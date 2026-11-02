@@ -1,0 +1,70 @@
+date,precision,type,actor,targets,children,value_usd,value_usd_today,sources
+1996-02-09,day,eat,disney,capcities,,19000000000.0,41223625806,https://www.sec.gov/Archives/edgar/data/1001039/0000898430-96-000382.txt https://www.baltimoresun.com/1995/08/01/a-media-giant-is-born-merger-is-biggest-in-entertainment-industrys-history-disney-capital-citiesabc-merger/
+1996-09-30,day,split,att_corp,,att_corp lucent,,,https://en.wikipedia.org/wiki/Lucent_Technologies
+1996-09-30,day,exit,lucent,,,,,https://en.wikipedia.org/wiki/Lucent_Technologies
+1997-05-13,filing,eat,sbc,pactel,,16700000000.0,35123055660,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000732716&type=15-12B https://en.wikipedia.org/wiki/Pacific_Telesis
+1997-06-15,month,enter,qwest,,,,,https://en.wikipedia.org/wiki/Qwest
+1997-08-14,day,eat,bell_atlantic,nynex,,52000000000.0,108753084577,https://en.wikipedia.org/wiki/NYNEX https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+1997-11-30,day,rename,westinghouse,,,,,https://en.wikipedia.org/wiki/CBS_Corporation
+1998-06-18,filing,split,us_west_old,,us_west mediaone,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000732718&type=8-K
+1998-09-15,filing,eat,worldcom,mci,,37000000000.0,76104134557,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000064079&type=15-12G https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+1999-03-09,day,eat,att_corp,tci,,48000000000.0,97950873786,https://en.wikipedia.org/wiki/Tele-Communications_Inc. https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+1999-10-08,day,eat,sbc,ameritech,,62000000000.0,124036145152,https://en.wikipedia.org/wiki/Ameritech https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+1999-11-03,filing,enter,charter,,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001091667&type=8-A12G
+2000-05-04,filing,eat,viacom,westinghouse,,35600000000.0,69931126168,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000106413&type=15-12B https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2000-06-16,filing,eat,att_corp,mediaone,,62000000000.0,121082903600,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000732718&type=8-K https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2000-06-30,day,eat,bell_atlantic,gte,,53360000000.0,104209415099,https://en.wikipedia.org/wiki/GTE https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2000-06-30,day,eat,qwest,us_west,,44000000000.0,85929802555,https://en.wikipedia.org/wiki/US_West https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2001-01-11,day,eat,aol,time_warner,,182000000000.0,348554874715,https://en.wikipedia.org/wiki/Merger_of_AOL_and_Time_Warner https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2001-07-15,month,split,att_corp,,att_corp att_wireless,,,https://en.wikipedia.org/wiki/AT%26T_Wireless_Services
+2002-05-06,filing,enter,netflix,,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001065280&type=8-A12G
+2002-07-21,day,distress,worldcom,,,,,https://en.wikipedia.org/wiki/WorldCom https://en.wikipedia.org/wiki/WorldCom
+2002-11-19,filing,split,att_corp,,att_corp att_broadband,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000022301&type=15-12G https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2002-11-19,filing,eat,comcast,att_broadband,,72000000000.0,133407471074,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000022301&type=15-12G https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2003-06-15,month,rename,aol,,,,,https://en.wikipedia.org/wiki/WarnerMedia
+2003-07-01,year,rename,worldcom,,,,,https://en.wikipedia.org/wiki/WorldCom
+2003-12-22,filing,enter,directv,,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000944868&type=8-A12B
+2004-10-26,filing,exit,att_wireless,,,41000000000.0,72265293501,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001138234&type=15-12B https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2004-11-12,day,enter,news_corp,,,,,https://en.wikipedia.org/wiki/News_Corporation
+2005-08-13,day,eat,sprint,nextel,,35000000000.0,60022590515,https://en.wikipedia.org/wiki/Sprint_Corporation https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2005-11-18,day,eat,sbc,att_corp,,16000000000.0,27161877839,https://en.wikipedia.org/wiki/AT%26T https://en.wikipedia.org/wiki/AT%26T
+2005-12-31,day,split,viacom,,cbs viacom_new,,,https://en.wikipedia.org/wiki/Viacom_%282005%E2%80%932019%29
+2006-01-09,filing,eat,bell_atlantic,worldcom,,7600000000.0,12824208731,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000723527&type=15-12G https://en.wikipedia.org/wiki/Verizon
+2006-05-04,filing,split,sprint,,sprint embarq,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001350031&type=8-K
+2006-05-08,filing,eat,disney,pixar,,7400000000.0,12362668654,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001002114&type=15-12G https://en.wikipedia.org/wiki/Pixar
+2006-12-29,day,eat,sbc,bellsouth,,86000000000.0,142400925652,https://en.wikipedia.org/wiki/BellSouth https://en.wikipedia.org/wiki/BellSouth
+2007-12-18,filing,eat,news_corp,dowjones,,5000000000.0,7952375322,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000029924&type=15-12B https://en.wikipedia.org/wiki/Dow_Jones_%26_Company
+2008-09-12,filing,enter,discovery,,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001437107&type=8-A12B
+2008-11-14,filing,eat,bell_atlantic,alltel,,28100000000.0,44334228465,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000065873&type=15-12B https://en.wikipedia.org/wiki/Alltel
+2009-03-13,filing,split,aol,,aol twc,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001105705&type=8-K
+2009-03-28,day,distress,charter,,,,,https://en.wikipedia.org/wiki/Charter_Communications https://en.wikipedia.org/wiki/Charter_Communications
+2009-07-01,filing,eat,centurytel,embarq,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001350031&type=8-K
+2009-12-03,day,enter,nbcu,,,,,https://en.wikipedia.org/wiki/Comcast
+2009-12-04,filing,split,aol,,aol aol_inc,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001105705&type=8-K
+2009-12-31,day,eat,disney,marvel,,4000000000.0,6189144548,https://en.wikipedia.org/wiki/Marvel_Entertainment https://en.wikipedia.org/wiki/Marvel_Entertainment
+2010-05-15,month,rename,centurytel,,,,,https://en.wikipedia.org/wiki/Lumen_Technologies
+2011-01-28,day,eat,comcast,nbcu,,30000000000.0,45612716841,https://en.wikipedia.org/wiki/Comcast https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2011-04-01,filing,eat,centurytel,qwest,,22400000000.0,33615843422,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001037949&type=25-NSE https://en.wikipedia.org/wiki/Qwest
+2012-12-21,day,eat,disney,lucasfilm,,4050000000.0,5890498268,https://en.wikipedia.org/wiki/Lucasfilm https://en.wikipedia.org/wiki/Lucasfilm
+2013-05-02,filing,enter,tmobile,,,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001283699&type=8-K
+2013-06-28,day,split,news_corp,,fox21 news_corp_new,,,https://en.wikipedia.org/wiki/News_Corporation
+2015-06-23,filing,eat,bell_atlantic,aol_inc,,4400000000.0,6226247070,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001468516&type=25-NSE https://en.wikipedia.org/wiki/Verizon
+2015-07-24,day,eat,sbc,directv,,67099999999.99999,94799884890,https://en.wikipedia.org/wiki/DirecTV https://en.wikipedia.org/wiki/DirecTV
+2016-05-18,day,eat,charter,twc,,78700000000.0,110481649879,https://en.wikipedia.org/wiki/Charter_Communications https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2017-11-01,day,eat,centurytel,level3,,34000000000.0,46238867052,https://en.wikipedia.org/wiki/Level_3_Communications https://en.wikipedia.org/wiki/Level_3_Communications
+2018-03-06,day,eat,discovery,scripps,,14600000000.0,19673090068,https://en.wikipedia.org/wiki/Scripps_Networks_Interactive https://en.wikipedia.org/wiki/Scripps_Networks_Interactive
+2018-06-14,day,eat,sbc,aol,,85400000000.0,114413505008,https://en.wikipedia.org/wiki/Acquisition_of_Time_Warner_by_AT%26T https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2018-10-15,day,eat,comcast,sky,,39000000000.0,51887163135,https://en.wikipedia.org/wiki/Sky_Group https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2019-03-20,day,split,fox21,,fox_assets fox_corp,,,https://en.wikipedia.org/wiki/Acquisition_of_21st_Century_Fox_by_Disney https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2019-03-20,day,eat,disney,fox_assets,,71300000000.0,94298923615,https://en.wikipedia.org/wiki/Acquisition_of_21st_Century_Fox_by_Disney https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2019-12-04,day,eat,cbs,viacom_new,,25000000000.0,32507636392,https://en.wikipedia.org/wiki/CBS_Corporation https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2020-04-01,day,eat,tmobile,sprint,,37000000000.0,48599495376,https://en.wikipedia.org/wiki/Sprint_Corporation https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2020-09-18,day,rename,centurytel,,,,,https://en.wikipedia.org/wiki/Lumen_Technologies
+2022-02-16,day,rename,cbs,,,,,https://en.wikipedia.org/wiki/Paramount_Global
+2022-04-12,filing,split,sbc,,sbc warnermedia,,,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001437107&type=8-A12B https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2022-04-12,filing,eat,discovery,warnermedia,,43000000000.0,50113542717,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001437107&type=8-A12B https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2025-08-07,day,eat,cbs,skydance,,4750000000.0,4941107238,https://en.wikipedia.org/wiki/Merger_of_Skydance_Media_and_Paramount_Global https://en.wikipedia.org/wiki/Merger_of_Skydance_Media_and_Paramount_Global
+2026-01-02,day,split,comcast,,comcast versant,,,https://en.wikipedia.org/wiki/Comcast
+2026-01-20,filing,eat,bell_atlantic,frontier,,20000000000.0,20594632993,https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000020520&type=25-NSE https://en.wikipedia.org/wiki/Verizon
+2026-08-20,day,eat,charter,cox_private,,21900000000.0,22042032017,https://en.wikipedia.org/wiki/Charter_Communications https://en.wikipedia.org/wiki/List_of_largest_mergers_and_acquisitions
+2026-10-06,day,eat,cbs,discovery,,110900000000.0,110900000000,https://en.wikipedia.org/wiki/Warner_Bros._Discovery https://en.wikipedia.org/wiki/Warner_Bros._Discovery

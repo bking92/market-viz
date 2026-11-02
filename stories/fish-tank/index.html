@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Who ate whom</title>
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <style>
+    @font-face { font-family: "Pixelify Sans"; src: url("../../assets/fonts/pixelify-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Pixelify Sans"; src: url("../../assets/fonts/pixelify-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    :root { --pixel: "Pixelify Sans", var(--label); --telecom: #4a3a9e; --media: #b45f12; --cable: #2f7a33; --deep: #164a69; }
+    .stage { max-width: 78rem; margin: 0 auto; padding: 0 1rem; display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    @media (min-width: 1000px) { .stage { grid-template-columns: minmax(0, 1fr) 21rem; align-items: start; } }
+    .tank-wrap { position: relative; }
+    #tank { position: relative; width: 100%; height: min(72vh, 680px); min-height: 360px; overflow: hidden; background: var(--deep); border: 3px solid #12202a; border-radius: 2px; box-shadow: inset 0 0 0 2px #2c4a5a; }
+    #tank-px { position: absolute; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; }
+    #tank-over { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    #tank-over text { font-family: var(--pixel); }
+    .year { font-weight: 600; fill: #ffffff; opacity: 0.42; }
+    .fish-label { font-size: 13px; fill: #ffffff; text-anchor: middle; paint-order: stroke; stroke: #0f2a3a; stroke-width: 3.5px; stroke-linejoin: round; }
+    .fish-label.small { font-size: 11.5px; }
+
+    .caption { font-size: 1.12rem; min-height: 8rem; }
+    .caption h2 { font-weight: 600; font-size: 1.55rem; line-height: 1.15; margin: 0 0 0.6rem; }
+    .caption p { margin: 0 0 0.75rem; }
+    .caption .when { font-style: italic; color: var(--ink-soft); }
+    .caption .minor { color: var(--ink-soft); font-size: 1.02rem; }
+    .caption .resume { display: block; height: 2px; background: var(--rule); margin: 0.9rem 0 0.5rem; position: relative; overflow: hidden; }
+    .caption .resume i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--ink); }
+
+    .stage > * { min-width: 0; }
+    .controls { font-family: var(--label); font-size: 0.9rem; display: flex; gap: 0.8rem; align-items: center; margin-top: 0.6rem; }
+    @media (max-width: 600px) { #tank { height: 58vh; min-height: 300px; } .controls { font-size: 0.85rem; } }
+    .controls button { font: inherit; background: none; border: 0; border-bottom: 1px solid var(--ink); padding: 0; cursor: pointer; color: var(--ink); }
+    #timeline { flex: 1; height: 28px; cursor: pointer; }
+    #timeline .track { stroke: var(--rule); stroke-width: 2; }
+    #timeline .done { stroke: var(--ink); stroke-width: 2; }
+    #timeline .tick { stroke: var(--ink); stroke-width: 1; }
+    #timeline text { font-size: 10.5px; fill: var(--ink-soft); }
+    .key { font-family: var(--label); font-size: 0.85rem; color: var(--ink-soft); margin: 0.4rem 0 0; }
+    .key-item { white-space: nowrap; margin-right: 0.7rem; display: inline-block; }
+    .tooltip { max-width: 18rem; }
+    .method table { font-size: 0.78rem; }
+    #sources a, .method td a { overflow-wrap: anywhere; word-break: break-word; }
+    .method .wide-table { max-height: 32rem; overflow: auto; }
+  </style>
+</head>
+<body>
+  <nav class="masthead"><a href="../../index.html">Market Visualization</a></nav>
+
+  <header class="lede">
+    <h1>Who ate whom</h1>
+    <p>Thirty years of American media and telecom, played out as a fish tank. Every fish is a company, drawn as big as the stock market said it was worth at the time. When one company buys another, a fish gets eaten. When a company splits up, it pops like a bubble and the pieces swim off on their own.</p>
+    <p>Fish that keep swallowing big rivals turn into predators. Small upstarts start as guppies and grow up. It plays by itself and stops at the biggest moments. <span data-fill="span-note"></span></p>
+    <p class="byline">Market values from <span data-fill="first-date">…</span> to <span data-fill="last-date">…</span>. Where every number came from is at the end.</p>
+  </header>
+
+  <section class="stage" aria-label="Animated fish tank">
+    <div class="tank-wrap">
+      <div id="tank" role="img" aria-label="Animated pixel-art fish tank of media and telecom companies sized by market value"><canvas id="tank-px"></canvas><svg id="tank-over"></svg></div>
+      <div class="controls">
+        <button id="play" type="button">Pause</button>
+        <svg id="timeline" aria-label="Timeline. Click to jump to a year."></svg>
+        <button id="replay" type="button">Start over</button>
+      </div>
+      <p class="key" id="key"></p>
+    </div>
+    <div class="caption" id="caption" aria-live="polite"></div>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How this was made</h2>
+    <p>Each fish's body area is proportional to the company's value on that date, in dollars of the day, not adjusted for inflation. Between two dated values the size is eased smoothly from one to the next. Fish smaller than a few pixels are drawn at a minimum size so they stay visible.</p>
+    <p id="value-method">…</p>
+    <p id="species-method">…</p>
+    <p>Mergers and splits are placed on the date the deal closed, not the date it was announced. Every event below lists the article it was checked against: the build script fetches each source and refuses to run if the quoted passage isn't in it.</p>
+    <p>All figures are computed by <code>pipeline/build_fish_tank.py</code>, which writes the files this page reads. Nothing on the page is typed in by hand.</p>
+
+    <h2>Sources</h2>
+    <ol id="sources"></ol>
+
+    <h2>What is left out</h2>
+    <div id="gaps"></div>
+
+    <h2>The data</h2>
+    <p>Every event in the tank, with its deal value and source.</p>
+    <div id="event-table" class="wide-table"></div>
+    <p>Every dated value behind every fish.</p>
+    <div id="value-table" class="wide-table"></div>
+  </section>
+
+  <div class="tooltip" id="tooltip"></div>
+  <script src="../../assets/js/d3.min.js"></script>
+  <script type="module" src="story.js"></script>
+</body>
+</html>
