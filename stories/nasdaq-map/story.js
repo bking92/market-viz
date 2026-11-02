@@ -8,7 +8,7 @@ const fmtShort = (s) => d3.timeFormat("%b %-d")(parse(s));
 const pct = (v, p = 1) => `${d3.format(`.${p}f`)(Math.abs(v * 100))}%`;
 const usd = (bn) => (Math.abs(bn) >= 1000 ? `$${d3.format(".2f")(Math.abs(bn) / 1000)} trillion` : `$${d3.format(".0f")(Math.abs(bn))} billion`);
 
-const { meta, companies, shrunk } = await d3.json("data/map.json");
+const { meta, companies, after } = await d3.json("data/map.json");
 const D = meta.dates, P = meta.peak_index, L = meta.last_index;
 const total = meta.total_cap_bn;
 const [bx0, by0, bx1, by1] = meta.conus_bounds;
@@ -54,6 +54,8 @@ const fills = {
   "top-losers": losers.map((x) => `${x.c.t} (${usd(x.d)})`).join(", "),
   "gainers-n": String(gainers.length).replace(/^./, (s) => s.toUpperCase()),
   "lost-equiv": lostEq.text,
+  "removed-names": after.removed.map((r) => r.name).join(" and "),
+  "removed-share": pct(after.removed_share, 2), "lost-share-2": pct(after.lost_share, 2),
 };
 document.querySelectorAll("[data-fill]").forEach((el) => { if (fills[el.dataset.fill] != null) el.textContent = fills[el.dataset.fill]; });
 document.getElementById("gaps").textContent = [meta.live_gaps, ...meta.gaps.map((g) => `${g.ticker}: ${g.why}.`)].filter(Boolean).join(" ");
@@ -75,12 +77,20 @@ function makeMap(svgSel, opts = {}) {
     g.append("rect").attr("class", "gone").attr("x", (c) => c.bbox[0] - 1).attr("width", (c) => c.bbox[2] - c.bbox[0] + 2);
   });
   patch.append("path").attr("class", "patch").attr("d", (c) => c.path).attr("fill", "none");
-  const gShrink = svg.append("g").style("opacity", 0);
-  const shrinkPaths = gShrink.selectAll("path.patch").data(companies).join("path").attr("class", "patch").attr("fill", "#b9ae9c");
-  const shrinkLabels = gShrink.selectAll("text").data(companies).join("text").attr("class", "tick-label")
-    .style("font-size", (c) => `${fontFor(c)}px`).text((c) => c.t)
-    .style("display", (c) => (labelledSet.has(c.t) ? null : "none"));
-  const ghost = svg.append("path").attr("class", "ghost").attr("d", meta.conus_path).style("opacity", 0);
+  // "after": the removed states, then the remaining land re-divided at last-day values
+  const gRemoved = svg.append("g").style("opacity", 0);
+  gRemoved.selectAll("path").data(after.removed).join("path").attr("class", "removed-state").attr("d", (r) => r.path);
+  const gAfter = svg.append("g").style("opacity", 0);
+  const afterFont = (c) => Math.min(24, Math.sqrt(c.cap[L] / total[L]) * 62);
+  const afterPaths = gAfter.selectAll("path.patch").data(companies).join("path").attr("class", "patch after-patch")
+    .attr("d", (c, i) => after.patches[i].path);
+  const afterLabels = gAfter.selectAll("text").data(companies.filter((c, i) => {
+    const bb = after.patches[i].bbox; return afterFont(c) >= 6.5 && (bb[2] - bb[0]) > c.t.length * afterFont(c) * 0.7;
+  })).join("text").attr("class", "tick-label")
+    .attr("x", (c) => after.patches[companies.indexOf(c)].label[0]).attr("y", (c) => after.patches[companies.indexOf(c)].label[1])
+    .style("font-size", (c) => `${afterFont(c)}px`).text((c) => c.t);
+  const ghost = svg.append("g").style("opacity", 0);
+  ghost.selectAll("path").data(after.removed).join("path").attr("class", "ghost").attr("d", (r) => r.path);
   const gRef = svg.append("g");
   const gLabels = svg.append("g");
   const dateLabel = svg.append("text").attr("class", "date-label").attr("x", bx0).attr("y", by0 - 34);
@@ -97,7 +107,7 @@ function makeMap(svgSel, opts = {}) {
   }).on("mouseleave", () => tip.style("opacity", 0));
 
   const state = { k: P, mode: "drain" };
-  hover(patch, () => state.k); hover(shrinkPaths, () => state.k);
+  hover(patch, () => state.k); hover(afterPaths, () => L);
 
   function setDate(k, dur = 0) {
     state.k = k;
@@ -108,22 +118,18 @@ function makeMap(svgSel, opts = {}) {
     dateLabel.text(fmtDate(D[k]));
     const ch = total[k] / total[P] - 1;
     dateSub.text(k === P ? `${usd(total[k])}, the peak` : `${usd(total[k])}, ${ch < 0 ? "down" : "up"} ${pct(ch)} from the peak`);
-    if (state.mode === "shrink") drawShrink(k, dur);
   }
-  function drawShrink(k, dur) {
-    const s = shrunk[k]; if (!s) return;
-    shrinkPaths.transition().duration(dur).attr("d", (c, i) => s.paths[i]);
-    shrinkLabels.filter((c, i) => s.labels[i]).transition().duration(dur)
-      .attr("x", (c) => s.labels[companies.indexOf(c)][0]).attr("y", (c) => s.labels[companies.indexOf(c)][1]);
-  }
+  // modes: "drain" (peak outlines, filled to the day's value), "remove" (peak map with the matching states marked),
+  // "after" (those states gone, the rest re-divided at last-day values)
   function setMode(mode, dur = 600) {
     state.mode = mode;
-    gDrain.transition().duration(dur).style("opacity", mode === "drain" ? 1 : 0);
-    gShrink.transition().duration(dur).style("opacity", mode === "shrink" ? 1 : 0);
-    ghost.transition().duration(dur).style("opacity", mode === "shrink" ? 1 : 0);
-    gLabels.transition().duration(dur).style("opacity", mode === "drain" ? 1 : 0);
-    gDrain.style("pointer-events", mode === "drain" ? null : "none");
-    if (mode === "shrink") drawShrink(state.k, 0);
+    const t = (sel, on) => sel.transition().duration(dur).style("opacity", on ? 1 : 0);
+    t(gDrain, mode !== "after"); t(gLabels, mode !== "after");
+    t(gRemoved, mode === "remove"); t(gAfter, mode === "after"); t(ghost, mode === "after");
+    gDrain.style("pointer-events", mode === "after" ? "none" : null);
+    gAfter.style("pointer-events", mode === "after" ? null : "none");
+    if (mode === "after") { dateLabel.text(fmtDate(D[L])); dateSub.text(`${usd(total[L])}, on what's left after removing ${fills["removed-names"]}`); }
+    if (mode === "remove") { dateLabel.text(fmtDate(D[L])); dateSub.text(`${fills["lost-share-2"]} of the value gone; ${fills["removed-names"]} are ${fills["removed-share"]} of the land`); }
   }
   function highlight(set) {
     patch.classed("lit", (c) => set && set.has(c.t)).classed("dim", (c) => set && !set.has(c.t));
@@ -144,39 +150,21 @@ function makeMap(svgSel, opts = {}) {
 
 // ---------- the scrolly ----------
 const m1 = makeMap("#map");
-let playTimer = null;
-function play(from, to, ms = 4200) {
-  if (playTimer) playTimer.stop();
-  const n = to - from, step = ms / n;
-  m1.setDate(from);
-  playTimer = d3.interval((elapsed) => {
-    const k = Math.min(to, from + Math.floor(elapsed / step) + 1);
-    m1.setDate(k, step);
-    if (k >= to) playTimer.stop();
-  }, step);
-}
 const top10set = new Set(byPeak.slice(0, 10).map((c) => c.t));
 const loserSet = new Set(losers.map((x) => x.c.t));
 scroller(document.querySelectorAll(".scrolly .step"), (i) => {
-  if (playTimer) playTimer.stop();
   if (i === 0) { m1.setMode("drain"); m1.setDate(P); m1.highlight(null); m1.showStates(null); }
   if (i === 1) { m1.setMode("drain"); m1.setDate(P); m1.highlight(new Set([byPeak[0].t])); m1.showStates(c0eq.names); }
   if (i === 2) { m1.setMode("drain"); m1.setDate(P); m1.highlight(top10set); m1.showStates(null); }
-  if (i === 3) { m1.setMode("drain"); m1.highlight(null); m1.showStates(null); play(P, L); }
-  if (i === 4) { m1.setMode("drain"); m1.setDate(L, 300); m1.highlight(loserSet); m1.showStates(null); }
-  if (i === 5) { m1.highlight(null); m1.setDate(L); m1.setMode("shrink"); m1.showStates(null); }
+  if (i === 3) { m1.setMode("drain"); m1.highlight(null); m1.showStates(null); m1.setDate(L, 900); }
+  if (i === 4) { m1.setMode("drain"); m1.setDate(L); m1.highlight(loserSet); m1.showStates(null); }
+  if (i === 5) { m1.highlight(null); m1.showStates(null); m1.setDate(P); m1.setMode("remove"); }
+  if (i === 6) { m1.highlight(null); m1.showStates(null); m1.setMode("after"); }
 });
 
-// ---------- explore ----------
-const m2 = makeMap("#map2");
-const slider = document.getElementById("slider");
-slider.min = P; slider.max = L; slider.value = L;
-m2.setDate(L);
-slider.addEventListener("input", () => m2.setDate(+slider.value, 120));
-document.querySelectorAll("#controls button").forEach((b) => b.addEventListener("click", () => {
-  document.querySelectorAll("#controls button").forEach((x) => x.classList.toggle("on", x === b));
-  m2.setMode(b.dataset.mode);
-}));
+// ---------- before and after, side by side ----------
+const mBefore = makeMap("#map-before");
+const mAfter = makeMap("#map-after"); mAfter.setMode("after", 0);
 
 // ---------- the table ----------
 const rows = companies.map((c) => ({ t: c.t, name: c.name, share: c.share_peak, p: c.cap[P], l: c.cap[L] }));

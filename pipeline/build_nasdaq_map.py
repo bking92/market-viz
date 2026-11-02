@@ -123,17 +123,23 @@ for i, co in enumerate(companies):
                    'label': [round(c.x, 1), round(c.y, 1)],
                    'drain': [drain_level(g, f) for f in frac]})
 
-# shrunk-country layouts: whole map scaled to total(t)/total(peak) in area, members re-sized by cap(t), same tree
-cx, cy = conus.centroid.x, conus.centroid.y
-shrunk = []
-for k in range(len(dates)):
-    s = math.sqrt(total[k] / total[pk]) if k != pk else 1.0
-    if k < pk: shrunk.append(None); continue
-    poly = affinity.scale(conus, s, s, origin=(cx, cy)) if total[k] <= total[pk] else conus
-    w = [co['cap'][k] for co in companies]
-    reg = {}; apply_tree(tree, poly, idx, w, reg)
-    shrunk.append({'outline': path(poly, 0.2), 'paths': [path(reg[i], 0.2) for i in idx],
-                   'labels': [[round(reg[i].representative_point().x, 1), round(reg[i].representative_point().y, 1)] if not reg[i].is_empty else None for i in idx]})
+# "After" map: remove the state or pair of states whose combined area is closest to the share of value lost
+# (peak to last day), then lay the remaining members out again on the land that is left, at last-day values.
+import itertools
+lost_share = (total[pk] - total[last]) / total[pk]
+cands = [c for k in (1, 2) for c in itertools.combinations(sorted(states), k)]
+removed = min(cands, key=lambda c: abs(sum(states[i][1].area for i in c) / A - lost_share))
+removed_geom = unary_union([states[i][1] for i in removed]).buffer(0)
+remaining = conus.difference(removed_geom).buffer(0)
+order = sorted(idx, key=lambda i: -companies[i]['cap'][last])
+w_last = [co['cap'][last] for co in companies]
+tree_after = build_tree(remaining, order, w_last)
+reg_after = {}; apply_tree(tree_after, remaining, order, w_last, reg_after)
+after = {'removed': [{'id': i, 'name': states[i][0], 'share': states[i][1].area / A, 'path': path(states[i][1], 0.1)} for i in removed],
+         'removed_share': removed_geom.area / A, 'lost_share': lost_share,
+         'remaining_path': path(remaining, 0.1),
+         'patches': [{'path': path(reg_after[i]), 'label': [round(reg_after[i].representative_point().x, 1), round(reg_after[i].representative_point().y, 1)],
+                      'bbox': [round(v, 1) for v in reg_after[i].bounds]} for i in idx]}
 
 # state equivalents (area share of the continental 48, from the same equal-area projection)
 state_list = sorted([{'name': n, 'share': g.area / A} for n, g in states.values()], key=lambda s: -s['share'])
@@ -145,10 +151,11 @@ meta = {'live_gaps': live_meta.get('gaps', ''), 'live_members_note': live_meta.g
         'conus_path': path(conus, 0.1),
         'states_paths': [{'name': n, 'path': path(g, 0.1)} for n, g in states.values()],
         'state_shares': state_list}
-json.dump({'meta': meta, 'companies': out_co, 'shrunk': shrunk}, open(os.path.join(OUT, 'map.json'), 'w'), separators=(',', ':'))
+json.dump({'meta': meta, 'companies': out_co, 'after': after}, open(os.path.join(OUT, 'map.json'), 'w'), separators=(',', ':'))
 with open(os.path.join(OUT, 'caps.csv'), 'w', newline='') as f:
     wr = csv.writer(f); wr.writerow(['ticker', 'name'] + dates)
     for co in companies: wr.writerow([co['t'], co['name']] + [round(x) for x in co['cap']])
 json.dump({k: meta[k] for k in ('crosscheck', 'dates', 'peak_index', 'trough_index', 'last_index', 'total_cap_bn', 'n_companies', 'gaps')}, open(os.path.join(OUT, 'meta.json'), 'w'), indent=1)
+print('removed', [states[i][0] for i in removed], round(removed_geom.area / A, 5), 'lost', round(lost_share, 5))
 print('peak', dates[pk], total[pk] / 1e12, 'last', dates[last], total[last] / 1e12, 'trough', dates[trough], 'n', len(companies))
 print('max area error', max(abs(c['area_check'] - c['share_peak']) for c in out_co))

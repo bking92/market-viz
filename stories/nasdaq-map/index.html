@@ -19,13 +19,12 @@
     .chart .dark-label { fill: var(--ink); }
     .chart .date-label { font-family: var(--serif); font-size: 26px; fill: var(--ink); }
     .chart .date-sub { font-family: var(--label); font-size: 13px; fill: var(--ink-soft); }
-    .controls { font-family: var(--label); font-size: 0.9rem; max-width: 40rem; margin: 0 auto; padding: 0 1.25rem; display: none; }
-    .controls.on { display: block; }
-    .controls input[type=range] { width: 100%; accent-color: var(--ink); }
-    .controls button { font: inherit; background: none; border: 0; border-bottom: 1px solid var(--ink); padding: 0; margin-right: 1.2rem; cursor: pointer; color: var(--ink-soft); }
-    .controls button.on { color: var(--ink); font-weight: 600; }
     .explore { max-width: 64rem; margin: 6vh auto 0; padding: 0 1.25rem; }
     .explore svg { width: 100%; height: auto; }
+    .pair { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    @media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } }
+    .chart .removed-state { fill: var(--loss); stroke: var(--paper); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+    .chart .after-patch { fill: #b9ae9c; }
     .explore p { max-width: var(--measure); margin: 0 auto 1rem; }
     .loss-word { color: var(--loss); }
   </style>
@@ -47,17 +46,17 @@
       <div class="step"><p>The ten biggest companies held <b data-fill="top10-share">…</b> of the value, so they get <span data-fill="top10-share">…</span> of the land. The other <span data-fill="rest-n">…</span> share what's left.</p></div>
       <div class="step"><p>Now the selloff. As each company loses value, its patch drains, and the emptied part turns <span class="loss-word">red</span>.</p><p>By <b data-fill="last-date">…</b>, <b data-fill="lost-total">…</b> was gone, <span data-fill="lost-pct">…</span> of the peak.</p></div>
       <div class="step"><p>The losses weren't spread evenly. These five lost the most in dollars: <span data-fill="top-losers">…</span>.</p><p><span data-fill="gainers-n">…</span> companies were worth more on <span data-fill="last-date-short">…</span> than at the peak. Their patches stay full.</p></div>
-      <div class="step"><p>Put the whole country back together at its new size and it shrinks. The dashed line is where the coast used to be.</p><p>The land that's missing is <span data-fill="lost-pct">…</span> of the lower 48, <span data-fill="lost-equiv">…</span>.</p></div>
+      <div class="step"><p>So how much land is that? The selloff took <span data-fill="lost-share-2">…</span> of the value. <b data-fill="removed-names">…</b> together are <span data-fill="removed-share">…</span> of the lower 48, the closest match of any one or two states.</p><p>Take them off the map.</p></div>
+      <div class="step"><p>Here is what's left, divided up again at <span data-fill="last-date-short">…</span> values. Each company gets land in proportion to what it's worth now.</p><p>The dashed lines are where <span data-fill="removed-names">…</span> used to be.</p></div>
     </div>
   </section>
 
   <section class="explore">
-    <p>Drag through the days yourself. Switch between draining each patch in place and shrinking the whole country.</p>
-    <div class="controls on" id="controls">
-      <button data-mode="drain" class="on">Drain each patch</button><button data-mode="shrink">Shrink the country</button>
-      <input type="range" id="slider" min="0" max="1" step="1" value="0" aria-label="Date">
+    <p>Before and after, side by side.</p>
+    <div class="pair">
+      <svg class="chart" id="map-before" role="img" aria-label="The map at the peak"></svg>
+      <svg class="chart" id="map-after" role="img" aria-label="The map after the selloff, with the matching states removed"></svg>
     </div>
-    <svg class="chart" id="map2" role="img" aria-label="Interactive version of the map"></svg>
   </section>
 
   <section class="method" id="method">
@@ -67,7 +66,8 @@
     <p>This is total company value, not the float-adjusted, capped weight the index itself uses. That matters for companies with a small public float. SpaceX, for example, gets land for its whole valuation even though most of its shares don't trade. Alphabet appears once, with both share classes added together.</p>
     <p>The peak is <span data-fill="peak-date">…</span>, the Nasdaq-100's record close in the daily index data the companion story uses, and the same day news reports give.</p>
     <p>The map is the continental 48 states plus DC from the U.S. Census Bureau's cartographic boundary files, as packaged in us-atlas 3.0.1, drawn in an Albers equal-area projection, so equal areas on screen are equal areas of land. The country is cut into patches by repeatedly splitting the list of companies into two halves of nearly equal value and cutting the map along its longer side so each side gets exactly its share of the area. A patch's area matches its company's share to within a millionth before the outlines are smoothed for drawing. State comparisons use the same projected areas.</p>
-    <p>In the drain view each patch keeps its peak outline and fills from the bottom to the fraction of its peak value it still has. A company worth more than at the peak is drawn full, so the drawn total there can slightly overstate what's left; the numbers in the text use the exact sums. In the shrink view the whole outline is scaled so its area matches the day's total, and the patches are redrawn inside it at that day's values.</p>
+    <p>In the drain view each patch keeps its peak outline and fills from the bottom to the fraction of its peak value it still has. A company worth more than at the peak is drawn full, so the drawn total there can slightly overstate what's left; the numbers in the text use the exact sums.</p>
+    <p>For the after map, the build script checks every single state and every pair of states (DC counted as its own piece) and removes the one whose area share is closest to the share of value lost between the peak and <span data-fill="last-date">…</span>. That is <span data-fill="removed-names">…</span>, at <span data-fill="removed-share">…</span> of the land against <span data-fill="lost-share-2">…</span> of the value. The remaining land is then divided again with the same splitting method, at last-day values, so each patch's share of the remaining land equals its share of the remaining value. Because the removed area is a hair different from the lost value, land per dollar on the after map differs from the before map by that same hair.</p>
     <p>All figures are computed by <code>pipeline/build_nasdaq_map.py</code> from the companion story's <code>constituent_daily.csv</code> and the map files in <code>data/raw/</code>.</p>
 
     <h2>Sources</h2>
