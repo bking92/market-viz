@@ -1,0 +1,393 @@
+// Who ate whom: media and telecom M&A as a fish tank.
+// Reads only data/tank.json, written by pipeline/build_fish_tank.py.
+// Story time (tau) is a decimal year. Sizes, species, births and deaths are pure functions of tau;
+// swimming is a d3-force simulation running on wall-clock time so fish keep moving during pauses.
+
+const PLAY_SECONDS = 90;      // the whole span, not counting pauses
+const CHASE = 0.45;           // years of story time a predator spends closing in on its prey
+const POP = 0.4;              // years of story time a split takes to pop and spread
+const SWIM_IN = 0.5;          // years for a newcomer to swim in, or a leaver to swim out
+const MIN_PX = 8;             // canvas pixels: the smallest fish drawn
+
+const fmt$ = (v) => v >= 1e12 ? `$${(v / 1e12).toFixed(2)} trillion` : v >= 1e9 ? `$${(v / 1e9).toFixed(v >= 1e11 ? 0 : 1)} billion` : `$${(v / 1e6).toFixed(0)} million`;
+const fmtDate = (d) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+const fmtMonth = (d) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", timeZone: "UTC" });
+function yr(d) {
+  const t = new Date(d + "T00:00:00Z");
+  const y = t.getUTCFullYear();
+  const start = Date.UTC(y, 0, 1), end = Date.UTC(y + 1, 0, 1);
+  return y + (t - start) / (end - start);
+}
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
+function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967295; }
+
+import { sprite, areaFactor, Aquarium, fishColour, HR, COLOURS } from "./pixel.js";
+const AREA = { guppy: areaFactor("guppy"), adult: areaFactor("adult"), predator: areaFactor("predator") };
+
+const res = await fetch("data/tank.json");
+const D = await res.json();
+
+// ---------- static text ----------
+document.querySelectorAll("[data-fill]").forEach((el) => {
+  const k = el.dataset.fill;
+  if (k === "first-date") el.textContent = fmtMonth(D.first_date);
+  else if (k === "last-date") el.textContent = fmtMonth(D.last_date);
+  else if (D.text && D.text[k] != null) el.textContent = D.text[k];
+});
+document.getElementById("value-method").textContent = D.text.value_method;
+document.getElementById("species-method").textContent = D.text.species_method;
+const srcById = Object.fromEntries(D.sources.map((s) => [s.id, s]));
+d3.select("#sources").selectAll("li").data(D.sources.filter((s) => s.list !== false)).join("li")
+  .html((s) => `${s.label}${s.url ? ` <a href="${s.url}">${s.url.replace(/^https?:\/\//, "").slice(0, 70)}</a>` : ""}${s.note ? `. ${s.note}` : ""}`);
+d3.select("#gaps").selectAll("p").data(D.gaps).join("p").text((g) => g);
+
+// ---------- model ----------
+const T0 = yr(D.first_date), T1 = yr(D.last_date);
+const fish = D.fish.map((f) => ({
+  ...f,
+  tBorn: f.born ? yr(f.born) : -Infinity,
+  tDied: f.died ? yr(f.died) : Infinity,
+  pts: f.series.map((p) => ({ ...p, t: yr(p.d) })).sort((a, b) => a.t - b.t),
+  names: f.names.map(([d, n]) => ({ t: d ? yr(d) : -Infinity, n })),
+  tPred: f.predator_from ? yr(f.predator_from) : Infinity,
+}));
+const byId = Object.fromEntries(fish.map((f) => [f.id, f]));
+const FAST_POP = 0.2;                     // a piece that pops off one fish to be eaten by another pops faster
+const LINK = 0.3;                         // ...and is eaten this long after the pop
+const popDur = (e) => (e.id.endsWith("_pop") ? FAST_POP : POP);
+const events = D.events.map((e) => {
+  const t = yr(e.date);
+  let tv = t;                                   // when the event finishes on screen
+  if (e.type === "eat" && e.linked) tv = t + LINK;
+  if (e.type === "exit" && e.after_pop) tv = t + POP * 0.45 + SWIM_IN;
+  return { ...e, t, tv };
+}).sort((a, b) => a.tv - b.tv);
+const pauses = events.filter((e) => e.pause);
+const deflator = D.deflator; // by year: multiply a dollar value of that year to get today's dollars
+
+// How each fish enters and leaves, read off the events.
+for (const f of fish) { f.enter = null; f.leave = null; }
+for (const e of events) {
+  if (e.type === "eat") e.targets.forEach((id) => (byId[id].leave = { kind: "eaten", e }));
+  if (e.type === "split") {
+    if (!e.children.includes(e.actor)) byId[e.actor].leave = { kind: "popped", e };
+    e.children.filter((id) => id !== e.actor).forEach((id) => (byId[id].enter = { kind: "popped", e }));
+  }
+  if (e.type === "enter") byId[e.actor].enter = { kind: "swim", e };
+  if (e.type === "exit") byId[e.actor].leave = { kind: "swim", e };
+}
+for (const f of fish) if (f.outside && !f.piece && f.leave) f.enter = { kind: "outside", e: f.leave.e };
+
+// Give every company its own colour, never shared with a fish in the tank at the same time.
+{
+  const span = (f) => [Math.max(T0, f.tBorn === -Infinity ? (f.pts[0] ? f.pts[0].t : T0) : f.tBorn) - 0.5, Math.min(T1, f.tDied) + 0.5];
+  const used = new Array(COLOURS.length).fill(0), placed = [];
+  for (const f of fish.slice().sort((a, b) => span(a)[0] - span(b)[0] || hash(a.id) - hash(b.id))) {
+    const [a, b] = span(f);
+    const clash = new Set(placed.filter((g) => g.s[0] < b && a < g.s[1]).map((g) => g.f.ci));
+    let best = 0, score = Infinity;
+    COLOURS.forEach((_, i) => { const sc = (clash.has(i) ? 1000 : 0) + used[i]; if (sc < score) { score = sc; best = i; } });
+    f.ci = best; used[best]++; placed.push({ f, s: [a, b] });
+  }
+}
+function nameAt(f, t) { let n = f.names[0].n; for (const x of f.names) if (x.t <= t) n = x.n; return n; }
+const showDate = (e) => e.precision === "month" ? fmtMonth(e.date) : e.precision === "year" ? e.date.slice(0, 4) : fmtDate(e.date);
+function valueAt(f, t) {
+  const p = f.pts;
+  if (!p.length) return null;
+  if (t <= p[0].t) return { v: p[0].v, kind: p[0].kind, src: p[0].src, d: p[0].d, held: t < p[0].t - 0.02 };
+  if (t >= p[p.length - 1].t) { const q = p[p.length - 1]; return { v: q.v, kind: q.kind, src: q.src, d: q.d, held: t > q.t + 0.02 }; }
+  let i = d3.bisector((x) => x.t).right(p, t) - 1;
+  const a = p[i], b = p[i + 1];
+  const w = (t - a.t) / (b.t - a.t);
+  return { v: Math.exp(Math.log(a.v) * (1 - w) + Math.log(b.v) * w), kind: a.kind === b.kind ? a.kind : (w < 0.5 ? a.kind : b.kind), src: a.src, d: a.d, held: false };
+}
+function speciesAt(f, t, v) {
+  if (t >= f.tPred) return "predator";
+  const real = v * (deflator[Math.floor(t)] || deflator[Math.floor(T1)]);
+  return real >= D.thresholds.adult_real ? "adult" : "guppy";
+}
+
+// ---------- layout ----------
+const box = document.getElementById("tank");
+const aq = new Aquarium(document.getElementById("tank-px"));
+const svg = d3.select("#tank-over");
+let W = 0, H = 0, P = 3, kArea = 1, sandY = 0;
+const yearText = svg.append("text").attr("class", "year");
+const gLabels = svg.append("g");
+function resize() {
+  const r = box.getBoundingClientRect();
+  W = r.width; H = r.height;
+  P = clamp(Math.round(W / 300), 2, 4);         // screen pixels per art pixel
+  aq.resize(W, H, P);
+  sandY = aq.sandTop * P;
+  svg.attr("viewBox", `0 0 ${W} ${H}`);
+  kArea = (0.15 * W * H) / D.max_total;   // the most crowded moment fills about a seventh of the tank
+  const fs = Math.min(H * 0.16, 100);
+  yearText.attr("x", 16).attr("y", 10 + fs).attr("font-size", fs);
+  drawTimeline();
+}
+function lenFor(v, species) { return Math.max(MIN_PX * P, Math.sqrt((v * kArea) / AREA[species])); }
+// Spread home spots evenly over the water (a Halton sequence over the fish's index), not by sector.
+const halton = (i, b) => { let f = 1, r = 0; while (i > 0) { f /= b; r += f * (i % b); i = Math.floor(i / b); } return r; };
+function home(f) {
+  const i = fish.indexOf(f) + 1;
+  return { x: W * (0.08 + 0.84 * halton(i, 2)), y: 12 + (sandY - 30) * (0.08 + 0.84 * halton(i, 3)) };
+}
+
+// ---------- simulation ----------
+const nodes = new Map();
+let lastLive = new Map();
+const sim = d3.forceSimulation([]).alphaDecay(0).alphaTarget(0.3).velocityDecay(0.35)
+  .force("x", d3.forceX((n) => n.tx).strength((n) => n.pull))
+  .force("y", d3.forceY((n) => n.ty).strength((n) => n.pull))
+  .force("collide", d3.forceCollide((n) => (n.solid ? n.L * 0.42 + 6 : 0)).strength(0.6).iterations(3))
+  .stop();
+
+let tau = T0, playing = true, pausedOn = null, pauseStarted = 0, lastWall = null, nextPause = 0;
+
+function frame(wall) {
+  const dt = lastWall == null ? 0 : Math.min(0.1, (wall - lastWall) / 1000);
+  lastWall = wall;
+  if (playing && !pausedOn) {
+    tau = Math.min(T1, tau + (dt * (T1 - T0)) / PLAY_SECONDS);
+    const p = pauses[nextPause];
+    if (p && tau >= p.tv + 0.04) { pausedOn = p; pauseStarted = wall; nextPause++; showPause(p); }
+    if (tau >= T1) { playing = false; setPlayLabel(); showEnd(); }
+  }
+  if (pausedOn) {
+    const need = readSeconds(pausedOn) * 1000;
+    const prog = clamp((wall - pauseStarted) / need, 0, 1);
+    d3.select("#caption .resume i").style("width", `${prog * 100}%`);
+    if (prog >= 1 && playing) resume();
+  }
+  step(wall / 1000);
+  requestAnimationFrame(frame);
+}
+
+function step(wallS) {
+  const live = new Map(); // id -> render spec
+  for (const f of fish) {
+    let tStart = f.tBorn, tEnd = f.tDied;
+    if (f.enter && f.enter.kind === "popped") tStart = f.enter.e.t + popDur(f.enter.e) * 0.45;
+    if (f.enter && f.enter.kind === "outside") tStart = f.enter.e.tv - CHASE - 0.3;
+    if (f.leave && f.leave.kind === "popped") tEnd = f.leave.e.t + popDur(f.leave.e) * 0.5;
+    if (f.leave && (f.leave.kind === "eaten" || f.leave.kind === "swim")) tEnd = f.leave.e.tv;
+    if (tau < tStart || tau >= tEnd) continue;
+    const val = valueAt(f, tau);
+    if (!val) continue;
+    const species = speciesAt(f, tau, val.v);
+    live.set(f.id, { f, val, species, L: lenFor(val.v, species) });
+  }
+  // Sync simulation nodes.
+  for (const [id, n] of nodes) if (!live.has(id)) nodes.delete(id);
+  for (const [id, s] of live) {
+    if (nodes.has(id)) continue;
+    const h = home(s.f);
+    const n = { id, x: h.x, y: h.y, vx: 0, vy: 0, dir: hash(id) > 0.5 ? 1 : -1, L: s.L, scale: 1 };
+    const en = s.f.enter;
+    if (en && en.kind === "popped" && nodes.has(en.e.actor)) {
+      const par = nodes.get(en.e.actor);
+      const a = hash(id + "a") * Math.PI * 2;
+      Object.assign(n, { x: par.x + Math.cos(a) * 4, y: par.y + Math.sin(a) * 4, vx: Math.cos(a) * 6, vy: Math.sin(a) * 6 });
+    } else if ((en && en.kind === "swim" && tau < en.e.t + SWIM_IN) || (en && en.kind === "outside")) {
+      n.x = hash(id + "side") > 0.5 ? W + 120 : -120; n.dir = n.x < 0 ? 1 : -1;
+    }
+    nodes.set(id, n);
+  }
+  // Targets, chases, exits.
+  for (const n of nodes.values()) n.chompNow = 0;
+  for (const [id, s] of live) {
+    const n = nodes.get(id), f = s.f, h = home(f);
+    const ph = hash(id + "p") * 6.28, sp = 0.18 + 0.12 * hash(id + "s");
+    n.tx = h.x + W * 0.09 * Math.sin(wallS * sp + ph); n.ty = h.y + H * 0.06 * Math.sin(wallS * sp * 1.3 + ph * 2);
+    n.tx = clamp(n.tx, s.L * 0.5, W - s.L * 0.5); n.ty = clamp(n.ty, s.L * 0.3 + 8, sandY - 6 - s.L * 0.3);
+    n.pull = 0.02; n.solid = true; n.L = s.L; n.scale = 1; n.flip = false; n.alpha = 1;
+    const lv = f.leave;
+    if (lv && lv.kind === "eaten") {
+      const span = lv.e.linked ? LINK - FAST_POP * 0.5 : CHASE;
+      const p = (tau - (lv.e.tv - span)) / span;
+      const pred = nodes.get(lv.e.actor);
+      if (p > 0 && pred) {
+        const mouth = pred.x + pred.dir * pred.L * 0.42;
+        n.tx = mouth; n.ty = pred.y; n.pull = 0.02 + 0.25 * smooth(0, 0.8, p); n.solid = false;
+        n.scale = 1 - smooth(0.7, 1, p); pred.hunting = id; pred.chompNow = Math.max(pred.chompNow, p); n.eatenBy = lv.e.actor;
+      }
+    }
+    if (lv && lv.kind === "swim") {
+      const p = (tau - (lv.e.tv - SWIM_IN)) / SWIM_IN;
+      if (p > 0) { n.tx = n.x > W / 2 ? W + 300 : -300; n.pull = 0.05; n.solid = false; }
+    }
+    if (lv && lv.kind === "popped") {
+      const p = (tau - lv.e.t) / popDur(lv.e);
+      if (p >= 0) { n.popping = p; n.solid = false; n.pull = 0.2; n.tx = n.x; n.ty = n.y; }
+    } else n.popping = null;
+    const en = f.enter;
+    if (en && en.kind === "popped") { const d = popDur(en.e); const p = (tau - en.e.t - d * 0.45) / (d * 0.55); n.scale *= smooth(0, 1, p); }
+    if (en && en.kind === "swim" && tau < en.e.t + SWIM_IN) n.pull = 0.04;
+    if (en && en.kind === "outside" && !(lv && tau > lv.e.tv - CHASE)) n.pull = 0.05;
+    for (const e of events) if (e.type === "distress" && e.actor === id && tau >= e.t && tau < yr(e.until)) n.flip = true;
+    if (f.outside) n.solid = false;
+  }
+  // Predators steer toward the fish they are about to eat.
+  for (const [id, n] of nodes) {
+    if (n.hunting && nodes.has(n.hunting)) { const prey = nodes.get(n.hunting); n.tx = n.tx * 0.5 + prey.x * 0.5; n.ty = n.ty * 0.5 + prey.y * 0.5; }
+    n.hunting = null; n.chomp = n.chompNow;
+  }
+  for (const n of nodes.values()) { if (!Number.isFinite(n.x) || !Number.isFinite(n.y)) { const h = home(byId[n.id]); n.x = h.x; n.y = h.y; n.vx = n.vy = 0; } }
+  sim.nodes([...nodes.values()]);
+  sim.tick();
+  for (const n of nodes.values()) {
+    if (Math.abs(n.vx) > 0.25) n.dir = n.vx > 0 ? 1 : -1;
+    if (n.solid && n.pull <= 0.02) { const half = (n.L || 0) * 0.5; if (half * 2 < W) n.x = clamp(n.x, half, W - half); }
+    const s = live.get(n.id);
+    if (s) n.L = s.L;
+  }
+  lastLive = live;
+  render(live);
+}
+
+let lastRender = null;
+function render(live) {
+  const now = performance.now() / 1000, dt = lastRender == null ? 0 : Math.min(0.1, now - lastRender);
+  lastRender = now;
+  yearText.text(Math.floor(pausedOn ? pausedOn.t : tau)); // a pause shows the year the deal closed
+  const specs = [...live.values()].filter((s) => nodes.has(s.f.id));
+  const ctx = aq.ctx;
+  ctx.drawImage(aq.bg, 0, 0);
+  aq.rays(now);
+  aq.weedsDraw(now, false);
+  // Big fish swim behind small ones.
+  const order = specs.slice().sort((a, b) => b.L * nodes.get(b.f.id).scale - a.L * nodes.get(a.f.id).scale);
+  for (const s of order) {
+    const n = nodes.get(s.f.id);
+    const pop = n.popping;
+    if (pop != null && pop >= 0.45) continue;
+    const len = Math.round((s.L * n.scale) / P);
+    if (len < 3) continue;
+    const speed = Math.hypot(n.vx, n.vy);
+    n.phase = (n.phase ?? hash(s.f.id) * 6) + dt * (1.6 + Math.min(4, speed * 0.6)) * (len < 20 ? 1.4 : 1);
+    const chomping = n.chomp > 0.45 && n.chomp < 1;
+    const open = chomping && Math.floor(now * 7) % 2 === 0;
+    const img = sprite(s.species, s.f.ci, len, Math.floor(n.phase) % 6, { ghost: s.val.kind === "estimate" || s.val.kind === "deal", open, dir: n.dir, flip: n.flip, pattern: Math.floor(hash(s.f.id + "pat") * 4) });
+    const bob = Math.round(Math.sin(now * 1.3 + hash(s.f.id + "b") * 6) * 0.6);
+    ctx.drawImage(img, Math.round(n.x / P - img.width / 2), Math.round(n.y / P - img.height / 2) + bob);
+    if (Math.random() < dt * 0.25 && len >= 10) aq.addBubble(n.x / P + n.dir * len * 0.5, n.y / P - 1, 1);
+    // A fish about to vanish down a throat leaves crumbs.
+    if (n.eatenBy && n.scale < 0.35 && !n.crumbed) { n.crumbed = true; aq.burst(n.x / P, n.y / P, fishColour(s.f.ci), 8 + Math.min(16, len / 3), 14); }
+  }
+  // Splits: the fish swells inside a bubble, then the bubble bursts.
+  for (const s of specs) {
+    const n = nodes.get(s.f.id), p = n.popping;
+    if (p == null) continue;
+    const r = Math.round(((s.L / P) * 0.55) * (p < 0.45 ? 1 + 0.35 * (p / 0.45) : 1.35));
+    if (p < 0.45) { aq.ring(Math.round(n.x / P), Math.round(n.y / P), r, "rgba(240,253,255,0.95)"); aq.ring(Math.round(n.x / P), Math.round(n.y / P), r + 1, "rgba(30,80,110,0.35)"); }
+    else if (!n.burst) { n.burst = true; aq.burst(n.x / P, n.y / P, "#f0fdff", 26, 30 + r); for (let i = 0; i < 6; i++) aq.addBubble(n.x / P + (Math.random() - 0.5) * r, n.y / P + (Math.random() - 0.5) * r, i % 2 ? 3 : 1); }
+  }
+  aq.weedsDraw(now, true);
+  aq.particles(now, dt);
+
+  // Labels on fish big enough to carry one, plus anyone in the current scene.
+  const focus = new Set(pausedOn ? [pausedOn.actor, ...(pausedOn.targets || []), ...(pausedOn.children || [])] : []);
+  const labelled = specs.filter((s) => { const n = nodes.get(s.f.id); return n.scale > 0.6 && n.popping == null && (s.L >= 48 || focus.has(s.f.id)); });
+  gLabels.selectAll("text").data(labelled, (s) => s.f.id).join("text")
+    .attr("class", (s) => `fish-label${s.L < 70 ? " small" : ""}`)
+    .attr("x", (s) => clamp(nodes.get(s.f.id).x, 34, W - 34)).attr("y", (s) => nodes.get(s.f.id).y + s.L * { guppy: 0.2, adult: 0.2, predator: 0.12 }[s.species] + 14)
+    .text((s) => nameAt(s.f, tau));
+  drawPlayhead();
+}
+
+box.addEventListener("mousemove", (ev) => {
+  const r = box.getBoundingClientRect(), mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  let best = null;
+  for (const s of lastLive.values()) { const n = nodes.get(s.f.id); if (!n) continue; if (Math.abs(mx - n.x) < s.L * 0.5 && Math.abs(my - n.y) < s.L * HR[s.species] * 0.45 && (!best || s.L < best.L)) best = s; }
+  if (best) tip(ev, best); else d3.select("#tooltip").style("opacity", 0);
+});
+box.addEventListener("mouseleave", () => d3.select("#tooltip").style("opacity", 0));
+function tip(ev, s) {
+  const v = s.val;
+  const how = { market: "stock market value", float: "value of shares held by outside investors, from an annual report", deal: "price paid in a deal", estimate: "published estimate, no stock price" }[v.kind];
+  d3.select("#tooltip").style("opacity", 1).style("left", `${ev.clientX + 14}px`).style("top", `${ev.clientY + 10}px`)
+    .html(`<b>${nameAt(s.f, tau)}</b><br>${fmt$(v.v)}<br>${how}${v.held ? `, last known ${fmtMonth(v.d)}` : ""}`);
+}
+
+// ---------- caption ----------
+const cap = d3.select("#caption");
+function readSeconds(e) { const words = (e.headline + " " + e.text).split(/\s+/).length; return clamp(words / 3.2, 7, 16); }
+function showIntro() { cap.html(`<p class="when">${fmtMonth(D.first_date)}</p><p>${D.text.intro}</p>`); }
+function showPause(e) {
+  cap.html(`<p class="when">${showDate(e)}</p><h2>${e.headline}</h2>${e.text.split("\n").map((p) => `<p>${p}</p>`).join("")}<span class="resume"><i></i></span><button type="button" id="go" class="go">Keep going</button>`);
+  cap.select("#go").style("font-family", "var(--label)").style("background", "none").style("border", 0).style("border-bottom", "1px solid var(--ink)").style("padding", 0).style("cursor", "pointer").on("click", resume);
+}
+function showMinor() {
+  const recent = events.filter((e) => !e.pause && e.minor && e.t <= tau && e.t > tau - 1.2).pop();
+  const box = cap.select(".minor");
+  if (!pausedOn && recent) {
+    if (box.empty()) cap.append("p").attr("class", "minor");
+    cap.select(".minor").text(`${Math.floor(recent.t)}: ${recent.minor}`);
+  }
+}
+function showEnd() { cap.html(`<p class="when">${fmtMonth(D.last_date)}</p><h2>${D.text.end_headline}</h2><p>${D.text.end}</p>`); }
+function resume() { pausedOn = null; if (!playing) { playing = true; setPlayLabel(); } cap.html(""); }
+setInterval(showMinor, 400);
+
+// ---------- controls ----------
+const tl = d3.select("#timeline");
+let tx = d3.scaleLinear();
+function drawTimeline() {
+  const w = tl.node().getBoundingClientRect().width;
+  tx = d3.scaleLinear().domain([T0, T1]).range([4, w - 4]);
+  tl.attr("viewBox", `0 0 ${w} 28`);
+  tl.selectAll("*").remove();
+  tl.append("line").attr("class", "track").attr("x1", tx(T0)).attr("x2", tx(T1)).attr("y1", 10).attr("y2", 10);
+  tl.append("line").attr("class", "done").attr("x1", tx(T0)).attr("y1", 10).attr("y2", 10);
+  tl.selectAll("line.tick").data(pauses).join("line").attr("class", "tick").attr("x1", (e) => tx(e.tv)).attr("x2", (e) => tx(e.tv)).attr("y1", 5).attr("y2", 15);
+  const decades = [2000, 2010, 2020].filter((y) => y > T0 && y < T1);
+  const startLabel = tx(decades[0] ?? T1) - tx(T0) > 40 ? [Math.ceil(T0)] : [];
+  tl.selectAll("text").data([...startLabel, ...decades]).join("text").attr("x", (y) => tx(y)).attr("y", 27).attr("text-anchor", (y) => (y === Math.ceil(T0) ? "start" : "middle")).text((y) => y);
+}
+function drawPlayhead() { tl.select("line.done").attr("x2", tx(tau)); }
+tl.on("click", (ev) => {
+  const [x] = d3.pointer(ev);
+  jump(clamp(tx.invert(x), T0, T1));
+});
+function jump(t) {
+  tau = t; pausedOn = null; nodes.clear(); cap.html("");
+  nextPause = pauses.findIndex((e) => e.tv + 0.04 > tau); if (nextPause < 0) nextPause = pauses.length;
+  if (!playing) { playing = true; setPlayLabel(); }
+}
+function setPlayLabel() { d3.select("#play").text(playing ? "Pause" : "Play"); }
+d3.select("#play").on("click", () => {
+  if (tau >= T1) { jump(T0); showIntro(); return; }
+  playing = !playing; if (playing && pausedOn) resume(); setPlayLabel();
+});
+d3.select("#replay").on("click", () => { jump(T0); showIntro(); });
+document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); d3.select("#play").dispatch("click"); } });
+
+// Key: one of each species and the hollow outline, drawn with the same sprites.
+const keyImg = (sp, ghost) => { const c = sprite(sp, 6, 24, 1, { ghost }); return `<img src="${c.toDataURL()}" width="${c.width * 2}" height="${c.height * 2}" alt="" style="image-rendering:pixelated;vertical-align:middle">`; };
+d3.select("#key").html([["guppy", false, "worth under " + D.text.adult_short], ["adult", false, "grown up"], ["predator", false, "predator"], ["adult", true, "no stock price, sized by a deal or estimate"]].map(([sp, g, label]) => `<span class="key-item">${keyImg(sp, g)} ${label}</span>`).join(" ") + ``);
+
+// ---------- tables ----------
+function table(sel, cols, rows) {
+  const t = d3.select(sel).append("table");
+  t.append("thead").append("tr").selectAll("th").data(cols).join("th").text((c) => c[0]);
+  t.append("tbody").selectAll("tr").data(rows).join("tr").selectAll("td").data((r) => cols.map((c) => c[1](r))).join("td").html((x) => x);
+}
+const srcLink = (id) => { const s = srcById[id]; return s ? (s.url ? `<a href="${s.url}">${s.short || s.label}</a>` : s.short || s.label) : id; };
+d3.select("#event-table").append("p").text("* Date of the SEC filing that records the deal closing or the stock being delisted, usually the closing day or within a few days of it.");
+table("#event-table", [["Date", (e) => showDate(e) + (e.precision === "filing" ? "*" : "")], ["What happened", (e) => e.minor || e.headline], ["Deal value", (e) => (e.value ? fmt$(e.value) : "")], ["In today's dollars", (e) => (e.value_real ? fmt$(e.value_real) : "")], ["Source", (e) => [...new Set(e.src)].map(srcLink).join(", ")]], events.filter((e) => e.minor || e.headline));
+const rows = [];
+for (const f of fish) for (const p of f.pts) rows.push({ f, p });
+table("#value-table", [["Company", (r) => nameAt(r.f, r.p.t)], ["Date", (r) => r.p.d], ["Value", (r) => fmt$(r.p.v)], ["Kind", (r) => r.p.kind], ["Source", (r) => srcLink(r.p.src)]], rows);
+
+window.addEventListener("resize", resize);
+resize();
+showIntro();
+requestAnimationFrame(frame);
+// Hooks for screenshots: ?t=2001.05 jumps to a moment and holds there.
+const q = new URLSearchParams(location.search);
+if (q.has("t")) { jump(+q.get("t")); playing = false; setPlayLabel(); }
+if (q.has("pause")) { const e = pauses[+q.get("pause")]; if (e) jump(e.tv - 0.25); }
+window.__tank = { jump, get tau() { return tau; }, pause: () => { playing = false; setPlayLabel(); } };

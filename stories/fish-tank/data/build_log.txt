@@ -1,0 +1,409 @@
+CPI: 956 months, base 2026-09 = 336.298
+QUOTE OK  [sec] https://www.sec.gov/Archives/edgar/data/1001039/0000898430-96-000382.txt: “On February 9, 1996, The Walt Disney Company (the "Company") completed”
+QUOTE OK  [news] https://www.baltimoresun.com/1995/08/01/a-media-giant-is-born-merger-is-biggest-: “If the $19 billion deal is approved”
+EVENT 1996-02-09 (day) disney_abc: value=$19 billion sources=2
+QUOTE OK  [wiki] Qwest: “The telecom company was renamed Qwest and became a publicly traded company in June 1997”
+EVENT 1997-06-15 (month) qwest_in: value=- sources=1
+QUOTE OK  [wiki] CBS Corporation: “The first incarnation of the company was formed on November 30, 1997 after the Westinghouse Electric Corporati”
+EVENT 1997-11-30 (day) cbs_name: value=- sources=1
+SECFORM 1091667 CHARTER COMMUNICATIONS, INC. /MO/: 8-A12G filed 1999-11-03
+EVENT 1999-11-03 (filing) charter_in: value=- sources=1
+SECFORM 1065280 NETFLIX INC: 8-A12G filed 2002-05-06
+EVENT 2002-05-06 (filing) netflix_in: value=- sources=1
+SECFORM 1437107 Warner Bros. Discovery, Inc.: 8-A12B filed 2008-09-12
+EVENT 2008-09-12 (filing) discovery_in: value=- sources=1
+QUOTE OK  [wiki] Lumen Technologies: “The new corporate name, CenturyLink, Inc., did not become official until May 2010”
+EVENT 2010-05-15 (month) ctl_name: value=- sources=1
+QUOTE OK  [wiki] Lumen Technologies: “Effective with the opening of the trading day on September 18, 2020, the company stock ticker changed from CTL”
+EVENT 2020-09-18 (day) lumen_name: value=- sources=1
+QUOTE OK  [wiki] Lucent Technologies: “It was established on September 30, 1996, through the divestiture of the former AT&T Technologies business uni”
+EVENT 1996-09-30 (day) lucent: value=- sources=1
+SECFORM 732716 PACIFIC TELESIS GROUP: 15-12B filed 1997-05-13
+QUOTE OK  [wiki] Pacific Telesis: “In 1997, Pacific Telesis Group was acquired by SBC Communications (renamed from Southwestern Bell Corporation)”
+EVENT 1997-05-13 (filing) sbc_pactel: value=$17 billion sources=2
+QUOTE OK  [wiki] NYNEX: “The final merger took place on August 14, 1997”
+LIST Bell Atlantic / NYNEX 1996: 52.0 bn  [12 | 1996 | Bell Atlantic | NYNEX | 52.0 | {{inflation | US | 52 | 1996 | r=1}}]
+EVENT 1997-08-14 (day) ba_nynex: value=$52 billion sources=2
+SECFORM 732718 COMCAST MO GROUP INC: 8-K filed 1998-06-18
+EVENT 1998-06-18 (filing) uswest_split: value=- sources=1
+SECFORM 64079 MCI COMMUNICATIONS CORP: 15-12G filed 1998-09-15
+LIST Worldcom / MCI Communications 1997: 37.0 bn  [22 | 1997 | Worldcom | MCI Communications | 37.0 | {{inflation | US | 37 | 1997 | r=1}}]
+EVENT 1998-09-15 (filing) wcom_mci: value=$37 billion sources=2
+QUOTE OK  [wiki] Tele-Communications Inc.: “AT&T completed its acquisition on March 9, 1999”
+LIST AT&T / Tele-Communications Inc. 1999: 48.0 bn  [14 | 1999 | AT&T | Tele-Communications Inc. | 48.0 | {{inflation | US | 48 | 1999 | r=1}}]
+EVENT 1999-03-09 (day) att_tci: value=$48 billion sources=2
+QUOTE OK  [wiki] Ameritech: “then the two companies officially merged on October 8, 1999”
+LIST SBC Communications / Ameritech Corporation 1999: 62.0 bn  [8 | 1999 | SBC Communications | Ameritech Corporation | 62.0 | {{inflation | US | 62 | 1999 | r=1}}]
+EVENT 1999-10-08 (day) sbc_ameritech: value=$62 billion sources=2
+SECFORM 106413 CBS CORP: 15-12B filed 2000-05-04
+LIST Viacom / CBS Corporation 1999: 35.6 bn  [24 | 1999 | Viacom | CBS Corporation | 35.6 | {{inflation | US | 35.6 | 1999 | r=1}}]
+EVENT 2000-05-04 (filing) viacom_cbs: value=$36 billion sources=2
+SECFORM 732718 COMCAST MO GROUP INC: 15-12B filed 2000-06-16
+LIST AT&T / MediaOne 2002: 62.0 bn  [13 | 2002 | AT&T | MediaOne | 62.0 | {{inflation | US | 62 | 2002 | r=1}}]
+EVENT 2000-06-16 (filing) att_mediaone: value=$62 billion sources=2
+QUOTE OK  [wiki] GTE: “Bell Atlantic merged with GTE on June 30, 2000, and named the new entity Verizon Communications”
+LIST Bell Atlantic / GTE 1998: 53.36 bn  [11 | 1998 | Bell Atlantic | GTE | 53.36 | {{inflation | US | 53.36 | 1998 | r=1}}]
+EVENT 2000-06-30 (day) verizon: value=$53 billion sources=2
+QUOTE OK  [wiki] US West: “U S West merged with Qwest on June 30, 2000”
+LIST Qwest Communications / US West 1999: 44.0 bn  [16 | 1999 | Qwest Communications | US West | 44.0 | {{inflation | US | 44 | 1999 | r=1}}]
+EVENT 2000-06-30 (day) qwest_uswest: value=$44 billion sources=2
+QUOTE OK  [wiki] Merger of AOL and Time Warner: “After an extensive regulatory review, the merger closed on January 11, 2001”
+LIST AOL / Time Warner 2000: 182.0 bn  [1 | 2000 | AOL | Time Warner | 182.0 | {{inflation | US | 182 | 2000 | r=1}}]
+EVENT 2001-01-11 (day) aol_tw: value=$182 billion sources=2
+QUOTE OK  [wiki] AT&T Wireless Services: “Just over a year later in July 2001, AT&T Wireless became a separate company rather than a division of AT&T Co”
+EVENT 2001-07-15 (month) attws_split: value=- sources=1
+QUOTE OK  [wiki] WorldCom: “On July 21, 2002, WorldCom filed for Chapter 11 bankruptcy protection in the largest such filing in United Sta”
+QUOTE OK  [wiki] WorldCom: “The company emerged from bankruptcy in 2004”
+EVENT 2002-07-21 (day) wcom_bk: value=- sources=2
+SECFORM 22301 COMCAST HOLDINGS CORP: 15-12G filed 2002-11-19
+LIST Comcast / AT&T Broadband 2001: 72.0 bn  [6 | 2001 | Comcast | AT&T Broadband | 72.0 | {{inflation | US | 72 | 2001 | r=1}}]
+EVENT 2002-11-19 (filing) comcast_attbb: value=$72 billion sources=2
+SECFORM 944868 DIRECTV GROUP INC: 8-A12B filed 2003-12-22
+EVENT 2003-12-22 (filing) directv_in: value=- sources=1
+SECFORM 1138234 NEW CINGULAR WIRELESS SERVICES, INC.: 15-12B filed 2004-10-26
+LIST Cingular / AT&T Wireless 2004: 41.0 bn  [29 | 2004 | Cingular | AT&T Wireless | 41.0 | {{inflation | US | 41 | 2004 | r=1}}]
+EVENT 2004-10-26 (filing) attws_exit: value=$41 billion sources=2
+QUOTE OK  [wiki] News Corporation: “the company was re-incorporated under Delaware General Corporation Law following a successful shareholder vote”
+EVENT 2004-11-12 (day) news_in: value=- sources=1
+QUOTE OK  [wiki] WorldCom: “MCI (2003–2006)”
+EVENT 2003-07-01 (year) wcom_mci_name: value=- sources=1
+QUOTE OK  [wiki] WarnerMedia: “In June 2003, the company dropped the "AOL" from its name, and reverted itself to Time Warner”
+EVENT 2003-06-15 (month) tw_name: value=- sources=1
+QUOTE OK  [wiki] Sprint Corporation: “Sprint Nextel was formed on August 13, 2005, when the deal was completed”
+LIST Sprint Corporation / Nextel Communications 2005: 35.0 bn  [40 | 2005 | Sprint Corporation | Nextel Communications | 35.0 | {{inflation | US | 35 | 2005 | r=1}}]
+EVENT 2005-08-13 (day) sprint_nextel: value=$35 billion sources=2
+QUOTE OK  [wiki] AT&T: “On November 18, 2005, SBC Communications purchased its former parent, AT&T Corporation, for $16 billion”
+QUOTE OK  [wiki] AT&T: “On November 18, 2005, SBC Communications purchased its former parent, AT&T Corporation, for $16 billion”
+EVENT 2005-11-18 (day) sbc_att: value=$16 billion sources=2
+QUOTE OK  [wiki] Viacom (2005–2019): “It was split from the original Viacom on December 31, 2005”
+EVENT 2005-12-31 (day) viacom_split: value=- sources=1
+SECFORM 723527 MCI INC: 15-12G filed 2006-01-09
+QUOTE OK  [wiki] Verizon: “Verizon increased its bid to $7.6 billion, which MCI accepted on March 29, 2005”
+EVENT 2006-01-09 (filing) vz_mci: value=$7.6 billion sources=2
+SECFORM 1350031 Embarq CORP: 8-K filed 2006-05-04
+EVENT 2006-05-04 (filing) embarq_split: value=- sources=1
+QUOTE OK  [wiki] Comcast: “the parties announced that Comcast would buy a controlling 51% stake in NBC Universal, including Universal Pic”
+EVENT 2009-12-03 (day) nbcu_in: value=- sources=1
+SECFORM 1002114 PIXAR \CA\: 15-12G filed 2006-05-08
+QUOTE OK  [wiki] Pixar: “Disney ultimately agreed on January 24, 2006, to buy Pixar for approximately $7.4 billion”
+EVENT 2006-05-08 (filing) disney_pixar: value=$7.4 billion sources=2
+QUOTE OK  [wiki] BellSouth: “executed on December 29, 2006, AT&T Inc. (originally SBC Communications) acquired BellSouth for approximately ”
+QUOTE OK  [wiki] BellSouth: “AT&T Inc. (originally SBC Communications) acquired BellSouth for approximately $86 billion”
+EVENT 2006-12-29 (day) att_bls: value=$86 billion sources=2
+SECFORM 29924 DOW JONES & CO INC: 15-12B filed 2007-12-18
+QUOTE OK  [wiki] Dow Jones & Company: “had agreed in principle on a US$5 billion takeover”
+EVENT 2007-12-18 (filing) news_dj: value=$5.0 billion sources=2
+SECFORM 65873 ALLTEL CORP: 15-12B filed 2008-11-14
+QUOTE OK  [wiki] Alltel: “Verizon Wireless announced it would acquire the majority of Alltel Wireless in a deal valued at $28.1 billion”
+EVENT 2008-11-14 (filing) vz_alltel: value=$28 billion sources=2
+SECFORM 1105705 WARNER MEDIA, LLC: 8-K filed 2009-03-13
+EVENT 2009-03-13 (filing) twc_split: value=- sources=1
+QUOTE OK  [wiki] Charter Communications: “Charter filed for a prearranged bankruptcy on March 28, 2009”
+QUOTE OK  [wiki] Charter Communications: “That day, Charter emerged from bankruptcy”
+EVENT 2009-03-28 (day) charter_bk: value=- sources=2
+SECFORM 1350031 Embarq CORP: 25-NSE filed 2009-07-01
+EVENT 2009-07-01 (filing) ctl_embarq: value=- sources=1
+SECFORM 1105705 WARNER MEDIA, LLC: 8-K filed 2009-12-04
+EVENT 2009-12-04 (filing) aol_split: value=- sources=1
+QUOTE OK  [wiki] Marvel Entertainment: “On December 31, 2009, Disney completed its acquisition of Marvel Entertainment”
+QUOTE OK  [wiki] Marvel Entertainment: “On August 31, 2009, the Walt Disney Company announced a deal to acquire Marvel Entertainment for $4 billion”
+EVENT 2009-12-31 (day) disney_marvel: value=$4.0 billion sources=2
+QUOTE OK  [wiki] Comcast: “The transaction was completed on January 28, 2011”
+LIST Comcast / NBCUniversal 2009: 30.0 bn  [50 | 2009 | Comcast | General Electric ( NBCUniversal) | 30.0 | {{inflation | US | 30 | 2009 | r=1}}]
+EVENT 2011-01-28 (day) comcast_nbcu: value=$30 billion sources=2
+SECFORM 1037949 QWEST COMMUNICATIONS INTERNATIONAL INC: 25-NSE filed 2011-04-01
+QUOTE OK  [wiki] Qwest: “The valuation of CenturyLink's purchase as of April 21, 2010, was $22.4 billion”
+EVENT 2011-04-01 (filing) ctl_qwest: value=$22 billion sources=2
+QUOTE OK  [wiki] Lucasfilm: “On December 21, 2012, Disney completed the acquisition and Lucasfilm became a wholly owned subsidiary of Disne”
+QUOTE OK  [wiki] Lucasfilm: “On October 30, 2012, Disney announced a deal to acquire Lucasfilm for $4.05 billion”
+EVENT 2012-12-21 (day) disney_lucas: value=$4.0 billion sources=2
+SECFORM 1283699 T-Mobile US, Inc.: 8-K filed 2013-05-02
+EVENT 2013-05-02 (filing) tmo_in: value=- sources=1
+QUOTE OK  [wiki] News Corporation: “The formal split was completed on June 28, 2013”
+EVENT 2013-06-28 (day) news_split: value=- sources=1
+SECFORM 1468516 AOL Inc.: 25-NSE filed 2015-06-23
+QUOTE OK  [wiki] Verizon: “Verizon acquired AOL in 2015 at $50 per share, for a deal valued around $4.4 billion”
+EVENT 2015-06-23 (filing) vz_aol: value=$4.4 billion sources=2
+QUOTE OK  [wiki] DirecTV: “On July 24, 2015, after receiving approval from the Federal Communications Commission and the Department of Ju”
+QUOTE OK  [wiki] DirecTV: “AT&T acquired DirecTV in a transaction valued at $67.1 billion”
+EVENT 2015-07-24 (day) att_directv: value=$67 billion sources=2
+QUOTE OK  [wiki] Charter Communications: “On May 18, 2016, Charter finalized acquisition of Time Warner Cable and its sister company Bright House Networ”
+LIST Charter Communications / Time Warner Cable 2015: 78.7 bn  [10 | 2015 | Charter Communications | Time Warner Cable | 78.7 | {{inflation | US | 78.7 | 2015 | r=1}}]
+EVENT 2016-05-18 (day) charter_twc: value=$79 billion sources=2
+QUOTE OK  [wiki] Level 3 Communications: “The deal officially closed and Level 3 became part of CenturyLink on November 1, 2017”
+QUOTE OK  [wiki] Level 3 Communications: “CenturyLink announced its intent to acquire Level 3 in a deal valued at around $34 billion”
+EVENT 2017-11-01 (day) ctl_level3: value=$34 billion sources=2
+QUOTE OK  [wiki] Scripps Networks Interactive: “Discovery Communications completed its acquisition of SNI after receiving approval from the United States Depa”
+QUOTE OK  [wiki] Scripps Networks Interactive: “Discovery Communications announced that it would acquire Scripps Networks Interactive for $14.6 billion”
+EVENT 2018-03-06 (day) disc_scripps: value=$15 billion sources=2
+QUOTE OK  [wiki] Acquisition of Time Warner by AT&T: “The merger closed on June 14, 2018”
+LIST AT&T / Time Warner 2016: 85.4 bn  [8 | 2016 | AT&T | Time Warner | 85.4 — {{font color | red | 108.7}} | {{inflation | US | 85.4 | 2016 | r=1}} — {{font color | red | {{inflation | US |]
+EVENT 2018-06-14 (day) att_tw: value=$85 billion sources=2
+QUOTE OK  [wiki] Sky Group: “Fox sold their stake in October 2018, followed by the remaining shareholders a month later”
+LIST Comcast Corporation / Sky plc 2018: 39.0 bn  [34 | 2018 | Comcast Corporation | Sky plc | 39.0 | {{inflation | US | 39 | 2018 | r=1}}]
+EVENT 2018-10-15 (day) comcast_sky: value=$39 billion sources=2
+QUOTE OK  [wiki] Acquisition of 21st Century Fox by Disney: “the transaction closed on March 20, 2019”
+LIST The Walt Disney Company / 21st Century Fox 2018: 71.3 bn  [12 | 2018 | The Walt Disney Company | 21st Century Fox | 71.3 — {{font color | red | 85.1}} | {{inflation | US | 71.3 | 2018 | r=1}} — {{font color | ]
+EVENT 2019-03-20 (day) disney_fox: value=$71 billion sources=2
+QUOTE OK  [wiki] CBS Corporation: “The merger was completed on December 4, 2019”
+LIST Viacom / CBS Corporation 2019: 25.0 bn  [65 | 2019 | Viacom | CBS Corporation | 25.0 | {{inflation | US | 25 | 2019 | r=1}}]
+EVENT 2019-12-04 (day) cbs_viacom: value=$25 billion sources=2
+QUOTE OK  [wiki] Sprint Corporation: “Before being acquired by T-Mobile US on April 1, 2020”
+LIST T-Mobile US / Sprint Corporation 2018: 37.0 bn  [39 | 2018 | T-Mobile US | Sprint Corporation | 37.0 | {{inflation | US | 37 | 2018 | r=1}}]
+EVENT 2020-04-01 (day) tmo_sprint: value=$37 billion sources=2
+QUOTE OK  [wiki] Paramount Global: “On February 16, 2022, ViacomCBS was renamed to Paramount”
+EVENT 2022-02-16 (day) paramount_name: value=- sources=1
+SECFORM 1437107 Warner Bros. Discovery, Inc.: 8-K filed 2022-04-12
+LIST Discovery, Inc. / WarnerMedia 2021: 43.0 bn  [24 | 2021 | Discovery, Inc. | AT&T ( WarnerMedia) | 43.0 | {{inflation | US | 43 | 2021 | r=1}}]
+EVENT 2022-04-12 (filing) wbd: value=$43 billion sources=2
+QUOTE OK  [wiki] Merger of Skydance Media and Paramount Global: “Skydance announced that the transaction would close six days later, which occurred on August 7, 2025”
+QUOTE OK  [wiki] Merger of Skydance Media and Paramount Global: “an all-stock merger between Skydance Media and Paramount, valued at $4.75 billion”
+EVENT 2025-08-07 (day) paramount_skydance: value=$4.8 billion sources=2
+QUOTE OK  [wiki] Comcast: “the spin-off was completed, which finished on January 2, 2026”
+EVENT 2026-01-02 (day) versant: value=- sources=1
+SECFORM 20520 Frontier Communications Parent, Inc.: 25-NSE filed 2026-01-20
+QUOTE OK  [wiki] Verizon: “valuing the company at $20 billion”
+EVENT 2026-01-20 (filing) vz_frontier: value=$20 billion sources=2
+QUOTE OK  [wiki] Charter Communications: “the merger was completed on August 20, 2026”
+LIST Charter Communications / Cox Communications 2025: 21.9 bn  [59 | 2025 | Charter Communications | Cox Enterprises ( Cox Communications) | 21.9 — {{font color | red | 34.5}} | {{inflation | US | 21.9 | 2025 | r=1]
+EVENT 2026-08-20 (day) charter_cox: value=$22 billion sources=2
+QUOTE OK  [wiki] Warner Bros. Discovery: “The acquisition closed on October 6, 2026”
+QUOTE OK  [wiki] Warner Bros. Discovery: “Paramount Skydance outbid them with a $110.9 billion offer for the entire company on February 24, 2026”
+EVENT 2026-10-06 (day) psky_wbd: value=$111 billion sources=2
+CMC att: AT&T (T), 667 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+XCHECK sbc 1996-02-29: monthly $33 billion vs SEC outside-investor value $33 billion (ratio 1.00)
+XCHECK sbc 1997-02-28: monthly $34 billion vs SEC outside-investor value $34 billion (ratio 1.00)
+XCHECK sbc 1998-02-27: monthly $70 billion vs SEC outside-investor value $69 billion (ratio 1.00)
+XCHECK sbc 1999-02-26: monthly $104 billion vs SEC outside-investor value $104 billion (ratio 1.00)
+XCHECK sbc 2000-03-06: monthly $121 billion vs SEC outside-investor value $147 billion (ratio 0.82)
+XCHECK sbc 2002-01-31: monthly $126 billion vs SEC outside-investor value $125 billion (ratio 1.00)
+XCHECK sbc 2002-06-28: monthly $101 billion vs SEC outside-investor value $101 billion (ratio 1.00)
+XCHECK sbc 2003-06-30: monthly $85 billion vs SEC outside-investor value $85 billion (ratio 1.00)
+XCHECK sbc 2004-06-30: monthly $80 billion vs SEC outside-investor value $80 billion (ratio 1.00)
+XCHECK sbc 2005-06-30: monthly $79 billion vs SEC outside-investor value $78 billion (ratio 1.00)
+XCHECK sbc 2006-06-30: monthly $108 billion vs SEC outside-investor value $108 billion (ratio 1.00)
+XCHECK sbc 2007-06-29: monthly $253 billion vs SEC outside-investor value $253 billion (ratio 1.00)
+XCHECK sbc 2008-06-30: monthly $199 billion vs SEC outside-investor value $198 billion (ratio 1.00)
+XCHECK sbc 2009-06-30: monthly $147 billion vs SEC outside-investor value $147 billion (ratio 1.00)
+XCHECK sbc 2010-06-30: monthly $143 billion vs SEC outside-investor value $143 billion (ratio 1.00)
+XCHECK sbc 2011-06-30: monthly $186 billion vs SEC outside-investor value $186 billion (ratio 1.00)
+XCHECK sbc 2012-06-29: monthly $209 billion vs SEC outside-investor value $207 billion (ratio 1.01)
+XCHECK sbc 2013-06-28: monthly $190 billion vs SEC outside-investor value $189 billion (ratio 1.01)
+XCHECK sbc 2014-06-30: monthly $184 billion vs SEC outside-investor value $184 billion (ratio 1.00)
+XCHECK sbc 2015-06-30: monthly $184 billion vs SEC outside-investor value $184 billion (ratio 1.00)
+XCHECK sbc 2016-06-30: monthly $266 billion vs SEC outside-investor value $266 billion (ratio 1.00)
+XCHECK sbc 2017-06-30: monthly $232 billion vs SEC outside-investor value $232 billion (ratio 1.00)
+XCHECK sbc 2018-06-30: monthly $235 billion vs SEC outside-investor value $233 billion (ratio 1.01)
+XCHECK sbc 2019-06-30: monthly $245 billion vs SEC outside-investor value $245 billion (ratio 1.00)
+XCHECK sbc 2020-06-30: monthly $215 billion vs SEC outside-investor value $215 billion (ratio 1.00)
+XCHECK sbc 2021-06-30: monthly $208 billion vs SEC outside-investor value $205 billion (ratio 1.02)
+XCHECK sbc 2022-06-30: monthly $148 billion vs SEC outside-investor value $149 billion (ratio 0.99)
+XCHECK sbc 2023-06-30: monthly $114 billion vs SEC outside-investor value $114 billion (ratio 1.00)
+XCHECK sbc 2024-06-30: monthly $126 billion vs SEC outside-investor value $137 billion (ratio 0.92)
+XCHECK sbc 2025-06-30: monthly $203 billion vs SEC outside-investor value $207 billion (ratio 0.98)
+CMC bellsouth: BellSouth (BLS), 2516 points 1997-01-02..2006-12-29, year-end table checked for 10 years
+CMC verizon: Verizon (VZ), 663 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+XCHECK bell_atlantic 1996-02-29: monthly $29 billion vs SEC outside-investor value $29 billion (ratio 1.00)
+XCHECK bell_atlantic 1997-02-28: monthly $30 billion vs SEC outside-investor value $30 billion (ratio 1.00)
+XCHECK bell_atlantic 1998-02-28: monthly $70 billion vs SEC outside-investor value $70 billion (ratio 1.00)
+XCHECK bell_atlantic 1999-01-31: monthly $93 billion vs SEC outside-investor value $93 billion (ratio 1.00)
+XCHECK bell_atlantic 2000-02-29: monthly $76 billion vs SEC outside-investor value $76 billion (ratio 1.00)
+XCHECK bell_atlantic 2002-01-31: monthly $126 billion vs SEC outside-investor value $125 billion (ratio 1.00)
+XCHECK bell_atlantic 2002-06-28: monthly $108 billion vs SEC outside-investor value $107 billion (ratio 1.01)
+XCHECK bell_atlantic 2003-06-30: monthly $109 billion vs SEC outside-investor value $109 billion (ratio 1.00)
+XCHECK bell_atlantic 2004-06-30: monthly $100 billion vs SEC outside-investor value $100 billion (ratio 1.00)
+XCHECK bell_atlantic 2005-06-30: monthly $96 billion vs SEC outside-investor value $96 billion (ratio 0.99)
+XCHECK bell_atlantic 2006-06-30: monthly $97 billion vs SEC outside-investor value $93 billion (ratio 1.04)
+XCHECK bell_atlantic 2007-06-29: monthly $119 billion vs SEC outside-investor value $123 billion (ratio 0.97)
+XCHECK bell_atlantic 2008-06-30: monthly $105 billion vs SEC outside-investor value $104 billion (ratio 1.01)
+XCHECK bell_atlantic 2009-06-30: monthly $91 billion vs SEC outside-investor value $85 billion (ratio 1.07)
+XCHECK bell_atlantic 2010-06-30: monthly $79 billion vs SEC outside-investor value $75 billion (ratio 1.06)
+XCHECK bell_atlantic 2011-06-30: monthly $105 billion vs SEC outside-investor value $101 billion (ratio 1.04)
+XCHECK bell_atlantic 2012-06-29: monthly $127 billion vs SEC outside-investor value $127 billion (ratio 1.00)
+XCHECK bell_atlantic 2013-06-28: monthly $144 billion vs SEC outside-investor value $144 billion (ratio 1.00)
+XCHECK bell_atlantic 2014-06-30: monthly $203 billion vs SEC outside-investor value $203 billion (ratio 1.00)
+XCHECK bell_atlantic 2015-06-30: monthly $190 billion vs SEC outside-investor value $189 billion (ratio 1.00)
+XCHECK bell_atlantic 2016-06-30: monthly $228 billion vs SEC outside-investor value $228 billion (ratio 1.00)
+XCHECK bell_atlantic 2017-06-30: monthly $182 billion vs SEC outside-investor value $182 billion (ratio 1.00)
+XCHECK bell_atlantic 2018-06-30: monthly $208 billion vs SEC outside-investor value $208 billion (ratio 1.00)
+XCHECK bell_atlantic 2019-06-30: monthly $236 billion vs SEC outside-investor value $236 billion (ratio 1.00)
+XCHECK bell_atlantic 2020-06-30: monthly $226 billion vs SEC outside-investor value $228 billion (ratio 0.99)
+XCHECK bell_atlantic 2021-06-30: monthly $237 billion vs SEC outside-investor value $232 billion (ratio 1.02)
+XCHECK bell_atlantic 2022-06-30: monthly $213 billion vs SEC outside-investor value $213 billion (ratio 1.00)
+XCHECK bell_atlantic 2023-06-30: monthly $149 billion vs SEC outside-investor value $156 billion (ratio 0.95)
+XCHECK bell_atlantic 2024-06-30: monthly $167 billion vs SEC outside-investor value $174 billion (ratio 0.96)
+XCHECK bell_atlantic 2025-06-30: monthly $181 billion vs SEC outside-investor value $182 billion (ratio 0.99)
+CMC gte-corporation: GTE Corporation (GTE), 883 points 1997-01-02..2000-06-30, year-end table checked for 4 years
+CMC us-west: US West (USW), 883 points 1997-01-02..2000-06-30, year-end table checked for 4 years
+CMC qwest-communications-international: Qwest Communications International (Q), 3466 points 1997-06-24..2011-03-31, year-end table checked for 15 years
+CMC lumen: Lumen Technologies (LUMN), 651 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+CMC worldcom: Worldcom (WCOM), 1506 points 1997-01-02..2002-12-31, year-end table checked for 6 years
+DROP worldcom 1995-03-17 $105 million: under a tenth of nearby values ['$89 million', '$23 billion']
+DROP worldcom 1996-03-15 $89 million: under a tenth of nearby values ['$105 million', '$23 billion', '$24 billion']
+DROP worldcom 2002-07-01 $178 million: under a tenth of nearby values ['$2.7 billion', '$2.5 billion', '$296 million', '$652 million']
+CMC sprint-corporation: Sprint Corporation (S), 5850 points 1997-01-02..2020-03-31, year-end table checked for 24 years
+COVER UNUSED nextel 2005-03-15: kind=float float=None shares=[] prices=[]
+CMC lucent-technologies: Lucent Technologies (LU), 2496 points 1997-01-02..2006-11-30, year-end table checked for 10 years
+CMC t-mobile-us: T-Mobile US (TMUS), 531 points 2007-06-29..2026-11-02, year-end table checked for 20 years
+CMC comcast: Comcast (CMCSA), 667 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+DROP comcast 1995-02-01 $540 million: under a tenth of nearby values ['$4.5 billion', '$5.7 billion']
+XCHECK comcast 2016-06-30: monthly $157 billion vs SEC outside-investor value $156 billion (ratio 1.01)
+XCHECK comcast 2017-06-30: monthly $183 billion vs SEC outside-investor value $182 billion (ratio 1.01)
+XCHECK comcast 2018-06-30: monthly $151 billion vs SEC outside-investor value $149 billion (ratio 1.01)
+XCHECK comcast 2019-06-30: monthly $192 billion vs SEC outside-investor value $191 billion (ratio 1.01)
+XCHECK comcast 2020-06-30: monthly $176 billion vs SEC outside-investor value $177 billion (ratio 1.00)
+XCHECK comcast 2021-06-30: monthly $261 billion vs SEC outside-investor value $260 billion (ratio 1.01)
+XCHECK comcast 2022-06-30: monthly $187 billion vs SEC outside-investor value $172 billion (ratio 1.09)
+XCHECK comcast 2023-06-30: monthly $168 billion vs SEC outside-investor value $170 billion (ratio 0.99)
+XCHECK comcast 2024-06-30: monthly $147 billion vs SEC outside-investor value $151 billion (ratio 0.98)
+XCHECK comcast 2025-06-30: monthly $131 billion vs SEC outside-investor value $131 billion (ratio 1.00)
+CMC charter-communications: Charter Communications (CHTR), 496 points 2009-12-31..2026-11-02, year-end table checked for 18 years
+DROP charter 2000-03-28 $189 million: under a tenth of nearby values ['$4.3 billion', '$3.5 billion']
+DROP charter 2009-06-30 $8 million: under a tenth of nearby values ['$1.5 billion', '$393 million', '$4.1 billion', '$3.5 billion']
+CMC time-warner-cable: Time Warner Cable (TWC), 2358 points 2007-01-05..2016-05-17, year-end table checked for 10 years
+COVER UNUSED directv 2004-03-17: kind=float float=None shares=[1384112120] prices=[]
+CMC walt-disney: Walt Disney (DIS), 666 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+CMC time-warner: Time Warner (TWX), 1017 points 1997-01-02..2001-01-11, year-end table checked for 5 years
+COVER 883780 1996-09-30 asof=1996-08-31 float=2194994117.0 prices=[2.0] shares=[]
+COVER 883780 1997-09-29 asof=1997-07-31 float=5850000000.0 prices=[] shares=[]
+COVER 883780 1998-09-28 asof=1998-08-31 float=18400000000.0 prices=[] shares=[]
+COVER 883780 1999-08-13 asof=1999-07-30 float=104400000000.0 prices=[] shares=[]
+GET https://www.sec.gov/Archives/edgar/data/883780/000088378000000098/0001.txt failed (attempt 1): HTTP Error 404: Not Found
+COVER 883780 2000-09-22 no market-value sentence found in https://www.sec.gov/Archives/edgar/data/883780/000088378000000098/0001.txt
+COVER 1105705 2002-03-25 asof=2002-02-28 float=101710000000.0 prices=[] shares=[4270919209, 171185826]
+COVER 1105705 2003-03-28 asof=2003-02-28 float=61240000000.0 prices=[61.24] shares=[4312505667, 171185826]
+COVER 1105705 2004-03-15 asof=2003-06-30 float=72300000000.0 prices=[72.3] shares=[4381685546, 171185826]
+COVER 1105705 2005-03-11 asof=2005-02-28 float=79800000000.0 prices=[79.8] shares=[4499568010, 96315431]
+COVER 1105705 2006-02-27 asof=2006-02-17 float=74670000000.0 prices=[74.67] shares=[4418053277, 87245036]
+COVER 1105705 2007-02-23 asof=2007-02-16 float=66269999999.99999 prices=[66.27] shares=[3815571860, 18784759]
+COVER 1105705 2008-02-22 asof=2008-02-15 float=75170000000.0 prices=[75.17] shares=[3576321571]
+COVER 1105705 2009-02-20 asof=2009-02-13 float=53040000000.0 prices=[53.04] shares=[3587795646]
+COVER 1105705 2010-02-19 asof=2010-02-11 float=28960000000.0 prices=[28.96] shares=[1150231940]
+COVER 1105705 2011-02-18 asof=2011-02-11 float=31570000000.0 prices=[31.57] shares=[1092833062]
+COVER 1105705 2012-02-24 asof=2012-02-17 float=35240000000.0 prices=[35.24] shares=[969638079]
+COVER 1105705 2013-02-22 asof=2013-02-15 float=35960000000.0 prices=[35.96] shares=[934790459]
+COVER 1105705 2014-02-26 asof=2014-02-19 float=51570000000.0 prices=[51.57] shares=[892661216]
+COVER 1105705 2015-02-26 asof=2015-02-19 float=58280000000.0 prices=[58.28] shares=[830521982]
+COVER 1105705 2016-02-25 asof=2016-02-19 float=68960000000.0 prices=[68.96] shares=[790154346]
+COVER 1105705 2017-02-23 asof=2017-02-17 float=56860000000.0 prices=[56.86] shares=[774334281]
+COVER 1105705 2018-02-22 asof=2018-02-14 float=78170000000.0 prices=[78.17] shares=[779851623]
+CMC aol-inc: AOL Inc. (AOL), 1402 points 2009-11-24..2015-06-22, year-end table checked for 7 years
+COVER 813828 1994-03-31 asof=1994-03-25 float=867699384.0 prices=[34.0, 29.125] shares=[53449525, 90078203]
+COVER 813828 1995-03-31 asof=1995-03-27 float=11574252971.0 prices=[45.5, 44.875] shares=[74684715, 284965503]
+COVER 813828 1996-04-01 asof=1996-03-22 float=11573975364.0 prices=[40.875, 41.75] shares=[75099274, 294853114]
+COVER 813828 1997-03-31 asof=1997-03-21 float=9358028060.0 prices=[36.5, 37.0] shares=[69460550, 282799274]
+COVER 813828 1998-03-31 asof=1998-03-23 float=13775515364.0 prices=[53.06, 53.75] shares=[69786230, 285831341]
+COVER 813828 1999-03-31 asof=1999-03-15 float=21340464583.0 prices=[42.03125, 42.9375] shares=[140250342, 555815214]
+COVER 813828 2000-03-24 asof=2000-03-14 float=26356153154.0 prices=[52.4375, 52.6875] shares=[138136111, 560513402]
+COVER 813828 2001-03-28 asof=2001-03-19 float=73006967475.0 prices=[46.87, 46.6] shares=[137458566, 1644694576]
+COVER 813828 2002-03-29 asof=2002-03-08 float=77592143083.0 prices=[50.13, 50.05] shares=[137387192, 1626842436]
+COVER 813828 2003-03-27 asof=2002-06-28 float=69107936241.0 prices=[44.46, 44.37] shares=[134933495, 1621605094]
+COVER 813828 2004-03-15 asof=2003-06-30 float=67501372965.0 prices=[43.7, 43.66] shares=[132173087, 1606667083]
+COVER 813828 2005-03-16 asof=2004-06-30 float=54528978272.0 prices=[36.35, 35.72] shares=[131502564, 1496205266]
+COVER 813828 2006-03-16 asof=2005-06-30 float=44829681615.0 prices=[32.22, 32.02] shares=[64962813, 707348555]
+COVER 813828 2007-03-01 asof=2006-06-30 float=18497863666.0 prices=[27.06, 27.05] shares=[61282839, 723762833]
+COVER 813828 2008-02-28 asof=2007-06-29 float=21310376715.0 prices=[33.33, 33.32] shares=[58717973, 621999819]
+COVER 813828 2009-02-25 asof=2008-06-30 float=11407401463.0 prices=[19.48, 19.49] shares=[57706637, 621384938]
+COVER 813828 2010-02-25 asof=2009-06-30 float=4173954942.0 prices=[6.97, 6.92] shares=[51540350, 625501557]
+COVER 813828 2011-02-25 asof=2010-06-30 float=8228202036.0 prices=[12.98, 12.93] shares=[43629213, 628770581]
+COVER 813828 2012-02-23 asof=None float=17822470696.0 prices=[28.77, 28.49] shares=[43444102, 605639763]
+COVER 813828 2013-02-15 asof=None float=19599438288.0 prices=[33.29, 32.78] shares=[42712202, 586448427]
+COVER 813828 2014-02-14 asof=None float=27458028984.0 prices=[48.81, 48.87] shares=[39066582, 554311765]
+COVER 813828 2015-02-13 asof=None float=32764308589.0 prices=[62.1, 62.14] shares=[37826904, 459445346]
+COVER 813828 2016-02-16 asof=None float=24504818550.0 prices=[57.4, 55.5] shares=[37726904, 421814016]
+COVER 813828 2017-02-17 asof=None float=21984467954.0 prices=[58.18, 54.44] shares=[37598604, 371936529]
+COVER 813828 2018-02-20 asof=None float=22932497124.0 prices=[64.81, 63.78] shares=[37572434, 345147497]
+COVER 813828 2019-02-15 asof=None float=18798291656.0 prices=[56.49, 56.22] shares=[25293972, 347676011]
+COVER 813828 2020-02-20 asof=None float=16667764650.0 prices=[50.04, 49.9] shares=[52268438, 561471552]
+COVER 813828 2021-02-24 asof=None float=12893859999.0 prices=[25.6, 23.32] shares=[52066317, 567539816]
+COVER 813828 2022-02-15 asof=None float=26352596280.0 prices=[48.45, 45.2] shares=[40707486, 607877188]
+COVER 813828 2023-02-16 asof=None float=14437112130.0 prices=[27.26, 24.68] shares=[40704560, 609812293]
+COVER 813828 2024-02-28 asof=None float=9348585082.0 prices=[18.56, 15.91] shares=[40702775, 611782283]
+COVER 813828 2025-02-26 asof=None float=6329109788.0 prices=[18.38, 10.39] shares=[40702683, 630007633]
+CMC viacomcbs: ViacomCBS (VIAC), 316 points 2001-01-31..2022-07-05, year-end table checked for 22 years
+COVER 106413 1994-03-07 asof=1994-02-05 float=4900000000.0 prices=[] shares=[353366776]
+COVER 106413 1995-03-07 asof=1995-01-31 float=4900000000.0 prices=[] shares=[357149060]
+COVER 106413 1996-03-13 asof=1996-01-31 float=8100000000.0 prices=[] shares=[417177880]
+COVER 106413 1997-03-19 asof=1997-02-28 float=10000000000.0 prices=[] shares=[608654292]
+COVER 106413 1998-03-24 asof=1998-01-30 float=20700000000.0 prices=[] shares=[714593724]
+COVER 106413 1999-03-24 asof=1999-01-31 float=23000000000.0 prices=[] shares=[707422490]
+COVER 106413 2000-03-29 asof=2000-02-29 float=44000000000.0 prices=[] shares=[767184087]
+CMC viacomcbs: ViacomCBS (VIAC), 316 points 2001-01-31..2022-07-05, year-end table checked for 22 years
+CMC paramount-skydance: Paramount Skydance (PSKY), 435 points 1996-01-31..2026-11-02, year-end table checked for 31 years
+COVER 1339947 2006-03-16 asof=2006-01-31 float=26459375417.0 prices=[41.5, 41.48] shares=[64053685, 666713304]
+COVER 1339947 2007-03-01 asof=2006-06-30 float=528799999.99999994 prices=[35.95, 35.84] shares=[61541108, 654448196, 59297997]
+COVER 1339947 2008-02-28 asof=2007-06-30 float=476600000.0 prices=[41.6, 41.63] shares=[58288799, 620257916, 57373044]
+COVER 1339947 2009-02-12 asof=2008-06-30 float=322400000.0 prices=[30.61, 30.54] shares=[57362613, 565353499, 57362086]
+COVER 1339947 2010-02-11 asof=2009-06-30 float=252600000.0 prices=[23.98, 22.7] shares=[57363986, 549501904, 52342953]
+COVER 1339947 2010-11-12 asof=2010-06-30 float=375700000.0 prices=[35.66, 31.37] shares=[51970772, 556179499, 51972965]
+COVER 1339947 2011-11-10 asof=2011-03-31 float=561700000.0 prices=[53.29, 46.52] shares=[51625640, 536176526, 51408049]
+COVER 1339947 2012-11-15 asof=2012-03-31 float=547900000.0 prices=[51.97, 47.46] shares=[51410737, 478630502, 51151238]
+COVER 1339947 2013-11-14 asof=2013-03-29 float=664800000.0 prices=[63.06, 61.48] shares=[51151252, 435394194, 51113772]
+COVER 1339947 2014-11-13 asof=2014-03-31 float=898800000.0 prices=[85.26, 84.99] shares=[50975288, 380363277, 50875550]
+COVER 1339947 2015-11-12 asof=2015-03-31 float=710300000.0 prices=[68.72, 68.3] shares=[50380722, 346563969, 49476685]
+COVER 1339947 2016-11-09 asof=2016-03-31 float=452600000.0 prices=[45.3, 41.28] shares=[49434379, 346607330, 49431379]
+COVER 1339947 2017-11-16 asof=2017-03-31 float=487000000.0 prices=[48.75, 46.62] shares=[49431379, 351557942, 49431181]
+COVER 1339947 2018-11-16 asof=2018-03-29 float=395600000.0 prices=[39.6, 31.06] shares=[49431181, 352971713, 49430905]
+COVER 1339947 2019-11-14 asof=2019-03-29 float=324100000.0 prices=[32.45, 28.07] shares=[49430745, 353640804, 49430485]
+COVER 1308161 2005-09-01 asof=2004-12-31 float=38621415508.0 prices=[18.66, 19.2] shares=[2236658934]
+COVER 1308161 2006-08-23 asof=2005-12-31 float=44788116347.0 prices=[15.55, 16.61] shares=[2171163687]
+COVER 1308161 2007-08-23 asof=2006-12-29 float=60535729427.0 prices=[21.48, 22.26] shares=[2141871251]
+COVER 1308161 2008-08-13 asof=2007-12-28 float=57761852293.0 prices=[20.6, 21.29] shares=[1810522293, 798520953]
+COVER 1308161 2009-08-12 asof=2008-12-26 float=19655740121.0 prices=[8.51, 9.08] shares=[1815792025, 798520953]
+COVER 1308161 2010-08-06 asof=2009-12-24 float=32306194523.0 prices=[13.65, 15.86] shares=[1822667085, 798520953]
+COVER 1308161 2011-08-15 asof=2010-12-23 float=34801293198.0 prices=[14.82, 16.5] shares=[1828371543, 798520953]
+COVER 1308161 2012-08-14 asof=2011-12-30 float=38535109963.0 prices=[17.84, 18.18] shares=[1568816267, 798520953]
+COVER 1308161 2013-08-19 asof=2012-12-28 float=49602015885.0 prices=[24.61, 25.28] shares=[1511009419, 798520953]
+COVER 1308161 2014-08-14 asof=2013-12-31 float=68040089152.0 prices=[35.17, 34.6] shares=[1391535388, 798520953]
+COVER 1308161 2015-08-13 asof=2014-12-31 float=68749929183.0 prices=[38.41, 36.89] shares=[1220939959, 798520953]
+COVER 1308161 2016-08-11 asof=2015-12-31 float=42436167371.0 prices=[27.16, 27.23] shares=[1064007198, 798520953]
+COVER 1308161 2017-08-14 asof=2016-12-30 float=41015233992.0 prices=[28.04, 27.25] shares=[1052536963, 798520953]
+COVER 1308161 2018-08-13 asof=2017-12-29 float=50807921943.0 prices=[34.53, 34.12] shares=[1054053200, 798520953]
+CMC news-corp: News Corp (NWS), 453 points 2013-06-28..2026-11-02, year-end table checked for 14 years
+CMC fox-corporation: Fox Corporation (FOX), 382 points 2019-03-29..2026-11-02, year-end table checked for 8 years
+CMC discovery: Discovery (DISCA), 291 points 2005-07-29..2022-07-05, year-end table checked for 18 years
+CMC warner-bros-discovery: Warner Bros. Discovery (WBD), 240 points 2022-04-16..2026-11-02, year-end table checked for 5 years
+CMC CHECK netflix 2002: chart 2.273e+08 vs table 2.200e+08
+CMC netflix: Netflix (NFLX), 597 points 2002-05-31..2026-11-02, year-end table checked for 25 years
+COVER 1002114 1997-03-31 asof=1997-03-20 float=167113835.0 prices=[167.0] shares=[40141461]
+COVER 1002114 1998-03-31 asof=1998-03-18 float=403074076.0 prices=[403.0] shares=[43515276]
+COVER 1002114 1999-03-31 asof=1999-03-19 float=584134562.0 prices=[584.0] shares=[45625719]
+COVER 1002114 2000-03-30 asof=2000-03-20 float=600848851.0 prices=[600.0] shares=[47033847]
+COVER 1002114 2001-03-30 asof=2001-03-15 float=576704788.0 prices=[576.0] shares=[47783625]
+COVER 1002114 2002-03-29 asof=2002-03-04 float=671625614.0 prices=[671.0] shares=[49499873]
+COVER 1002114 2003-03-28 asof=2002-06-28 float=497000000.0 prices=[497.0] shares=[50175152, 53180410]
+COVER 1002114 2004-03-18 asof=2003-06-27 float=1377878000.0 prices=[1.0] shares=[54135552, 55960801]
+COVER 1002114 2005-03-17 asof=2004-07-02 float=1793965609.0 prices=[1.0] shares=[56480505, 58776532]
+COVER 1002114 2006-03-07 asof=2005-07-01 float=2480647889.0 prices=[2.0] shares=[118568761, 120429073]
+CMC versant-media-group: Versant Media Group (VSNT), 42 points 2025-12-31..2026-11-02, year-end table checked for 2 years
+QUOTE OK  [wiki] NBCUniversal: “GE used some of the funds, $5.8 billion, to buy out Vivendi's 20% minority stake in NBC Universal”
+CMC CHECK marvel-entertainment 1999: chart 1.844e+08 vs table 1.800e+08
+CMC CHECK marvel-entertainment 1998: chart 2.070e+08 vs table 2.000e+08
+CMC CHECK marvel-entertainment 1997: chart 2.150e+08 vs table 2.100e+08
+CMC marvel-entertainment: Marvel Entertainment (MVL), 3271 points 1997-01-02..2009-12-31, year-end table checked for 13 years
+NOTE charter_twc: Bright House has no value of its own, left out of the tank
+PREDATOR disney from 2006-05-08 (5 qualifying eats)
+PREDATOR sbc from 1999-10-08 (6 qualifying eats)
+PREDATOR bell_atlantic from 2000-06-30 (6 qualifying eats)
+PREDATOR att_corp from 2000-06-16 (2 qualifying eats)
+PREDATOR comcast from 2011-01-28 (3 qualifying eats)
+PREDATOR centurytel from 2017-11-01 (2 qualifying eats)
+PREDATOR charter from 2026-08-20 (2 qualifying eats)
+PREDATOR discovery from 2022-04-12 (2 qualifying eats)
+PREDATOR cbs from 2025-08-07 (3 qualifying eats)
+PAUSE 1996-02-09 Disney swallows ABC: Five weeks into the tank, Disney closes its purchase of Capital Cities/ABC, owner of the ABC network and 80 percent of ESPN, for $19 billion. When it was announced, the Baltimore Sun called it the lar
+PAUSE 2000-06-30 The Bells put themselves back together: Bell Atlantic eats GTE for $53 billion and renames itself Verizon. Three years earlier it had swallowed NYNEX. On the same day Qwest, a fiber upstart that only went public in 1997, eats US West.
+SBC h
+PAUSE 2001-01-11 The guppy eats the whale: AOL, worth about $2.2 billion when the tank opened in 1996, closes its purchase of Time Warner, a deal valued at $182 billion when it was announced a year earlier. It is the largest deal in this tank,
+PAUSE 2002-07-21 WorldCom goes belly up: WorldCom, which had eaten MCI four years earlier for $37 billion, files for bankruptcy after an accounting scandal. It is the largest bankruptcy filing in US history at the time.
+At its last annual re
+PAUSE 2002-11-19 AT&T comes apart, and Comcast feeds: Having paid $48 billion for TCI in 1999 and $62 billion for MediaOne in 2000, AT&T gives up on cable. Its cable unit pops off and Comcast swallows it in a deal valued at $72 billion.
+Comcast had been 
+PAUSE 2005-11-18 The child eats the parent: SBC, the smallest of the Baby Bells split off from AT&T in 1984, buys its old parent for $16 billion and takes its name. At the start of 1996 AT&T Corp. was worth $104 billion. At its last annual repo
+PAUSE 2018-06-14 The phone company buys Hollywood: AT&T, which had already eaten DirecTV, buys Time Warner, the company AOL swallowed in 2001. Wikipedia's list of the largest acquisitions puts the deal at $85 billion, or more including debt.
+AT&T is n
+PAUSE 2019-03-20 Disney eats most of Fox: 21st Century Fox pops. Most of it goes to Disney, in a deal valued at $71 billion. What is left swims off as a new, smaller company, Fox Corp.
+Disney has now swallowed ABC, Pixar, Marvel, Lucasfilm an
+PAUSE 2022-04-12 AT&T spits Time Warner back out: Four years after buying it, AT&T gives up on Hollywood. WarnerMedia pops out of AT&T and Discovery, the cable channel company, swallows it, a deal valued at $43 billion. The combined fish is Warner Br
+PAUSE 2026-10-06 The smallest studio eats the biggest: Paramount Skydance, worth $11 billion on the stock market, closes its $111 billion purchase of Warner Bros. Discovery after outbidding Netflix, and renames itself Skydance. Warner Bros. Discovery was 
+Most crowded month: 2021-03-15, $1.70 trillion in the tank

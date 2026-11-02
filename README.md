@@ -24,3 +24,12 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 - Members: api.nasdaq.com is blocked from the cloud environment, so the list comes from the Invesco QQQ Trust's latest public N-PORT on SEC EDGAR (holdings as of Jun 30, 2026), CUSIP/ISIN to ticker via api.openfigi.com, plus the hand-maintained `MEMBERSHIP_CHANGES` list in the script (each with a source URL). Update that list when Nasdaq announces changes, or swap to the next N-PORT (Sep 30 holdings should be public around late Nov 2026).
 - Shares: summed from every class tagged on the cover of each company's latest 10-Q/10-K/20-F/40-F (companyfacts drops multi-class companies). 20-F counts are divided by the ADS ratio on the cover.
 - Rerun: `SEC_USER_AGENT="name email" python3 pipeline/build_tech_selloff.py --start 2026-01-01` (about 10 minutes, rate-limited for Yahoo and SEC).
+
+## Who ate whom (fish tank): status (Nov 2, 2026)
+
+- Page: `stories/fish-tank/index.html`. Data: `stories/fish-tank/data/` (tank.json, values.csv, events.csv, build_log.txt).
+- Rebuild from `site/`: `SEC_USER_AGENT="market-viz research pipeline admin@example.com" python3 pipeline/build_fish_tank.py` (needs network to companiesmarketcap.com, data.sec.gov, sec.gov, en.wikipedia.org, fred). The build refuses to run if any quoted source passage is missing.
+- 57 fish, 69 events, 10 pauses, 1996 to Oct 2026. Values: companiesmarketcap.com, SEC 10-K cover float where that site is wrong (Comcast pre-2016, Sprint pre-2005), deal prices for firms with no stock.
+- URL hooks for checking: `?t=2007` jumps to a year, `?pause=4` jumps to just before a pause.
+- Known gaps are listed on the page under "What is left out".
+- Brian confirmed: 90 s of swimming plus pauses; "sources and uses" means sources and method. Look is pixel art (pixel.js), one colour per company.
