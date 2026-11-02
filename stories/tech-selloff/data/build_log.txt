@@ -1,0 +1,534 @@
+GET https://query1.finance.yahoo.com/v8/finance/chart/%5ENDX?period1=1767225600&period2=1793591196&interval=1d&events=split -> 21471 bytes
+GET https://fred.stlouisfed.org/graph/fredgraph.csv?id=NASDAQ100&cosd=2025-12-01 -> 4953 bytes
+Cross-check vs FRED NASDAQ100: 208 common days, largest gap 0.22 on 2026-10-06
+Peak close 31224.47 on 2026-10-06; latest 28384.85 on 2026-10-30
+GET https://data.sec.gov/submissions/CIK0001067839.json -> 45067 bytes
+GET https://www.sec.gov/Archives/edgar/data/1067839/000106783926000030/primary_doc.xml -> 116905 bytes
+QQQ N-PORT 0001067839-26-000030 (holdings as of 2026-06-30): 102 equity lines
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (10 ids) -> ok
+POST openfigi mapping (2 ids) -> ok
+POST openfigi mapping (9 ids) -> ok
+Matched Coca-Cola Europacific Partners PLC by ISIN GB00BDCPN049 -> CCEP
+No US ticker for Electronic Arts Inc. (CUSIP 285512109, ISIN US2855121099); no longer listed in the US
+Matched Seagate Technology Holdings PLC by ISIN IE00BKVD2N49 -> STX
+No US ticker for Warner Bros. Discovery, Inc. (CUSIP 934423104, ISIN US9344231041); no longer listed in the US
+Matched NXP Semiconductors N.V. by ISIN NL0009538784 -> NXPI
+Matched Linde PLC by ISIN IE000S9YS762 -> LIN
+Matched Nebius Group N.V., Class A by ISIN NL0009805522 -> NBIS
+Matched ASML Holding N.V., New York Shares by ISIN USN070592100 -> ASML
+Matched FERROVIAL NV by ISIN NL0015001FS8 -> FER
+Applied index change effective 2026-07-07: +SPCX -None (https://ir.nasdaq.com/news-releases/news-release-details/space-exploration-technologies-corporation-join-nasdaq-100)
+Applied index change effective 2026-08-04: +None -EA (https://www.marketscreener.com/news/electronic-arts-inc-nasdaqgm-ea-dropped-from-nasdaq-100-index-ce7f50ddd889f622)
+Not applied (outside 2026-06-30..2026-10-06): change effective 2026-10-09 +MRNA -WBD
+Electronic Arts Inc.: left the index before the peak, so its missing listing doesn't matter
+GET https://www.sec.gov/files/company_tickers.json -> 797604 bytes
+GET https://query1.finance.yahoo.com/v8/finance/chart/AXON?period1=1767225600&period2=1793591230&interval=1d&events=split -> 22241 bytes
+GET https://data.sec.gov/submissions/CIK0001069183.json -> 162543 bytes
+GET https://www.sec.gov/Archives/edgar/data/1069183/000162828026053646/axon-20260630.htm -> 1807207 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001069183.json -> 3387723 bytes
+AXON: shares 81,237,415 as of 2026-08-06 [1 class(es) on the cover of 10-Q filed 2026-08-06 (0001628280-26-053646)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/BKR?period1=1767225600&period2=1793591232&interval=1d&events=split -> 23393 bytes
+GET https://data.sec.gov/submissions/CIK0001701605.json -> 159614 bytes
+GET https://www.sec.gov/Archives/edgar/data/1701605/000170160526000035/bkr-20260930.htm -> 1548018 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001701605.json -> 2236693 bytes
+BKR: shares 993,078,473 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0001701605-26-000035)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/BKNG?period1=1767225600&period2=1793591234&interval=1d&events=split -> 24127 bytes
+GET https://data.sec.gov/submissions/CIK0001075531.json -> 158226 bytes
+GET https://www.sec.gov/Archives/edgar/data/1075531/000107553126000037/bkng-20260630.htm -> 1329427 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001075531.json -> 3354279 bytes
+BKNG: shares 751,380,500 as of 2026-08-04 [1 class(es) on the cover of 10-Q filed 2026-08-04 (0001075531-26-000037)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/FAST?period1=1767225600&period2=1793591235&interval=1d&events=split -> 23805 bytes
+GET https://data.sec.gov/submissions/CIK0000815556.json -> 158376 bytes
+GET https://www.sec.gov/Archives/edgar/data/815556/000081555626000049/fast-20260930.htm -> 1239499 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000815556.json -> 2726074 bytes
+FAST: shares 1,147,301,488 as of 2026-10-19 [1 class(es) on the cover of 10-Q filed 2026-10-19 (0000815556-26-000049)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AVGO?period1=1767225600&period2=1793591237&interval=1d&events=split -> 23405 bytes
+GET https://data.sec.gov/submissions/CIK0001730168.json -> 160094 bytes
+GET https://www.sec.gov/Archives/edgar/data/1730168/000173016826000080/avgo-20260802.htm -> 1729917 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001730168.json -> 2351559 bytes
+AVGO: shares 4,773,629,865 as of 2026-09-10 [1 class(es) on the cover of 10-Q filed 2026-09-10 (0001730168-26-000080)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/KDP?period1=1767225600&period2=1793591239&interval=1d&events=split -> 24078 bytes
+GET https://data.sec.gov/submissions/CIK0001418135.json -> 161502 bytes
+GET https://www.sec.gov/Archives/edgar/data/1418135/000141813526000051/kdp-20260630.htm -> 2398609 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001418135.json -> 5131878 bytes
+KDP: shares 1,360,826,038 as of 2026-08-10 [1 class(es) on the cover of 10-Q filed 2026-08-10 (0001418135-26-000051)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PDD?period1=1767225600&period2=1793591241&interval=1d&events=split -> 23240 bytes
+GET https://data.sec.gov/submissions/CIK0001737806.json -> 36025 bytes
+GET https://www.sec.gov/Archives/edgar/data/1737806/000110465926050727/pdd-20251231x20f.htm -> 4333379 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001737806.json -> 761258 bytes
+PDD: shares 1,423,396,462 as of 2026-04-29 [1 class(es) on the cover of 20-F filed 2026-04-29 (0001104659-26-050727); divided by 4 ordinary shares per ADS ('Depositary Shares (one American depositary share representing four')]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CPRT?period1=1767225600&period2=1793591245&interval=1d&events=split -> 24008 bytes
+GET https://data.sec.gov/submissions/CIK0000900075.json -> 159445 bytes
+GET https://www.sec.gov/Archives/edgar/data/900075/000119312526405731/cprt-20260731.htm -> 4477109 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000900075.json -> 3512701 bytes
+CPRT: shares 926,330,452 as of 2026-09-29 [1 class(es) on the cover of 10-K filed 2026-09-29 (0001193125-26-405731)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TTWO?period1=1767225600&period2=1793591249&interval=1d&events=split -> 23420 bytes
+GET https://data.sec.gov/submissions/CIK0000946581.json -> 157542 bytes
+GET https://www.sec.gov/Archives/edgar/data/946581/000162828026054870/ttwo-20260630.htm -> 1124286 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000946581.json -> 3317337 bytes
+TTWO: shares 186,980,443 as of 2026-08-07 [1 class(es) on the cover of 10-Q filed 2026-08-07 (0001628280-26-054870)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ROP?period1=1767225600&period2=1793591251&interval=1d&events=split -> 23131 bytes
+GET https://data.sec.gov/submissions/CIK0000882835.json -> 158154 bytes
+GET https://www.sec.gov/Archives/edgar/data/882835/000088283526000036/rop-20260630.htm -> 1125420 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000882835.json -> 3434191 bytes
+ROP: shares 98,900,874 as of 2026-07-31 [1 class(es) on the cover of 10-Q filed 2026-07-31 (0000882835-26-000036)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ALNY?period1=1767225600&period2=1793591252&interval=1d&events=split -> 23155 bytes
+GET https://data.sec.gov/submissions/CIK0001178670.json -> 162077 bytes
+GET https://www.sec.gov/Archives/edgar/data/1178670/000117867026000076/alny-20260930.htm -> 2132642 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001178670.json -> 2581899 bytes
+ALNY: shares 133,937,576 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0001178670-26-000076)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MPWR?period1=1767225600&period2=1793591255&interval=1d&events=split -> 23028 bytes
+GET https://data.sec.gov/submissions/CIK0001280452.json -> 163479 bytes
+GET https://www.sec.gov/Archives/edgar/data/1280452/000162828026053275/mpwr-20260630.htm -> 1016771 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001280452.json -> 3535560 bytes
+MPWR: shares 49,143,000 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0001628280-26-053275)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CRWD?period1=1767225600&period2=1793591257&interval=1d&events=split -> 23359 bytes
+GET https://data.sec.gov/submissions/CIK0001535527.json -> 157355 bytes
+GET https://www.sec.gov/Archives/edgar/data/1535527/000153552726000031/crwd-20260731.htm -> 2281150 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001535527.json -> 1965294 bytes
+CRWD: shares 1,023,934,842 as of 2026-08-27 [1 class(es) on the cover of 10-Q filed 2026-08-27 (0001535527-26-000031)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/DDOG?period1=1767225600&period2=1793591259&interval=1d&events=split -> 23344 bytes
+GET https://data.sec.gov/submissions/CIK0001561550.json -> 156700 bytes
+GET https://www.sec.gov/Archives/edgar/data/1561550/000162828026054458/ddog-20260630.htm -> 1697103 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001561550.json -> 1576540 bytes
+DDOG: shares 359,075,024 as of 2026-08-06 [2 class(es) on the cover of 10-Q filed 2026-08-06 (0001628280-26-054458)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ADBE?period1=1767225600&period2=1793591261&interval=1d&events=split -> 23422 bytes
+GET https://data.sec.gov/submissions/CIK0000796343.json -> 161886 bytes
+GET https://www.sec.gov/Archives/edgar/data/796343/000079634326000156/adbe-20260828.htm -> 1641554 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000796343.json -> 4334956 bytes
+ADBE: shares 389,200,000 as of 2026-09-22 [1 class(es) on the cover of 10-Q filed 2026-09-22 (0000796343-26-000156)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AMGN?period1=1767225600&period2=1793591263&interval=1d&events=split -> 23063 bytes
+GET https://data.sec.gov/submissions/CIK0000318154.json -> 157858 bytes
+GET https://www.sec.gov/Archives/edgar/data/318154/000031815426000126/amgn-20260630.htm -> 2509081 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000318154.json -> 3691898 bytes
+AMGN: shares 540,632,005 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0000318154-26-000126)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ADI?period1=1767225600&period2=1793591265&interval=1d&events=split -> 23044 bytes
+GET https://data.sec.gov/submissions/CIK0000006281.json -> 161445 bytes
+GET https://www.sec.gov/Archives/edgar/data/6281/000000628126000073/adi-20260801.htm -> 1176840 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000006281.json -> 4435442 bytes
+ADI: shares 484,565,465 as of 2026-08-19 [1 class(es) on the cover of 10-Q filed 2026-08-19 (0000006281-26-000073)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AMAT?period1=1767225600&period2=1793591267&interval=1d&events=split -> 22769 bytes
+GET https://data.sec.gov/submissions/CIK0000006951.json -> 159789 bytes
+GET https://www.sec.gov/Archives/edgar/data/6951/000162828026058235/amat-20260726.htm -> 1982158 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000006951.json -> 4552943 bytes
+AMAT: shares 793,597,443 as of 2026-08-20 [1 class(es) on the cover of 10-Q filed 2026-08-20 (0001628280-26-058235)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CSX?period1=1767225600&period2=1793591269&interval=1d&events=split -> 23881 bytes
+GET https://data.sec.gov/submissions/CIK0000277948.json -> 158745 bytes
+GET https://www.sec.gov/Archives/edgar/data/277948/000027794826000040/csx-20260930.htm -> 1315006 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000277948.json -> 3003526 bytes
+CSX: shares 1,843,398,210 as of 2026-10-21 [1 class(es) on the cover of 10-Q filed 2026-10-21 (0000277948-26-000040)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/COST?period1=1767225600&period2=1793591270&interval=1d&events=split -> 22245 bytes
+GET https://data.sec.gov/submissions/CIK0000909832.json -> 159569 bytes
+GET https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm -> 1456591 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json -> 3694553 bytes
+COST: shares 443,129,349 as of 2026-10-07 [1 class(es) on the cover of 10-K filed 2026-10-07 (0000909832-26-000093)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CDNS?period1=1767225600&period2=1793591272&interval=1d&events=split -> 22835 bytes
+GET https://data.sec.gov/submissions/CIK0000813672.json -> 157469 bytes
+GET https://www.sec.gov/Archives/edgar/data/813672/000081367226000121/cdns-20260930.htm -> 1647270 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000813672.json -> 3709263 bytes
+CDNS: shares 274,379,000 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0000813672-26-000121)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AMD?period1=1767225600&period2=1793591274&interval=1d&events=split -> 23037 bytes
+GET https://data.sec.gov/submissions/CIK0000002488.json -> 162189 bytes
+GET https://www.sec.gov/Archives/edgar/data/2488/000000248826000123/amd-20260627.htm -> 1348709 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000002488.json -> 3672449 bytes
+AMD: shares 1,632,475,042 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0000002488-26-000123)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CSCO?period1=1767225600&period2=1793591276&interval=1d&events=split -> 23930 bytes
+GET https://data.sec.gov/submissions/CIK0000858877.json -> 159649 bytes
+GET https://www.sec.gov/Archives/edgar/data/858877/000085887726000132/csco-20260725.htm -> 3373669 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000858877.json -> 6179472 bytes
+CSCO: shares 3,942,586,873 as of 2026-09-02 [1 class(es) on the cover of 10-K filed 2026-09-02 (0000858877-26-000132)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MAR?period1=1767225600&period2=1793591278&interval=1d&events=split -> 23278 bytes
+GET https://data.sec.gov/submissions/CIK0001048286.json -> 148231 bytes
+GET https://www.sec.gov/Archives/edgar/data/1048286/000104828626000035/mar-20260630.htm -> 1304325 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001048286.json -> 3269111 bytes
+MAR: shares 260,766,288 as of 2026-08-03 [1 class(es) on the cover of 10-Q filed 2026-08-03 (0001048286-26-000035)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MSTR?period1=1767225600&period2=1793591280&interval=1d&events=split -> 23911 bytes
+GET https://data.sec.gov/submissions/CIK0001050446.json -> 157131 bytes
+GET https://www.sec.gov/Archives/edgar/data/1050446/000105044626000044/mstr-20260630.htm -> 2814735 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001050446.json -> 3014282 bytes
+MSTR: shares 384,225,751 as of 2026-08-03 [2 class(es) on the cover of 10-Q filed 2026-08-03 (0001050446-26-000044)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/GILD?period1=1767225600&period2=1793591281&interval=1d&events=split -> 23920 bytes
+GET https://data.sec.gov/submissions/CIK0000882095.json -> 160557 bytes
+GET https://www.sec.gov/Archives/edgar/data/882095/000088209526000039/gild-20260930.htm -> 2604584 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000882095.json -> 4713206 bytes
+GILD: shares 1,240,338,614 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0000882095-26-000039)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PCAR?period1=1767225600&period2=1793591283&interval=1d&events=split -> 24146 bytes
+GET https://data.sec.gov/submissions/CIK0000075362.json -> 141327 bytes
+GET https://www.sec.gov/Archives/edgar/data/75362/000119312526436124/pcar-20260930.htm -> 7803996 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000075362.json -> 3178123 bytes
+PCAR: shares 526,505,329 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0001193125-26-436124)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/WDC?period1=1767225600&period2=1793591289&interval=1d&events=split -> 22547 bytes
+GET https://data.sec.gov/submissions/CIK0000106040.json -> 160208 bytes
+GET https://www.sec.gov/Archives/edgar/data/106040/000162828026066933/wdc-20261002.htm -> 1251250 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000106040.json -> 4294134 bytes
+WDC: shares 374,323,269 as of 2026-10-23 [1 class(es) on the cover of 10-Q filed 2026-10-23 (0001628280-26-066933)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/INTC?period1=1767225600&period2=1793591293&interval=1d&events=split -> 23930 bytes
+GET https://data.sec.gov/submissions/CIK0000050863.json -> 159351 bytes
+GET https://www.sec.gov/Archives/edgar/data/50863/000005086326000191/intc-20260926.htm -> 1837622 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json -> 4363467 bytes
+INTC: shares 5,315,000,000 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0000050863-26-000191)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PLTR?period1=1767225600&period2=1793591295&interval=1d&events=split -> 24088 bytes
+GET https://data.sec.gov/submissions/CIK0001321655.json -> 159432 bytes
+GET https://www.sec.gov/Archives/edgar/data/1321655/000132165526000041/pltr-20260630.htm -> 1797768 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001321655.json -> 1247305 bytes
+PLTR: shares 2,403,058,480 as of 2026-08-04 [3 class(es) on the cover of 10-Q filed 2026-08-04 (0001321655-26-000041)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ABNB?period1=1767225600&period2=1793591297&interval=1d&events=split -> 23714 bytes
+GET https://data.sec.gov/submissions/CIK0001559720.json -> 150906 bytes
+GET https://www.sec.gov/Archives/edgar/data/1559720/000155972026000027/abnb-20260630.htm -> 1391289 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001559720.json -> 1268110 bytes
+ABNB: shares 598,785,682 as of 2026-08-06 [3 class(es) on the cover of 10-Q filed 2026-08-06 (0001559720-26-000027)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/VRTX?period1=1767225600&period2=1793591299&interval=1d&events=split -> 22798 bytes
+GET https://data.sec.gov/submissions/CIK0000875320.json -> 157607 bytes
+GET https://www.sec.gov/Archives/edgar/data/875320/000087532026000259/vrtx-20260630.htm -> 2470153 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000875320.json -> 3925679 bytes
+VRTX: shares 253,460,924 as of 2026-08-04 [1 class(es) on the cover of 10-Q filed 2026-08-04 (0000875320-26-000259)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MCHP?period1=1767225600&period2=1793591301&interval=1d&events=split -> 23210 bytes
+GET https://data.sec.gov/submissions/CIK0000827054.json -> 162026 bytes
+GET https://www.sec.gov/Archives/edgar/data/827054/000082705426000038/mchp-20260630.htm -> 1547123 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000827054.json -> 4312449 bytes
+MCHP: shares 543,008,691 as of 2026-08-06 [1 class(es) on the cover of 10-Q filed 2026-08-06 (0000827054-26-000038)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MU?period1=1767225600&period2=1793591303&interval=1d&events=split -> 22748 bytes
+GET https://data.sec.gov/submissions/CIK0000723125.json -> 165204 bytes
+GET https://www.sec.gov/Archives/edgar/data/723125/000072312526000023/mu-20260903.htm -> 2062345 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000723125.json -> 4150366 bytes
+MU: shares 1,131,423,212 as of 2026-10-09 [1 class(es) on the cover of 10-K filed 2026-10-09 (0000723125-26-000023)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MSFT?period1=1767225600&period2=1793591305&interval=1d&events=split -> 23571 bytes
+GET https://data.sec.gov/submissions/CIK0000789019.json -> 185269 bytes
+GET https://www.sec.gov/Archives/edgar/data/789019/000119312526436133/msft-20260930.htm -> 5482967 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json -> 4936836 bytes
+MSFT: shares 7,426,194,552 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0001193125-26-436133)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AEP?period1=1767225600&period2=1793591308&interval=1d&events=split -> 23966 bytes
+GET https://data.sec.gov/submissions/CIK0000004904.json -> 162634 bytes
+GET https://www.sec.gov/Archives/edgar/data/4904/000000490426000072/aep-20260930.htm -> 11210541 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000004904.json -> 5279111 bytes
+AEP: shares 544,526,330 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0000004904-26-000072)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/DASH?period1=1767225600&period2=1793591311&interval=1d&events=split -> 23530 bytes
+GET https://data.sec.gov/submissions/CIK0001792789.json -> 157110 bytes
+GET https://www.sec.gov/Archives/edgar/data/1792789/000179278926000070/dash-20260930.htm -> 2266198 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001792789.json -> 1449125 bytes
+DASH: shares 435,976,331 as of 2026-10-30 [2 class(es) on the cover of 10-Q filed 2026-10-30 (0001792789-26-000070)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PAYX?period1=1767225600&period2=1793591313&interval=1d&events=split -> 23498 bytes
+GET https://data.sec.gov/submissions/CIK0000723531.json -> 156885 bytes
+GET https://www.sec.gov/Archives/edgar/data/723531/000072353126000006/payx-20260831.htm -> 3401266 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000723531.json -> 3497237 bytes
+PAYX: shares 355,980,473 as of 2026-09-24 [1 class(es) on the cover of 10-Q filed 2026-09-24 (0000723531-26-000006)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PEP?period1=1767225600&period2=1793591315&interval=1d&events=split -> 24007 bytes
+GET https://data.sec.gov/submissions/CIK0000077476.json -> 162402 bytes
+GET https://www.sec.gov/Archives/edgar/data/77476/000007747626000048/pep-20260905.htm -> 2539869 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000077476.json -> 5006158 bytes
+PEP: shares 1,362,741,092 as of 2026-10-08 [1 class(es) on the cover of 10-Q filed 2026-10-08 (0000077476-26-000048)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/APP?period1=1767225600&period2=1793591317&interval=1d&events=split -> 22459 bytes
+GET https://data.sec.gov/submissions/CIK0001751008.json -> 130791 bytes
+GET https://www.sec.gov/Archives/edgar/data/1751008/000175100826000059/app-20260630.htm -> 1334926 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001751008.json -> 1183787 bytes
+APP: shares 334,651,000 as of 2026-08-05 [2 class(es) on the cover of 10-Q filed 2026-08-05 (0001751008-26-000059)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MRVL?period1=1767225600&period2=1793591319&interval=1d&events=split -> 23815 bytes
+GET https://data.sec.gov/submissions/CIK0001835632.json -> 134471 bytes
+GET https://www.sec.gov/Archives/edgar/data/1835632/000183563226000025/mrvl-20260801.htm -> 2026550 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001835632.json -> 1329277 bytes
+MRVL: shares 876,900,000 as of 2026-08-28 [1 class(es) on the cover of 10-Q filed 2026-08-28 (0001835632-26-000025)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/SBUX?period1=1767225600&period2=1793591320&interval=1d&events=split -> 23589 bytes
+GET https://data.sec.gov/submissions/CIK0000829224.json -> 160656 bytes
+GET https://www.sec.gov/Archives/edgar/data/829224/000082922426000130/sbux-20260628.htm -> 2719355 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000829224.json -> 4156876 bytes
+SBUX: shares 1,140,000,000 as of 2026-07-29 [1 class(es) on the cover of 10-Q filed 2026-07-29 (0000829224-26-000130)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/FTNT?period1=1767225600&period2=1793591322&interval=1d&events=split -> 23430 bytes
+GET https://data.sec.gov/submissions/CIK0001262039.json -> 156280 bytes
+GET https://www.sec.gov/Archives/edgar/data/1262039/000126203926000027/ftnt-20260930.htm -> 2132077 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001262039.json -> 3515588 bytes
+FTNT: shares 734,709,741 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0001262039-26-000027)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TER?period1=1767225600&period2=1793591324&interval=1d&events=split -> 22764 bytes
+GET https://data.sec.gov/submissions/CIK0000097210.json -> 156797 bytes
+GET https://www.sec.gov/Archives/edgar/data/97210/000119312526441091/ter-20260927.htm -> 5571123 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000097210.json -> 5195213 bytes
+TER: shares 156,124,751 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0001193125-26-441091)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TXN?period1=1767225600&period2=1793591326&interval=1d&events=split -> 23664 bytes
+GET https://data.sec.gov/submissions/CIK0000097476.json -> 160385 bytes
+GET https://www.sec.gov/Archives/edgar/data/97476/000009747626000169/txn-20260930.htm -> 1249519 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000097476.json -> 3695696 bytes
+TXN: shares 913,770,316 as of 2026-10-23 [1 class(es) on the cover of 10-Q filed 2026-10-23 (0000097476-26-000169)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ISRG?period1=1767225600&period2=1793591328&interval=1d&events=split -> 22713 bytes
+GET https://data.sec.gov/submissions/CIK0001035267.json -> 158453 bytes
+GET https://www.sec.gov/Archives/edgar/data/1035267/000103526726000071/isrg-20260930.htm -> 1888616 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001035267.json -> 4205879 bytes
+ISRG: shares 346,643,718 as of 2026-10-21 [1 class(es) on the cover of 10-Q filed 2026-10-21 (0001035267-26-000071)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/WMT?period1=1767225600&period2=1793591330&interval=1d&events=split -> 24376 bytes
+GET https://data.sec.gov/submissions/CIK0000104169.json -> 157476 bytes
+GET https://www.sec.gov/Archives/edgar/data/104169/000010416926000154/wmt-20260731.htm -> 1433296 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json -> 3771831 bytes
+WMT: shares 7,933,746,241 as of 2026-08-28 [1 class(es) on the cover of 10-Q filed 2026-08-28 (0000104169-26-000154)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/EXC?period1=1767225600&period2=1793591332&interval=1d&events=split -> 23814 bytes
+GET https://data.sec.gov/submissions/CIK0001109357.json -> 169924 bytes
+GET https://www.sec.gov/Archives/edgar/data/1109357/000110935726000095/exc-20260930.htm -> 9809460 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001109357.json -> 5355142 bytes
+EXC: shares 1,034,896,686 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0001109357-26-000095)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CEG?period1=1767225600&period2=1793591334&interval=1d&events=split -> 23022 bytes
+GET https://data.sec.gov/submissions/CIK0001868275.json -> 62024 bytes
+GET https://www.sec.gov/Archives/edgar/data/1868275/000186827526000104/ceg-20260630.htm -> 3733597 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001868275.json -> 1466762 bytes
+CEG: shares 354,307,379 as of 2026-08-06 [1 class(es) on the cover of 10-Q filed 2026-08-06 (0001868275-26-000104)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TSLA?period1=1767225600&period2=1793591336&interval=1d&events=split -> 23395 bytes
+GET https://data.sec.gov/submissions/CIK0001318605.json -> 162096 bytes
+GET https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm -> 1605246 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json -> 3700279 bytes
+TSLA: shares 3,952,757,946 as of 2026-10-22 [1 class(es) on the cover of 10-Q filed 2026-10-22 (0001628280-26-066775)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/GEHC?period1=1767225600&period2=1793591338&interval=1d&events=split -> 23121 bytes
+GET https://data.sec.gov/submissions/CIK0001932393.json -> 72375 bytes
+GET https://www.sec.gov/Archives/edgar/data/1932393/000193239326000059/gehc-20260930.htm -> 2674688 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001932393.json -> 1286276 bytes
+GEHC: shares 452,137,831 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0001932393-26-000059)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AAPL?period1=1767225600&period2=1793591340&interval=1d&events=split -> 23675 bytes
+GET https://data.sec.gov/submissions/CIK0000320193.json -> 163586 bytes
+GET https://www.sec.gov/Archives/edgar/data/320193/000032019326000020/aapl-20260627.htm -> 1018317 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json -> 3789099 bytes
+AAPL: shares 14,594,180,000 as of 2026-07-31 [1 class(es) on the cover of 10-Q filed 2026-07-31 (0000320193-26-000020)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ARM?period1=1767225600&period2=1793591342&interval=1d&events=split -> 23145 bytes
+GET https://data.sec.gov/submissions/CIK0001973239.json -> 26238 bytes
+GET https://www.sec.gov/Archives/edgar/data/1973239/000197323926000097/arm-20260331.htm -> 3137010 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001973239.json -> 720517 bytes
+ARM: shares 1,064,055,252 as of 2026-05-26 [1 class(es) on the cover of 20-F filed 2026-05-26 (0001973239-26-000097); divided by 1 ordinary shares per ADS ('Depositary Shares, each representing one')]
+GET https://query1.finance.yahoo.com/v8/finance/chart/IDXX?period1=1767225600&period2=1793591343&interval=1d&events=split -> 22692 bytes
+GET https://data.sec.gov/submissions/CIK0000874716.json -> 154222 bytes
+GET https://www.sec.gov/Archives/edgar/data/874716/000087471626000123/idxx-20260630.htm -> 2093946 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000874716.json -> 4000153 bytes
+IDXX: shares 78,781,116 as of 2026-08-04 [1 class(es) on the cover of 10-Q filed 2026-08-04 (0000874716-26-000123)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ADP?period1=1767225600&period2=1793591345&interval=1d&events=split -> 23865 bytes
+GET https://data.sec.gov/submissions/CIK0000008670.json -> 145531 bytes
+GET https://www.sec.gov/Archives/edgar/data/8670/000000867026000044/adp-20260930.htm -> 1402141 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000008670.json -> 4946996 bytes
+ADP: shares 394,759,432 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0000008670-26-000044)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/QCOM?period1=1767225600&period2=1793591347&interval=1d&events=split -> 24048 bytes
+GET https://data.sec.gov/submissions/CIK0000804328.json -> 159413 bytes
+GET https://www.sec.gov/Archives/edgar/data/804328/000080432826000086/qcom-20260628.htm -> 1218383 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000804328.json -> 4358520 bytes
+QCOM: shares 1,050,000,000 as of 2026-07-29 [1 class(es) on the cover of 10-Q filed 2026-07-29 (0000804328-26-000086)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ALAB?period1=1767225600&period2=1793591349&interval=1d&events=split -> 22979 bytes
+GET https://data.sec.gov/submissions/CIK0001736297.json -> 65979 bytes
+GET https://www.sec.gov/Archives/edgar/data/1736297/000173629726000035/alab-20260630.htm -> 1430948 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001736297.json -> 528491 bytes
+ALAB: shares 173,485,104 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0001736297-26-000035)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CMCSA?period1=1767225600&period2=1793591351&interval=1d&events=split -> 24419 bytes
+GET https://data.sec.gov/submissions/CIK0001166691.json -> 148079 bytes
+GET https://www.sec.gov/Archives/edgar/data/1166691/000162828026066863/cmcsa-20260930.htm -> 1877498 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001166691.json -> 3802770 bytes
+CMCSA: shares 3,551,006,335 as of 2026-10-22 [2 class(es) on the cover of 10-Q filed 2026-10-22 (0001628280-26-066863)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MELI?period1=1767225600&period2=1793591353&interval=1d&events=split -> 21713 bytes
+GET https://data.sec.gov/submissions/CIK0001099590.json -> 134265 bytes
+GET https://www.sec.gov/Archives/edgar/data/1099590/000109959026000023/meli-20260630.htm -> 3012909 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001099590.json -> 3895647 bytes
+MELI: shares 50,696,802 as of 2026-08-06 [1 class(es) on the cover of 10-Q filed 2026-08-06 (0001099590-26-000023)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/LRCX?period1=1767225600&period2=1793591357&interval=1d&events=split -> 23369 bytes
+GET https://data.sec.gov/submissions/CIK0000707549.json -> 165197 bytes
+GET https://www.sec.gov/Archives/edgar/data/707549/000070754926000054/lrcx-20260927.htm -> 917983 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000707549.json -> 4110780 bytes
+LRCX: shares 1,249,171,000 as of 2026-10-22 [1 class(es) on the cover of 10-Q filed 2026-10-22 (0000707549-26-000054)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/META?period1=1767225600&period2=1793591359&interval=1d&events=split -> 22507 bytes
+GET https://data.sec.gov/submissions/CIK0001326801.json -> 157392 bytes
+GET https://www.sec.gov/Archives/edgar/data/1326801/000162828026066773/meta-20260930.htm -> 1826157 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json -> 2803690 bytes
+META: shares 2,556,241,253 as of 2026-10-22 [2 class(es) on the cover of 10-Q filed 2026-10-22 (0001628280-26-066773)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/SNDK?period1=1767225600&period2=1793591360&interval=1d&events=split -> 22118 bytes
+GET https://data.sec.gov/submissions/CIK0002023554.json -> 41087 bytes
+GET https://www.sec.gov/Archives/edgar/data/2023554/000162828026068601/sndk-20261002.htm -> 1156575 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0002023554.json -> 587614 bytes
+SNDK: shares 142,289,365 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0001628280-26-068601)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PANW?period1=1767225600&period2=1793591362&interval=1d&events=split -> 23302 bytes
+GET https://data.sec.gov/submissions/CIK0001327567.json -> 154907 bytes
+GET https://www.sec.gov/Archives/edgar/data/1327567/000132756726000023/panw-20260731.htm -> 3083410 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001327567.json -> 3176443 bytes
+PANW: shares 818,000,000 as of 2026-09-10 [1 class(es) on the cover of 10-K filed 2026-09-10 (0001327567-26-000023)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CRWV?period1=1767225600&period2=1793591364&interval=1d&events=split -> 23284 bytes
+GET https://data.sec.gov/submissions/CIK0001769628.json -> 157438 bytes
+GET https://www.sec.gov/Archives/edgar/data/1769628/000176962826000366/crwv-20260630.htm -> 2197626 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001769628.json -> 501063 bytes
+CRWV: shares 551,536,602 as of 2026-08-12 [3 class(es) on the cover of 10-Q filed 2026-08-12 (0001769628-26-000366)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/RKLB?period1=1767225600&period2=1793591366&interval=1d&events=split -> 23324 bytes
+GET https://data.sec.gov/submissions/CIK0001819994.json -> 103440 bytes
+GET https://www.sec.gov/Archives/edgar/data/1819994/000181999426000062/rklb-20260630.htm -> 1746168 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001819994.json -> 1278289 bytes
+RKLB: shares 598,350,482 as of 2026-08-10 [1 class(es) on the cover of 10-Q filed 2026-08-10 (0001819994-26-000062)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MDLZ?period1=1767225600&period2=1793591369&interval=1d&events=split -> 23790 bytes
+GET https://data.sec.gov/submissions/CIK0001103982.json -> 161380 bytes
+GET https://www.sec.gov/Archives/edgar/data/1103982/000162828026068256/mdlz-20260930.htm -> 2218432 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001103982.json -> 4539310 bytes
+MDLZ: shares 1,265,838,379 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0001628280-26-068256)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/FANG?period1=1767225600&period2=1793591371&interval=1d&events=split -> 23712 bytes
+GET https://data.sec.gov/submissions/CIK0001539838.json -> 164945 bytes
+GET https://www.sec.gov/Archives/edgar/data/1539838/000153983826000142/fang-20260630.htm -> 2041059 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001539838.json -> 3588068 bytes
+FANG: shares 280,024,353 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0001539838-26-000142)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/WDAY?period1=1767225600&period2=1793591372&interval=1d&events=split -> 23795 bytes
+GET https://data.sec.gov/submissions/CIK0001327811.json -> 161598 bytes
+GET https://www.sec.gov/Archives/edgar/data/1327811/000132781126000044/wday-20260731.htm -> 1629937 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001327811.json -> 3343895 bytes
+WDAY: shares 241,000,000 as of 2026-08-27 [2 class(es) on the cover of 10-Q filed 2026-08-27 (0001327811-26-000044)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ROST?period1=1767225600&period2=1793591375&interval=1d&events=split -> 23990 bytes
+GET https://data.sec.gov/submissions/CIK0000745732.json -> 155380 bytes
+GET https://www.sec.gov/Archives/edgar/data/745732/000074573226000041/rost-20260801.htm -> 949842 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000745732.json -> 3055271 bytes
+ROST: shares 319,453,110 as of 2026-09-01 [1 class(es) on the cover of 10-Q filed 2026-09-01 (0000745732-26-000041)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/DXCM?period1=1767225600&period2=1793591377&interval=1d&events=split -> 23123 bytes
+GET https://data.sec.gov/submissions/CIK0001093557.json -> 159487 bytes
+GET https://www.sec.gov/Archives/edgar/data/1093557/000109355726000195/dxcm-20260930.htm -> 1400567 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001093557.json -> 3091633 bytes
+DXCM: shares 372,950,922 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0001093557-26-000195)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/KLAC?period1=1767225600&period2=1793591379&interval=1d&events=split -> 23999 bytes
+GET https://data.sec.gov/submissions/CIK0000319201.json -> 159131 bytes
+GET https://www.sec.gov/Archives/edgar/data/319201/000031920126000034/klac-20260930.htm -> 1858921 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000319201.json -> 4955799 bytes
+KLAC: shares 1,302,962,435 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0000319201-26-000034)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TRI?period1=1767225600&period2=1793591381&interval=1d&events=split -> 23484 bytes
+GET https://data.sec.gov/submissions/CIK0001075124.json -> 159374 bytes
+GET https://www.sec.gov/Archives/edgar/data/1075124/000119312526094222/tri-20251231.htm -> 694003 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001075124.json -> 1232579 bytes
+TRI: shares 450,962,491 as of 2026-03-05 [3 class(es) on the cover of 40-F filed 2026-03-05 (0001193125-26-094222)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/HONA?period1=1767225600&period2=1793591383&interval=1d&events=split -> 11339 bytes
+GET https://data.sec.gov/submissions/CIK0002089271.json -> 13853 bytes
+GET https://www.sec.gov/Archives/edgar/data/2089271/000208927126000032/hona-20260926.htm -> 1675423 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0002089271.json -> 159965 bytes
+HONA: shares 317,031,836 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0002089271-26-000032)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/HON?period1=1767225600&period2=1793591385&interval=1d&events=split -> 24296 bytes
+GET https://data.sec.gov/submissions/CIK0000773840.json -> 160665 bytes
+GET https://www.sec.gov/Archives/edgar/data/773840/000077384026000143/hon-20260930.htm -> 2648994 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000773840.json -> 4625988 bytes
+HON: shares 317,358,518 as of 2026-10-22 [1 class(es) on the cover of 10-Q filed 2026-10-22 (0000773840-26-000143)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/TMUS?period1=1767225600&period2=1793591387&interval=1d&events=split -> 23771 bytes
+GET https://data.sec.gov/submissions/CIK0001283699.json -> 162664 bytes
+GET https://www.sec.gov/Archives/edgar/data/1283699/000128369926000129/tmus-20260930.htm -> 2321462 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001283699.json -> 4551659 bytes
+TMUS: shares 1,059,272,571 as of 2026-10-28 [1 class(es) on the cover of 10-Q filed 2026-10-28 (0001283699-26-000129)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/AMZN?period1=1767225600&period2=1793591388&interval=1d&events=split -> 23889 bytes
+GET https://data.sec.gov/submissions/CIK0001018724.json -> 159780 bytes
+GET https://www.sec.gov/Archives/edgar/data/1018724/000101872426000040/amzn-20260930.htm -> 1646112 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json -> 4554378 bytes
+AMZN: shares 10,813,138,306 as of 2026-10-30 [1 class(es) on the cover of 10-Q filed 2026-10-30 (0001018724-26-000040)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ADSK?period1=1767225600&period2=1793591390&interval=1d&events=split -> 23504 bytes
+GET https://data.sec.gov/submissions/CIK0000769397.json -> 161641 bytes
+GET https://www.sec.gov/Archives/edgar/data/769397/000076939726000061/adsk-20260731.htm -> 1916814 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000769397.json -> 4196572 bytes
+ADSK: shares 209,000,000 as of 2026-08-28 [1 class(es) on the cover of 10-Q filed 2026-08-28 (0000769397-26-000061)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/INTU?period1=1767225600&period2=1793591393&interval=1d&events=split -> 22924 bytes
+GET https://data.sec.gov/submissions/CIK0000896878.json -> 170228 bytes
+GET https://www.sec.gov/Archives/edgar/data/896878/000089687826000037/intu-20260731.htm -> 2812666 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000896878.json -> 4417219 bytes
+INTU: shares 267,236,000 as of 2026-09-09 [1 class(es) on the cover of 10-K filed 2026-09-09 (0000896878-26-000037)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/SNPS?period1=1767225600&period2=1793591398&interval=1d&events=split -> 22754 bytes
+GET https://data.sec.gov/submissions/CIK0000883241.json -> 160173 bytes
+GET https://www.sec.gov/Archives/edgar/data/883241/000088324126000025/snps-20260731.htm -> 2115545 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000883241.json -> 4253645 bytes
+SNPS: shares 191,636,646 as of 2026-08-26 [1 class(es) on the cover of 10-Q filed 2026-08-26 (0000883241-26-000025)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/XEL?period1=1767225600&period2=1793591400&interval=1d&events=split -> 23105 bytes
+GET https://data.sec.gov/submissions/CIK0000072903.json -> 153356 bytes
+GET https://www.sec.gov/Archives/edgar/data/72903/000007290326000181/xel-20260930.htm -> 2414089 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000072903.json -> 4385058 bytes
+XEL: shares 641,874,448 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0000072903-26-000181)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/CTAS?period1=1767225600&period2=1793591403&interval=1d&events=split -> 24038 bytes
+GET https://data.sec.gov/submissions/CIK0000723254.json -> 154119 bytes
+GET https://www.sec.gov/Archives/edgar/data/723254/000072325426000047/ctas-20260831.htm -> 1065573 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000723254.json -> 3494822 bytes
+CTAS: shares 397,075,093 as of 2026-10-07 [1 class(es) on the cover of 10-Q filed 2026-10-07 (0000723254-26-000047)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/NVDA?period1=1767225600&period2=1793591404&interval=1d&events=split -> 24211 bytes
+GET https://data.sec.gov/submissions/CIK0001045810.json -> 159761 bytes
+GET https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm -> 1517154 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json -> 4092966 bytes
+NVDA: shares 24,100,000,000 as of 2026-08-26 [1 class(es) on the cover of 10-Q filed 2026-08-26 (0001045810-26-000075)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ODFL?period1=1767225600&period2=1793591406&interval=1d&events=split -> 23913 bytes
+GET https://data.sec.gov/submissions/CIK0000878927.json -> 154699 bytes
+GET https://www.sec.gov/Archives/edgar/data/878927/000087892726000023/odfl-20260630.htm -> 1763012 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000878927.json -> 2277855 bytes
+ODFL: shares 207,356,622 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0000878927-26-000023)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/NFLX?period1=1767225600&period2=1793591408&interval=1d&events=split -> 23408 bytes
+GET https://data.sec.gov/submissions/CIK0001065280.json -> 161096 bytes
+GET https://www.sec.gov/Archives/edgar/data/1065280/000106528026000291/nflx-20260930.htm -> 1820097 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json -> 3648572 bytes
+NFLX: shares 4,106,325,903 as of 2026-10-21 [1 class(es) on the cover of 10-Q filed 2026-10-21 (0001065280-26-000291)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/REGN?period1=1767225600&period2=1793591410&interval=1d&events=split -> 22462 bytes
+GET https://data.sec.gov/submissions/CIK0000872589.json -> 160105 bytes
+GET https://www.sec.gov/Archives/edgar/data/872589/000087258926000034/regn-20260930.htm -> 2243902 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000872589.json -> 2960130 bytes
+REGN: shares 103,447,859 as of 2026-10-30 [2 class(es) on the cover of 10-Q filed 2026-10-30 (0000872589-26-000034)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/SHOP?period1=1767225600&period2=1793591412&interval=1d&events=split -> 23877 bytes
+GET https://data.sec.gov/submissions/CIK0001594805.json -> 88903 bytes
+GET https://www.sec.gov/Archives/edgar/data/1594805/000159480526000047/shop-20260630.htm -> 1743384 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001594805.json -> 918649 bytes
+SHOP: shares 1,286,643,932 as of 2026-08-05 [3 class(es) on the cover of 10-Q filed 2026-08-05 (0001594805-26-000047)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/MNST?period1=1767225600&period2=1793591414&interval=1d&events=split -> 23905 bytes
+GET https://data.sec.gov/submissions/CIK0000865752.json -> 152976 bytes
+GET https://www.sec.gov/Archives/edgar/data/865752/000110465926092193/mnst-20260630x10q.htm -> 3240912 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000865752.json -> 3248145 bytes
+MNST: shares 1,959,051,764 as of 2026-08-07 [1 class(es) on the cover of 10-Q filed 2026-08-07 (0001104659-26-092193); scaled 2.0:1.0 for the split on 2026-08-11, after this filing]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ORLY?period1=1767225600&period2=1793591416&interval=1d&events=split -> 23201 bytes
+GET https://data.sec.gov/submissions/CIK0000898173.json -> 159952 bytes
+GET https://www.sec.gov/Archives/edgar/data/898173/000089817326000045/orly-20260630x10q.htm -> 1635206 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000898173.json -> 3026097 bytes
+ORLY: shares 808,960,792 as of 2026-08-07 [1 class(es) on the cover of 10-Q filed 2026-08-07 (0000898173-26-000045)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/KHC?period1=1767225600&period2=1793591417&interval=1d&events=split -> 24388 bytes
+GET https://data.sec.gov/submissions/CIK0001637459.json -> 144011 bytes
+GET https://www.sec.gov/Archives/edgar/data/1637459/000163745926000054/khc-20260627.htm -> 2561962 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001637459.json -> 3417827 bytes
+KHC: shares 1,185,823,758 as of 2026-08-05 [1 class(es) on the cover of 10-Q filed 2026-08-05 (0001637459-26-000054)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/PYPL?period1=1767225600&period2=1793591419&interval=1d&events=split -> 23912 bytes
+GET https://data.sec.gov/submissions/CIK0001633917.json -> 160287 bytes
+GET https://www.sec.gov/Archives/edgar/data/1633917/000163391726000088/pypl-20260930.htm -> 3010453 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001633917.json -> 3160121 bytes
+PYPL: shares 830,658,298 as of 2026-10-27 [1 class(es) on the cover of 10-Q filed 2026-10-27 (0001633917-26-000088)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/LITE?period1=1767225600&period2=1793591421&interval=1d&events=split -> 21525 bytes
+GET https://data.sec.gov/submissions/CIK0001633978.json -> 158937 bytes
+GET https://www.sec.gov/Archives/edgar/data/1633978/000162828026057358/lite-20260627.htm -> 3332179 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001633978.json -> 3238456 bytes
+LITE: shares 89,700,000 as of 2026-08-17 [1 class(es) on the cover of 10-K filed 2026-08-17 (0001628280-26-057358)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/GOOGL?period1=1767225600&period2=1793591423&interval=1d&events=split -> 23553 bytes
+GET https://data.sec.gov/submissions/CIK0001652044.json -> 152427 bytes
+GET https://www.sec.gov/Archives/edgar/data/1652044/000165204426000084/goog-20260930.htm -> 2530711 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json -> 3249987 bytes
+GOOGL: shares 12,294,000,000 as of 2026-10-29 [3 class(es) on the cover of 10-Q filed 2026-10-29 (0001652044-26-000084)]
+GOOG: same company as an earlier ticker (CIK 1652044); counted once
+GET https://query1.finance.yahoo.com/v8/finance/chart/CCEP?period1=1767225600&period2=1793591425&interval=1d&events=split -> 23672 bytes
+GET https://data.sec.gov/submissions/CIK0001650107.json -> 107039 bytes
+GET https://www.sec.gov/Archives/edgar/data/1650107/000165010726000029/cce-20251231.htm -> 22675304 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001650107.json -> 1417005 bytes
+CCEP: shares 449,086,551 as of 2026-03-13 [1 class(es) on the cover of 20-F filed 2026-03-13 (0001650107-26-000029)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/STX?period1=1767225600&period2=1793591429&interval=1d&events=split -> 22242 bytes
+GET https://data.sec.gov/submissions/CIK0001137789.json -> 162862 bytes
+GET https://www.sec.gov/Archives/edgar/data/1137789/000113778926000309/stx-20261002.htm -> 1223132 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001137789.json -> 3748380 bytes
+STX: shares 229,561,109 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0001137789-26-000309)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/NXPI?period1=1767225600&period2=1793591431&interval=1d&events=split -> 23662 bytes
+GET https://data.sec.gov/submissions/CIK0001413447.json -> 163376 bytes
+GET https://www.sec.gov/Archives/edgar/data/1413447/000141344726000059/nxpi-20260927.htm -> 1429647 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001413447.json -> 2803742 bytes
+NXPI: shares 252,052,988 as of 2026-10-27 [1 class(es) on the cover of 10-Q filed 2026-10-27 (0001413447-26-000059)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/LIN?period1=1767225600&period2=1793591433&interval=1d&events=split -> 23234 bytes
+GET https://data.sec.gov/submissions/CIK0001707925.json -> 126239 bytes
+GET https://www.sec.gov/Archives/edgar/data/1707925/000162828026068079/lin-20260930.htm -> 1880676 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001707925.json -> 2275222 bytes
+LIN: shares 459,083,779 as of 2026-10-29 [1 class(es) on the cover of 10-Q filed 2026-10-29 (0001628280-26-068079)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/NBIS?period1=1767225600&period2=1793591435&interval=1d&events=split -> 23514 bytes
+GET https://data.sec.gov/submissions/CIK0001513845.json -> 83755 bytes
+GET https://www.sec.gov/Archives/edgar/data/1513845/000110465926052948/nbis-20251231x20f.htm -> 4251763 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001513845.json -> 1568737 bytes
+NBIS: shares 253,016,971 as of 2026-04-30 [2 class(es) on the cover of 20-F filed 2026-04-30 (0001104659-26-052948)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/ASML?period1=1767225600&period2=1793591437&interval=1d&events=split -> 23049 bytes
+GET https://data.sec.gov/submissions/CIK0000937966.json -> 97279 bytes
+GET https://www.sec.gov/Archives/edgar/data/937966/000162828026011378/asml-20251231.htm -> 24864722 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000937966.json -> 1837771 bytes
+ASML: shares 385,417,665 as of 2026-02-25 [1 class(es) on the cover of 20-F filed 2026-02-25 (0001628280-26-011378)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/FER?period1=1767225600&period2=1793591439&interval=1d&events=split -> 23539 bytes
+GET https://data.sec.gov/submissions/CIK0001468522.json -> 33614 bytes
+GET https://www.sec.gov/Archives/edgar/data/1468522/000162828026011789/fer-20251231.htm -> 13117852 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001468522.json -> 123045 bytes
+FER: shares 720,626,181 as of 2026-02-25 [1 class(es) on the cover of 20-F filed 2026-02-25 (0001628280-26-011789)]
+GET https://query1.finance.yahoo.com/v8/finance/chart/SPCX?period1=1767225600&period2=1793591441&interval=1d&events=split -> 11755 bytes
+GET https://data.sec.gov/submissions/CIK0001181412.json -> 15585 bytes
+GET https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm -> 2366730 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001181412.json -> 188229 bytes
+SPCX: shares 13,581,063,709 as of 2026-10-22 [2 class(es) on the cover of 10-Q filed 2026-10-22 (0001628280-26-066880)]

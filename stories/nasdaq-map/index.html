@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>If the Nasdaq-100 were the lower 48</title>
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <style>
+    .scrolly figure.graphic { margin: 0; }
+    .chart .patch { stroke: var(--paper); stroke-width: 0.7; vector-effect: non-scaling-stroke; }
+    .chart .kept { fill: #b9ae9c; transition: fill 400ms; }
+    .chart .gone { fill: var(--loss); opacity: 0; transition: opacity 400ms; }
+    .chart .lit .kept { fill: var(--ink); }
+    .chart .dim .kept { fill: #ddd5c7; }
+    .chart .ghost { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+    .chart .state-ref { fill: none; stroke: var(--paper); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
+    .chart .state-ref-inner { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
+    .chart .tick-label { font-family: var(--label); fill: var(--paper); pointer-events: none; text-anchor: middle; dominant-baseline: middle; font-weight: 600; }
+    .chart .dark-label { fill: var(--ink); }
+    .chart .date-label { font-family: var(--serif); font-size: 26px; fill: var(--ink); }
+    .chart .date-sub { font-family: var(--label); font-size: 13px; fill: var(--ink-soft); }
+    .controls { font-family: var(--label); font-size: 0.9rem; max-width: 40rem; margin: 0 auto; padding: 0 1.25rem; display: none; }
+    .controls.on { display: block; }
+    .controls input[type=range] { width: 100%; accent-color: var(--ink); }
+    .controls button { font: inherit; background: none; border: 0; border-bottom: 1px solid var(--ink); padding: 0; margin-right: 1.2rem; cursor: pointer; color: var(--ink-soft); }
+    .controls button.on { color: var(--ink); font-weight: 600; }
+    .explore { max-width: 64rem; margin: 6vh auto 0; padding: 0 1.25rem; }
+    .explore svg { width: 100%; height: auto; }
+    .explore p { max-width: var(--measure); margin: 0 auto 1rem; }
+    .loss-word { color: var(--loss); }
+  </style>
+</head>
+<body>
+  <nav class="masthead"><a href="../../index.html">Market Visualization</a></nav>
+
+  <header class="lede">
+    <h1>If the Nasdaq-100 were the lower 48</h1>
+    <p>Trillions of dollars are hard to picture. Land is easier. So let's hand out the continental United States to the companies in the Nasdaq-100, each getting a piece as big as its share of the index's market value at the October high, and then watch what the selloff does to the map.</p>
+    <p class="byline">Market values through <span data-fill="last-date">…</span>. How every number was made is at the end.</p>
+  </header>
+
+  <section class="scrolly">
+    <figure class="graphic"><svg class="chart" id="map" role="img" aria-label="Map of the continental United States divided among Nasdaq-100 companies by market value"></svg></figure>
+    <div class="steps">
+      <div class="step"><p>On <b data-fill="peak-date">…</b>, the <span data-fill="n">…</span> companies in the Nasdaq-100 were worth <b data-fill="peak-total">…</b> together, the day the index closed at its record. Here is all of it, laid over the 48 states.</p><p>Each patch is one company. Its area is its share of that <span data-fill="peak-total-short">…</span>.</p></div>
+      <div class="step"><p><b data-fill="c0-name">…</b> alone was <b data-fill="c0-share">…</b> of their combined value. On this map that's <span data-fill="c0-equiv">…</span>.</p></div>
+      <div class="step"><p>The ten biggest companies held <b data-fill="top10-share">…</b> of the value, so they get <span data-fill="top10-share">…</span> of the land. The other <span data-fill="rest-n">…</span> share what's left.</p></div>
+      <div class="step"><p>Now the selloff. As each company loses value, its patch drains, and the emptied part turns <span class="loss-word">red</span>.</p><p>By <b data-fill="last-date">…</b>, <b data-fill="lost-total">…</b> was gone, <span data-fill="lost-pct">…</span> of the peak.</p></div>
+      <div class="step"><p>The losses weren't spread evenly. These five lost the most in dollars: <span data-fill="top-losers">…</span>.</p><p><span data-fill="gainers-n">…</span> companies were worth more on <span data-fill="last-date-short">…</span> than at the peak. Their patches stay full.</p></div>
+      <div class="step"><p>Put the whole country back together at its new size and it shrinks. The dashed line is where the coast used to be.</p><p>The land that's missing is <span data-fill="lost-pct">…</span> of the lower 48, <span data-fill="lost-equiv">…</span>.</p></div>
+    </div>
+  </section>
+
+  <section class="explore">
+    <p>Drag through the days yourself. Switch between draining each patch in place and shrinking the whole country.</p>
+    <div class="controls on" id="controls">
+      <button data-mode="drain" class="on">Drain each patch</button><button data-mode="shrink">Shrink the country</button>
+      <input type="range" id="slider" min="0" max="1" step="1" value="0" aria-label="Date">
+    </div>
+    <svg class="chart" id="map2" role="img" aria-label="Interactive version of the map"></svg>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How this was made</h2>
+    <p>Market value for each company on each day is its closing price times its shares outstanding. These numbers are shared with the companion story, <a href="../tech-selloff/index.html">How much the tech selloff has taken back</a>, so the two pages agree. Members are the Nasdaq-100 as it stood on the peak day, <span data-fill="peak-date">…</span>. <span data-fill="members-note">…</span></p>
+    <p>I also fetched every member's daily closes separately from stockanalysis.com (data from S&amp;P Global Market Intelligence) as a check. All <span data-fill="xc-n">…</span> closes that both sources cover agree to the cent.</p>
+    <p>This is total company value, not the float-adjusted, capped weight the index itself uses. That matters for companies with a small public float. SpaceX, for example, gets land for its whole valuation even though most of its shares don't trade. Alphabet appears once, with both share classes added together.</p>
+    <p>The peak is <span data-fill="peak-date">…</span>, the Nasdaq-100's record close in the daily index data the companion story uses, and the same day news reports give.</p>
+    <p>The map is the continental 48 states plus DC from the U.S. Census Bureau's cartographic boundary files, as packaged in us-atlas 3.0.1, drawn in an Albers equal-area projection, so equal areas on screen are equal areas of land. The country is cut into patches by repeatedly splitting the list of companies into two halves of nearly equal value and cutting the map along its longer side so each side gets exactly its share of the area. A patch's area matches its company's share to within a millionth before the outlines are smoothed for drawing. State comparisons use the same projected areas.</p>
+    <p>In the drain view each patch keeps its peak outline and fills from the bottom to the fraction of its peak value it still has. A company worth more than at the peak is drawn full, so the drawn total there can slightly overstate what's left; the numbers in the text use the exact sums. In the shrink view the whole outline is scaled so its area matches the day's total, and the patches are redrawn inside it at that day's values.</p>
+    <p>All figures are computed by <code>pipeline/build_nasdaq_map.py</code> from the companion story's <code>constituent_daily.csv</code> and the map files in <code>data/raw/</code>.</p>
+
+    <h2>Sources</h2>
+    <ol>
+      <li>Members: Invesco QQQ Trust holdings in its SEC N-PORT filing, adjusted for Nasdaq-100 changes through the peak, as built by the companion story's pipeline.</li>
+      <li>Shares outstanding: each company's latest SEC 10-Q, 10-K, 20-F or 40-F cover page.</li>
+      <li>Daily closes: Yahoo Finance; cross-checked against stockanalysis.com historical price pages.</li>
+      <li>Index peak date context: The Private Banker, "Nasdaq 100 Falls Into Correction as Intel, Nvidia and Reddit Lead Tech Rout," Oct 30, 2026; Newsquawk headline, Oct 30, 2026.</li>
+      <li>State boundaries: U.S. Census Bureau cartographic boundary files via us-atlas 3.0.1 (states-albers-10m).</li>
+    </ol>
+
+    <h2>Known gaps</h2>
+    <p id="gaps">…</p>
+
+    <h2>The data</h2>
+    <p>Market value in billions of dollars at the peak and on the last day, with the change.</p>
+    <div id="table"></div>
+  </section>
+
+  <div class="tooltip" id="tooltip"></div>
+  <script src="../../assets/js/d3.min.js"></script>
+  <script type="module" src="story.js"></script>
+</body>
+</html>

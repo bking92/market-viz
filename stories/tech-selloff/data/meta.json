@@ -1,0 +1,29 @@
+{
+  "ndx_source_note": "Pulled from the Yahoo Finance chart API on 2026-11-01, 209 trading days.",
+  "fred_note": "On the 208 days both sources cover, the largest difference is 0.22 points (2026-10-06). FRED's series ends on 2026-10-29, so 2026-10-30 could not be checked.",
+  "peak_date": "2026-10-06",
+  "latest_date": "2026-10-30",
+  "members_note": "Members start from the 100 US-listed stock lines in the Invesco QQQ Trust's N-PORT filing 0001067839-26-000030 (holdings as of 2026-06-30), tickers matched by CUSIP or ISIN through OpenFIGI, then adjusted for the index changes listed below that took effect by the peak on 2026-10-06. Share counts are the sum of every class tagged on the cover of each company's latest 10-Q, 10-K, 20-F or 40-F (20-F counts converted to US depositary shares where the cover gives a ratio).",
+  "membership_changes": [
+    {
+      "date": "2026-07-07",
+      "add": [
+        "SPCX",
+        "Space Exploration Technologies Corp."
+      ],
+      "remove": null,
+      "source": "https://ir.nasdaq.com/news-releases/news-release-details/space-exploration-technologies-corporation-join-nasdaq-100"
+    },
+    {
+      "date": "2026-08-04",
+      "add": null,
+      "remove": "EA",
+      "remove_name": "Electronic Arts Inc.",
+      "source": "https://www.marketscreener.com/news/electronic-arts-inc-nasdaqgm-ea-dropped-from-nasdaq-100-index-ce7f50ddd889f622"
+    }
+  ],
+  "split_adjustments": [
+    "MNST (2.0-for-1.0 on 2026-08-11)"
+  ],
+  "gaps": "Index change after the peak not reflected (the member list is the one in force on 2026-10-06): MRNA replaced WBD on 2026-10-09. Warner Bros. Discovery, Inc. was in the N-PORT holdings but no longer has a US listing, so it has no latest close and is left out. Share counts more than 150 days old, because these companies file annual reports only (20-F/40-F) or have no newer filing; issuance or buybacks since then are not captured: PDD (2026-04-29), ARM (2026-05-26), TRI (2026-03-05), CCEP (2026-03-13), NBIS (2026-04-30), ASML (2026-02-25), FER (2026-02-25)."
+}
