@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How much the tech selloff has taken back</title>
+  <link rel="stylesheet" href="../../assets/css/site.css">
+</head>
+<body>
+  <nav class="masthead"><a href="../../index.html">Market Visualization</a></nav>
+
+  <header class="lede">
+    <h1>How much the tech selloff has taken back</h1>
+    <p>The Nasdaq-100 closed at its 2026 high on <span data-fill="peak-date">…</span>. <span data-fill="days-since">…</span> trading days later it had given back <span data-fill="last-dd">…</span><span data-fill="lede-tail"></span>. Scroll to watch it happen.</p>
+    <p class="byline">Data through <span data-fill="last-date">…</span>. Every number below comes from the files listed at the end.</p>
+  </header>
+
+  <section class="scrolly">
+    <figure class="graphic"><svg class="chart" id="chart" role="img" aria-label="Nasdaq-100 daily closes and drawdown"></svg></figure>
+    <div class="steps">
+      <div class="step"><p>On <b data-fill="peak-date">…</b>, the Nasdaq-100 closed at <b data-fill="peak-close">…</b>. That's the highest close in the daily data I have, which starts on <span data-fill="first-date">…</span>.</p></div>
+      <div class="step"><p>By <b data-fill="last-date">…</b>, it had closed at <b data-fill="last-close">…</b>. That's <b data-fill="last-dd">…</b> below the peak, <span data-fill="days-since">…</span> trading days later.</p></div>
+      <div class="step"><p>Here's the same line, counting only losses. Every day is measured against the highest close up to that day. A day at the top line is a new high.</p>
+        <p data-fill="worst-sentence">…</p></div>
+      <div class="step" data-needs="mcap"><p>A percentage hides how much money that is. Each square here is <span data-fill="unit">…</span> of market value in the Nasdaq-100's members at the peak.</p></div>
+      <div class="step" data-needs="mcap"><p>These are the squares the selloff has wiped out so far.</p></div>
+      <div class="step" data-needs="mcap"><p>And this is who they belonged to: the ten biggest losses in dollars, then everyone else.</p></div>
+      <div class="step" data-needs="mcap"><p>Of the <span data-fill="total-lost">…</span> that's gone, <span data-fill="tail-lost">…</span> went on just <span data-fill="tail-dates">…</span>, as the index fell <span data-fill="tail-moves">…</span>.</p>
+        <p>These are the biggest one-day losses on those two days. <span data-fill="tail-story">…</span></p></div>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How this was made</h2>
+    <p>The index line uses daily closing levels of the Nasdaq-100 (ticker ^NDX). Drawdown on each day is <code>close ÷ highest close so far − 1</code>. Because the series starts on <span data-fill="first-date">…</span>, “highest so far” means the highest close <em>within this window</em>. An earlier, higher close would make every drawdown here deeper.</p>
+    <p id="mcap-method">Market value per company is the closing price times shares outstanding. Shares come from the cover page of each company's most recent 10-Q, 10-K, 20-F or 40-F, where every share class is tagged as <code>dei:EntityCommonStockSharesOutstanding</code>. Classes are summed and priced at the listed share, so all of Alphabet's classes are valued at the Class A price. For foreign companies that trade in New York as depositary shares, the count is converted at the ratio printed on the cover. The same share count is used for every day, so buybacks or new issuance between the peak and the filing are ignored. This is total company value, not the index's own modified weighting, so it moves a little differently from the index: the members' combined value fell <span data-fill="mcap-change">…</span> from peak to latest, against <span data-fill="last-dd">…</span> for the index. In the square chart each company's loss is rounded to whole squares, so small losses can show as none; the totals in the labels are exact.</p>
+    <p id="members-method">Who counts as a member: <span data-fill="members-note">…</span></p>
+    <p>All figures are computed by <code>pipeline/build_tech_selloff.py</code>, which writes the CSVs this page reads. Nothing is typed in by hand.</p>
+
+    <h2>Sources</h2>
+    <ol id="sources">
+      <li>Nasdaq-100 daily closes: Yahoo Finance, ^NDX historical data. <span data-fill="ndx-source-note"></span></li>
+      <li>Cross-check: FRED series <a href="https://fred.stlouisfed.org/series/NASDAQ100">NASDAQ100</a> (Nasdaq OMX Group). <span data-fill="fred-note">…</span></li>
+      <li data-needs="mcap">Members: Invesco QQQ Trust, Form N-PORT holdings report on <a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&amp;CIK=0001067839&amp;type=NPORT-P">SEC EDGAR</a>, with CUSIPs matched to tickers through the <a href="https://www.openfigi.com/api">OpenFIGI</a> mapping API.</li>
+      <li data-needs="mcap">Index changes after that report: <span id="changes">…</span></li>
+      <li data-needs="mcap">Company prices: Yahoo Finance daily closes. Shares outstanding: each company's latest periodic filing on SEC EDGAR, listed by filing date in the table below.</li>
+    </ol>
+
+    <h2>What is left out</h2>
+    <p id="gaps">…</p>
+
+    <h2>The data</h2>
+    <p>Every company in the market-value steps, with the inputs behind its numbers.</p>
+    <div id="mcap-table" class="wide-table"></div>
+    <p>Every index close used in the chart, as published by the source.</p>
+    <div id="table"></div>
+  </section>
+
+  <div class="tooltip" id="tooltip"></div>
+  <script src="../../assets/js/d3.min.js"></script>
+  <script type="module" src="story.js"></script>
+</body>
+</html>
