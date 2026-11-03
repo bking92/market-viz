@@ -392,16 +392,32 @@ function table(sel, cols, rows) {
   t.append("tbody").selectAll("tr").data(rows).join("tr").selectAll("td").data((r) => cols.map((c) => c[1](r))).join("td").html((x) => x);
 }
 const srcLink = (id) => { const s = srcById[id]; return s ? (s.url ? `<a href="${s.url}">${s.short || s.label}</a>` : s.short || s.label) : id; };
-d3.select("#event-table").append("p").text("* Date of the SEC filing that records the deal closing or the stock being delisted, usually the closing day or within a few days of it.");
-table("#event-table", [["Date", (e) => showDate(e) + (e.precision === "filing" ? "*" : "")], ["What happened", (e) => e.minor || e.headline], ["Deal value", (e) => (e.value ? fmt$(e.value) : "")], ["In today's dollars", (e) => (e.value_real ? fmt$(e.value_real) : "")], ["Source", (e) => [...new Set(e.src)].map(srcLink).join(", ")]], events.filter((e) => e.minor || e.headline));
-const rows = [];
-for (const f of fish) for (const p of f.pts) rows.push({ f, p });
-table("#value-table", [["Company", (r) => nameAt(r.f, r.p.t)], ["Date", (r) => r.p.d], ["Value", (r) => fmt$(r.p.v)], ["Kind", (r) => r.p.kind], ["Source", (r) => srcLink(r.p.src)]], rows);
+// The tables are built after the tank is swimming, so they never hold up the first frame.
+function buildTables() {
+  d3.select("#event-table").append("p").text("* Date of the SEC filing that records the deal closing or the stock being delisted, usually the closing day or within a few days of it.");
+  table("#event-table", [["Date", (e) => showDate(e) + (e.precision === "filing" ? "*" : "")], ["What happened", (e) => e.minor || e.headline], ["Deal value", (e) => (e.value ? fmt$(e.value) : "")], ["In today's dollars", (e) => (e.value_real ? fmt$(e.value_real) : "")], ["Source", (e) => [...new Set(e.src)].map(srcLink).join(", ")]], events.filter((e) => e.minor || e.headline));
+  // Every dated value is in data/values.csv; on the page, one company at a time.
+  const vt = d3.select("#value-table");
+  const total = fish.reduce((a, f) => a + f.pts.length, 0);
+  vt.append("p").html(`${total.toLocaleString("en-US")} values in all, downloadable as <a href="data/values.csv">values.csv</a>. Pick a company to see its values here: `)
+    .append("select").attr("id", "value-pick").attr("aria-label", "Company")
+    .on("change", function () { draw(this.value); })
+    .selectAll("option").data(fish.slice().sort((a, b) => a.names[a.names.length - 1].n.localeCompare(b.names[b.names.length - 1].n))).join("option")
+    .attr("value", (f) => f.id).text((f) => f.names.map((x) => x.n).filter((n, i, a) => a.indexOf(n) === i).join(" / "));
+  const holder = vt.append("div");
+  function draw(id) {
+    holder.selectAll("*").remove();
+    const f = byId[id];
+    table(holder.node(), [["Name then", (p) => nameAt(f, p.t)], ["Date", (p) => p.d], ["Value", (p) => fmt$(p.v)], ["Kind", (p) => p.kind], ["Source", (p) => srcLink(p.src)]], f.pts);
+  }
+  draw(d3.select("#value-pick").property("value"));
+}
+(window.requestIdleCallback || ((cb) => setTimeout(cb, 300)))(buildTables);
 
 window.addEventListener("resize", resize);
 resize();
 showIntro();
-requestAnimationFrame(frame);
+requestAnimationFrame((w) => { frame(w); requestAnimationFrame(() => box.classList.remove("loading")); });
 // Hooks for screenshots: ?t=2001.05 jumps to a moment and holds there.
 const q = new URLSearchParams(location.search);
 if (q.has("t")) { jump(+q.get("t")); playing = false; setPlayLabel(); }

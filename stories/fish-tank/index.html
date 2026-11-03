@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Who ate whom</title>
+  <link rel="preload" href="data/tank.json" as="fetch" crossorigin="anonymous">
   <link rel="stylesheet" href="../../assets/css/site.css">
   <style>
     @font-face { font-family: "Pixelify Sans"; src: url("../../assets/fonts/pixelify-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
@@ -13,6 +14,13 @@
     @media (min-width: 1000px) { .stage { grid-template-columns: minmax(0, 1fr) 21rem; align-items: start; } }
     .tank-wrap { position: relative; }
     #tank { position: relative; width: 100%; height: min(72vh, 680px); min-height: 360px; overflow: hidden; background: var(--deep); border: 3px solid #12202a; border-radius: 2px; box-shadow: inset 0 0 0 2px #2c4a5a; }
+    /* While the data loads: a shimmer instead of an empty blue box. */
+    @keyframes shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+    #tank.loading { background: linear-gradient(100deg, #9fd8e6 30%, #c9eef5 50%, #9fd8e6 70%) 0 0 / 250% 100%, #9fd8e6; animation: shimmer 1.4s linear infinite; }
+    #tank.loading > * { visibility: hidden; }
+    [data-fill]:empty { display: inline-block; width: 6.5em; height: 0.9em; vertical-align: -0.05em; border-radius: 3px; background: linear-gradient(100deg, var(--rule) 30%, #eee7da 50%, var(--rule) 70%) 0 0 / 250% 100%; animation: shimmer 1.4s linear infinite; }
+    [data-fill="span-note"]:empty { display: none; }
+    @media (prefers-reduced-motion: reduce) { #tank.loading, [data-fill]:empty { animation: none; } }
     #tank-px { position: absolute; left: 0; top: 0; image-rendering: pixelated; image-rendering: crisp-edges; }
     #tank-over { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
     #tank-over text { font-family: var(--pixel); }
@@ -56,12 +64,12 @@
     <h1>Who ate whom</h1>
     <p>Thirty years of American media and telecom, played out as a fish tank. Every fish is a company, drawn as big as the stock market said it was worth at the time. When one company buys another, a fish gets eaten. When a company splits up, it pops like a bubble and the pieces swim off on their own.</p>
     <p>Fish that keep swallowing big rivals turn into predators. Small upstarts start as guppies and grow up. It plays by itself and stops at the biggest moments. <span data-fill="span-note"></span></p>
-    <p class="byline">Market values from <span data-fill="first-date">…</span> to <span data-fill="last-date">…</span>. Where every number came from is at the end.</p>
+    <p class="byline">Market values from <span data-fill="first-date"></span> to <span data-fill="last-date"></span>. Where every number came from is at the end.</p>
   </header>
 
   <section class="stage" aria-label="Animated fish tank">
     <div class="tank-wrap">
-      <div id="tank" role="img" aria-label="Animated pixel-art fish tank of media and telecom companies sized by market value"><canvas id="tank-px"></canvas><svg id="tank-over"></svg></div>
+      <div id="tank" class="loading" role="img" aria-label="Animated pixel-art fish tank of media and telecom companies sized by market value"><canvas id="tank-px"></canvas><svg id="tank-over"></svg></div>
       <div class="controls">
         <button id="play" type="button">Pause</button>
         <svg id="timeline" aria-label="Timeline. Click to jump to a year."></svg>
