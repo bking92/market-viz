@@ -52,6 +52,21 @@
     .key { font-family: var(--label); font-size: 0.85rem; color: var(--ink-soft); margin: 0.4rem 0 0; }
     .key-item { white-space: nowrap; margin-right: 0.7rem; display: inline-block; }
     .tooltip { max-width: min(18rem, 70vw); }
+    .tooltip .tip-history { display: block; margin-top: 0.35rem; padding-top: 0.3rem; border-top: 1px solid #5b544a; font-size: 12px; line-height: 1.35; }
+    .tooltip .tip-history span { display: block; }
+    .extras { font-family: var(--label); font-size: 0.85rem; margin: 0.5rem 0 0; display: flex; gap: 1.4rem; }
+    .extras button { font: inherit; color: var(--ink-soft); background: none; border: 0; padding: 0.5rem 0; margin: -0.5rem 0; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; touch-action: manipulation; }
+    .tree { max-width: 52rem; margin: 10vh auto 0; padding: 0 1.25rem; }
+    .tree > p { max-width: var(--measure); }
+    #tree-chart { columns: 2 22rem; column-gap: 2.5rem; margin-top: 1.5rem; }
+    .tree-root { break-inside: avoid; margin: 0 0 1.6rem; font-family: var(--label); font-size: 0.85rem; }
+    .tree .who { display: inline-flex; align-items: center; gap: 0.45rem; }
+    .tree .who img { image-rendering: pixelated; }
+    .tree .who.root { font-size: 1rem; }
+    .tree i { color: var(--ink-soft); font-style: normal; }
+    .tree ul { list-style: none; margin: 0.2rem 0 0 1.05rem; padding: 0 0 0 0.9rem; border-left: 1px solid var(--rule); }
+    .tree li { margin: 0.25rem 0; position: relative; }
+    .tree li::before { content: ""; position: absolute; left: -0.9rem; top: 0.85rem; width: 0.7rem; border-top: 1px solid var(--rule); }
     .method table { font-size: 0.78rem; }
     #sources a, .method td a { overflow-wrap: anywhere; word-break: break-word; }
     .method .wide-table { max-height: 32rem; overflow: auto; }
@@ -76,8 +91,15 @@
         <button id="replay" type="button">Start over</button>
       </div>
       <p class="key" id="key"></p>
+      <p class="extras"><button id="share" type="button">Share this moment</button><button id="sound" type="button" aria-pressed="false">Sound off</button></p>
     </div>
     <div class="caption" id="caption" aria-live="polite"></div>
+  </section>
+
+  <section class="tree" id="tree">
+    <h2>Who ended up inside whom</h2>
+    <p>Every company still swimming at the end, with everything it swallowed, and everything its prey had swallowed before. Years are when each deal closed; amounts are the deal values given in the table below.</p>
+    <div id="tree-chart"></div>
   </section>
 
   <section class="method" id="method">

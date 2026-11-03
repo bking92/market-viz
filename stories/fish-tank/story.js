@@ -292,7 +292,7 @@ function render(live) {
     ctx.drawImage(img, X, Y);
     if (Math.random() < dt * 0.25 && len >= 10) aq.addBubble(n.x / P + n.dir * len * 0.5, n.y / P - 1, 1);
     // A fish about to vanish down a throat leaves crumbs.
-    if (n.eatenBy && n.scale < 0.35 && !n.crumbed) { n.crumbed = true; aq.burst(n.x / P, n.y / P, fishColour(s.f.ci), 8 + Math.min(16, len / 3), 14); }
+    if (n.eatenBy && n.scale < 0.35 && !n.crumbed) { n.crumbed = true; sfx("chomp", len); aq.burst(n.x / P, n.y / P, fishColour(s.f.ci), 8 + Math.min(16, len / 3), 14); }
   }
   // Splits: the fish swells inside a bubble, then the bubble bursts.
   for (const s of specs) {
@@ -300,7 +300,7 @@ function render(live) {
     if (p == null) continue;
     const r = Math.round(((s.L / P) * 0.55) * (p < 0.45 ? 1 + 0.35 * (p / 0.45) : 1.35));
     if (p < 0.45) { aq.ring(Math.round(n.x / P), Math.round(n.y / P), r, "rgba(240,253,255,0.95)"); aq.ring(Math.round(n.x / P), Math.round(n.y / P), r + 1, "rgba(30,80,110,0.35)"); }
-    else if (!n.burst) { n.burst = true; aq.burst(n.x / P, n.y / P, "#f0fdff", 26, 30 + r); for (let i = 0; i < 6; i++) aq.addBubble(n.x / P + (Math.random() - 0.5) * r, n.y / P + (Math.random() - 0.5) * r, i % 2 ? 3 : 1); }
+    else if (!n.burst) { n.burst = true; sfx("pop", r); aq.burst(n.x / P, n.y / P, "#f0fdff", 26, 30 + r); for (let i = 0; i < 6; i++) aq.addBubble(n.x / P + (Math.random() - 0.5) * r, n.y / P + (Math.random() - 0.5) * r, i % 2 ? 3 : 1); }
   }
   aq.weedsDraw(now, true);
   aq.particles(now, dt);
@@ -332,11 +332,31 @@ box.addEventListener("mousemove", (ev) => {
   if (best) tip(ev, best); else d3.select("#tooltip").style("opacity", 0);
 });
 box.addEventListener("mouseleave", () => d3.select("#tooltip").style("opacity", 0));
+// What a fish has done so far: who it ate, what it split from or into, and who ate it.
+const yearOf = (e) => Math.floor(e.t);
+const dealOf = (e) => (e.value ? `, a ${fmt$(e.value)} deal` : "");
+function historyLines(f, upTo) {
+  const out = [];
+  for (const e of events) {
+    if (e.t > upTo) break;
+    if (e.type === "eat" && e.actor === f.id) out.push(`Ate ${e.targets.map((id) => nameAt(byId[id], e.t - 0.01)).join(" and ")} in ${yearOf(e)}${dealOf(e)}`);
+    if (e.type === "eat" && e.targets.includes(f.id)) out.push(`Eaten by ${nameAt(byId[e.actor], e.t)} in ${yearOf(e)}${dealOf(e)}`);
+    if (e.type === "split" && e.actor === f.id) out.push(`Split in ${yearOf(e)}: ${e.children.filter((id) => id !== f.id).map((id) => nameAt(byId[id], e.t + 0.01)).join(", ")} swam off`);
+    if (e.type === "split" && e.actor !== f.id && e.children.includes(f.id)) out.push(`Split off from ${nameAt(byId[e.actor], e.t - 0.01)} in ${yearOf(e)}`);
+  }
+  return out;
+}
+function historyHtml(f, upTo) {
+  const h = historyLines(f, upTo);
+  if (!h.length) return "";
+  const shown = h.slice(-5);
+  return `<span class="tip-history">${h.length > 5 ? `<span>…and ${h.length - 5} earlier</span>` : ""}${shown.map((x) => `<span>${x}</span>`).join("")}</span>`;
+}
 function tip(ev, s) {
   const v = s.val;
   const how = { market: "stock market value", float: "value of shares held by outside investors, from an annual report", deal: "price paid in a deal", estimate: "published estimate, no stock price" }[v.kind];
   const t = d3.select("#tooltip").style("opacity", 1)
-    .html(`<b>${nameAt(s.f, tau)}</b><br>${fmt$(v.v)}<br>${how}${v.held ? `, last known ${fmtMonth(v.d)}` : ""}`);
+    .html(`<b>${nameAt(s.f, tau)}</b><br>${fmt$(v.v)}<br>${how}${v.held ? `, last known ${fmtMonth(v.d)}` : ""}${historyHtml(s.f, tau)}`);
   // Keep the box on screen: flip it to the left of the finger near the right edge, and above near the bottom.
   const r = t.node().getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = window.innerHeight;
   let x = ev.clientX + 14, y = ev.clientY + 10;
@@ -371,6 +391,40 @@ function resume() { pausedOn = null; playing = true; setPlayLabel(); cap.html(""
 setInterval(showMinor, 400);
 
 // ---------- controls ----------
+// ---------- sound (off until the reader turns it on) ----------
+let audio = null, soundOn = false;
+function sfx(kind, size) {
+  if (!soundOn || !audio || document.hidden) return;
+  const t = audio.currentTime, big = clamp(size / 40, 0, 1);
+  const blip = (type, f0, f1, start, dur, vol) => {
+    const o = audio.createOscillator(), g = audio.createGain();
+    o.type = type; o.frequency.setValueAtTime(f0, t + start); o.frequency.exponentialRampToValueAtTime(f1, t + start + dur);
+    g.gain.setValueAtTime(vol, t + start); g.gain.exponentialRampToValueAtTime(0.001, t + start + dur);
+    o.connect(g).connect(audio.destination); o.start(t + start); o.stop(t + start + dur + 0.02);
+  };
+  if (kind === "chomp") { const f = 170 - 80 * big; blip("square", f, f * 0.45, 0, 0.07, 0.07); blip("square", f * 0.9, f * 0.4, 0.11, 0.07, 0.06); }
+  if (kind === "pop") { blip("sine", 500 - 200 * big, 1500, 0, 0.07, 0.16); blip("triangle", 1800, 2600, 0.05, 0.04, 0.05); }
+}
+d3.select("#sound").on("click", function () {
+  soundOn = !soundOn;
+  if (soundOn && !audio) audio = new (window.AudioContext || window.webkitAudioContext)();
+  if (audio) audio.resume();
+  d3.select(this).text(soundOn ? "Sound on" : "Sound off").attr("aria-pressed", soundOn);
+  if (soundOn) sfx("pop", 10);
+});
+
+// ---------- share the current moment ----------
+d3.select("#share").on("click", async function () {
+  const u = new URL(location.href); u.search = "";
+  if (pausedOn) u.searchParams.set("pause", pauses.indexOf(pausedOn)); else u.searchParams.set("t", tau.toFixed(2));
+  const url = u.toString(), btn = d3.select(this), was = "Share this moment";
+  try {
+    if (navigator.share && matchMedia("(pointer: coarse)").matches) { await navigator.share({ title: document.title, url }); return; }
+    await navigator.clipboard.writeText(url); btn.text("Link copied");
+  } catch (e) { if (e && e.name === "AbortError") return; window.prompt("Copy this link:", url); }
+  setTimeout(() => btn.text(was), 2200);
+});
+
 const tl = d3.select("#timeline");
 let tx = d3.scaleLinear();
 function drawTimeline() {
@@ -407,6 +461,24 @@ document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target
 // Key: one of each species and the hollow outline, drawn with the same sprites.
 const keyImg = (sp, ghost) => { const c = sprite(sp, 6, 24, 1, { ghost }); return `<img src="${c.toDataURL()}" width="${c.width * 2}" height="${c.height * 2}" alt="" style="image-rendering:pixelated;vertical-align:middle">`; };
 d3.select("#key").html([["guppy", false, "worth under " + D.text.adult_short], ["adult", false, "grown up"], ["predator", false, "predator"], ["adult", true, "no stock price, sized by a deal or estimate"]].map(([sp, g, label]) => `<span class="key-item">${keyImg(sp, g)} ${label}</span>`).join(" ") + ``);
+
+// ---------- who ended up inside whom ----------
+// Follow every "eat" to the end: a fish still in the tank at the close is the root of everything it
+// swallowed, and of everything its prey had swallowed before.
+function drawTree() {
+  const eatsBy = d3.group(events.filter((e) => e.type === "eat"), (e) => e.actor);
+  const icon = (f, t) => { const v = valueAt(f, t); const c = sprite(v ? speciesAt(f, t, v.v) : "adult", f.ci, 22, 1, { ghost: v && (v.kind === "estimate" || v.kind === "deal") }); return `<img src="${c.toDataURL()}" width="${c.width * 2}" height="${c.height * 2}" alt="">`; };
+  const was = (f, t) => { const now = nameAt(f, t); const old = [...new Set(f.names.filter((x) => x.t <= t).map((x) => x.n))].filter((n) => n !== now); return old.length ? ` <i>(was ${old.join(", then ")})</i>` : ""; };
+  const node = (f, t, seen) => {
+    const kids = (eatsBy.get(f.id) || []).filter((e) => e.t <= T1).flatMap((e) => e.targets.map((id) => ({ e, f: byId[id] }))).filter((k) => !seen.has(k.f.id));
+    kids.forEach((k) => seen.add(k.f.id));
+    return `<ul>${kids.map((k) => `<li><span class="who">${icon(k.f, k.e.t - 0.02)}<span><b>${nameAt(k.f, k.e.t - 0.01)}</b>${was(k.f, k.e.t - 0.01)} <i>${yearOf(k.e)}${k.e.value ? `, ${fmt$(k.e.value)}` : ""}</i></span></span>${node(k.f, k.e.t, seen)}</li>`).join("")}</ul>`;
+  };
+  const alive = fish.filter((f) => !f.outside && (!f.leave || f.leave.e.t > T1) && f.tDied > T1 && (eatsBy.get(f.id) || []).length)
+    .map((f) => ({ f, v: valueAt(f, T1) })).sort((a, b) => (b.v ? b.v.v : 0) - (a.v ? a.v.v : 0));
+  d3.select("#tree-chart").html(alive.map(({ f, v }) => `<div class="tree-root"><span class="who root">${icon(f, T1)}<span><b>${nameAt(f, T1)}</b>${was(f, T1)} <i>${v ? fmt$(v.v) + " now" : ""}</i></span></span>${node(f, T1, new Set([f.id]))}</div>`).join(""));
+}
+drawTree();
 
 // ---------- tables ----------
 function table(sel, cols, rows) {
