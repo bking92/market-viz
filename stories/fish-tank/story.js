@@ -3,7 +3,7 @@
 // Story time (tau) is a decimal year. Sizes, species, births and deaths are pure functions of tau;
 // swimming is a d3-force simulation running on wall-clock time so fish keep moving during pauses.
 
-const PLAY_SECONDS = 90;      // the whole span, not counting pauses
+const PLAY_SECONDS = 120;     // the whole span, not counting pauses
 const CHASE = 0.45;           // years of story time a predator spends closing in on its prey
 const POP = 0.4;              // years of story time a split takes to pop and spread
 const SWIM_IN = 0.5;          // years for a newcomer to swim in, or a leaver to swim out
@@ -67,8 +67,9 @@ const pauses = events.filter((e) => e.pause);
 // Pacing: story time slows down around every smaller deal so it can be read, and speeds up through
 // quiet years. Total swimming time stays PLAY_SECONDS (pauses come on top).
 const minors = events.filter((e) => !e.pause && e.minor);
-const EXTRA = 0.8, SIG = 0.22;                         // wall seconds added per smaller deal, spread over ±SIG years
-const EXTRA_STOP = 2.5, SIG_STOP = 0.2;                  // ...and in the run-up to each big stop, so the chase is watchable
+const STRETCH = PLAY_SECONDS / 90;                      // timings below were tuned for 90 s; scale them with the total
+const EXTRA = 0.8 * STRETCH, SIG = 0.22;                         // wall seconds added per smaller deal, spread over ±SIG years
+const EXTRA_STOP = 2.5 * STRETCH, SIG_STOP = 0.2;                  // ...and in the run-up to each big stop, so the chase is watchable
 const BASE = (PLAY_SECONDS - EXTRA * minors.length - EXTRA_STOP * pauses.length) / (T1 - T0);   // wall seconds per quiet year
 const bump = (t, c, extra, sig) => (extra / (sig * Math.sqrt(Math.PI))) * Math.exp(-(((t - c) / sig) ** 2));
 const secPerYear = (t) => BASE + minors.reduce((a, e) => a + bump(t, e.t, EXTRA, SIG), 0) + pauses.reduce((a, e) => a + bump(t, e.tv - 0.15, EXTRA_STOP, SIG_STOP), 0);

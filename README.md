@@ -32,4 +32,4 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 - 57 fish, 69 events, 10 pauses, 1996 to Oct 2026. Values: companiesmarketcap.com, SEC 10-K cover float where that site is wrong (Comcast pre-2016, Sprint pre-2005), deal prices for firms with no stock.
 - URL hooks for checking: `?t=2007` jumps to a year, `?pause=4` jumps to just before a pause.
 - Known gaps are listed on the page under "What is left out".
-- Brian confirmed: 90 s of swimming plus pauses; "sources and uses" means sources and method. Look is pixel art (pixel.js), one colour per company.
+- Brian confirmed: 2 minutes of swimming plus pauses (changed from 90 s on Nov 3); "sources and uses" means sources and method. Look is pixel art (pixel.js), one colour per company.
