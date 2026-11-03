@@ -7,7 +7,7 @@ const PLAY_SECONDS = 90;      // the whole span, not counting pauses
 const CHASE = 0.45;           // years of story time a predator spends closing in on its prey
 const POP = 0.4;              // years of story time a split takes to pop and spread
 const SWIM_IN = 0.5;          // years for a newcomer to swim in, or a leaver to swim out
-const MIN_PX = 8;             // canvas pixels: the smallest fish drawn
+const MIN_PX = 11;            // canvas pixels: the smallest fish drawn
 
 const fmt$ = (v) => v >= 1e12 ? `$${(v / 1e12).toFixed(2)} trillion` : v >= 1e9 ? `$${(v / 1e9).toFixed(v >= 1e11 ? 0 : 1)} billion` : `$${(v / 1e6).toFixed(0)} million`;
 const fmtDate = (d) => new Date(d + "T12:00:00Z").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
@@ -22,7 +22,7 @@ const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const smooth = (a, b, x) => { const t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); };
 function hash(s) { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return (h >>> 0) / 4294967295; }
 
-import { sprite, areaFactor, Aquarium, fishColour, HR, COLOURS } from "./pixel.js";
+import { sprite, areaFactor, Aquarium, fishColour, HR, COLOURS, glowOf } from "./pixel.js";
 const AREA = { guppy: areaFactor("guppy"), adult: areaFactor("adult"), predator: areaFactor("predator") };
 
 const res = await fetch("data/tank.json");
@@ -67,9 +67,11 @@ const pauses = events.filter((e) => e.pause);
 // Pacing: story time slows down around every smaller deal so it can be read, and speeds up through
 // quiet years. Total swimming time stays PLAY_SECONDS (pauses come on top).
 const minors = events.filter((e) => !e.pause && e.minor);
-const EXTRA = 1.1, SIG = 0.22;                        // wall seconds added per deal, spread over ±SIG years
-const BASE = (PLAY_SECONDS - EXTRA * minors.length) / (T1 - T0);   // wall seconds per quiet year
-const secPerYear = (t) => BASE + minors.reduce((a, e) => a + (EXTRA / (SIG * Math.sqrt(Math.PI))) * Math.exp(-(((t - e.t) / SIG) ** 2)), 0);
+const EXTRA = 0.8, SIG = 0.22;                         // wall seconds added per smaller deal, spread over ±SIG years
+const EXTRA_STOP = 2.5, SIG_STOP = 0.2;                  // ...and in the run-up to each big stop, so the chase is watchable
+const BASE = (PLAY_SECONDS - EXTRA * minors.length - EXTRA_STOP * pauses.length) / (T1 - T0);   // wall seconds per quiet year
+const bump = (t, c, extra, sig) => (extra / (sig * Math.sqrt(Math.PI))) * Math.exp(-(((t - c) / sig) ** 2));
+const secPerYear = (t) => BASE + minors.reduce((a, e) => a + bump(t, e.t, EXTRA, SIG), 0) + pauses.reduce((a, e) => a + bump(t, e.tv - 0.15, EXTRA_STOP, SIG_STOP), 0);
 const deflator = D.deflator; // by year: multiply a dollar value of that year to get today's dollars
 
 // How each fish enters and leaves, read off the events.
@@ -123,8 +125,7 @@ let W = 0, H = 0, P = 3, kArea = 1, sandY = 0;
 const yearText = svg.append("text").attr("class", "year");
 const gLabels = svg.append("g");
 function resize() {
-  const r = box.getBoundingClientRect();
-  W = r.width; H = r.height;
+  W = box.clientWidth; H = box.clientHeight;   // inside the border
   P = clamp(Math.round(W / 300), 2, 4);         // screen pixels per art pixel
   aq.resize(W, H, P);
   sandY = aq.sandTop * P;
@@ -209,7 +210,7 @@ function step(wallS) {
     const ph = hash(id + "p") * 6.28, sp = 0.18 + 0.12 * hash(id + "s");
     n.tx = h.x + W * 0.09 * Math.sin(wallS * sp + ph); n.ty = h.y + H * 0.06 * Math.sin(wallS * sp * 1.3 + ph * 2);
     n.tx = clamp(n.tx, s.L * 0.5, W - s.L * 0.5); n.ty = clamp(n.ty, s.L * 0.3 + 8, sandY - 6 - s.L * 0.3);
-    n.pull = 0.02; n.solid = true; n.L = s.L; n.scale = 1; n.flip = false; n.alpha = 1;
+    n.pull = 0.02; n.solid = true; n.L = s.L; n.scale = 1; n.flip = false; n.alpha = 1; n.transit = false;
     const lv = f.leave;
     if (lv && lv.kind === "eaten") {
       const span = lv.e.linked ? LINK - FAST_POP * 0.5 : CHASE;
@@ -223,7 +224,7 @@ function step(wallS) {
     }
     if (lv && lv.kind === "swim") {
       const p = (tau - (lv.e.tv - SWIM_IN)) / SWIM_IN;
-      if (p > 0) { n.tx = n.x > W / 2 ? W + 300 : -300; n.pull = 0.05; n.solid = false; }
+      if (p > 0) { n.tx = n.x > W / 2 ? W + 300 : -300; n.pull = 0.05; n.solid = false; n.transit = true; }
     }
     if (lv && lv.kind === "popped") {
       const p = (tau - lv.e.t) / popDur(lv.e);
@@ -231,8 +232,8 @@ function step(wallS) {
     } else n.popping = null;
     const en = f.enter;
     if (en && en.kind === "popped") { const d = popDur(en.e); const p = (tau - en.e.t - d * 0.45) / (d * 0.55); n.scale *= smooth(0, 1, p); }
-    if (en && en.kind === "swim" && tau < en.e.t + SWIM_IN) n.pull = 0.04;
-    if (en && en.kind === "outside" && !(lv && tau > lv.e.tv - CHASE)) n.pull = 0.05;
+    if (en && en.kind === "swim" && tau < en.e.t + SWIM_IN) { n.pull = 0.04; n.transit = true; }
+    if (en && en.kind === "outside") { n.transit = true; if (!(lv && tau > lv.e.tv - CHASE)) n.pull = 0.05; }
     for (const e of events) if (e.type === "distress" && e.actor === id && tau >= e.t && tau < yr(e.until)) n.flip = true;
     if (f.outside) n.solid = false;
   }
@@ -246,7 +247,7 @@ function step(wallS) {
   sim.tick();
   for (const n of nodes.values()) {
     if (Math.abs(n.vx) > 0.25) n.dir = n.vx > 0 ? 1 : -1;
-    if (n.solid && n.pull <= 0.02) { const half = (n.L || 0) * 0.5; if (half * 2 < W) n.x = clamp(n.x, half, W - half); }
+    if (!n.transit && !n.eatenBy) { const half = (n.L || 0) * 0.5 * (n.scale ?? 1) + 2; if (half * 2 < W) n.x = clamp(n.x, half, W - half); }
     const s = live.get(n.id);
     if (s) n.L = s.L;
   }
@@ -266,19 +267,28 @@ function render(live) {
   aq.weedsDraw(now, false);
   // Big fish swim behind small ones.
   const order = specs.slice().sort((a, b) => b.L * nodes.get(b.f.id).scale - a.L * nodes.get(a.f.id).scale);
-  for (const s of order) {
+  // During a stop, the fish in the story glow and the rest of the tank dims.
+  const inScene = new Set(pausedOn ? [pausedOn.actor, ...(pausedOn.targets || []), ...(pausedOn.children || [])] : []);
+  const dim = pausedOn ? 0.42 * smooth(0, 600, performance.now() - pauseShownAt) : 0;
+  const drawn = [];
+  for (const s of order) if (!inScene.has(s.f.id)) drawFish(s); else drawn.push(s);
+  if (dim > 0) { ctx.fillStyle = `rgba(10,38,56,${dim.toFixed(3)})`; ctx.fillRect(0, 0, aq.w, aq.h); }
+  for (const s of drawn) drawFish(s, dim > 0);
+  function drawFish(s, glow) {
     const n = nodes.get(s.f.id);
     const pop = n.popping;
-    if (pop != null && pop >= 0.45) continue;
+    if (pop != null && pop >= 0.45) return;
     const len = Math.round((s.L * n.scale) / P);
-    if (len < 3) continue;
+    if (len < 3) return;
     const speed = Math.hypot(n.vx, n.vy);
     n.phase = (n.phase ?? hash(s.f.id) * 6) + dt * (1.6 + Math.min(4, speed * 0.6)) * (len < 20 ? 1.4 : 1);
     const chomping = n.chomp > 0.45 && n.chomp < 1;
     const open = chomping && Math.floor(now * 7) % 2 === 0;
     const img = sprite(s.species, s.f.ci, len, Math.floor(n.phase) % 6, { ghost: s.val.kind === "estimate" || s.val.kind === "deal", open, dir: n.dir, flip: n.flip, pattern: Math.floor(hash(s.f.id + "pat") * 4) });
     const bob = Math.round(Math.sin(now * 1.3 + hash(s.f.id + "b") * 6) * 0.6);
-    ctx.drawImage(img, Math.round(n.x / P - img.width / 2), Math.round(n.y / P - img.height / 2) + bob);
+    const X = Math.round(n.x / P - img.width / 2), Y = Math.round(n.y / P - img.height / 2) + bob;
+    if (glow) { const g = glowOf(img); ctx.globalAlpha = 0.65 + 0.35 * Math.sin(now * 4); ctx.drawImage(g, X - 2, Y - 2); ctx.globalAlpha = 1; }
+    ctx.drawImage(img, X, Y);
     if (Math.random() < dt * 0.25 && len >= 10) aq.addBubble(n.x / P + n.dir * len * 0.5, n.y / P - 1, 1);
     // A fish about to vanish down a throat leaves crumbs.
     if (n.eatenBy && n.scale < 0.35 && !n.crumbed) { n.crumbed = true; aq.burst(n.x / P, n.y / P, fishColour(s.f.ci), 8 + Math.min(16, len / 3), 14); }
@@ -297,15 +307,25 @@ function render(live) {
   // Labels on fish big enough to carry one, plus anyone in the current scene.
   const focus = new Set(pausedOn ? [pausedOn.actor, ...(pausedOn.targets || []), ...(pausedOn.children || [])] : []);
   const labelled = specs.filter((s) => { const n = nodes.get(s.f.id); return n.scale > 0.6 && n.popping == null && (s.L >= 48 || focus.has(s.f.id)); });
-  gLabels.selectAll("text").data(labelled, (s) => s.f.id).join("text")
-    .attr("class", (s) => `fish-label${s.L < 70 ? " small" : ""}`)
-    .attr("x", (s) => clamp(nodes.get(s.f.id).x, 34, W - 34)).attr("y", (s) => nodes.get(s.f.id).y + s.L * { guppy: 0.2, adult: 0.2, predator: 0.12 }[s.species] + 14)
-    .text((s) => nameAt(s.f, tau));
+  // Place names biggest fish first; a name that would sit on another tries above its fish, else it is skipped.
+  const boxes = [], placed = [];
+  for (const s of labelled.sort((a, b) => (focus.has(b.f.id) - focus.has(a.f.id)) || b.L - a.L)) {
+    const n = nodes.get(s.f.id), name = nameAt(s.f, tau), fs = s.L < 70 ? 11.5 : 13;
+    const w = name.length * fs * 0.56 + 6, h = fs + 2, x = clamp(n.x, w / 2 + 2, W - w / 2 - 2);
+    const below = n.y + s.L * { guppy: 0.2, adult: 0.2, predator: 0.12 }[s.species] + 14, above = n.y - s.L * { guppy: 0.24, adult: 0.26, predator: 0.2 }[s.species] - 4;
+    const fits = (y) => !boxes.some((b) => Math.abs(b.x - x) < (b.w + w) / 2 && Math.abs(b.y - y) < (b.h + h) / 2);
+    const y = fits(below) ? below : fits(above) && above > fs + 4 ? above : null;
+    if (y == null) continue;
+    boxes.push({ x, y, w, h }); placed.push({ s, x, y, name, small: fs < 13 });
+  }
+  gLabels.selectAll("text").data(placed, (d) => d.s.f.id).join("text")
+    .attr("class", (d) => `fish-label${d.small ? " small" : ""}`)
+    .attr("x", (d) => d.x).attr("y", (d) => d.y).text((d) => d.name);
   drawPlayhead();
 }
 
 box.addEventListener("mousemove", (ev) => {
-  const r = box.getBoundingClientRect(), mx = ev.clientX - r.left, my = ev.clientY - r.top;
+  const r = box.getBoundingClientRect(), mx = ev.clientX - r.left - box.clientLeft, my = ev.clientY - r.top - box.clientTop;
   let best = null;
   for (const s of lastLive.values()) { const n = nodes.get(s.f.id); if (!n) continue; if (Math.abs(mx - n.x) < s.L * 0.5 && Math.abs(my - n.y) < s.L * HR[s.species] * 0.45 && (!best || s.L < best.L)) best = s; }
   if (best) tip(ev, best); else d3.select("#tooltip").style("opacity", 0);
@@ -329,7 +349,9 @@ function tip(ev, s) {
 const cap = d3.select("#caption");
 function readSeconds(e) { const words = (e.headline + " " + e.text).split(/\s+/).length; return clamp(words / 3.2, 7, 16); }
 function showIntro() { cap.html(`<p class="when">${fmtMonth(D.first_date)}</p><p>${D.text.intro}</p>`); }
+let pauseShownAt = 0;
 function showPause(e) {
+  pauseShownAt = performance.now();
   cap.html(`<p class="when">${showDate(e)}</p><h2>${e.headline}</h2>${e.text.split("\n").map((p) => `<p>${p}</p>`).join("")}<span class="resume"><i></i></span><button type="button" id="go" class="go">Keep going</button>`);
   cap.select("#go").style("font-family", "var(--label)").style("background", "none").style("border", 0).style("border-bottom", "1px solid var(--ink)").style("padding", 0).style("cursor", "pointer").on("click", resume);
 }
@@ -422,4 +444,4 @@ requestAnimationFrame((w) => { frame(w); requestAnimationFrame(() => box.classLi
 const q = new URLSearchParams(location.search);
 if (q.has("t")) { jump(+q.get("t")); playing = false; setPlayLabel(); }
 if (q.has("pause")) { const e = pauses[+q.get("pause")]; if (e) jump(e.tv - 0.25); }
-window.__tank = { jump, get tau() { return tau; }, pause: () => { playing = false; setPlayLabel(); } };
+window.__tank = { nodes, jump, get tau() { return tau; }, pause: () => { playing = false; setPlayLabel(); } };

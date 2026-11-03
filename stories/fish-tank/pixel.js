@@ -304,3 +304,15 @@ export class Aquarium {
   }
 }
 export const fishColour = (ci) => ramp(ci)[2];
+
+// A soft light outline around a sprite, for the fish in the current scene.
+const glows = new WeakMap();
+export function glowOf(img) {
+  let g = glows.get(img);
+  if (g) return g;
+  g = document.createElement("canvas"); g.width = img.width + 4; g.height = img.height + 4;
+  const c = g.getContext("2d");
+  for (const [dx, dy] of [[0, 2], [4, 2], [2, 0], [2, 4], [1, 1], [3, 1], [1, 3], [3, 3]]) c.drawImage(img, dx, dy);
+  c.globalCompositeOperation = "source-in"; c.fillStyle = "#fff6c8"; c.fillRect(0, 0, g.width, g.height);
+  glows.set(img, g); return g;
+}
