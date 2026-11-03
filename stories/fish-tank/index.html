@@ -25,13 +25,17 @@
     .caption p { margin: 0 0 0.75rem; }
     .caption .when { font-style: italic; color: var(--ink-soft); }
     .caption .minor { color: var(--ink-soft); font-size: 1.02rem; }
+    .caption .minors { margin-top: 0.4rem; }
+    .caption .minor { margin: 0 0 0.45rem; }
+    .caption .minor.older { opacity: 0.55; font-size: 0.95rem; }
     .caption .resume { display: block; height: 2px; background: var(--rule); margin: 0.9rem 0 0.5rem; position: relative; overflow: hidden; }
     .caption .resume i { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--ink); }
 
     .stage > * { min-width: 0; }
     .controls { font-family: var(--label); font-size: 0.9rem; display: flex; gap: 0.8rem; align-items: center; margin-top: 0.6rem; }
     @media (max-width: 600px) { #tank { height: 58vh; min-height: 300px; } .controls { font-size: 0.85rem; } }
-    .controls button { font: inherit; background: none; border: 0; border-bottom: 1px solid var(--ink); padding: 0; cursor: pointer; color: var(--ink); }
+    .controls button { font: inherit; background: none; border: 0; padding: 0.7rem 0.2rem; margin: -0.7rem -0.2rem; min-width: 3.2rem; cursor: pointer; color: var(--ink); touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+    .controls button span, .controls button { text-decoration: underline; text-underline-offset: 4px; }
     #timeline { flex: 1; height: 28px; cursor: pointer; }
     #timeline .track { stroke: var(--rule); stroke-width: 2; }
     #timeline .done { stroke: var(--ink); stroke-width: 2; }
@@ -39,7 +43,7 @@
     #timeline text { font-size: 10.5px; fill: var(--ink-soft); }
     .key { font-family: var(--label); font-size: 0.85rem; color: var(--ink-soft); margin: 0.4rem 0 0; }
     .key-item { white-space: nowrap; margin-right: 0.7rem; display: inline-block; }
-    .tooltip { max-width: 18rem; }
+    .tooltip { max-width: min(18rem, 70vw); }
     .method table { font-size: 0.78rem; }
     #sources a, .method td a { overflow-wrap: anywhere; word-break: break-word; }
     .method .wide-table { max-height: 32rem; overflow: auto; }

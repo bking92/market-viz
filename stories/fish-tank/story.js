@@ -64,6 +64,12 @@ const events = D.events.map((e) => {
   return { ...e, t, tv };
 }).sort((a, b) => a.tv - b.tv);
 const pauses = events.filter((e) => e.pause);
+// Pacing: story time slows down around every smaller deal so it can be read, and speeds up through
+// quiet years. Total swimming time stays PLAY_SECONDS (pauses come on top).
+const minors = events.filter((e) => !e.pause && e.minor);
+const EXTRA = 1.1, SIG = 0.22;                        // wall seconds added per deal, spread over ±SIG years
+const BASE = (PLAY_SECONDS - EXTRA * minors.length) / (T1 - T0);   // wall seconds per quiet year
+const secPerYear = (t) => BASE + minors.reduce((a, e) => a + (EXTRA / (SIG * Math.sqrt(Math.PI))) * Math.exp(-(((t - e.t) / SIG) ** 2)), 0);
 const deflator = D.deflator; // by year: multiply a dollar value of that year to get today's dollars
 
 // How each fish enters and leaves, read off the events.
@@ -151,9 +157,9 @@ function frame(wall) {
   const dt = lastWall == null ? 0 : Math.min(0.1, (wall - lastWall) / 1000);
   lastWall = wall;
   if (playing && !pausedOn) {
-    tau = Math.min(T1, tau + (dt * (T1 - T0)) / PLAY_SECONDS);
+    tau = Math.min(T1, tau + dt / secPerYear(tau));
     const p = pauses[nextPause];
-    if (p && tau >= p.tv + 0.04) { pausedOn = p; pauseStarted = wall; nextPause++; showPause(p); }
+    if (p && tau >= p.tv + 0.04) { pausedOn = p; pauseStarted = wall; nextPause++; showPause(p); setPlayLabel(); }
     if (tau >= T1) { playing = false; setPlayLabel(); showEnd(); }
   }
   if (pausedOn) {
@@ -308,8 +314,15 @@ box.addEventListener("mouseleave", () => d3.select("#tooltip").style("opacity", 
 function tip(ev, s) {
   const v = s.val;
   const how = { market: "stock market value", float: "value of shares held by outside investors, from an annual report", deal: "price paid in a deal", estimate: "published estimate, no stock price" }[v.kind];
-  d3.select("#tooltip").style("opacity", 1).style("left", `${ev.clientX + 14}px`).style("top", `${ev.clientY + 10}px`)
+  const t = d3.select("#tooltip").style("opacity", 1)
     .html(`<b>${nameAt(s.f, tau)}</b><br>${fmt$(v.v)}<br>${how}${v.held ? `, last known ${fmtMonth(v.d)}` : ""}`);
+  // Keep the box on screen: flip it to the left of the finger near the right edge, and above near the bottom.
+  const r = t.node().getBoundingClientRect(), vw = document.documentElement.clientWidth, vh = window.innerHeight;
+  let x = ev.clientX + 14, y = ev.clientY + 10;
+  if (x + r.width > vw - 8) x = Math.max(8, ev.clientX - 14 - r.width);
+  if (y + r.height > vh - 8) y = Math.max(8, ev.clientY - 10 - r.height);
+  t.style("left", `${x}px`).style("top", `${y}px`);
+  clearTimeout(tip.timer); tip.timer = setTimeout(() => t.style("opacity", 0), 4000);
 }
 
 // ---------- caption ----------
@@ -320,16 +333,18 @@ function showPause(e) {
   cap.html(`<p class="when">${showDate(e)}</p><h2>${e.headline}</h2>${e.text.split("\n").map((p) => `<p>${p}</p>`).join("")}<span class="resume"><i></i></span><button type="button" id="go" class="go">Keep going</button>`);
   cap.select("#go").style("font-family", "var(--label)").style("background", "none").style("border", 0).style("border-bottom", "1px solid var(--ink)").style("padding", 0).style("cursor", "pointer").on("click", resume);
 }
+// The smaller deals stay listed, newest first, so one that went by quickly can still be read.
 function showMinor() {
-  const recent = events.filter((e) => !e.pause && e.minor && e.t <= tau && e.t > tau - 1.2).pop();
-  const box = cap.select(".minor");
-  if (!pausedOn && recent) {
-    if (box.empty()) cap.append("p").attr("class", "minor");
-    cap.select(".minor").text(`${Math.floor(recent.t)}: ${recent.minor}`);
-  }
+  if (pausedOn || tau >= T1) return;
+  const recent = minors.filter((e) => e.t <= tau && e.t > tau - 3).slice(-3).reverse();
+  let box = cap.select(".minors");
+  if (!recent.length) { box.remove(); return; }
+  if (box.empty()) box = cap.append("div").attr("class", "minors");
+  box.selectAll("p").data(recent, (e) => e.id).join("p").attr("class", (e, i) => `minor${i ? " older" : ""}`)
+    .text((e) => `${Math.floor(e.t)}: ${e.minor}`);
 }
 function showEnd() { cap.html(`<p class="when">${fmtMonth(D.last_date)}</p><h2>${D.text.end_headline}</h2><p>${D.text.end}</p>`); }
-function resume() { pausedOn = null; if (!playing) { playing = true; setPlayLabel(); } cap.html(""); }
+function resume() { pausedOn = null; playing = true; setPlayLabel(); cap.html(""); }
 setInterval(showMinor, 400);
 
 // ---------- controls ----------
@@ -357,10 +372,11 @@ function jump(t) {
   nextPause = pauses.findIndex((e) => e.tv + 0.04 > tau); if (nextPause < 0) nextPause = pauses.length;
   if (!playing) { playing = true; setPlayLabel(); }
 }
-function setPlayLabel() { d3.select("#play").text(playing ? "Pause" : "Play"); }
+function setPlayLabel() { d3.select("#play").text(playing && !pausedOn ? "Pause" : "Play"); }
 d3.select("#play").on("click", () => {
   if (tau >= T1) { jump(T0); showIntro(); return; }
-  playing = !playing; if (playing && pausedOn) resume(); setPlayLabel();
+  if (pausedOn) { resume(); return; }   // during a stop, the button means keep going
+  playing = !playing; setPlayLabel();
 });
 d3.select("#replay").on("click", () => { jump(T0); showIntro(); });
 document.addEventListener("keydown", (e) => { if (e.code === "Space" && e.target === document.body) { e.preventDefault(); d3.select("#play").dispatch("click"); } });
