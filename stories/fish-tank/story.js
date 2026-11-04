@@ -161,12 +161,12 @@ function frame(wall) {
   if (playing && !pausedOn) {
     tau = Math.min(T1, tau + dt / secPerYear(tau));
     const p = pauses[nextPause];
-    if (p && tau >= p.tv + 0.04) { pausedOn = p; pauseStarted = wall; nextPause++; showPause(p); setPlayLabel(); }
+    if (p && tau >= p.tv + 0.04) { pausedOn = p; pauseStarted = performance.now(); nextPause++; showPause(p); setPlayLabel(); }
     if (tau >= T1) { playing = false; setPlayLabel(); showEnd(); }
   }
   if (pausedOn) {
     const need = readSeconds(pausedOn) * 1000;
-    const prog = clamp((wall - pauseStarted) / need, 0, 1);
+    const prog = clamp((performance.now() - pauseStarted) / need, 0, 1);
     d3.select("#caption .resume i").style("width", `${prog * 100}%`);
     if (prog >= 1 && playing) resume();
   }
