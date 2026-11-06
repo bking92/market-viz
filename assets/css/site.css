@@ -81,10 +81,12 @@ a:hover { color: var(--brand); }
 .method th:first-child, .method td:first-child { text-align: left; }
 
 /* Home page index of stories */
-.index { max-width: 40rem; margin: 12vh auto; padding: 0 1.25rem; }
-.index h1 { font-weight: 600; font-size: 2.6rem; line-height: 1.1; margin: 0 0 1rem; display: flex; align-items: center; gap: 0.9rem; }
-.index h1 img { width: 3.2rem; height: 3.2rem; flex: none; }
-.index h1 i { font-weight: 400; }
+.index { max-width: 40rem; margin: 6vh auto 12vh; padding: 0 1.25rem; }
+/* Home page band: the full-colour wordmark, cream on cobalt. */
+.brand-band { background: var(--brand); color: var(--paper); padding: 9vh 1.25rem 8vh; }
+.brand-band h1 { max-width: 40rem; margin: 0 auto; font-weight: 600; font-size: clamp(1.6rem, 7vw, 3.4rem); white-space: nowrap; line-height: 1.05; display: flex; align-items: center; gap: 1rem; }
+.brand-band h1 img { width: 1.15em; height: 1.15em; flex: none; }
+.brand-band h1 i { font-weight: 400; }
 .story-link { display: block; border-top: 1px solid var(--rule); padding: 1.25rem 0; text-decoration: none; }
 .story-link h2 { font-weight: 600; font-size: 1.6rem; margin: 0 0 0.25rem; }
 .story-link:hover h2 { color: var(--brand); }
