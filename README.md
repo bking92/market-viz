@@ -1,4 +1,4 @@
-# Market Visualization site
+# Finance in Pictures site
 
 Static site, no build step. Open `index.html` through any static server, for example
 `python3 -m http.server` from this folder, then visit http://localhost:8000.
@@ -16,6 +16,7 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 ## Rules every story follows
 - Every number on the page comes from a file in `data/` that a pipeline script wrote. Nothing is typed in by hand.
 - Each story ends with "How this was made", sources, known gaps, and the underlying table.
+- Brand: treemap logo (`assets/img/logo.svg`, blocks sized by the five largest Nasdaq-100 market caps on Oct 30, 2026). Palette in `site.css`: cream paper `#f6f1e3`, ink `#14110f`, cobalt `--brand` `#1f3cff` for the masthead and main data series, tomato `--loss` `#ff4b23` for value that is gone, citron `#d7ff3c` as a rare highlight. Charts use the CSS variables, never hex codes.
 - Style: sentence-case serif headlines, prose carries the story, labels sit on the marks. No all-caps kicker labels, no stacked small subheads, no boxed caveat panels.
 
 ## Tech selloff: status (Nov 1, 2026)
