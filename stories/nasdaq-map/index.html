@@ -4,14 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>If the Nasdaq-100 were the lower 48</title>
+  <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="../../assets/css/site.css">
   <style>
     .scrolly figure.graphic { margin: 0; }
     .chart .patch { stroke: var(--paper); stroke-width: 0.7; vector-effect: non-scaling-stroke; }
-    .chart .kept { fill: #b9ae9c; transition: fill 400ms; }
+    .chart .kept { fill: var(--brand); transition: fill 400ms; }
     .chart .gone { fill: var(--loss); opacity: 0; transition: opacity 400ms; }
     .chart .lit .kept { fill: var(--ink); }
-    .chart .dim .kept { fill: #ddd5c7; }
+    .chart .dim .kept { fill: var(--brand-soft); }
     .chart .ghost { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
     .chart .state-ref { fill: none; stroke: var(--paper); stroke-width: 2.2; vector-effect: non-scaling-stroke; }
     .chart .state-ref-inner { fill: none; stroke: var(--ink); stroke-width: 1; stroke-dasharray: 4 3; vector-effect: non-scaling-stroke; }
@@ -24,13 +27,13 @@
     .pair { display: grid; grid-template-columns: 1fr; gap: 2rem; }
     @media (min-width: 900px) { .pair { grid-template-columns: 1fr 1fr; } }
     .chart .removed-state { fill: var(--loss); stroke: var(--paper); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-    .chart .after-patch { fill: #b9ae9c; }
+    .chart .after-patch { fill: var(--brand); }
     .explore p { max-width: var(--measure); margin: 0 auto 1rem; }
-    .loss-word { color: var(--loss); }
+    .loss-word { color: var(--loss-text); font-weight: 600; }
   </style>
 </head>
 <body>
-  <nav class="masthead"><a href="../../index.html">Market Visualization</a></nav>
+  <nav class="masthead"><a href="../../index.html"><span>Finance <i>in</i> Pictures</span></a></nav>
 
   <header class="lede">
     <h1>If the Nasdaq-100 were the lower 48</h1>

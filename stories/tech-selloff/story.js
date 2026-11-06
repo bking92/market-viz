@@ -138,7 +138,7 @@ const gNotes = svg.append("g");
 const clip = svg.append("clipPath").attr("id", "reveal").append("rect").attr("x", 0).attr("y", 0).attr("height", H).attr("width", 0);
 const lossArea = gLine.append("path").attr("fill", "var(--loss)").attr("opacity", 0).attr("clip-path", "url(#reveal)");
 const highLine = gLine.append("path").attr("fill", "none").attr("stroke", "var(--ink-soft)").attr("stroke-dasharray", "3 4").attr("stroke-width", 1).attr("opacity", 0).attr("clip-path", "url(#reveal)");
-const line = gLine.append("path").attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("clip-path", "url(#reveal)");
+const line = gLine.append("path").attr("fill", "none").attr("stroke", "var(--brand)").attr("stroke-width", 2).attr("stroke-linejoin", "round").attr("clip-path", "url(#reveal)");
 
 function drawAxes(mode, t) {
   gAxisX.transition(t).call(d3.axisBottom(x).ticks(narrow ? 3 : d3.timeMonth.every(1)).tickFormat(d3.timeFormat("%B")).tickSizeOuter(0));
@@ -173,7 +173,7 @@ function stepLevel(step) {
   clip.transition(t).attr("width", step === 0 ? x(peak.date) + 2 : W);
 
   gNotes.selectAll("*").remove();
-  gNotes.append("circle").attr("cx", x(peak.date)).attr("cy", yLevel(peak.close)).attr("r", 5).attr("fill", "var(--ink)").attr("stroke", "var(--paper)").attr("stroke-width", 2);
+  gNotes.append("circle").attr("cx", x(peak.date)).attr("cy", yLevel(peak.close)).attr("r", 5).attr("fill", "var(--brand)").attr("stroke", "var(--paper)").attr("stroke-width", 2);
   note(gNotes, "note-strong", x(peak.date), yLevel(peak.close) - 16, `${fmtLevel(peak.close)} on ${fmtShort(peak.date)}`, "end");
   if (step >= 1) {
     gNotes.append("circle").attr("cx", x(last.date)).attr("cy", yLevel(last.close)).attr("r", 5).attr("fill", "var(--loss)").attr("stroke", "var(--paper)").attr("stroke-width", 2);
@@ -253,7 +253,7 @@ function stepGrid(phase) {
     .transition().duration(900).delay((d, k) => (phase === 1 && d.lost ? (k % 50) * 6 : 0))
     .attr("x", (d, k) => xy[k][0]).attr("y", (d, k) => xy[k][1])
     .attr("width", phase < 2 ? s : Math.min(s, 12)).attr("height", phase < 2 ? s : Math.min(s, 12))
-    .attr("fill", (d) => (phase >= 1 && d.lost ? "var(--loss)" : "var(--ink)"))
+    .attr("fill", (d) => (phase >= 1 && d.lost ? "var(--loss)" : "var(--brand)"))
     .attr("opacity", (d) => (phase >= 2 && !d.lost ? 0 : phase === 1 && !d.lost ? 0.25 : 1));
 
   gGrid.selectAll("text.lbl").remove();
