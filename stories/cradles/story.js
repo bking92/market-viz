@@ -1,6 +1,6 @@
 // "How fast do companies make a buck?". Reads only ./data, which pipeline/build_cradles.py writes.
 import { scroller } from "../../assets/js/scroller.js";
-import { CradleScene, fmtInterval } from "./cradle.js";
+import { CradleScene, fmtInterval, fmtRate } from "./cradle.js";
 
 const d3 = window.d3;
 const [raw, meta, decadeRaw, pairRaw] = await Promise.all([
@@ -61,7 +61,6 @@ const pair = pairRaw.companies.map((c) => ({ ...byTicker.get(c.ticker), ...c, ti
   name: byTicker.get(c.ticker).name, note: `worth ${usdBig(c.market_value)}` }))
   .sort((a, b) => b.market_value - a.market_value);
 for (const p of pair) { p.interval = byTicker.get(p.ticker.split("~")[0]).interval; p.lossInterval = 0; }
-const moved = rows.filter((r) => r.listed_as === "losses" && r.group !== "losses");
 const fills = {
   "fastest": fastest.name,
   "fastest-interval": fmtInterval(fastest.interval),
@@ -70,16 +69,15 @@ const fills = {
   "fastest-unit": fmtInterval(every(fastest)),
   "giants-max": `${Math.ceil(d3.max(giants, every))} seconds`,
   "giants-note": `${giants[giants.length - 1].name}, the slowest of this group, strikes every ${fmtInterval(every(giants[giants.length - 1]))}.`,
-  "brands-note": `${brands[0].name} strikes every ${fmtInterval(every(brands[0]))}. ${lastBrand.name} strikes once every ${fmtInterval(every(lastBrand))}.`,
+  "last-brand": lastBrand.name,
   "slowest-unit": fmtInterval(every(slowest)),
   "slowest": slowest.name,
   "slowest-interval": fmtInterval(slowest.interval),
   "ratio": usd(1e6 * slowest.interval / fastest.interval),
   "loss-note": `${losers[0].name} lost ${usd(losers[0].net_income)}: $10,000 gone every ${fmtInterval(losers[0].lossInterval * UNIT / 1e6)}. ` +
-    `${list(losers.slice(1).map((r) => r.name))} lost money too.` +
-    (moved.length ? ` I expected ${list(moved.map((r) => r.name))} to be here as well, but ${moved.length > 1 ? "they" : "it"} made a profit over these twelve months, so ${moved.length > 1 ? "they swing" : "it swings"} with the rest.` : ""),
+    `${list(losers.slice(1).map((r) => r.name))} lost money too.`,
   "as-of": fmtDate(meta.as_of),
-  "decade-lead": `Here are the two that changed most and least since the twelve months to ${monthYear(speedups[0].t.period_end)}.`,
+  "decade-lead": "Here are the two that changed most and least over the last decade.",
   "decade-note": `${speedups[0].t.name} sped up the most: from one strike every ${fmtInterval(speedups[0].t.interval * UNIT / 1e6)} to one every ${fmtInterval(every(speedups[0].now))}, ${d3.format(",.0f")(speedups[0].x)} times as fast. ` +
     `${speedups[speedups.length - 1].t.name} changed the least, and still makes money ${d3.format(".1f")(speedups[speedups.length - 1].x)} times as fast: one strike every ${fmtInterval(speedups[speedups.length - 1].t.interval * UNIT / 1e6)} then, every ${fmtInterval(every(speedups[speedups.length - 1].now))} now. The table at the end has the rest of the top earners.`,
   "pair-a": pair[0].name, "pair-b": pair[1].name,
@@ -194,3 +192,60 @@ t2.append("tbody").selectAll("tr").data(decade).join("tr")
 
 d3.select("#pair-data").text(pairRaw.companies.map((c) =>
   `${byTicker.get(c.ticker).name}: ${d3.format(",")(c.shares)} shares outstanding as of ${fmtDate(c.shares_as_of)} (cover of its ${c.shares_form}, accession ${c.shares_accn}) × $${d3.format(",.2f")(c.close)} close on ${fmtDate(c.close_date)} = ${usdBig(c.market_value)}.`).join(" "));
+
+// ---------- try your own: any S&P 500 company, any dollars per strike ----------
+// Reads data/sp500.csv, which pipeline/build_cradles_sp500.py writes with the same method as the story.
+{
+  const [spRaw, spMeta] = await Promise.all([d3.csv("data/sp500.csv"), d3.json("data/sp500_meta.json")]);
+  const sp = spRaw.map((r) => {
+    const ps = +r.per_second, story = byTicker.get(r.ticker);
+    return { ...r, name: story ? story.name : (r.display_name || r.name), per_second: ps, net_income: +r.net_income, cik: +r.cik,
+      interval: ps > 0 ? 1e6 / ps : 0, lossInterval: ps < 0 ? 1e6 / -ps : 0, inStory: !!story };
+  }).sort((a, b) => d3.ascending(a.name, b.name));
+  const AMOUNTS = [];
+  for (let e = 0; e <= 7; e++) for (const m of [1, 2, 5]) if (m * 10 ** e <= 1e7) AMOUNTS.push(m * 10 ** e);
+  const amtLabel = (u) => (u >= 1e6 ? `$${u / 1e6} million` : `$${d3.format(",")(u)}`);
+  const key = (r) => `${r.name} (${r.ticker})`;
+  const byKey = new Map(sp.map((r) => [key(r).toLowerCase(), r]));
+  const byTk = new Map(sp.map((r) => [r.ticker.toLowerCase(), r]));
+  d3.select("#pick-list").selectAll("option").data(sp).join("option").attr("value", key);
+
+  const input = document.getElementById("pick-co"), range = document.getElementById("pick-amt");
+  range.max = String(AMOUNTS.length - 1);
+  range.value = String(AMOUNTS.indexOf(UNIT));
+  const stage = document.getElementById("pick-stage"), out = document.getElementById("pick-amt-out"), text = document.getElementById("pick-text");
+  const pickScene = new CradleScene(stage, sp, { unit: UNIT, maxR: 30,
+    onStrike: (it, n) => { if (n === 1 && pickScene.strikeEvery(it.d) > 0.25) tick(0.2); } });
+  let cur = sp.find((r) => r.ticker === "AAPL") || sp[0];
+  input.value = key(cur);
+
+  function render() {
+    const u = AMOUNTS[+range.value];
+    out.textContent = amtLabel(u);
+    range.setAttribute("aria-valuetext", amtLabel(u));
+    pickScene.setUnit(u);
+    pickScene.layout([cur.ticker], false, 1);
+    const sec = (cur.interval || cur.lossInterval) * u / 1e6;
+    const pace = sec < 1 ? `${fmtRate(1 / sec)} times a second` : `once every ${fmtInterval(sec)}`;
+    const window_ = `the twelve months to ${fmtDate(cur.period_end)}`;
+    text.innerHTML = cur.interval > 0
+      ? `${cur.name} made ${usd(cur.net_income)} in ${window_}. At ${amtLabel(u)} a strike, its cradle strikes <b>${pace}</b>.`
+      : `${cur.name} lost ${usd(cur.net_income)} in ${window_}, so its cradle is broken: it loses ${amtLabel(u)} ${pace}.`;
+  }
+  function choose() {
+    const v = input.value.trim().toLowerCase();
+    const r = byKey.get(v) || byTk.get(v) || (v.length > 2 && sp.find((x) => x.name.toLowerCase().startsWith(v)));
+    if (r) { cur = r; render(); input.blur(); }
+  }
+  input.addEventListener("change", choose);
+  input.addEventListener("input", () => { if (byKey.has(input.value.trim().toLowerCase())) choose(); });
+  input.addEventListener("focus", () => input.select());
+  range.addEventListener("input", render);
+  render();
+
+  const groups = d3.groups(Object.entries(spMeta.skipped_reason || {}), ([, why]) => why);
+  const nLeft = d3.sum(groups, ([, g]) => g.length);
+  d3.select("#sp500-note").text(
+    `The picker at the end covers ${sp.length} companies in the S&P 500, as listed in the holdings of the SPDR S&P 500 ETF Trust (SPY) on ${fmtDate(spMeta.holdings_as_of)}, with the same twelve-month net income method and checks as the rest of the story. ` +
+    (nLeft ? `${nLeft} are left out. ` + groups.map(([why, g]) => `${list(g.map(([t]) => t))}: ${why}.`).join(" ") + " The reasons are spelled out in sp500_log.txt." : ""));
+}

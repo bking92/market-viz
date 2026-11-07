@@ -172,14 +172,17 @@ function angles(u) {
   return (((k % 2) + 2) % 2 === 0) ? [0, a] : [-a, 0];
 }
 
-export function fmtUnit(u) { return u >= 1e6 ? `$${u / 1e6}M` : `$${u / 1e3}k`; }
+export function fmtUnit(u) { return u >= 1e6 ? `$${u / 1e6}M` : u >= 1e3 ? `$${u / 1e3}k` : `$${u}`; }
+
+export function fmtRate(n) { return n >= 100 ? Math.round(n).toLocaleString("en-US") : n >= 10 ? n.toFixed(0) : n.toFixed(1); }
 
 export function fmtInterval(s) {
   if (s < 10) return `${s.toFixed(1)} seconds`;
   if (s < 60) return `${s.toFixed(0)} seconds`;
   if (s < 3600) { const m = Math.floor(s / 60), x = Math.round(s - m * 60); return x === 60 ? `${m + 1} min` : `${m} min ${x} s`; }
   if (s < 86400) { const h = Math.floor(s / 3600), m = Math.round((s - h * 3600) / 60); return m === 60 ? `${h + 1} hr` : `${h} hr ${m} min`; }
-  return `${(s / 86400).toFixed(1)} days`;
+  if (s < 365.25 * 86400) return `${(s / 86400).toFixed(1)} days`;
+  return `${(s / 86400 / 365.25).toFixed(1)} years`;
 }
 
 
@@ -411,7 +414,9 @@ export class CradleScene {
   drawLabel(it) {
     const g = this.g, { x, y, r, a, d } = it;
     const amt = fmtUnit(this.unit), k = this.unit / 1e6;
-    const sub = d.interval > 0 ? `${amt} every ${fmtInterval(d.interval * k)}` : `lost ${amt} every ${fmtInterval(d.lossInterval * k)}`;
+    const sec = (d.interval > 0 ? d.interval : d.lossInterval) * k;
+    const pace = sec < 0.5 ? `, ${fmtRate(1 / sec)} times a second` : ` every ${fmtInterval(sec)}`;
+    const sub = d.interval > 0 ? `${amt}${pace}` : `lost ${amt}${pace}`;
     // shrink both lines together until they fit the cell
     let fs = it.labelSize || 14;
     const maxW = (it.cellW || 1e9) * 0.94;
