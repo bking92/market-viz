@@ -1,3 +1,12 @@
+// --vh: 1% of the viewport height, fixed at load and only updated when the width changes (rotation),
+// so an on-screen keyboard opening doesn't shrink every vh-sized gap and jump the page.
+{
+  let w = window.innerWidth;
+  const setVh = () => document.documentElement.style.setProperty("--vh", `${window.innerHeight / 100}px`);
+  setVh();
+  window.addEventListener("resize", () => { if (window.innerWidth !== w) { w = window.innerWidth; setVh(); } });
+}
+
 // Minimal scrollytelling driver shared by all stories.
 // Usage: scroller(document.querySelectorAll(".step"), (index, el) => render(index));
 // Fires when a step's middle crosses the middle of the viewport, in either direction.

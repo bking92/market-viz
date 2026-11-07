@@ -208,7 +208,6 @@ d3.select("#pair-data").text(pairRaw.companies.map((c) =>
   const key = (r) => `${r.name} (${r.ticker})`;
   const byKey = new Map(sp.map((r) => [key(r).toLowerCase(), r]));
   const byTk = new Map(sp.map((r) => [r.ticker.toLowerCase(), r]));
-  d3.select("#pick-list").selectAll("option").data(sp).join("option").attr("value", key);
 
   const input = document.getElementById("pick-co"), range = document.getElementById("pick-amt");
   range.max = String(AMOUNTS.length - 1);
@@ -236,14 +235,48 @@ d3.select("#pair-data").text(pairRaw.companies.map((c) =>
       ? `${cur.name} made ${usd(cur.net_income)} in ${window_}. At ${amtLabel(u)} a strike, its cradle strikes <b>${pace}</b>.`
       : `${cur.name} lost ${usd(cur.net_income)} in ${window_}, so its cradle is broken: it loses ${amtLabel(u)} ${pace}.`;
   }
-  function choose() {
-    const v = input.value.trim().toLowerCase();
-    const r = byKey.get(v) || byTk.get(v) || (v.length > 2 && sp.find((x) => x.name.toLowerCase().startsWith(v)));
-    if (r) { cur = r; render(); input.blur(); }
+  // suggestions: tickers that start with what was typed first, then names that contain it
+  const listEl = document.getElementById("pick-list");
+  let matches = [], hi = -1;
+  function search(v) {
+    v = v.trim().toLowerCase();
+    if (!v) return [];
+    const tk = sp.filter((r) => r.ticker.toLowerCase().startsWith(v)).sort((a, b) => a.ticker.length - b.ticker.length);
+    const nm = sp.filter((r) => !tk.includes(r) && r.name.toLowerCase().split(/[\s.,&'-]+/).some((w) => w.startsWith(v)));
+    nm.sort((a, b) => b.name.toLowerCase().startsWith(v) - a.name.toLowerCase().startsWith(v));
+    const any = sp.filter((r) => !tk.includes(r) && !nm.includes(r) && r.name.toLowerCase().includes(v));
+    return [...tk, ...nm, ...any].slice(0, 6);
   }
-  input.addEventListener("change", choose);
-  input.addEventListener("input", () => { if (byKey.has(input.value.trim().toLowerCase())) choose(); });
-  input.addEventListener("focus", () => input.select());
+  function showList() {
+    listEl.replaceChildren(...matches.map((r, i) => {
+      const li = document.createElement("li");
+      li.setAttribute("role", "option"); li.id = `pick-opt-${i}`; li.setAttribute("aria-selected", String(i === hi));
+      li.append(r.name); const t = document.createElement("span"); t.textContent = r.ticker; li.append(t);
+      li.addEventListener("pointerdown", (e) => { e.preventDefault(); pickRow(r); });
+      return li;
+    }));
+    listEl.hidden = !matches.length;
+    input.setAttribute("aria-expanded", String(matches.length > 0));
+    if (hi >= 0) input.setAttribute("aria-activedescendant", `pick-opt-${hi}`); else input.removeAttribute("aria-activedescendant");
+  }
+  function hideList() { matches = []; hi = -1; showList(); }
+  function pickRow(r) { cur = r; input.value = key(r); hideList(); render(); input.blur(); }
+  input.addEventListener("input", () => {
+    matches = search(input.value); hi = matches.length ? 0 : -1; showList();
+    // on a phone the keyboard covers the lower half: once, move the box near the top so the list shows
+    const box = input.getBoundingClientRect();
+    if (matches.length && window.visualViewport && box.bottom + 160 > visualViewport.height) {
+      window.scrollBy({ top: box.top - 70, behavior: "smooth" });
+    }
+  });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown" && matches.length) { hi = (hi + 1) % matches.length; showList(); e.preventDefault(); }
+    else if (e.key === "ArrowUp" && matches.length) { hi = (hi - 1 + matches.length) % matches.length; showList(); e.preventDefault(); }
+    else if (e.key === "Enter") { const r = matches[hi] || byKey.get(input.value.trim().toLowerCase()) || byTk.get(input.value.trim().toLowerCase()); if (r) pickRow(r); e.preventDefault(); }
+    else if (e.key === "Escape") { hideList(); input.value = key(cur); }
+  });
+  input.addEventListener("focus", () => { input.select(); });
+  input.addEventListener("blur", () => { setTimeout(() => { hideList(); if (!input.value.trim()) input.value = key(cur); }, 150); });
   range.addEventListener("input", render);
   render();
   if (shared || location.hash === "#pick") requestAnimationFrame(() => document.getElementById("pick").scrollIntoView());
@@ -255,16 +288,29 @@ d3.select("#pair-data").text(pairRaw.companies.map((c) =>
     const sec = (cur.interval || cur.lossInterval) * u / 1e6;
     const pace = sec < 1 ? `${fmtRate(1 / sec)} times a second` : `once every ${fmtInterval(sec)}`;
     const text = cur.interval > 0 ? `${cur.name} makes ${amtLabel(u)} ${pace}.` : `${cur.name} loses ${amtLabel(u)} ${pace}.`;
-    try {
-      if (navigator.share && matchMedia("(pointer: coarse)").matches) { await navigator.share({ title: document.title, text, url }); return; }
-      await navigator.clipboard.writeText(url);
-      shareNote.textContent = "Link copied.";
-    } catch (e) {
-      if (e && e.name === "AbortError") return;
-      shareNote.textContent = url;
+    // 1) the phone's share sheet where there is one; 2) the clipboard; 3) show the link to copy by hand
+    if (navigator.share) {
+      try { await navigator.share({ title: document.title, text, url }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
     }
-    setTimeout(() => { if (shareNote.textContent === "Link copied.") shareNote.textContent = ""; }, 4000);
+    const copied = await copyText(url);
+    shareNote.replaceChildren(copied ? "Link copied: " : "Your link: ");
+    const a = document.createElement("a"); a.href = url; a.textContent = url; shareNote.append(a);
   });
+  async function copyText(t) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await Promise.race([navigator.clipboard.writeText(t), new Promise((_, no) => setTimeout(() => no(new Error("timeout")), 1500))]);
+        return true;
+      }
+    } catch (e) { /* fall through to the old way */ }
+    const ta = document.createElement("textarea");
+    ta.value = t; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+    document.body.append(ta); ta.select(); ta.setSelectionRange(0, t.length);
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    ta.remove();
+    return ok;
+  }
   for (const el of [input, range]) el.addEventListener("input", () => { shareNote.textContent = ""; });
 
   const groups = d3.groups(Object.entries(spMeta.skipped_reason || {}), ([, why]) => why);
