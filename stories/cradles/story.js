@@ -28,7 +28,9 @@ const usd = (v) => {
 };
 const fmtDate = (s) => d3.timeFormat("%b %-d, %Y")(d3.timeParse("%Y-%m-%d")(s));
 const list = (a) => (a.length < 2 ? a.join("") : `${a.slice(0, -1).join(", ")} and ${a[a.length - 1]}`);
-const perSecAt = (r, speed) => speed / r.interval;
+const UNIT = 1e5; // dollars per strike after the first step
+const every = (r) => r.interval * UNIT / 1e6; // seconds between $100k strikes
+const perSecAt = (r, speed) => speed / every(r);
 
 const lastBrand = brands[brands.length - 1];
 const moved = rows.filter((r) => r.listed_as === "losses" && r.group !== "losses");
@@ -37,13 +39,15 @@ const fills = {
   "fastest-interval": fmtInterval(fastest.interval),
   "fastest-rate": `$${d3.format(",.0f")(fastest.per_second)}`,
   "giants-n": String(giants.length),
-  "giants-max": `${Math.ceil(d3.max(giants, (r) => r.interval) / 60)} minutes`,
-  "giants-note": `${giants[0].name} strikes every ${fmtInterval(giants[0].interval)}, so here about every ${d3.format(".1f")(giants[0].interval / 60)} seconds. ${giants[giants.length - 1].name}, the slowest of this group, takes ${fmtInterval(giants[giants.length - 1].interval)}.`,
-  "brands-note": `${brands[0].name} takes ${fmtInterval(brands[0].interval)} for each million. ${lastBrand.name} needs ${fmtInterval(lastBrand.interval)}, so even sped up 60 times its cradle strikes only once every ${fmtInterval(lastBrand.interval / 60)}.`,
+  "fastest-100k": fmtInterval(every(fastest)),
+  "giants-max": `${Math.ceil(d3.max(giants, every) / 10) * 10} seconds`,
+  "giants-note": `${giants[giants.length - 1].name}, the slowest of this group, strikes every ${fmtInterval(every(giants[giants.length - 1]))}.`,
+  "brands-note": `${brands[0].name} strikes every ${fmtInterval(every(brands[0]))}. ${lastBrand.name} strikes once every ${fmtInterval(every(lastBrand))}.`,
+  "slowest-100k": fmtInterval(every(slowest)),
   "fastest-hour": d3.format(".0f")(perSecAt(fastest, 3600)),
   "slowest": slowest.name,
   "slowest-interval": fmtInterval(slowest.interval),
-  "slowest-hour": fmtInterval(slowest.interval / 3600),
+  "slowest-hour": fmtInterval(every(slowest) / 3600),
   "ratio": usd(1e6 * slowest.interval / fastest.interval),
   "loss-note": `${losers[0].name} lost ${usd(losers[0].net_income)}: a million dollars gone every ${fmtInterval(losers[0].lossInterval)}. ` +
     `${list(losers.slice(1).map((r) => r.name))} lost money too.` +
@@ -82,28 +86,30 @@ soundBtn.addEventListener("click", () => {
   soundBtn.setAttribute("aria-pressed", String(soundOn));
 });
 // only cradles striking slower than a few times a second click audibly
-const onStrike = (it, n) => { if (n === 1 && it.d.interval / scene.speed > 0.25) tick(); };
+const onStrike = (it, n) => { if (n === 1 && scene.strikeEvery(it.d) / scene.speed > 0.25) tick(); };
 
 // ---------- the scrolly stage ----------
 const scene = new CradleScene(document.getElementById("stage"), rows, { onStrike, maxR: 30 });
 const clock = document.getElementById("clock");
-const speedText = { 1: "Real time", 60: "Each second here is <b>one minute</b>", 3600: "Each second here is <b>one hour</b>", 86400: "Each second here is <b>one day</b>" };
+const speedText = { 1: "Real time", 3600: "Each second here is <b>one hour</b>", 86400: "Each second here is <b>one day</b>" };
+const unitText = (u) => (u >= 1e6 ? "each strike is <b>$1 million</b>" : "each strike is <b>$100,000</b>");
 const tk = (a) => a.map((r) => r.ticker);
 const STEPS = [
-  { show: [fastest.ticker], speed: 1 },
-  { show: [fastest.ticker], speed: 60 },
-  { show: tk(giants), speed: 60 },
-  { show: tk(brands), speed: 60 },
-  { show: tk([...giants, ...brands]), speed: 3600 },
-  { show: tk(small), speed: 3600 },
-  { show: tk(small), speed: 86400 },
-  { show: tk(losers), speed: 86400 },
+  { show: [fastest.ticker], speed: 1, unit: 1e6 },
+  { show: [fastest.ticker], speed: 1, unit: UNIT },
+  { show: tk(giants), speed: 1, unit: UNIT },
+  { show: tk(brands), speed: 1, unit: UNIT },
+  { show: tk([...giants, ...brands]), speed: 3600, unit: UNIT },
+  { show: tk(small), speed: 3600, unit: UNIT },
+  { show: tk(small), speed: 86400, unit: UNIT },
+  { show: tk(losers), speed: 86400, unit: UNIT },
 ];
 function go(i) {
   const s = STEPS[Math.max(0, Math.min(i, STEPS.length - 1))];
   scene.layout(s.show);
   scene.setSpeed(s.speed);
-  clock.innerHTML = speedText[s.speed];
+  scene.setUnit(s.unit);
+  clock.innerHTML = `${speedText[s.speed]}, ${unitText(s.unit)}`;
 }
 go(0);
 scene.setSpeed(1, true);
@@ -121,7 +127,7 @@ function sizeAll() {
   return cols;
 }
 sizeAll();
-const explore = new CradleScene(all, rows, { onStrike: (it, n) => { if (n === 1 && it.d.interval / explore.speed > 0.25) tick(0.12); } });
+const explore = new CradleScene(all, rows, { unit: UNIT, onStrike: (it, n) => { if (n === 1 && explore.strikeEvery(it.d) / explore.speed > 0.25) tick(0.12); } });
 explore.layout(tk(order), true);
 explore.setSpeed(3600, true);
 window.addEventListener("resize", () => { sizeAll(); });

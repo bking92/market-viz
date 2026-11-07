@@ -172,10 +172,13 @@ function angles(u) {
   return (((k % 2) + 2) % 2 === 0) ? [0, a] : [-a, 0];
 }
 
+export function fmtUnit(u) { return u >= 1e6 ? `$${u / 1e6}M` : `$${u / 1e3}k`; }
+
 export function fmtInterval(s) {
+  if (s < 10) return `${s.toFixed(1)} seconds`;
   if (s < 60) return `${s.toFixed(0)} seconds`;
   if (s < 3600) { const m = Math.floor(s / 60), x = Math.round(s - m * 60); return x === 60 ? `${m + 1} min` : `${m} min ${x} s`; }
-  if (s < 86400 * 2) { const h = Math.floor(s / 3600), m = Math.round((s - h * 3600) / 60); return m === 60 ? `${h + 1} hr` : `${h} hr ${m} min`; }
+  if (s < 86400) { const h = Math.floor(s / 3600), m = Math.round((s - h * 3600) / 60); return m === 60 ? `${h + 1} hr` : `${h} hr ${m} min`; }
   return `${(s / 86400).toFixed(1)} days`;
 }
 
@@ -190,6 +193,8 @@ export class CradleScene {
     this.maxR = opts.maxR || 26;
     this.label = opts.label !== false;
     this.offset = 0.5; // every cradle starts with its ball pulled back, released together
+    this.unit = opts.unit || 1e6; // dollars of profit per strike
+    for (const it of this.items) it.u = this.offset;
     this.resize();
     new ResizeObserver(() => { this.resize(); this.layout(this.visible || [], true); }).observe(canvas);
     this.last = performance.now();
@@ -230,7 +235,9 @@ export class CradleScene {
       if (instant) it.a = 1;
     }
   }
-  phase(it) { return this.sim / it.d.interval + this.offset; }
+  setUnit(u) { this.unit = u; }
+  // real seconds between strikes for this cradle at the current dollars-per-strike
+  strikeEvery(d) { return d.interval * this.unit / 1e6; }
   frame(t) {
     const dt = Math.min(0.1, (t - this.last) / 1000); this.last = t;
     const k = 1 - Math.exp(-dt / 0.45);
@@ -245,6 +252,7 @@ export class CradleScene {
     for (const it of this.items) {
       it.x += (it.tx - it.x) * kp; it.y += (it.ty - it.y) * kp; it.r += (it.tr - it.r) * kp;
       it.a += (it.ta - it.a) * (1 - Math.exp(-dt / 0.25));
+      if (it.d.interval > 0) it.u += dt * (prevSpeed + this.speed) / 2 / this.strikeEvery(it.d);
       if (it.a < 0.01) continue;
       this.drawCradle(it, dt);
     }
@@ -257,7 +265,7 @@ export class CradleScene {
     let samples = [[0, 0]]; // list of [left angle, right angle]
     let smear = false;
     if (moving) {
-      const u = this.phase(it), du = shutter * this.speed / d.interval;
+      const u = it.u, du = shutter * this.speed / this.strikeEvery(d);
       if (du > 1.5) {
         // many strikes per frame: draw where the ball spends its time, evenly over one full cycle
         smear = true; samples = [];
@@ -293,7 +301,8 @@ export class CradleScene {
   }
   drawLabel(it) {
     const g = this.g, { x, y, r, a, d } = it;
-    const sub = d.interval > 0 ? `$1M every ${fmtInterval(d.interval)}` : `lost $1M every ${fmtInterval(d.lossInterval)}`;
+    const amt = fmtUnit(this.unit), k = this.unit / 1e6;
+    const sub = d.interval > 0 ? `${amt} every ${fmtInterval(d.interval * k)}` : `lost ${amt} every ${fmtInterval(d.lossInterval * k)}`;
     // shrink both lines together until they fit the cell
     let fs = it.labelSize || 14;
     const maxW = (it.cellW || 1e9) * 0.94;
