@@ -216,8 +216,12 @@ d3.select("#pair-data").text(pairRaw.companies.map((c) =>
   const stage = document.getElementById("pick-stage"), out = document.getElementById("pick-amt-out"), text = document.getElementById("pick-text");
   const pickScene = new CradleScene(stage, sp, { unit: UNIT, maxR: 30,
     onStrike: (it, n) => { if (n === 1 && pickScene.strikeEvery(it.d) > 0.25) tick(0.2); } });
-  let cur = sp.find((r) => r.ticker === "AAPL") || sp[0];
+  // a shared link carries ?co=TICKER&each=DOLLARS#pick
+  const q = new URLSearchParams(location.search);
+  const shared = q.get("co") && byTk.get(q.get("co").toLowerCase());
+  let cur = shared || sp.find((r) => r.ticker === "AAPL") || sp[0];
   input.value = key(cur);
+  if (q.get("each") && AMOUNTS.includes(+q.get("each"))) range.value = String(AMOUNTS.indexOf(+q.get("each")));
 
   function render() {
     const u = AMOUNTS[+range.value];
@@ -242,6 +246,26 @@ d3.select("#pair-data").text(pairRaw.companies.map((c) =>
   input.addEventListener("focus", () => input.select());
   range.addEventListener("input", render);
   render();
+  if (shared || location.hash === "#pick") requestAnimationFrame(() => document.getElementById("pick").scrollIntoView());
+
+  const shareBtn = document.getElementById("pick-share"), shareNote = document.getElementById("pick-share-note");
+  shareBtn.addEventListener("click", async () => {
+    const u = AMOUNTS[+range.value];
+    const url = `${location.origin}${location.pathname}?co=${encodeURIComponent(cur.ticker)}&each=${u}#pick`;
+    const sec = (cur.interval || cur.lossInterval) * u / 1e6;
+    const pace = sec < 1 ? `${fmtRate(1 / sec)} times a second` : `once every ${fmtInterval(sec)}`;
+    const text = cur.interval > 0 ? `${cur.name} makes ${amtLabel(u)} ${pace}.` : `${cur.name} loses ${amtLabel(u)} ${pace}.`;
+    try {
+      if (navigator.share && matchMedia("(pointer: coarse)").matches) { await navigator.share({ title: document.title, text, url }); return; }
+      await navigator.clipboard.writeText(url);
+      shareNote.textContent = "Link copied.";
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+      shareNote.textContent = url;
+    }
+    setTimeout(() => { if (shareNote.textContent === "Link copied.") shareNote.textContent = ""; }, 4000);
+  });
+  for (const el of [input, range]) el.addEventListener("input", () => { shareNote.textContent = ""; });
 
   const groups = d3.groups(Object.entries(spMeta.skipped_reason || {}), ([, why]) => why);
   const nLeft = d3.sum(groups, ([, g]) => g.length);

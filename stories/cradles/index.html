@@ -30,6 +30,10 @@
     .pick .ends { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-soft); }
     #pick-stage { display: block; width: 100%; height: 400px; }
     #pick-text { font-size: 1.15rem; min-height: 3.2em; }
+    .pick .share { font-family: var(--label); font-size: 0.95rem; margin-top: 0.25rem; }
+    #pick-share { font: 600 0.95rem var(--label); color: var(--paper); background: var(--brand); border: 0; border-radius: 0; padding: 0.55rem 0.9rem; cursor: pointer; }
+    #pick-share:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+    #pick-share-note { color: var(--ink-soft); margin-left: 0.5rem; word-break: break-all; }
     @media (max-width: 640px) { .pick .controls { grid-template-columns: 1fr; } #pick-stage { height: 320px; } }
     #all { width: 100%; display: block; }
     .sound { position: absolute; right: 1rem; bottom: 1rem; font-family: var(--label); font-size: 0.85rem; background: none; border: 0; color: var(--ink-soft); cursor: pointer; pointer-events: auto; text-decoration: underline; text-underline-offset: 3px; }
@@ -87,6 +91,7 @@
     </div>
     <canvas id="pick-stage" role="img" aria-label="The chosen company's cradle"></canvas>
     <p id="pick-text" aria-live="polite"></p>
+    <p class="share"><button id="pick-share" type="button">Share this cradle</button> <span id="pick-share-note" aria-live="polite"></span></p>
   </section>
 
   <section class="method" id="method">
