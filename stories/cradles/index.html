@@ -45,14 +45,14 @@
     <div class="steps">
       <div class="step"><p>This is a Newton's cradle. Each time a ball strikes, <b data-fill="fastest">…</b> has made another $1 million of profit.</p>
         <p>It's running at real speed: one strike every <b data-fill="fastest-interval">…</b>. That's <span data-fill="fastest-rate">…</span> a second, around the clock, for a whole year.</p></div>
-      <div class="step"><p>That's slow to watch, so let's cut the million into ten. From here on, each strike is <b>$100,000</b>. The clock still runs at real speed, and <span data-fill="fastest">…</span> now strikes every <b data-fill="fastest-100k">…</b>.</p></div>
-      <div class="step"><p>Here are the biggest earners on the list, still in real time. All <span data-fill="giants-n">…</span> of them make $100,000 in under <b data-fill="giants-max">…</b>.</p>
+      <div class="step"><p>That's slow to watch, so let's cut the million into a hundred pieces. From here on, each strike is <b>$10,000</b>. The clock still runs at real speed, and <span data-fill="fastest">…</span> now strikes every <b data-fill="fastest-unit">…</b>.</p></div>
+      <div class="step"><p>Here are the biggest earners on the list, still in real time. All <span data-fill="giants-n">…</span> of them make $10,000 in under <b data-fill="giants-max">…</b>.</p>
         <p data-fill="giants-note">…</p></div>
-      <div class="step"><p>Now some names everyone knows. Even at $100,000 a strike, most of them barely move.</p>
+      <div class="step"><p>Now some names everyone knows. Even at $10,000 a strike, the slower ones barely move.</p>
         <p data-fill="brands-note">…</p></div>
-      <div class="step"><p>So now speed up the clock, to an hour a second. The brands come alive, and the giants turn into a blur: <span data-fill="fastest">…</span> now strikes <b data-fill="fastest-hour">…</b> times a second.</p></div>
-      <div class="step"><p>Then there are the small, particular companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-interval">…</b> to make a million, or <span data-fill="slowest-100k">…</span> for each $100,000. Even at an hour a second, its cradle strikes once every <span data-fill="slowest-hour">…</span>.</p></div>
-      <div class="step"><p>At a day a second, they finally swing. In the time <span data-fill="slowest">…</span> takes to make a million, <span data-fill="fastest">…</span> makes <b data-fill="ratio">…</b>.</p></div>
+      <div class="step"><p>So now speed up the clock, to an hour a second. Almost every cradle here turns into a blur: <span data-fill="fastest">…</span> now strikes <b data-fill="fastest-hour">…</b> times a second.</p></div>
+      <div class="step"><p>Then there are the small, particular companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-interval">…</b> to make a million, or <span data-fill="slowest-unit">…</span> for each $10,000. Speed the clock to an hour a second and its cradle finally strikes, once every <span data-fill="slowest-hour">…</span>.</p></div>
+      <div class="step"><p>At a day a second, all of them are swinging hard. In the time <span data-fill="slowest">…</span> takes to make a million, <span data-fill="fastest">…</span> makes <b data-fill="ratio">…</b>.</p></div>
       <div class="step"><p>Some cradles never strike. These companies lost money over the same twelve months.</p>
         <p data-fill="loss-note">…</p></div>
     </div>
@@ -60,7 +60,7 @@
 
   <section class="explore" id="explore">
     <h2>All of them at once</h2>
-    <p>Every company in the story, fastest first. Each strike is $100,000. Pick a speed.</p>
+    <p>Every company in the story, fastest first. Each strike is $10,000. Pick a speed.</p>
     <div class="speeds" role="group" aria-label="Clock speed">
       <button type="button" data-speed="1">Real time</button>
       <button type="button" data-speed="3600" aria-pressed="true">An hour a second</button>
@@ -73,7 +73,7 @@
     <h2>How this was made</h2>
     <p>Profit here is net income attributable to the company's shareholders (the XBRL tag <code>us-gaap:NetIncomeLoss</code>), as reported in each company's own 10-K and 10-Q filings with the SEC. For each company I take the latest twelve months it has reported: the last full fiscal year, plus this year to date, minus the same period a year earlier. Where the latest report is the annual report, that year is used as is. Each total is checked against the sum of the four quarters the filings give, and the build stops if they disagree.</p>
     <p>Time to make a million is <code>$1,000,000 ÷ (net income ÷ seconds in those twelve months)</code>. The twelve months are counted by their real length, since some fiscal years run 52 or 53 weeks. Net income is earned unevenly, of course: this is the average pace, as if it ticked in steadily day and night.</p>
-    <p>Each cradle strikes once per $1 million in the first step and once per $100,000 after that. The line above the cradles always says which, and how fast the clock is running: the time between strikes on screen is the number in each label divided by that speed. The balls swing like a pendulum. At high speeds they are drawn with motion blur, and when a cradle strikes many times within one frame it is drawn as a smear of where its balls spend their time.</p>
+    <p>Each cradle strikes once per $1 million in the first step and once per $10,000 after that. The line above the cradles always says which, and how fast the clock is running: the time between strikes on screen is the number in each label divided by that speed. The balls swing like a pendulum. At high speeds they are drawn with motion blur, and when a cradle strikes many times within one frame it is drawn as a smear of where its balls spend their time.</p>
     <p>Fiscal years differ, so the twelve-month windows don't all end on the same date. The table at the end gives each company's window. Data was pulled from SEC EDGAR on <span data-fill="as-of">…</span>, using filings made by that day. All figures are computed by <code>pipeline/build_cradles.py</code>, which writes the CSV this page reads. Nothing is typed in by hand.</p>
 
     <h2>Sources</h2>

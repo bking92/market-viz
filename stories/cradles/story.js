@@ -28,8 +28,8 @@ const usd = (v) => {
 };
 const fmtDate = (s) => d3.timeFormat("%b %-d, %Y")(d3.timeParse("%Y-%m-%d")(s));
 const list = (a) => (a.length < 2 ? a.join("") : `${a.slice(0, -1).join(", ")} and ${a[a.length - 1]}`);
-const UNIT = 1e5; // dollars per strike after the first step
-const every = (r) => r.interval * UNIT / 1e6; // seconds between $100k strikes
+const UNIT = 1e4; // dollars per strike after the first step
+const every = (r) => r.interval * UNIT / 1e6; // seconds between $10k strikes
 const perSecAt = (r, speed) => speed / every(r);
 
 const lastBrand = brands[brands.length - 1];
@@ -39,12 +39,12 @@ const fills = {
   "fastest-interval": fmtInterval(fastest.interval),
   "fastest-rate": `$${d3.format(",.0f")(fastest.per_second)}`,
   "giants-n": String(giants.length),
-  "fastest-100k": fmtInterval(every(fastest)),
-  "giants-max": `${Math.ceil(d3.max(giants, every) / 10) * 10} seconds`,
+  "fastest-unit": fmtInterval(every(fastest)),
+  "giants-max": `${Math.ceil(d3.max(giants, every))} seconds`,
   "giants-note": `${giants[giants.length - 1].name}, the slowest of this group, strikes every ${fmtInterval(every(giants[giants.length - 1]))}.`,
   "brands-note": `${brands[0].name} strikes every ${fmtInterval(every(brands[0]))}. ${lastBrand.name} strikes once every ${fmtInterval(every(lastBrand))}.`,
-  "slowest-100k": fmtInterval(every(slowest)),
-  "fastest-hour": d3.format(".0f")(perSecAt(fastest, 3600)),
+  "slowest-unit": fmtInterval(every(slowest)),
+  "fastest-hour": d3.format(",.0f")(perSecAt(fastest, 3600)),
   "slowest": slowest.name,
   "slowest-interval": fmtInterval(slowest.interval),
   "slowest-hour": fmtInterval(every(slowest) / 3600),
@@ -92,7 +92,7 @@ const onStrike = (it, n) => { if (n === 1 && scene.strikeEvery(it.d) / scene.spe
 const scene = new CradleScene(document.getElementById("stage"), rows, { onStrike, maxR: 30 });
 const clock = document.getElementById("clock");
 const speedText = { 1: "Real time", 3600: "Each second here is <b>one hour</b>", 86400: "Each second here is <b>one day</b>" };
-const unitText = (u) => (u >= 1e6 ? "each strike is <b>$1 million</b>" : "each strike is <b>$100,000</b>");
+const unitText = (u) => (u >= 1e6 ? "each strike is <b>$1 million</b>" : "each strike is <b>$10,000</b>");
 const tk = (a) => a.map((r) => r.ticker);
 const STEPS = [
   { show: [fastest.ticker], speed: 1, unit: 1e6 },
