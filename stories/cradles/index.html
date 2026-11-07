@@ -19,6 +19,18 @@
     .explore { max-width: 72rem; margin: 6vh auto 0; padding: 0 1.25rem; }
     .explore h2 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.5rem; max-width: var(--measure); }
     .explore > p { max-width: var(--measure); margin: 0 0 1rem; }
+    .pick { max-width: var(--measure); margin: 12vh auto 0; padding: 0 1.25rem; }
+    .pick h2 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.5rem; }
+    .pick .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; margin: 1.25rem 0 0.5rem; font-family: var(--label); font-size: 0.95rem; }
+    .pick label { display: flex; flex-direction: column; gap: 0.4rem; }
+    .pick label b { color: var(--brand); font-weight: 700; }
+    .pick input[list] { font: 500 1.05rem var(--label); padding: 0.45rem 0.6rem; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0; }
+    .pick input[list]:focus { outline: none; border-color: var(--brand); }
+    .pick input[type=range] { width: 100%; accent-color: var(--brand); margin: 0.35rem 0 0; }
+    .pick .ends { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-soft); }
+    #pick-stage { display: block; width: 100%; height: 400px; }
+    #pick-text { font-size: 1.15rem; min-height: 3.2em; }
+    @media (max-width: 640px) { .pick .controls { grid-template-columns: 1fr; } #pick-stage { height: 320px; } }
     #all { width: 100%; display: block; }
     .sound { position: absolute; right: 1rem; bottom: 1rem; font-family: var(--label); font-size: 0.85rem; background: none; border: 0; color: var(--ink-soft); cursor: pointer; pointer-events: auto; text-decoration: underline; text-underline-offset: 3px; }
   </style>
@@ -45,12 +57,10 @@
         <p data-fill="giants-note">…</p></div>
       <div class="step"><p>Ten years ago, they were much slower. <span data-fill="decade-lead">…</span></p>
         <p data-fill="decade-note">…</p></div>
-      <div class="step"><p>Now some names everyone knows. Even at $10,000 a strike, the slower ones barely move.</p>
-        <p data-fill="brands-note">…</p></div>
+      <div class="step"><p>Now some names everyone knows. You’ll have to look carefully to tell that the <span data-fill="last-brand">…</span> cradle is moving.</p></div>
       <div class="step"><p><b data-fill="pair-a">…</b> and <b data-fill="pair-b">…</b> make money at almost exactly the same pace. <span data-fill="pair-pace">…</span></p>
         <p data-fill="pair-values">…</p></div>
-      <div class="step"><p>Then there are the small, particular companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-interval">…</b> to make a million, or <span data-fill="slowest-unit">…</span> for each $10,000. Its cradle barely moves.</p>
-        <p>In the time <span data-fill="slowest">…</span> takes to make a million, <span data-fill="fastest">…</span> makes <b data-fill="ratio">…</b>.</p></div>
+      <div class="step"><p>Then there are the smaller companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-unit">…</b> to earn $10,000. Its cradle barely moves.</p></div>
       <div class="step"><p>Some cradles are broken. These companies lost money over the same twelve months.</p>
         <p data-fill="loss-note">…</p></div>
     </div>
@@ -58,8 +68,25 @@
 
   <section class="explore" id="explore">
     <h2>All of them at once</h2>
-    <p>Every company in the story, fastest first, in real time. Each strike is $10,000.</p>
+    <p>Every company in the story, fastest to slowest, in real time.</p>
     <canvas id="all" role="img" aria-label="All the companies' cradles in a grid"></canvas>
+  </section>
+
+  <section class="pick" id="pick">
+    <h2>Try your own</h2>
+    <p>Pick any company in the S&amp;P 500 and how much profit each strike stands for.</p>
+    <div class="controls">
+      <label>Company
+        <input id="pick-co" list="pick-list" autocomplete="off" spellcheck="false" placeholder="Type a name or ticker">
+        <datalist id="pick-list"></datalist>
+      </label>
+      <label>Each strike is <b id="pick-amt-out">…</b>
+        <input id="pick-amt" type="range" min="0" max="21" step="1" value="9" aria-describedby="pick-amt-out">
+        <span class="ends"><span>$1</span><span>$10 million</span></span>
+      </label>
+    </div>
+    <canvas id="pick-stage" role="img" aria-label="The chosen company's cradle"></canvas>
+    <p id="pick-text" aria-live="polite"></p>
   </section>
 
   <section class="method" id="method">
@@ -69,6 +96,7 @@
     <p>Each cradle strikes once per $10,000 of profit. Every cradle runs in real time, so the time between strikes on screen is the number in its label. The balls swing like a pendulum, and fast ones are drawn with motion blur.</p>
     <p>Fiscal years differ, so the twelve-month windows don't all end on the same date. The table at the end gives each company's window. Data was pulled from SEC EDGAR on <span data-fill="as-of">…</span>, using filings made by that day. All figures are computed by <code>pipeline/build_cradles.py</code>, which writes the CSV this page reads. Nothing is typed in by hand.</p>
 
+    <p id="sp500-note"></p>
     <p>Ten years ago: the same calculation for the twelve months ending ten years before each company's latest window, using figures as first reported at the time (later restatements, such as new accounting rules applied to old years, are ignored so that annual and quarterly figures match). Market value, used only for the two companies compared in the middle of the story, is shares outstanding from the cover of each company's latest 10-Q times its last closing price before the data was pulled.</p>
 
     <h2>Sources</h2>
@@ -76,6 +104,7 @@
       <li>Net income: SEC EDGAR <a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">XBRL company facts API</a> (data.sec.gov), from each company's 10-K and 10-Q filings. Accession numbers for every figure are in the table below, and the full arithmetic is in <a href="data/build_log.txt">build_log.txt</a>.</li>
       <li>Closing prices for the market-value comparison: Yahoo Finance daily chart data.</li>
       <li>Company identifiers: SEC's <a href="https://www.sec.gov/files/company_tickers.json">ticker-to-CIK list</a>.</li>
+      <li>S&amp;P 500 membership for the picker: <a href="https://www.ssga.com/us/en/intermediary/etfs/spdr-sp-500-etf-trust-spy">SPDR S&amp;P 500 ETF Trust (SPY)</a> daily holdings, State Street. Company names as listed on Wikipedia's <a href="https://en.wikipedia.org/wiki/List_of_S%26P_500_companies">List of S&amp;P 500 companies</a>. Net income for each from the SEC's <a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">XBRL company-concept API</a>; the arithmetic is in <a href="data/sp500_log.txt">sp500_log.txt</a> and the figures in <a href="data/sp500.csv">sp500.csv</a>.</li>
     </ol>
 
     <h2>What is left out</h2>
