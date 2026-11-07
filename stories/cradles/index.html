@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A million dollars, click by click</title>
+  <meta name="description" content="Newton's cradles that strike once for every $1 million of profit a company makes.">
+  <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <style>
+    .scrolly .graphic { flex-direction: column; justify-content: flex-start; align-items: center; }
+    .scrolly .graphic canvas { width: 100%; height: 56vh; display: block; }
+    @media (min-width: 1000px) { .scrolly .graphic { justify-content: center; } .scrolly .graphic canvas { height: min(84vh, 760px); } }
+    .clock { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--ink-soft); min-height: 1.6em; margin: 0 0 0.2rem; text-align: center; width: 100%; }
+    .clock b { font-style: normal; font-weight: 600; color: var(--brand); }
+    .live { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--brand); }
+    .explore { max-width: 72rem; margin: 6vh auto 0; padding: 0 1.25rem; }
+    .explore h2 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.5rem; max-width: var(--measure); }
+    .explore > p { max-width: var(--measure); margin: 0 0 1rem; }
+    .speeds { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-family: var(--label); font-size: 0.95rem; margin: 0.5rem 0 1rem; }
+    .speeds button { font: inherit; background: none; border: 0; border-bottom: 2px solid transparent; padding: 0.2rem 0; color: var(--ink-soft); cursor: pointer; }
+    .speeds button[aria-pressed="true"] { color: var(--ink); border-bottom-color: var(--brand); font-weight: 600; }
+    .speeds button:hover { color: var(--brand); }
+    #all { width: 100%; display: block; }
+    .sound { position: absolute; right: 1rem; bottom: 1rem; font-family: var(--label); font-size: 0.85rem; background: none; border: 0; color: var(--ink-soft); cursor: pointer; pointer-events: auto; text-decoration: underline; text-underline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <nav class="masthead"><a href="../../index.html"><span>Finance <i>in</i> Pictures</span></a></nav>
+
+  <header class="lede">
+    <h1>A million dollars, click by click</h1>
+    <p>Since you opened this page, <span data-fill="fastest">…</span> has made <span class="live" data-live="fastest">…</span> in profit. The cradles below strike once for every million dollars a company makes.</p>
+    <p class="byline">Profit is net income over each company's latest four reported quarters, from its SEC filings. Every number comes from the files listed at the end.</p>
+  </header>
+
+  <section class="scrolly">
+    <figure class="graphic">
+      <p class="clock" id="clock" aria-live="polite"></p>
+      <canvas id="stage" role="img" aria-label="Newton's cradles, one per company, each striking once per million dollars of profit"></canvas>
+      <button class="sound" id="sound" type="button" aria-pressed="false">Sound off</button>
+    </figure>
+    <div class="steps">
+      <div class="step"><p>This is a Newton's cradle. Each time a ball strikes, <b data-fill="fastest">…</b> has made another $1 million of profit.</p>
+        <p>It's running at real speed: one strike every <b data-fill="fastest-interval">…</b>. That's <span data-fill="fastest-rate">…</span> a second, around the clock, for a whole year.</p></div>
+      <div class="step"><p>That's slow to watch, so let's run the clock 60 times faster. From here on, every second on screen is a minute of real time.</p></div>
+      <div class="step"><p>At that speed, here are the biggest earners on the list. All <span data-fill="giants-n">…</span> of them make a million dollars in under <b data-fill="giants-max">…</b>.</p>
+        <p data-fill="giants-note">…</p></div>
+      <div class="step"><p>Now some names everyone knows. At a minute a second, most of them barely move.</p>
+        <p data-fill="brands-note">…</p></div>
+      <div class="step"><p>So speed up again, to an hour a second. The brands come alive, and the giants turn into a blur: <span data-fill="fastest">…</span> now strikes <b data-fill="fastest-hour">…</b> times a second.</p></div>
+      <div class="step"><p>Then there are the small, particular companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-interval">…</b> to make a million. Even at an hour a second, its cradle strikes once every <span data-fill="slowest-hour">…</span>.</p></div>
+      <div class="step"><p>At a day a second, they finally swing. In the time <span data-fill="slowest">…</span> takes to make a million, <span data-fill="fastest">…</span> makes <b data-fill="ratio">…</b>.</p></div>
+      <div class="step"><p>Some cradles never strike. These companies lost money over the same twelve months.</p>
+        <p data-fill="loss-note">…</p></div>
+    </div>
+  </section>
+
+  <section class="explore" id="explore">
+    <h2>All of them at once</h2>
+    <p>Every company in the story, fastest first. Pick a speed.</p>
+    <div class="speeds" role="group" aria-label="Clock speed">
+      <button type="button" data-speed="1">Real time</button>
+      <button type="button" data-speed="60">A minute a second</button>
+      <button type="button" data-speed="3600" aria-pressed="true">An hour a second</button>
+      <button type="button" data-speed="86400">A day a second</button>
+    </div>
+    <canvas id="all" role="img" aria-label="All the companies' cradles in a grid"></canvas>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How this was made</h2>
+    <p>Profit here is net income attributable to the company's shareholders (the XBRL tag <code>us-gaap:NetIncomeLoss</code>), as reported in each company's own 10-K and 10-Q filings with the SEC. For each company I take the latest twelve months it has reported: the last full fiscal year, plus this year to date, minus the same period a year earlier. Where the latest report is the annual report, that year is used as is. Each total is checked against the sum of the four quarters the filings give, and the build stops if they disagree.</p>
+    <p>Time to make a million is <code>$1,000,000 ÷ (net income ÷ seconds in those twelve months)</code>. The twelve months are counted by their real length, since some fiscal years run 52 or 53 weeks. Net income is earned unevenly, of course: this is the average pace, as if it ticked in steadily day and night.</p>
+    <p>Each cradle strikes once per million, so the time between strikes is the number in its label, divided by the clock speed shown above the cradles. The balls swing like a pendulum. At high speeds they are drawn with motion blur, and when a cradle strikes many times within one frame it is drawn as a smear of where its balls spend their time.</p>
+    <p>Fiscal years differ, so the twelve-month windows don't all end on the same date. The table at the end gives each company's window. Data was pulled from SEC EDGAR on <span data-fill="as-of">…</span>, using filings made by that day. All figures are computed by <code>pipeline/build_cradles.py</code>, which writes the CSV this page reads. Nothing is typed in by hand.</p>
+
+    <h2>Sources</h2>
+    <ol>
+      <li>Net income: SEC EDGAR <a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">XBRL company facts API</a> (data.sec.gov), from each company's 10-K and 10-Q filings. Accession numbers for every figure are in the table below, and the full arithmetic is in <a href="data/build_log.txt">build_log.txt</a>.</li>
+      <li>Company identifiers: SEC's <a href="https://www.sec.gov/files/company_tickers.json">ticker-to-CIK list</a>.</li>
+    </ol>
+
+    <h2>What is left out</h2>
+    <p id="gaps">…</p>
+
+    <h2>The data</h2>
+    <div id="table" class="wide-table"></div>
+  </section>
+
+  <script src="../../assets/js/d3.min.js"></script>
+  <script type="module" src="story.js"></script>
+</body>
+</html>

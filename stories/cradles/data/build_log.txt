@@ -1,0 +1,233 @@
+GET https://www.sec.gov/files/company_tickers.json -> 796507 bytes
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json -> 4092966 bytes
+NVDA (NVIDIA CORP, CIK 1045810): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-27..2026-01-25    120,067,000,000 USD  10-K filed 2026-02-25 accn 0001045810-26-000021
+    2026-01-26..2026-07-26    118,010,000,000 USD  10-Q filed 2026-08-26 accn 0001045810-26-000075
+    2025-01-27..2025-07-27     45,197,000,000 USD  10-Q filed 2026-08-26 accn 0001045810-26-000075
+    TTM 2025-07-28..2026-07-26 (364 days) = 192,880,000,000 USD
+    check, sum of four quarters = 192,879,000,000 (difference -1,000,000)
+    = 6,132.99 USD per second; $1M every 163.1 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json -> 3859564 bytes
+AAPL (Apple Inc., CIK 320193): tag NetIncomeLoss, fiscal year (latest report is the annual report)
+    2025-09-28..2026-09-26    132,175,000,000 USD  10-K filed 2026-11-03 accn 0000320193-26-000026
+    TTM 2025-09-28..2026-09-26 (364 days) = 132,175,000,000 USD
+    check, sum of four quarters = 132,175,000,000 (difference 0)
+    = 4,202.76 USD per second; $1M every 237.9 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001652044.json -> 3250837 bytes
+GOOGL (Alphabet Inc., CIK 1652044): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31    132,170,000,000 USD  10-K filed 2026-02-05 accn 0001652044-26-000018
+    2026-01-01..2026-09-30    201,239,000,000 USD  10-Q filed 2026-10-29 accn 0001652044-26-000084
+    2025-01-01..2025-09-30     97,715,000,000 USD  10-Q filed 2026-10-29 accn 0001652044-26-000084
+    TTM 2025-10-01..2026-09-30 (365 days) = 235,694,000,000 USD
+    check, sum of four quarters = 235,694,000,000 (difference 0)
+    = 7,473.81 USD per second; $1M every 133.8 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json -> 4938072 bytes
+MSFT (MICROSOFT CORP, CIK 789019): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-07-01..2026-06-30    133,749,000,000 USD  10-K filed 2026-07-29 accn 0001193125-26-323660
+    2026-07-01..2026-09-30     36,629,000,000 USD  10-Q filed 2026-10-28 accn 0001193125-26-436133
+    2025-07-01..2025-09-30     27,747,000,000 USD  10-Q filed 2026-10-28 accn 0001193125-26-436133
+    TTM 2025-10-01..2026-09-30 (365 days) = 142,631,000,000 USD
+    check, sum of four quarters = 142,631,000,000 (difference 0)
+    = 4,522.80 USD per second; $1M every 221.1 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json -> 4554378 bytes
+AMZN (AMAZON.COM, INC., CIK 1018724): tag NetIncomeLoss, twelve months as reported in the latest 10-Q
+    2025-10-01..2026-09-30    134,779,000,000 USD  10-Q filed 2026-10-30 accn 0001018724-26-000040
+    TTM 2025-10-01..2026-09-30 (365 days) = 134,779,000,000 USD
+    check, sum of four quarters = 134,779,000,000 (difference 0)
+    = 4,273.81 USD per second; $1M every 234.0 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json -> 2810958 bytes
+META (Meta Platforms, Inc., CIK 1326801): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     60,458,000,000 USD  10-K filed 2026-01-29 accn 0001628280-26-003942
+    2026-01-01..2026-09-30     52,481,000,000 USD  10-Q filed 2026-10-22 accn 0001628280-26-066773
+    2025-01-01..2025-09-30     37,690,000,000 USD  10-Q filed 2026-10-22 accn 0001628280-26-066773
+    TTM 2025-10-01..2026-09-30 (365 days) = 75,249,000,000 USD
+    check, sum of four quarters = 75,249,000,000 (difference 0)
+    = 2,386.13 USD per second; $1M every 419.1 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000019617.json -> 8133727 bytes
+JPM (JPMORGAN CHASE & CO, CIK 19617): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     57,048,000,000 USD  10-K filed 2026-02-13 accn 0001628280-26-008131
+    2026-01-01..2026-09-30     52,954,000,000 USD  10-Q filed 2026-11-03 accn 0001628280-26-069523
+    2025-01-01..2025-09-30     44,023,000,000 USD  10-Q filed 2026-11-03 accn 0001628280-26-069523
+    TTM 2025-10-01..2026-09-30 (365 days) = 65,979,000,000 USD
+    check, sum of four quarters = 65,979,000,000 (difference 0)
+    = 2,092.18 USD per second; $1M every 478.0 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001067983.json -> 2798312 bytes
+BRK-B (BERKSHIRE HATHAWAY INC, CIK 1067983): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     66,968,000,000 USD  10-K filed 2026-03-02 accn 0001193125-26-083899
+    2026-01-01..2026-06-30     35,773,000,000 USD  10-Q filed 2026-08-10 accn 0001193125-26-341032
+    2025-01-01..2025-06-30     16,973,000,000 USD  10-Q filed 2026-08-10 accn 0001193125-26-341032
+    TTM 2025-07-01..2026-06-30 (365 days) = 85,768,000,000 USD
+    check, sum of four quarters = 85,768,000,000 (difference 0)
+    = 2,719.69 USD per second; $1M every 367.7 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001403161.json -> 3693161 bytes
+V (VISA INC., CIK 1403161): tag NetIncomeLoss, fiscal year (latest report is the annual report)
+    2025-10-01..2026-09-30     23,504,000,000 USD  10-K filed 2026-11-05 accn 0001403161-26-000134
+    TTM 2025-10-01..2026-09-30 (365 days) = 23,504,000,000 USD
+    check, sum of four quarters = 23,504,000,000 (difference 0)
+    = 745.31 USD per second; $1M every 1,341.7 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000104169.json -> 3771831 bytes
+WMT (Walmart Inc., CIK 104169): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-02-01..2026-01-31     21,893,000,000 USD  10-K filed 2026-03-13 accn 0000104169-26-000055
+    2026-02-01..2026-07-31     11,696,000,000 USD  10-Q filed 2026-08-28 accn 0000104169-26-000154
+    2025-02-01..2025-07-31     11,513,000,000 USD  10-Q filed 2026-08-28 accn 0000104169-26-000154
+    TTM 2025-08-01..2026-07-31 (365 days) = 22,076,000,000 USD
+    check, sum of four quarters = 22,076,000,000 (difference 0)
+    = 700.03 USD per second; $1M every 1,428.5 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000059478.json -> 3550873 bytes
+LLY (ELI LILLY AND COMPANY, CIK 59478): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     20,640,000,000 USD  10-K filed 2026-02-12 accn 0000059478-26-000013
+    2026-01-01..2026-09-30     20,942,000,000 USD  10-Q filed 2026-10-29 accn 0000059478-26-000108
+    2025-01-01..2025-09-30     14,002,000,000 USD  10-Q filed 2026-10-29 accn 0000059478-26-000108
+    TTM 2025-10-01..2026-09-30 (365 days) = 27,580,000,000 USD
+    check, sum of four quarters = 27,580,000,000 (difference 0)
+    = 874.56 USD per second; $1M every 1,143.4 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000021344.json -> 5206922 bytes
+KO (COCA COLA CO, CIK 21344): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     13,107,000,000 USD  10-K filed 2026-02-20 accn 0001628280-26-010047
+    2026-01-01..2026-10-02     12,358,000,000 USD  10-Q filed 2026-10-28 accn 0001628280-26-067844
+    2025-01-01..2025-09-26     10,836,000,000 USD  10-Q filed 2026-10-28 accn 0001628280-26-067844
+    TTM 2025-09-27..2026-10-02 (371 days) = 14,629,000,000 USD
+    check, sum of four quarters = 14,629,000,000 (difference 0)
+    = 456.38 USD per second; $1M every 2,191.2 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000909832.json -> 3694553 bytes
+COST (COSTCO WHOLESALE CORP /NEW, CIK 909832): tag NetIncomeLoss, fiscal year (latest report is the annual report)
+    2025-09-01..2026-08-30      9,226,000,000 USD  10-K filed 2026-10-07 accn 0000909832-26-000093
+    TTM 2025-09-01..2026-08-30 (364 days) = 9,226,000,000 USD
+    check: four discrete quarters not available in the filings
+    = 293.36 USD per second; $1M every 3,408.8 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000063908.json -> 3632551 bytes
+MCD (McDONALD’S CORPORATION, CIK 63908): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31      8,563,000,000 USD  10-K filed 2026-02-24 accn 0000063908-26-000035
+    2026-01-01..2026-09-30      6,831,000,000 USD  10-Q filed 2026-11-06 accn 0000063908-26-000083
+    2025-01-01..2025-09-30      6,399,000,000 USD  10-Q filed 2026-11-06 accn 0000063908-26-000083
+    TTM 2025-10-01..2026-09-30 (365 days) = 8,995,000,000 USD
+    check, sum of four quarters = 8,995,000,000 (difference 0)
+    = 285.23 USD per second; $1M every 3,505.9 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001065280.json -> 3648572 bytes
+NFLX (Netflix, Inc., CIK 1065280): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     10,981,201,000 USD  10-K filed 2026-01-23 accn 0001065280-26-000034
+    2026-01-01..2026-09-30     12,348,132,000 USD  10-Q filed 2026-10-21 accn 0001065280-26-000291
+    2025-01-01..2025-09-30      8,562,680,000 USD  10-Q filed 2026-10-21 accn 0001065280-26-000291
+    TTM 2025-10-01..2026-09-30 (365 days) = 14,766,653,000 USD
+    check, sum of four quarters = 14,766,653,000 (difference 0)
+    = 468.25 USD per second; $1M every 2,135.6 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001318605.json -> 3700279 bytes
+TSLA (Tesla, Inc., CIK 1318605): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31      3,794,000,000 USD  10-K filed 2026-01-29 accn 0001628280-26-003952
+    2026-01-01..2026-09-30      2,378,000,000 USD  10-Q filed 2026-10-22 accn 0001628280-26-066775
+    2025-01-01..2025-09-30      2,954,000,000 USD  10-Q filed 2026-10-22 accn 0001628280-26-066775
+    TTM 2025-10-01..2026-09-30 (365 days) = 3,218,000,000 USD
+    check, sum of four quarters = 3,218,000,000 (difference 0)
+    = 102.04 USD per second; $1M every 9,799.9 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000047111.json -> 4594265 bytes
+HSY (HERSHEY CO, CIK 47111): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31        883,259,000 USD  10-K filed 2026-02-17 accn 0001628280-26-008586
+    2026-01-01..2026-09-27      1,473,584,000 USD  10-Q filed 2026-10-29 accn 0001628280-26-068136
+    2025-01-01..2025-09-28        563,242,000 USD  10-Q filed 2026-10-29 accn 0001628280-26-068136
+    TTM 2025-09-29..2026-09-27 (364 days) = 1,793,601,000 USD
+    check, sum of four quarters = 1,793,601,000 (difference 0)
+    = 57.03 USD per second; $1M every 17,534.3 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001058090.json -> 3055241 bytes
+CMG (CHIPOTLE MEXICAN GRILL, INC., CIK 1058090): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31      1,535,761,000 USD  10-K filed 2026-02-04 accn 0001058090-26-000009
+    2026-01-01..2026-09-30      1,046,245,000 USD  10-Q filed 2026-10-29 accn 0001058090-26-000104
+    2025-01-01..2025-09-30      1,204,829,000 USD  10-Q filed 2026-10-29 accn 0001058090-26-000104
+    TTM 2025-10-01..2026-09-30 (365 days) = 1,377,177,000 USD
+    check, sum of four quarters = 1,377,177,000 (difference 0)
+    = 43.67 USD per second; $1M every 22,899.0 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001286681.json -> 2954345 bytes
+DPZ (Domino’s Pizza, Inc., CIK 1286681): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2024-12-30..2025-12-28        601,704,000 USD  10-K filed 2026-02-23 accn 0001193125-26-062321
+    2025-12-29..2026-09-06        427,740,000 USD  10-Q filed 2026-10-13 accn 0001286681-26-000040
+    2024-12-30..2025-09-07        420,061,000 USD  10-Q filed 2026-10-13 accn 0001286681-26-000040
+    TTM 2025-09-08..2026-09-06 (364 days) = 609,383,000 USD
+    check: four discrete quarters not available in the filings
+    = 19.38 USD per second; $1M every 51,608.9 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001334036.json -> 3560236 bytes
+CROX (CROCS, INC., CIK 1334036): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31        -81,198,000 USD  10-K filed 2026-02-12 accn 0001334036-26-000006
+    2026-01-01..2026-09-30        559,198,000 USD  10-Q filed 2026-10-29 accn 0001334036-26-000060
+    2025-01-01..2025-09-30       -186,363,000 USD  10-Q filed 2026-10-29 accn 0001334036-26-000060
+    TTM 2025-10-01..2026-09-30 (365 days) = 664,363,000 USD
+    check, sum of four quarters = 664,363,000 (difference 0)
+    = 21.07 USD per second; $1M every 47,468.0 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000105132.json -> 2859386 bytes
+WDFC (WD-40 COMPANY, CIK 105132): tag NetIncomeLoss, fiscal year (latest report is the annual report)
+    2025-09-01..2026-08-31         82,346,000 USD  10-K filed 2026-10-26 accn 0000105132-26-000091
+    TTM 2025-09-01..2026-08-31 (365 days) = 82,346,000 USD
+    check, sum of four quarters = 82,346,000 (difference 0)
+    = 2.61 USD per second; $1M every 382,969.4 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001113809.json -> 2655249 bytes
+BBW (BUILD-A-BEAR WORKSHOP INC, CIK 1113809): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-02-02..2026-01-31         52,203,000 USD  10-K filed 2026-04-16 accn 0001437749-26-012501
+    2026-02-01..2026-08-01         27,059,000 USD  10-Q filed 2026-09-10 accn 0001437749-26-030081
+    2025-02-02..2025-08-02         27,686,000 USD  10-Q filed 2026-09-10 accn 0001437749-26-030081
+    TTM 2025-08-03..2026-08-01 (364 days) = 51,576,000 USD
+    check, sum of four quarters = 51,576,000 (difference 0)
+    = 1.64 USD per second; $1M every 609,772.0 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000069733.json -> 3021564 bytes
+NATH (NATHAN'S FAMOUS, INC., CIK 69733): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-03-31..2026-03-29         20,020,000 USD  10-K filed 2026-06-09 accn 0001437749-26-019923
+    2026-03-30..2026-06-28          8,829,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
+    2025-03-31..2025-06-29          8,928,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
+    TTM 2025-06-30..2026-06-28 (364 days) = 19,921,000 USD
+    check, sum of four quarters = 19,921,000 (difference 0)
+    = 0.63 USD per second; $1M every 1,578,715.9 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json -> 4363467 bytes
+INTC (Intel Corporation, CIK 50863): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2024-12-29..2025-12-27       -267,000,000 USD  10-K filed 2026-01-23 accn 0000050863-26-000011
+    2025-12-28..2026-09-26    -11,441,000,000 USD  10-Q filed 2026-10-30 accn 0000050863-26-000191
+    2024-12-29..2025-09-27        324,000,000 USD  10-Q filed 2026-10-30 accn 0000050863-26-000191
+    TTM 2025-09-28..2026-09-26 (364 days) = -12,032,000,000 USD
+    check, sum of four quarters = -12,032,000,000 (difference 0)
+    = -382.58 USD per second; loss
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000012927.json -> 5248494 bytes
+BA (THE BOEING COMPANY, CIK 12927): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31      2,235,000,000 USD  10-K filed 2026-01-30 accn 0001628280-26-004357
+    2026-01-01..2026-09-30       -564,000,000 USD  10-Q filed 2026-10-27 accn 0001628280-26-067508
+    2025-01-01..2025-09-30     -5,985,000,000 USD  10-Q filed 2026-10-27 accn 0001628280-26-067508
+    TTM 2025-10-01..2026-09-30 (365 days) = 7,656,000,000 USD
+    check, sum of four quarters = 7,656,000,000 (difference 0)
+    = 242.77 USD per second; $1M every 4,119.1 s
+    expected a loss but it is profitable: moved to group brands
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001874178.json -> 1043661 bytes
+RIVN (Rivian Automotive, Inc. / DE, CIK 1874178): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     -3,646,000,000 USD  10-K filed 2026-02-12 accn 0001874178-26-000008
+    2026-01-01..2026-09-30     -2,162,000,000 USD  10-Q filed 2026-10-29 accn 0001874178-26-000066
+    2025-01-01..2025-09-30     -2,835,000,000 USD  10-Q filed 2026-10-29 accn 0001874178-26-000066
+    TTM 2025-10-01..2026-09-30 (365 days) = -2,973,000,000 USD
+    check, sum of four quarters = -2,973,000,000 (difference 0)
+    = -94.27 USD per second; loss
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001639825.json -> 1597712 bytes
+PTON (Peloton Interactive, Inc., CIK 1639825): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-07-01..2026-06-30         63,200,000 USD  10-K filed 2026-08-06 accn 0001639825-26-000038
+    2026-07-01..2026-09-30         96,200,000 USD  10-Q filed 2026-11-05 accn 0001639825-26-000048
+    2025-07-01..2025-09-30         13,900,000 USD  10-Q filed 2026-11-05 accn 0001639825-26-000048
+    TTM 2025-10-01..2026-09-30 (365 days) = 145,500,000 USD
+    check, sum of four quarters = 145,400,000 (difference -100,000)
+    = 4.61 USD per second; $1M every 216,742.3 s
+    expected a loss but it is profitable: moved to group small
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001682852.json -> 1922442 bytes
+MRNA (Moderna, Inc., CIK 1682852): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     -2,822,000,000 USD  10-K filed 2026-02-20 accn 0001682852-26-000033
+    2026-01-01..2026-09-30     -1,963,000,000 USD  10-Q filed 2026-11-06 accn 0001682852-26-000197
+    2025-01-01..2025-09-30     -1,996,000,000 USD  10-Q filed 2026-11-06 accn 0001682852-26-000197
+    TTM 2025-10-01..2026-09-30 (365 days) = -2,789,000,000 USD
+    check, sum of four quarters = -2,789,000,000 (difference 0)
+    = -88.44 USD per second; loss
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001811210.json -> 1529292 bytes
+LCID (Lucid Group, Inc., CIK 1811210): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31     -2,698,051,000 USD  10-K filed 2026-02-24 accn 0001628280-26-011053
+    2026-01-01..2026-06-30     -2,063,195,000 USD  10-Q filed 2026-08-04 accn 0001628280-26-052606
+    2025-01-01..2025-06-30       -905,603,000 USD  10-Q filed 2026-08-04 accn 0001628280-26-052606
+    TTM 2025-07-01..2026-06-30 (365 days) = -3,855,643,000 USD
+    check, sum of four quarters = -3,855,643,000 (difference 0)
+    = -122.26 USD per second; loss
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001564408.json -> 1818562 bytes
+SNAP (SNAP INC, CIK 1564408): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31       -460,489,000 USD  10-K filed 2026-02-05 accn 0001564408-26-000013
+    2026-01-01..2026-09-30       -196,413,000 USD  10-Q filed 2026-11-05 accn 0001564408-26-000067
+    2025-01-01..2025-09-30       -505,698,000 USD  10-Q filed 2026-11-05 accn 0001564408-26-000067
+    TTM 2025-10-01..2026-09-30 (365 days) = -151,204,000 USD
+    check, sum of four quarters = -151,204,000 (difference 0)
+    = -4.79 USD per second; loss

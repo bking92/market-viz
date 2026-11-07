@@ -1,0 +1,9 @@
+{
+ "excluded": {
+  "BYND": "Beyond Meat: its trailing-twelve-month net income built from year-to-date figures differs by $10.8 million from the sum of its four reported quarters, so the figure is ambiguous."
+ },
+ "as_of": "2026-11-07",
+ "built": "2026-11-07 12:03 UTC",
+ "n": 30,
+ "source": "SEC EDGAR XBRL company facts API, https://data.sec.gov/api/xbrl/companyfacts/"
+}
