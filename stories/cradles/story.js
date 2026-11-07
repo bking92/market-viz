@@ -89,13 +89,12 @@ soundBtn.addEventListener("click", () => {
 const onStrike = (it, n) => { if (n === 1 && scene.strikeEvery(it.d) / scene.speed > 0.25) tick(); };
 
 // ---------- the scrolly stage ----------
-const scene = new CradleScene(document.getElementById("stage"), rows, { onStrike, maxR: 30 });
+const scene = new CradleScene(document.getElementById("stage"), rows, { onStrike, maxR: 30, unit: UNIT });
 const clock = document.getElementById("clock");
 const speedText = { 1: "Real time", 3600: "Each second here is <b>one hour</b>", 86400: "Each second here is <b>one day</b>" };
 const unitText = (u) => (u >= 1e6 ? "each strike is <b>$1 million</b>" : "each strike is <b>$10,000</b>");
 const tk = (a) => a.map((r) => r.ticker);
 const STEPS = [
-  { show: [fastest.ticker], speed: 1, unit: 1e6 },
   { show: [fastest.ticker], speed: 1, unit: UNIT },
   { show: tk(giants), speed: 1, unit: UNIT },
   { show: tk(brands), speed: 1, unit: UNIT },
