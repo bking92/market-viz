@@ -1,4 +1,4 @@
-GET https://www.sec.gov/files/company_tickers.json -> 796507 bytes
+GET https://www.sec.gov/files/company_tickers.json -> 797279 bytes
 GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json -> 4092966 bytes
 NVDA (NVIDIA CORP, CIK 1045810): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
     2025-01-27..2026-01-25    120,067,000,000 USD  10-K filed 2026-02-25 accn 0001045810-26-000021
@@ -127,6 +127,14 @@ HSY (HERSHEY CO, CIK 47111): tag NetIncomeLoss, trailing twelve months: fiscal y
     TTM 2025-09-29..2026-09-27 (364 days) = 1,793,601,000 USD
     check, sum of four quarters = 1,793,601,000 (difference 0)
     = 57.03 USD per second; $1M every 17,534.3 s
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000027904.json -> 3414070 bytes
+DAL (DELTA AIR LINES, INC., CIK 27904): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-01-01..2025-12-31      5,005,000,000 USD  10-K filed 2026-02-11 accn 0000027904-26-000013
+    2026-01-01..2026-09-30      2,070,000,000 USD  10-Q filed 2026-10-09 accn 0000027904-26-000038
+    2025-01-01..2025-09-30      3,786,000,000 USD  10-Q filed 2026-10-09 accn 0000027904-26-000038
+    TTM 2025-10-01..2026-09-30 (365 days) = 3,289,000,000 USD
+    check, sum of four quarters = 3,290,000,000 (difference 1,000,000)
+    = 104.29 USD per second; $1M every 9,588.3 s
 GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001058090.json -> 3055241 bytes
 CMG (CHIPOTLE MEXICAN GRILL, INC., CIK 1058090): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
     2025-01-01..2025-12-31      1,535,761,000 USD  10-K filed 2026-02-04 accn 0001058090-26-000009
@@ -165,14 +173,7 @@ BBW (BUILD-A-BEAR WORKSHOP INC, CIK 1113809): tag NetIncomeLoss, trailing twelve
     TTM 2025-08-03..2026-08-01 (364 days) = 51,576,000 USD
     check, sum of four quarters = 51,576,000 (difference 0)
     = 1.64 USD per second; $1M every 609,772.0 s
-GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000069733.json -> 3021564 bytes
-NATH (NATHAN'S FAMOUS, INC., CIK 69733): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
-    2025-03-31..2026-03-29         20,020,000 USD  10-K filed 2026-06-09 accn 0001437749-26-019923
-    2026-03-30..2026-06-28          8,829,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
-    2025-03-31..2025-06-29          8,928,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
-    TTM 2025-06-30..2026-06-28 (364 days) = 19,921,000 USD
-    check, sum of four quarters = 19,921,000 (difference 0)
-    = 0.63 USD per second; $1M every 1,578,715.9 s
+NATH: not in SEC ticker list, skipped
 GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json -> 4363467 bytes
 INTC (Intel Corporation, CIK 50863): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
     2024-12-29..2025-12-27       -267,000,000 USD  10-K filed 2026-01-23 accn 0000050863-26-000011
@@ -231,3 +232,58 @@ SNAP (SNAP INC, CIK 1564408): tag NetIncomeLoss, trailing twelve months: fiscal 
     TTM 2025-10-01..2026-09-30 (365 days) = -151,204,000 USD
     check, sum of four quarters = -151,204,000 (difference 0)
     = -4.79 USD per second; loss
+
+--- 10 years earlier ---
+GOOGL: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-01-01..2015-12-31     16,348,000,000 USD  10-K filed 2016-02-11 accn 0001652044-16-000012
+    2016-01-01..2016-09-30     14,145,000,000 USD  10-Q filed 2016-11-03 accn 0001652044-16-000038
+    2015-01-01..2015-09-30     11,425,000,000 USD  10-Q filed 2015-10-29 accn 0001652044-15-000005
+    TTM 2015-10-01..2016-09-30 (366 days) = 19,068,000,000 USD; four-quarter sum 19,068,000,000
+    = 602.99 USD per second; $1M every 1,658.4 s
+NVDA: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-01-26..2016-01-31        614,000,000 USD  10-K filed 2016-03-17 accn 0001045810-16-000205
+    2016-02-01..2016-07-31        449,000,000 USD  10-Q filed 2016-08-23 accn 0001045810-16-000300
+    2015-01-26..2015-07-26        160,000,000 USD  10-Q filed 2015-08-19 accn 0001045810-15-000143
+    TTM 2015-07-27..2016-07-31 (371 days) = 903,000,000 USD; four-quarter sum 902,000,000
+    = 28.17 USD per second; $1M every 35,497.7 s
+MSFT: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-07-01..2016-06-30     16,798,000,000 USD  10-K filed 2016-07-28 accn 0001193125-16-662209
+    2016-07-01..2016-09-30      4,690,000,000 USD  10-Q filed 2016-10-20 accn 0001193125-16-742796
+    2015-07-01..2015-09-30      4,620,000,000 USD  10-Q filed 2015-10-22 accn 0001193125-15-350718
+    TTM 2015-10-01..2016-09-30 (366 days) = 16,868,000,000 USD; four-quarter sum 16,566,000,000
+    disagrees with the four-quarter sum by -302,000,000: ambiguous, left out
+AMZN: twelve months as reported in the latest 10-Q
+    2015-10-01..2016-09-30      2,105,000,000 USD  10-Q filed 2016-10-28 accn 0001018724-16-000324
+    TTM 2015-10-01..2016-09-30 (366 days) = 2,105,000,000 USD; four-quarter sum 2,104,000,000
+    = 66.57 USD per second; $1M every 15,022.5 s
+AAPL: fiscal year (latest report is the annual report)
+    2015-09-27..2016-09-24     45,687,000,000 USD  10-K filed 2016-10-26 accn 0001628280-16-020309
+    TTM 2015-09-27..2016-09-24 (364 days) = 45,687,000,000 USD; four-quarter sum 45,687,000,000
+    = 1,452.71 USD per second; $1M every 688.4 s
+BRK-B: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-01-01..2015-12-31     24,083,000,000 USD  10-K filed 2016-02-29 accn 0001193125-16-483023
+    2016-01-01..2016-06-30     10,590,000,000 USD  10-Q filed 2016-08-05 accn 0001193125-16-673492
+    2015-01-01..2015-06-30      9,177,000,000 USD  10-Q filed 2015-08-07 accn 0001193125-15-283231
+    TTM 2015-07-01..2016-06-30 (366 days) = 25,496,000,000 USD; four-quarter sum 25,496,000,000
+    = 806.26 USD per second; $1M every 1,240.3 s
+META: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-01-01..2015-12-31      3,688,000,000 USD  10-K filed 2016-01-28 accn 0001326801-16-000043
+    2016-01-01..2016-09-30      5,944,000,000 USD  10-Q filed 2016-11-03 accn 0001326801-16-000087
+    2015-01-01..2015-09-30      2,127,000,000 USD  10-Q filed 2015-11-05 accn 0001326801-15-000032
+    TTM 2015-10-01..2016-09-30 (366 days) = 7,505,000,000 USD; four-quarter sum 7,505,000,000
+    = 237.33 USD per second; $1M every 4,213.5 s
+JPM: trailing twelve months: fiscal year + this year to date − last year to date
+    2015-01-01..2015-12-31     24,442,000,000 USD  10-K filed 2016-02-23 accn 0000019617-16-000902
+    2016-01-01..2016-09-30     18,006,000,000 USD  10-Q filed 2016-11-01 accn 0000019617-16-001150
+    2015-01-01..2015-09-30     19,008,000,000 USD  10-Q filed 2015-11-02 accn 0000019617-15-000464
+    TTM 2015-10-01..2016-09-30 (366 days) = 23,440,000,000 USD; four-quarter sum 23,440,000,000
+    = 741.25 USD per second; $1M every 1,349.1 s
+
+--- pair: similar profit, different market value ---
+GET https://query1.finance.yahoo.com/v8/finance/chart/TSLA?range=1mo&interval=1d -> 3610 bytes
+TSLA: last close on or before 2026-11-07: 358.22 on 2026-11-06 (https://query1.finance.yahoo.com/v8/finance/chart/TSLA?range=1mo&interval=1d)
+TSLA: 3,952,757,946 shares as of 2026-10-15 (10-Q filed 2026-10-22, accn 0001628280-26-066775) x 358.22 = 1,415,956,951,416 USD
+GET https://query1.finance.yahoo.com/v8/finance/chart/DAL?range=1mo&interval=1d -> 3639 bytes
+DAL: last close on or before 2026-11-07: 87.2 on 2026-11-06 (https://query1.finance.yahoo.com/v8/finance/chart/DAL?range=1mo&interval=1d)
+DAL: 657,912,380 shares as of 2026-09-30 (10-Q filed 2026-10-09, accn 0000027904-26-000038) x 87.2 = 57,369,959,536 USD
+profit gap 2.2%, market value ratio 24.7x

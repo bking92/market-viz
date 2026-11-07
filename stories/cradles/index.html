@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A million dollars, click by click</title>
+  <title>How fast do companies make a buck?</title>
   <meta name="description" content="Newton's cradles that strike once for every $1 million of profit a company makes.">
   <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
   <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32">
@@ -31,7 +31,7 @@
   <nav class="masthead"><a href="../../index.html"><span>Finance <i>in</i> Pictures</span></a></nav>
 
   <header class="lede">
-    <h1>A million dollars, click by click</h1>
+    <h1>How fast do companies make a buck?</h1>
     <p>Since you opened this page, <span data-fill="fastest">…</span> has made <span class="live" data-live="fastest">…</span> in profit. Each strike of the cradles below is another $10,000 of a company's profit.</p>
     <p class="byline">Profit is net income over each company's latest four reported quarters, from its SEC filings. Every number comes from the files listed at the end.</p>
   </header>
@@ -47,12 +47,16 @@
         <p>It's running at real speed: one strike every <b data-fill="fastest-unit">…</b>. That's <span data-fill="fastest-rate">…</span> a second, around the clock, for a whole year, or a million dollars every <span data-fill="fastest-interval">…</span>.</p></div>
       <div class="step"><p>Here are the biggest earners on the list, still in real time. All <span data-fill="giants-n">…</span> of them make $10,000 in under <b data-fill="giants-max">…</b>.</p>
         <p data-fill="giants-note">…</p></div>
+      <div class="step"><p>Ten years ago, they were much slower. <span data-fill="decade-lead">…</span></p>
+        <p data-fill="decade-note">…</p></div>
       <div class="step"><p>Now some names everyone knows. Even at $10,000 a strike, the slower ones barely move.</p>
         <p data-fill="brands-note">…</p></div>
+      <div class="step"><p><b data-fill="pair-a">…</b> and <b data-fill="pair-b">…</b> make money at almost exactly the same pace. <span data-fill="pair-pace">…</span></p>
+        <p data-fill="pair-values">…</p></div>
       <div class="step"><p>So now speed up the clock, to an hour a second. Almost every cradle here turns into a blur: <span data-fill="fastest">…</span> now strikes <b data-fill="fastest-hour">…</b> times a second.</p></div>
       <div class="step"><p>Then there are the small, particular companies. <b data-fill="slowest">…</b> takes <b data-fill="slowest-interval">…</b> to make a million, or <span data-fill="slowest-unit">…</span> for each $10,000. Speed the clock to an hour a second and its cradle finally strikes, once every <span data-fill="slowest-hour">…</span>.</p></div>
       <div class="step"><p>At a day a second, all of them are swinging hard. In the time <span data-fill="slowest">…</span> takes to make a million, <span data-fill="fastest">…</span> makes <b data-fill="ratio">…</b>.</p></div>
-      <div class="step"><p>Some cradles never strike. These companies lost money over the same twelve months.</p>
+      <div class="step"><p>Some cradles are broken. These companies lost money over the same twelve months.</p>
         <p data-fill="loss-note">…</p></div>
     </div>
   </section>
@@ -75,9 +79,12 @@
     <p>Each cradle strikes once per $10,000 of profit. The line above the cradles says how fast the clock is running: the time between strikes on screen is the number in each label divided by that speed. The balls swing like a pendulum. At high speeds they are drawn with motion blur, and when a cradle strikes many times within one frame it is drawn as a smear of where its balls spend their time.</p>
     <p>Fiscal years differ, so the twelve-month windows don't all end on the same date. The table at the end gives each company's window. Data was pulled from SEC EDGAR on <span data-fill="as-of">…</span>, using filings made by that day. All figures are computed by <code>pipeline/build_cradles.py</code>, which writes the CSV this page reads. Nothing is typed in by hand.</p>
 
+    <p>Ten years ago: the same calculation for the twelve months ending ten years before each company's latest window, using figures as first reported at the time (later restatements, such as new accounting rules applied to old years, are ignored so that annual and quarterly figures match). Market value, used only for the two companies compared in the middle of the story, is shares outstanding from the cover of each company's latest 10-Q times its last closing price before the data was pulled.</p>
+
     <h2>Sources</h2>
     <ol>
       <li>Net income: SEC EDGAR <a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces">XBRL company facts API</a> (data.sec.gov), from each company's 10-K and 10-Q filings. Accession numbers for every figure are in the table below, and the full arithmetic is in <a href="data/build_log.txt">build_log.txt</a>.</li>
+      <li>Closing prices for the market-value comparison: Yahoo Finance daily chart data.</li>
       <li>Company identifiers: SEC's <a href="https://www.sec.gov/files/company_tickers.json">ticker-to-CIK list</a>.</li>
     </ol>
 
@@ -86,6 +93,9 @@
 
     <h2>The data</h2>
     <div id="table" class="wide-table"></div>
+    <p>Ten years earlier, for the companies in the comparison.</p>
+    <div id="decade-table" class="wide-table"></div>
+    <p>Market values: <span id="pair-data">…</span></p>
   </section>
 
   <script src="../../assets/js/d3.min.js"></script>

@@ -35,7 +35,7 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 - Known gaps are listed on the page under "What is left out".
 - Brian confirmed: 2 minutes of swimming plus pauses (changed from 90 s on Nov 3); "sources and uses" means sources and method. Look is pixel art (pixel.js), one colour per company.
 
-## A million dollars, click by click (Newton's cradles): status (Nov 7, 2026)
+## How fast do companies make a buck? (Newton's cradles): status (Nov 7, 2026)
 
 - Page: `stories/cradles/index.html`, renderer `cradle.js` (canvas, pendulum motion, motion blur at high clock speeds). Data: `stories/cradles/data/` (companies.csv, meta.json, build_log.txt).
 - Profit = us-gaap `NetIncomeLoss` over the latest twelve reported months (FY + YTD − prior YTD) from SEC company facts, checked against four discrete quarters. Seconds per $1M uses the window's real length.

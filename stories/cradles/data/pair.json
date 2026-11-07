@@ -1,0 +1,37 @@
+{
+ "companies": [
+  {
+   "ticker": "TSLA",
+   "name": "Tesla",
+   "net_income": 3218000000,
+   "per_second": 102.0421,
+   "period_end": "2026-09-30",
+   "shares": 3952757946,
+   "shares_as_of": "2026-10-15",
+   "shares_accn": "0001628280-26-066775",
+   "shares_form": "10-Q",
+   "close": 358.22,
+   "close_date": "2026-11-06",
+   "market_value": 1415956951416,
+   "cik": 1318605
+  },
+  {
+   "ticker": "DAL",
+   "name": "Delta Air Lines",
+   "net_income": 3289000000,
+   "per_second": 104.2935,
+   "period_end": "2026-09-30",
+   "shares": 657912380,
+   "shares_as_of": "2026-09-30",
+   "shares_accn": "0000027904-26-000038",
+   "shares_form": "10-Q",
+   "close": 87.2,
+   "close_date": "2026-11-06",
+   "market_value": 57369959536,
+   "cik": 27904
+  }
+ ],
+ "profit_gap": 0.0216,
+ "value_ratio": 24.68,
+ "price_source": "Yahoo Finance chart API, daily close"
+}

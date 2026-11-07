@@ -1,9 +1,11 @@
-// "A million dollars, click by click". Reads only ./data, which pipeline/build_cradles.py writes.
+// "How fast do companies make a buck?". Reads only ./data, which pipeline/build_cradles.py writes.
 import { scroller } from "../../assets/js/scroller.js";
 import { CradleScene, fmtInterval } from "./cradle.js";
 
 const d3 = window.d3;
-const [raw, meta] = await Promise.all([d3.csv("data/companies.csv"), d3.json("data/meta.json")]);
+const [raw, meta, decadeRaw, pairRaw] = await Promise.all([
+  d3.csv("data/companies.csv"), d3.json("data/meta.json"), d3.csv("data/decade.csv"), d3.json("data/pair.json"),
+]);
 await document.fonts.ready;
 
 const rows = raw.map((r) => {
@@ -26,6 +28,7 @@ const usd = (v) => {
   if (a >= 1e6) return `$${d3.format(".0f")(a / 1e6)} million`;
   return `$${d3.format(",.0f")(a)}`;
 };
+const usdBig = (v) => (v >= 1e12 ? `$${d3.format(".2f")(v / 1e12)} trillion` : `$${d3.format(".1f")(v / 1e9)} billion`);
 const fmtDate = (s) => d3.timeFormat("%b %-d, %Y")(d3.timeParse("%Y-%m-%d")(s));
 const list = (a) => (a.length < 2 ? a.join("") : `${a.slice(0, -1).join(", ")} and ${a[a.length - 1]}`);
 const UNIT = 1e4; // dollars per strike after the first step
@@ -33,6 +36,27 @@ const every = (r) => r.interval * UNIT / 1e6; // seconds between $10k strikes
 const perSecAt = (r, speed) => speed / every(r);
 
 const lastBrand = brands[brands.length - 1];
+const year = (s) => s.slice(0, 4);
+const monthYear = (s) => d3.timeFormat("%B %Y")(d3.timeParse("%Y-%m-%d")(s));
+
+// Ten years ago: the same giants, each shown twice, then and now (extra cradles with their own keys).
+const byTicker = new Map(rows.map((r) => [r.ticker, r]));
+const decade = decadeRaw.map((r) => ({ ...r, net_income: +r.net_income, per_second: +r.per_second, interval: +r.seconds_per_million }));
+const pairsThenNow = [];
+for (const t of decade) {
+  const now = byTicker.get(t.ticker);
+  pairsThenNow.push({ ...t, ticker: `${t.ticker}~then`, name: `${t.name}, ${year(t.period_end)}`, lossInterval: 0 });
+  pairsThenNow.push({ ...now, ticker: `${t.ticker}~now`, name: `${now.name}, ${year(now.period_end)}` });
+}
+const speedups = decade.map((t) => ({ t, now: byTicker.get(t.ticker), x: byTicker.get(t.ticker).per_second / t.per_second }))
+  .sort((a, b) => b.x - a.x);
+const alpha = decade.find((t) => t.ticker === fastest.ticker);
+
+// Same profit pace, very different price tags.
+const pair = pairRaw.companies.map((c) => ({ ...byTicker.get(c.ticker), ...c, ticker: `${c.ticker}~pair`,
+  name: byTicker.get(c.ticker).name, note: `worth ${usdBig(c.market_value)}` }))
+  .sort((a, b) => b.market_value - a.market_value);
+for (const p of pair) { p.interval = byTicker.get(p.ticker.split("~")[0]).interval; p.lossInterval = 0; }
 const moved = rows.filter((r) => r.listed_as === "losses" && r.group !== "losses");
 const fills = {
   "fastest": fastest.name,
@@ -49,10 +73,17 @@ const fills = {
   "slowest-interval": fmtInterval(slowest.interval),
   "slowest-hour": fmtInterval(every(slowest) / 3600),
   "ratio": usd(1e6 * slowest.interval / fastest.interval),
-  "loss-note": `${losers[0].name} lost ${usd(losers[0].net_income)}: a million dollars gone every ${fmtInterval(losers[0].lossInterval)}. ` +
+  "loss-note": `${losers[0].name} lost ${usd(losers[0].net_income)}: $10,000 gone every ${fmtInterval(losers[0].lossInterval * UNIT / 1e6)}. ` +
     `${list(losers.slice(1).map((r) => r.name))} lost money too.` +
     (moved.length ? ` I expected ${list(moved.map((r) => r.name))} to be here as well, but ${moved.length > 1 ? "they" : "it"} made a profit over these twelve months, so ${moved.length > 1 ? "they swing" : "it swings"} with the rest.` : ""),
   "as-of": fmtDate(meta.as_of),
+  "decade-lead": alpha ? `In the twelve months to ${monthYear(alpha.period_end)}, ${alpha.name} made $10,000 every ${fmtInterval(alpha.interval * UNIT / 1e6)}. Now it's every ${fmtInterval(every(fastest))}.` : "",
+  "decade-note": `${speedups[0].t.name} has sped up the most: from one strike every ${fmtInterval(speedups[0].t.interval * UNIT / 1e6)} to one every ${fmtInterval(every(speedups[0].now))}, ${d3.format(",.0f")(speedups[0].x)} times as fast. ` +
+    `The slowest to grow, ${speedups[speedups.length - 1].t.name}, still makes money ${d3.format(".1f")(speedups[speedups.length - 1].x)} times as fast as it did.` +
+    (Object.keys(meta.decade_skipped || {}).length ? ` ${list(Object.keys(meta.decade_skipped).map((t) => byTicker.get(t).name))} ${Object.keys(meta.decade_skipped).length > 1 ? "are" : "is"} missing here; see the notes at the end.` : ""),
+  "pair-a": pair[0].name, "pair-b": pair[1].name,
+  "pair-pace": `${pair[0].name} makes $10,000 every ${fmtInterval(every(pair[0]))}, ${pair[1].name} every ${fmtInterval(every(pair[1]))}.`,
+  "pair-values": `At the close on ${fmtDate(pair[0].close_date)}, the stock market valued ${pair[0].name} at ${usdBig(pair[0].market_value)} and ${pair[1].name} at ${usdBig(pair[1].market_value)}: ${d3.format(".0f")(pairRaw.value_ratio)} times as much for the same pace of profit.`,
 };
 for (const el of document.querySelectorAll("[data-fill]")) if (fills[el.dataset.fill] !== undefined) el.textContent = fills[el.dataset.fill];
 
@@ -89,7 +120,7 @@ soundBtn.addEventListener("click", () => {
 const onStrike = (it, n) => { if (n === 1 && scene.strikeEvery(it.d) / scene.speed > 0.25) tick(); };
 
 // ---------- the scrolly stage ----------
-const scene = new CradleScene(document.getElementById("stage"), rows, { onStrike, maxR: 30, unit: UNIT });
+const scene = new CradleScene(document.getElementById("stage"), [...rows, ...pairsThenNow, ...pair], { onStrike, maxR: 30, unit: UNIT });
 const clock = document.getElementById("clock");
 const speedText = { 1: "Real time", 3600: "Each second here is <b>one hour</b>", 86400: "Each second here is <b>one day</b>" };
 const unitText = (u) => (u >= 1e6 ? "each strike is <b>$1 million</b>" : "each strike is <b>$10,000</b>");
@@ -97,7 +128,9 @@ const tk = (a) => a.map((r) => r.ticker);
 const STEPS = [
   { show: [fastest.ticker], speed: 1, unit: UNIT },
   { show: tk(giants), speed: 1, unit: UNIT },
+  { show: tk(pairsThenNow), speed: 1, unit: UNIT, cols: () => (window.innerWidth < 640 ? 2 : 4) },
   { show: tk(brands), speed: 1, unit: UNIT },
+  { show: tk(pair), speed: 1, unit: UNIT, cols: () => 2 },
   { show: tk([...giants, ...brands]), speed: 3600, unit: UNIT },
   { show: tk(small), speed: 3600, unit: UNIT },
   { show: tk(small), speed: 86400, unit: UNIT },
@@ -105,7 +138,7 @@ const STEPS = [
 ];
 function go(i) {
   const s = STEPS[Math.max(0, Math.min(i, STEPS.length - 1))];
-  scene.layout(s.show);
+  scene.layout(s.show, false, s.cols ? s.cols() : null);
   scene.setSpeed(s.speed);
   scene.setUnit(s.unit);
   clock.innerHTML = `${speedText[s.speed]}, ${unitText(s.unit)}`;
@@ -143,6 +176,7 @@ const gaps = [];
 for (const [, why] of Object.entries(meta.excluded || {})) gaps.push(`${why} I left it out.`);
 if (brk) gaps.push(`Berkshire Hathaway's net income includes gains and losses on the stocks it owns, whether or not it sold them, so its pace moves with the stock market as much as with its businesses. Its latest filing in the data covers the twelve months to ${fmtDate(brk.period_end)}.`);
 gaps.push("Only companies that file 10-K and 10-Q reports with the SEC are included, so companies that report elsewhere or on other forms, such as TSMC with its annual 20-F, aren't here. Net income includes one-off items such as write-downs and gains on sales, which can make a single year look better or worse than the business underneath.");
+for (const [, why] of Object.entries(meta.decade_skipped || {})) gaps.push(`In the ten-years-ago comparison: ${why}`);
 document.getElementById("gaps").textContent = gaps.join(" ");
 
 const cols = [
@@ -158,3 +192,12 @@ const table = d3.select("#table").append("table");
 table.append("thead").append("tr").selectAll("th").data(cols).join("th").text((c) => c[0]);
 table.append("tbody").selectAll("tr").data(order).join("tr")
   .selectAll("td").data((r) => cols.map((c) => c[1](r))).join("td").html((v) => v);
+
+const t2 = d3.select("#decade-table").append("table");
+const cols2 = cols.filter((c) => c[0] !== "Basis");
+t2.append("thead").append("tr").selectAll("th").data(cols2).join("th").text((c) => c[0]);
+t2.append("tbody").selectAll("tr").data(decade).join("tr")
+  .selectAll("td").data((r) => cols2.map((c) => c[1](r))).join("td").html((v) => v);
+
+d3.select("#pair-data").text(pairRaw.companies.map((c) =>
+  `${byTicker.get(c.ticker).name}: ${d3.format(",")(c.shares)} shares outstanding as of ${fmtDate(c.shares_as_of)} (cover of its ${c.shares_form}, accession ${c.shares_accn}) × $${d3.format(",.2f")(c.close)} close on ${fmtDate(c.close_date)} = ${usdBig(c.market_value)}.`).join(" "));
