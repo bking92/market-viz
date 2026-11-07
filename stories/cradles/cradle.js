@@ -5,7 +5,9 @@
 // When a ball moves more than a sliver per frame it is drawn with true motion blur (several sub-frame
 // samples); when it strikes many times per frame it is drawn as its time-averaged smear.
 
-const AMP = 0.5;            // swing amplitude in radians (about 29°)
+import { drawCradle3D, renderToCache, BOX } from "./cradle3d.js";
+
+const AMP = 0.42;            // swing amplitude in radians (about 29°)
 const L = 7;                // string length, in ball radii
 const DEPTH = { x: 0.25, y: -1.3 }; // offset of the back rail, in ball radii (a slightly raised 3/4 view)
 const BALLS = 5;
@@ -308,6 +310,9 @@ export class CradleScene {
     this.resize();
     new ResizeObserver(() => { this.resize(); this.layout(this.visible || [], true); }).observe(canvas);
     this.last = performance.now();
+    // only draw while the canvas is (nearly) on screen; the clocks keep running either way
+    this.onScreen = true;
+    new IntersectionObserver((es) => { for (const e of es) this.onScreen = e.isIntersecting; }, { rootMargin: "200px" }).observe(canvas);
     const tick = (t) => { this.frame(t); requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
   }
@@ -364,14 +369,44 @@ export class CradleScene {
       it.x += (it.tx - it.x) * kp; it.y += (it.ty - it.y) * kp; it.r += (it.tr - it.r) * kp;
       it.a += (it.ta - it.a) * (1 - Math.exp(-dt / 0.25));
       if (it.d.interval > 0) it.u += dt * (prevSpeed + this.speed) / 2 / this.strikeEvery(it.d);
-      if (it.a < 0.01) continue;
+      if (it.a < 0.01 || !this.onScreen) continue;
       this.drawCradle(it, dt);
     }
   }
+  // 3D picture of this cradle (studio chrome). Falls back to the flat 2D drawing without WebGL.
+  draw3D(it, samples, smear) {
+    const { x: cx, y: top, r, a, d } = it, dpr = this.dpr;
+    const rect = { x: cx - BOX.w / 2 * r, y: top - BOX.up * r, w: BOX.w * r, h: BOX.h * r };
+    let sides = null, key;
+    const broken = !(d.interval > 0);
+    if (broken) key = `broken ${d.ticker}`;
+    else {
+      sides = [0, 1].map((side) => {
+        const angs = samples.map((p) => p[side]);
+        if (angs.every((v) => Math.abs(v) < 1e-4)) return [[0, 1]];
+        if (smear) return [[0, 0.55], ...angs.map((v) => [v, 0.16])];
+        if (angs.length === 1) return [[angs[0], 1]];
+        return angs.map((v) => [v, Math.min(1, 1.25 / angs.length)]);
+      });
+      key = JSON.stringify(sides.map((l) => l.map(([v, o]) => [Math.round(v * 400), Math.round(o * 50)])));
+    }
+    key += ` ${Math.round(rect.w * dpr)}x${Math.round(rect.h * dpr)}`;
+    if (!it.cache) it.cache = document.createElement("canvas");
+    if (it.cacheKey !== key) {
+      if (!renderToCache(it.cache, rect, dpr, sides, broken ? d.ticker : null, broken ? rng(d.ticker) : null)) return false;
+      it.cacheKey = key;
+    }
+    const g = this.g;
+    g.save(); g.globalAlpha = a; g.drawImage(it.cache, rect.x, rect.y, rect.w, rect.h); g.restore();
+    return true;
+  }
   drawCradle(it, dt) {
     const g = this.g, { x: cx, y: top, r, a } = it, dpr = this.dpr, d = it.d;
-    if (!(d.interval > 0)) { drawBroken(g, cx, top, r, a, dpr, d.ticker); if (this.label) this.drawLabel(it); return; }
-    drawFrameBack(g, cx, top, r, a);
+    if (!(d.interval > 0)) {
+      if (this.use3D !== false && this.draw3D(it, null, false)) { if (this.label) this.drawLabel(it); return; }
+      this.use3D = false;
+      drawBroken(g, cx, top, r, a, dpr, d.ticker); if (this.label) this.drawLabel(it); return;
+    }
     const moving = d.interval > 0;
     const shutter = dt * 0.6; // seconds of simulated-clock exposure, as a share of the frame
     let samples = [[0, 0]]; // list of [left angle, right angle]
@@ -391,6 +426,9 @@ export class CradleScene {
       if (it.lastK !== null && kNow !== it.lastK && this.onStrike && it.ta > 0.5) this.onStrike(it, kNow - it.lastK);
       it.lastK = kNow;
     }
+    if (this.use3D !== false && this.draw3D(it, samples, smear)) { if (this.label) this.drawLabel(it); return; }
+    this.use3D = false;
+    drawFrameBack(g, cx, top, r, a);
     // shadows (averaged over samples)
     const sa = a / samples.length;
     for (const [l, rr] of samples) { drawShadow(g, cx, top, r, 0, l, sa); drawShadow(g, cx, top, r, BALLS - 1, rr, sa); }
