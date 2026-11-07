@@ -11,21 +11,27 @@
   <link rel="stylesheet" href="../../assets/css/site.css">
   <style>
     .scrolly .graphic { flex-direction: column; justify-content: flex-start; align-items: center; }
-    .scrolly .graphic canvas { width: 100%; height: 56vh; display: block; }
-    @media (min-width: 1000px) { .scrolly .graphic { justify-content: center; } .scrolly .graphic canvas { height: min(84vh, 760px); } }
+    .scrolly .graphic canvas { width: 100%; height: calc(var(--vh, 1vh) * 56); display: block; }
+    @media (min-width: 1000px) { .scrolly .graphic { justify-content: center; } .scrolly .graphic canvas { height: min(calc(var(--vh, 1vh) * 84), 760px); } }
     .clock { font-family: var(--serif); font-style: italic; font-size: 1.05rem; color: var(--ink-soft); min-height: 1.6em; margin: 0 0 0.2rem; text-align: center; width: 100%; }
     .clock b { font-style: normal; font-weight: 600; color: var(--brand); }
     .live { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--brand); }
-    .explore { max-width: 72rem; margin: 6vh auto 0; padding: 0 1.25rem; }
+    .explore { max-width: 72rem; margin: calc(var(--vh, 1vh) * 6) auto 0; padding: 0 1.25rem; }
     .explore h2 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.5rem; max-width: var(--measure); }
     .explore > p { max-width: var(--measure); margin: 0 0 1rem; }
-    .pick { max-width: var(--measure); margin: 12vh auto 0; padding: 0 1.25rem; }
+    .pick { max-width: var(--measure); margin: calc(var(--vh, 1vh) * 12) auto 0; padding: 0 1.25rem; }
     .pick h2 { font-weight: 600; font-size: 1.9rem; margin: 0 0 0.5rem; }
     .pick .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem 2rem; margin: 1.25rem 0 0.5rem; font-family: var(--label); font-size: 0.95rem; }
     .pick label { display: flex; flex-direction: column; gap: 0.4rem; }
     .pick label b { color: var(--brand); font-weight: 700; }
-    .pick input[list] { font: 500 1.05rem var(--label); padding: 0.45rem 0.6rem; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0; }
-    .pick input[list]:focus { outline: none; border-color: var(--brand); }
+    .pick .combo { position: relative; display: block; }
+    .pick #pick-list { position: absolute; z-index: 5; left: 0; right: 0; top: 100%; margin: 0; padding: 0; list-style: none; background: var(--paper); border: 2px solid var(--ink); border-top: 0; max-height: 17rem; overflow-y: auto; }
+    .pick #pick-list li { padding: 0.55rem 0.6rem; cursor: pointer; font-size: 1rem; }
+    .pick #pick-list li span { color: var(--ink-soft); margin-left: 0.4rem; font-size: 0.85rem; }
+    .pick #pick-list li[aria-selected="true"], .pick #pick-list li:hover { background: var(--brand); color: var(--paper); }
+    .pick #pick-list li[aria-selected="true"] span, .pick #pick-list li:hover span { color: var(--paper); }
+    .pick #pick-co { width: 100%; box-sizing: border-box; font: 500 16px var(--label); padding: 0.45rem 0.6rem; border: 2px solid var(--ink); background: var(--paper); color: var(--ink); border-radius: 0; }
+    .pick #pick-co:focus { outline: none; border-color: var(--brand); }
     .pick input[type=range] { width: 100%; accent-color: var(--brand); margin: 0.35rem 0 0; }
     .pick .ends { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--ink-soft); }
     #pick-stage { display: block; width: 100%; height: 400px; }
@@ -81,8 +87,10 @@
     <p>Pick any company in the S&amp;P 500 and how much profit each strike stands for.</p>
     <div class="controls">
       <label>Company
-        <input id="pick-co" list="pick-list" autocomplete="off" spellcheck="false" placeholder="Type a name or ticker">
-        <datalist id="pick-list"></datalist>
+        <span class="combo">
+          <input id="pick-co" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pick-list" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="Type a name or ticker">
+          <ul id="pick-list" role="listbox" hidden></ul>
+        </span>
       </label>
       <label>Each strike is <b id="pick-amt-out">…</b>
         <input id="pick-amt" type="range" min="0" max="21" step="1" value="9" aria-describedby="pick-amt-out">
