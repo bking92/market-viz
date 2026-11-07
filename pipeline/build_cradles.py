@@ -55,6 +55,12 @@ COMPANIES = [
 PAIR = ("TSLA", "DAL")  # similar profit, very different market value; checked below
 YEARS_BACK = 10
 UA_PLAIN = "market-viz-research/0.1 (data pipeline)"
+# Companies that have dropped off SEC's ticker list but whose last filings are still used, with why.
+CIK_FALLBACK = {"NATH": 69733}
+DEREGISTERED = {
+    "NATH": "Nathan's Famous filed a Form 15 on November 5, 2026, ending its SEC registration, so it has left "
+            "SEC's ticker list. Its last reported twelve months (to June 28, 2026) are still used.",
+}
 EXCLUDED = {
     "BYND": "Beyond Meat: its trailing-twelve-month net income built from year-to-date figures differs by "
             "$10.8 million from the sum of its four reported quarters, so the figure is ambiguous.",
@@ -171,7 +177,9 @@ def main():
         if tk in EXCLUDED:
             log(f"{tk}: excluded. {EXCLUDED[tk]}")
             continue
-        cik = cik_of.get(tk)
+        cik = cik_of.get(tk) or CIK_FALLBACK.get(tk)
+        if tk not in cik_of and cik:
+            log(f"{tk}: not in SEC's current ticker list; using CIK {cik} from CIK_FALLBACK")
         if cik is None:
             log(f"{tk}: not in SEC ticker list, skipped")
             continue
@@ -233,7 +241,7 @@ def main():
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
-    meta = dict(decade_skipped=decade_skipped, excluded=EXCLUDED, as_of=AS_OF, built=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), n=len(rows),
+    meta = dict(deregistered=DEREGISTERED, decade_skipped=decade_skipped, excluded=EXCLUDED, as_of=AS_OF, built=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), n=len(rows),
                 source="SEC EDGAR XBRL company facts API, https://data.sec.gov/api/xbrl/companyfacts/")
     json.dump(meta, open(f"{OUT}/meta.json", "w"), indent=1)
     open(f"{OUT}/build_log.txt", "w").write("\n".join(LOG) + "\n")

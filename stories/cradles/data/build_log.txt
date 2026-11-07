@@ -1,4 +1,4 @@
-GET https://www.sec.gov/files/company_tickers.json -> 797279 bytes
+GET https://www.sec.gov/files/company_tickers.json -> 796507 bytes
 GET https://data.sec.gov/api/xbrl/companyfacts/CIK0001045810.json -> 4092966 bytes
 NVDA (NVIDIA CORP, CIK 1045810): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
     2025-01-27..2026-01-25    120,067,000,000 USD  10-K filed 2026-02-25 accn 0001045810-26-000021
@@ -173,7 +173,14 @@ BBW (BUILD-A-BEAR WORKSHOP INC, CIK 1113809): tag NetIncomeLoss, trailing twelve
     TTM 2025-08-03..2026-08-01 (364 days) = 51,576,000 USD
     check, sum of four quarters = 51,576,000 (difference 0)
     = 1.64 USD per second; $1M every 609,772.0 s
-NATH: not in SEC ticker list, skipped
+GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000069733.json -> 3021564 bytes
+NATH (NATHAN'S FAMOUS, INC., CIK 69733): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
+    2025-03-31..2026-03-29         20,020,000 USD  10-K filed 2026-06-09 accn 0001437749-26-019923
+    2026-03-30..2026-06-28          8,829,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
+    2025-03-31..2025-06-29          8,928,000 USD  10-Q filed 2026-08-07 accn 0001437749-26-026427
+    TTM 2025-06-30..2026-06-28 (364 days) = 19,921,000 USD
+    check, sum of four quarters = 19,921,000 (difference 0)
+    = 0.63 USD per second; $1M every 1,578,715.9 s
 GET https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json -> 4363467 bytes
 INTC (Intel Corporation, CIK 50863): tag NetIncomeLoss, trailing twelve months: fiscal year + this year to date − last year to date
     2024-12-29..2025-12-27       -267,000,000 USD  10-K filed 2026-01-23 accn 0000050863-26-000011

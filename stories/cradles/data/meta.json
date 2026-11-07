@@ -1,4 +1,7 @@
 {
+ "deregistered": {
+  "NATH": "Nathan's Famous filed a Form 15 on November 5, 2026, ending its SEC registration, so it has left SEC's ticker list. Its last reported twelve months (to June 28, 2026) are still used."
+ },
  "decade_skipped": {
   "MSFT": "Microsoft: the filings from then don't add up. Its twelve months to 2016-09-30 come to $16.87 billion from the year totals but $16.57 billion from the four quarters, so it is left out."
  },
@@ -6,7 +9,7 @@
   "BYND": "Beyond Meat: its trailing-twelve-month net income built from year-to-date figures differs by $10.8 million from the sum of its four reported quarters, so the figure is ambiguous."
  },
  "as_of": "2026-11-07",
- "built": "2026-11-07 15:48 UTC",
- "n": 30,
+ "built": "2026-11-07 18:22 UTC",
+ "n": 31,
  "source": "SEC EDGAR XBRL company facts API, https://data.sec.gov/api/xbrl/companyfacts/"
 }
