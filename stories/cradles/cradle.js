@@ -182,6 +182,113 @@ export function fmtInterval(s) {
   return `${(s / 86400).toFixed(1)} days`;
 }
 
+
+// ---------- a broken cradle, for companies losing money ----------
+// Deterministic per company: the front rail has snapped, the right-hand post leans out, the balls that lost
+// their strings lie on the base (one has rolled off), and now and then a ball is wound up around the bar.
+function rng(seedStr) {
+  let h = 1779033703 ^ seedStr.length;
+  for (let i = 0; i < seedStr.length; i++) { h = Math.imul(h ^ seedStr.charCodeAt(i), 3432918353); h = (h << 13) | (h >>> 19); }
+  return () => { h = Math.imul(h ^ (h >>> 16), 2246822507); h = Math.imul(h ^ (h >>> 13), 3266489909); h ^= h >>> 16; return (h >>> 0) / 4294967296; };
+}
+
+function contactShadow(g, x, y, w, h, alpha) {
+  const rg = g.createRadialGradient(x, y, 0, x, y, w);
+  rg.addColorStop(0, `rgba(5,8,40,${0.5 * alpha})`); rg.addColorStop(1, "rgba(5,8,40,0)");
+  g.save(); g.translate(x, y); g.scale(1, h / w); g.translate(-x, -y);
+  g.fillStyle = rg; g.beginPath(); g.arc(x, y, w, 0, Math.PI * 2); g.fill(); g.restore();
+}
+
+function sprite(g, x, y, r, alpha, dpr) {
+  const s = ballSprite(r, dpr);
+  g.globalAlpha = alpha;
+  g.drawImage(s.canvas, x - s.size / dpr / 2, y - s.size / dpr / 2, s.size / dpr, s.size / dpr);
+  g.globalAlpha = 1;
+}
+
+function stringLine(g, pts, r, alpha) {
+  g.save(); g.globalAlpha = alpha * 0.8; g.strokeStyle = "#3a3632"; g.lineWidth = Math.max(0.6, r * 0.05); g.lineCap = "round";
+  g.beginPath(); g.moveTo(pts[0][0], pts[0][1]);
+  if (pts.length === 3) g.quadraticCurveTo(pts[1][0], pts[1][1], pts[2][0], pts[2][1]);
+  else for (const p of pts.slice(1)) g.lineTo(p[0], p[1]);
+  g.stroke(); g.restore();
+}
+
+function drawBroken(g, cx, top, r, a, dpr, seed) {
+  const R = rng(seed), h = HALF * r, c = CORNER * r, baseY = top + BASE_Y * r;
+  const depthY = -DEPTH.y * r * 1.5, topY = baseY - depthY, footY = baseY - 0.25 * r;
+  const bw = 10.6 * r, bh = 1.35 * r, w = Math.max(1.4, 0.38 * r);
+  drawFrameBack(g, cx, top, r, a);
+  // a crack across the base's top face and down its front
+  g.save(); g.globalAlpha = a * 0.75; g.strokeStyle = "#0b1250"; g.lineWidth = Math.max(0.8, r * 0.07); g.lineJoin = "miter";
+  const kx = cx + (R() * 6 - 3) * r;
+  g.beginPath(); g.moveTo(kx - 1.2 * r, topY + 0.15 * r);
+  g.lineTo(kx - 0.5 * r, topY + depthY * 0.35); g.lineTo(kx - 0.9 * r, topY + depthY * 0.6); g.lineTo(kx - 0.2 * r, baseY);
+  g.lineTo(kx - 0.45 * r, baseY + bh * 0.5); g.lineTo(kx - 0.1 * r, baseY + bh); g.stroke(); g.restore();
+
+  const breakX = cx + (R() * 3.5 - 1.5) * r;       // where the front rail snapped
+  const pivots = [];
+  for (let i = 0; i < BALLS; i++) pivots.push(ballPos(cx, top, r, i, 0));
+  const dx = DEPTH.x * r / 2, dy = DEPTH.y * r / 2;
+  // balls that lost their front string: on the base, spaced out, one off the edge onto the paper
+  const fallen = pivots.map((b, i) => i).filter((i) => pivots[i].px - dx > breakX);
+  const slots = [];
+  fallen.forEach((i, k) => {
+    if (k === fallen.length - 1 && fallen.length > 1) {
+      slots.push({ i, floor: true, x: cx + bw + r * (1.4 + R() * 0.8), y: baseY + bh + 0.25 * r - r });
+    } else {
+      let x;
+      for (let t = 0; t < 20; t++) { x = cx + (R() * 2 - 1) * (bw - 1.6 * r); if (slots.every((s) => Math.abs(s.x - x) > 2.2 * r)) break; }
+      slots.push({ i, floor: false, x, y: topY + depthY * (0.35 + R() * 0.45) - r * 0.95 });
+    }
+  });
+  // shadows first
+  for (const s of slots) contactShadow(g, s.x + 0.2 * r, s.y + r * 0.92, r * 1.05, r * 0.28, a);
+  // strings: snapped stubs hanging from the back rail, tails lying next to the fallen balls
+  for (const s of slots) {
+    const b = pivots[s.i], bx = b.px + dx, by = b.py + dy, len = (1.6 + R() * 2.2) * r, sway = (R() - 0.5) * 1.6 * r;
+    stringLine(g, [[bx, by], [bx + sway, by + len * 0.6], [bx + sway * 0.4, by + len]], r, a);
+    const ang = R() * Math.PI * 2;
+    stringLine(g, [[s.x, s.y - r * 0.9], [s.x + Math.cos(ang) * 1.5 * r, s.y - r * 0.9 + Math.sin(ang) * 0.5 * r], [s.x + Math.cos(ang) * 2.6 * r, s.y - r * 0.3]], r, a);
+  }
+  // balls still on both rails: most hang straight, one may be wound up around the bar
+  const hanging = pivots.map((b, i) => i).filter((i) => !fallen.includes(i));
+  const wound = hanging.length > 1 && R() < 0.75 ? hanging[Math.floor(R() * hanging.length)] : -1;
+  for (const i of hanging) {
+    const b = pivots[i];
+    if (i === wound) {
+      const y = b.py + 1.45 * r;
+      // loops of string around the bar, then a short drop to the ball
+      g.save(); g.globalAlpha = a * 0.9; g.strokeStyle = "#3a3632"; g.lineWidth = Math.max(0.7, r * 0.07);
+      for (let k = 0; k < 4; k++) { g.beginPath(); g.ellipse(b.px - 0.45 * r + k * 0.3 * r, b.py - 0.05 * r, 0.3 * r, 0.55 * r, 0.35, 0, Math.PI * 2); g.stroke(); }
+      g.restore();
+      stringLine(g, [[b.px - dx, b.py - dy], [b.px, y - r * 0.9], [b.px + dx, b.py + dy]], r, a);
+      sprite(g, b.px, y, r, a, dpr);
+    } else {
+      const th = (R() - 0.5) * 0.08;
+      drawShadow(g, cx, top, r, i, th, a);
+      drawBall(g, cx, top, r, i, th, a, dpr);
+    }
+  }
+  for (const s of slots) sprite(g, s.x, s.y, r, a, dpr);
+  // front frame: left half intact up to the break; right post leans out with a drooping stub of rail
+  g.save(); g.globalAlpha = a; g.fillStyle = "#14161f";
+  for (const x of [cx - h, cx + h]) { g.beginPath(); g.ellipse(x, footY, w * 1.1, w * 0.42, 0, 0, Math.PI * 2); g.fill(); }
+  g.restore();
+  chrome(g, (ox, oy) => {
+    g.beginPath(); g.moveTo(cx - h + ox, footY + oy); g.lineTo(cx - h + ox, top + c + oy);
+    g.arcTo(cx - h + ox, top + oy, cx - h + c + ox, top + oy, c); g.lineTo(breakX + ox, top + oy + 0.15 * r);
+  }, w, a);
+  const tilt = 0.18 + R() * 0.12, Lp = footY - (top + c);
+  const tx = cx + h + Math.sin(tilt) * Lp, ty = footY - Math.cos(tilt) * Lp;
+  const stub = Math.max(1.5 * r, cx + h - breakX - 1.2 * r) * 0.75;
+  chrome(g, (ox, oy) => {
+    g.beginPath(); g.moveTo(cx + h + ox, footY + oy); g.lineTo(tx + ox, ty + oy);
+    g.quadraticCurveTo(tx + ox, ty - c + oy, tx - c + ox, ty - c * 0.55 + oy);
+    g.lineTo(tx - c - stub + ox, ty + stub * 0.45 + oy);
+  }, w, a);
+}
+
 // ---------- the scene ----------
 export class CradleScene {
   constructor(canvas, items, opts = {}) {
@@ -209,19 +316,20 @@ export class CradleScene {
   setSpeed(s, instant = false) { this.targetLogSpeed = Math.log(s); if (instant) this.logSpeed = this.targetLogSpeed; }
   get speed() { return Math.exp(this.logSpeed); }
   // show the cradles for these tickers, in this order, in a grid that fits the canvas
-  layout(tickers, instant = false) {
+  layout(tickers, instant = false, forceCols = null) {
     this.visible = tickers;
     const n = tickers.length, W = this.W, H = this.H;
     if (!n || !W) return;
     let best = null;
-    for (let cols = 1; cols <= n; cols++) {
+    const extra = tickers.some((t) => this.items.find((it) => it.d.ticker === t)?.d.note) ? 26 : 0;
+    for (let cols = forceCols ? Math.min(forceCols, n) : 1; cols <= (forceCols ? Math.min(forceCols, n) : n); cols++) {
       const rows = Math.ceil(n / cols);
-      const labelH = 46;
+      const labelH = 46 + extra;
       const r = Math.min(W / cols / 23.5, (H / rows - labelH) / 13.4, this.maxR);
       if (!best || r > best.r) best = { cols, rows, r };
     }
     const { cols, rows, r } = best;
-    const cellW = W / cols, labelH = Math.max(40, Math.min(58, r * 2.4)), cellH = r * 13.4 + labelH;
+    const cellW = W / cols, labelH = Math.max(40, Math.min(58, r * 2.4)) + extra, cellH = r * 13.4 + labelH;
     const y0 = Math.max(0, (H - rows * cellH) / 2);
     const idx = new Map(tickers.map((t, i) => [t, i]));
     for (const it of this.items) {
@@ -259,6 +367,7 @@ export class CradleScene {
   }
   drawCradle(it, dt) {
     const g = this.g, { x: cx, y: top, r, a } = it, dpr = this.dpr, d = it.d;
+    if (!(d.interval > 0)) { drawBroken(g, cx, top, r, a, dpr, d.ticker); if (this.label) this.drawLabel(it); return; }
     drawFrameBack(g, cx, top, r, a);
     const moving = d.interval > 0;
     const shutter = dt * 0.6; // seconds of simulated-clock exposure, as a share of the frame
@@ -318,6 +427,7 @@ export class CradleScene {
     g.font = `400 ${fs * 0.82}px "Libre Franklin", Arial, sans-serif`;
     g.fillStyle = d.interval > 0 ? css("--ink-soft") : css("--loss-text");
     g.fillText(sub, x, ly + fs * 1.15);
+    if (d.note) { g.fillStyle = css("--brand"); g.font = `600 ${fs * 0.95}px "Libre Franklin", Arial, sans-serif`; g.fillText(d.note, x, ly + fs * 2.45); }
     g.globalAlpha = 1;
   }
 }

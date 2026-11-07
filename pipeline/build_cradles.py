@@ -11,6 +11,13 @@ discrete quarters where the filings give them, and every input (with accession n
 Seconds to earn $1M = 1,000,000 / (TTM net income / seconds in the TTM window). The window length is the
 real number of days between the start and end dates (52/53-week years differ).
 
+Two extras for the story:
+  * decade.csv: the same twelve-month net income for each of the "giants", for the window ending ten years
+    before their latest one, from the same filings API, as first reported.
+  * pair.json: two companies with almost the same profit pace but very different market values. Market value
+    = shares outstanding on the cover of the latest 10-Q/10-K (dei:EntityCommonStockSharesOutstanding) x the
+    last close on or before AS_OF from Yahoo Finance's chart API.
+
 Run from the site root:
     SEC_USER_AGENT="your name you@example.com" python3 pipeline/build_cradles.py
 """
@@ -34,6 +41,7 @@ COMPANIES = [
     ("V", "Visa", "brands"), ("WMT", "Walmart", "brands"), ("LLY", "Eli Lilly", "brands"),
     ("KO", "Coca-Cola", "brands"), ("COST", "Costco", "brands"), ("MCD", "McDonald's", "brands"),
     ("NFLX", "Netflix", "brands"), ("TSLA", "Tesla", "brands"), ("HSY", "Hershey", "brands"),
+    ("DAL", "Delta Air Lines", "brands"),
     ("CMG", "Chipotle", "brands"), ("DPZ", "Domino's", "brands"),
     # Small and particular
     ("CROX", "Crocs", "small"), ("WDFC", "WD-40", "small"), ("BBW", "Build-A-Bear", "small"),
@@ -44,6 +52,9 @@ COMPANIES = [
     ("SNAP", "Snap", "losses"),
 ]
 # Checked and left out, with the reason shown on the page:
+PAIR = ("TSLA", "DAL")  # similar profit, very different market value; checked below
+YEARS_BACK = 10
+UA_PLAIN = "market-viz-research/0.1 (data pipeline)"
 EXCLUDED = {
     "BYND": "Beyond Meat: its trailing-twelve-month net income built from year-to-date figures differs by "
             "$10.8 million from the sum of its four reported quarters, so the figure is ambiguous.",
@@ -58,13 +69,13 @@ def log(msg):
     LOG.append(msg)
 
 
-def fetch(url):
+def fetch(url, ua=None):
     p = os.path.join(CACHE, hashlib.sha1(url.encode()).hexdigest())
     if os.path.exists(p):
         return open(p, "rb").read()
     for attempt in range(5):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA_SEC, "Accept-Encoding": "identity"})
+            req = urllib.request.Request(url, headers={"User-Agent": ua or UA_SEC, "Accept-Encoding": "identity"})
             body = urllib.request.urlopen(req, timeout=60).read()
             open(p, "wb").write(body)
             log(f"GET {url} -> {len(body)} bytes")
@@ -84,7 +95,7 @@ def days(f):
     return (d(f["end"]) - d(f["start"])).days + 1
 
 
-def facts_for(cf, tag):
+def facts_for(cf, tag, first=False):
     node = cf["facts"].get("us-gaap", {}).get(tag, {}).get("units", {}).get("USD")
     if not node:
         return None
@@ -97,7 +108,7 @@ def facts_for(cf, tag):
         if f["filed"] > AS_OF:
             continue
         k = (f["start"], f["end"])
-        if k not in best or f["filed"] > best[k]["filed"]:
+        if k not in best or (f["filed"] < best[k]["filed"] if first else f["filed"] > best[k]["filed"]):
             best[k] = f
     return list(best.values())
 
@@ -155,6 +166,7 @@ def main():
     cik_of = {v["ticker"]: v["cik_str"] for v in tickers.values()}
     title_of = {v["ticker"]: v["title"] for v in tickers.values()}
     rows = []
+    kept = {}
     for tk, name, group in COMPANIES:
         if tk in EXCLUDED:
             log(f"{tk}: excluded. {EXCLUDED[tk]}")
@@ -183,6 +195,7 @@ def main():
         if res is None:
             log(f"{tk}: no usable net income series, skipped")
             continue
+        kept[tk] = dict(cf=cf, facts=facts, res=res, cik=cik, name=name, group=group)
         span_days = (d(res["end"]) - d(res["start"])).days + 1
         secs = span_days * 86400
         per_sec = res["value"] / secs
@@ -214,14 +227,111 @@ def main():
                          sources=" ".join(sorted({f["accn"] for f in res["inputs"]})),
                          latest_filed=max(f["filed"] for f in res["inputs"])))
     rows.sort(key=lambda r: -r["per_second"])
+    decade_skipped = decade(rows, kept)
+    pair(rows, kept)
     with open(f"{OUT}/companies.csv", "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0]))
         w.writeheader()
         w.writerows(rows)
-    meta = dict(excluded=EXCLUDED, as_of=AS_OF, built=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), n=len(rows),
+    meta = dict(decade_skipped=decade_skipped, excluded=EXCLUDED, as_of=AS_OF, built=dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"), n=len(rows),
                 source="SEC EDGAR XBRL company facts API, https://data.sec.gov/api/xbrl/companyfacts/")
     json.dump(meta, open(f"{OUT}/meta.json", "w"), indent=1)
     open(f"{OUT}/build_log.txt", "w").write("\n".join(LOG) + "\n")
+
+
+
+def decade(rows, kept):
+    """Twelve-month net income for each giant, for the window ending YEARS_BACK years before its latest."""
+    out, skipped = [], {}
+    log(f"\n--- {YEARS_BACK} years earlier ---")
+    for r in rows:
+        if r["group"] != "giants":
+            continue
+        k = kept[r["ticker"]]
+        target = d(r["period_end"]) - dt.timedelta(days=round(365.25 * YEARS_BACK))
+        # As first reported: later restatements (e.g. new accounting rules applied to old years) would mix
+        # restated annual figures with quarters that were never restated.
+        first = facts_for(k["cf"], r["tag"], first=True)
+        # Only filings made within five months of the window's end: what was known at the time.
+        sub = [f for f in first if d(f["end"]) <= target + dt.timedelta(days=20)
+               and d(f["filed"]) <= target + dt.timedelta(days=150)]
+        try:
+            res = ttm(sub)
+        except (ValueError, KeyError) as e:
+            log(f"{r['ticker']}: no {YEARS_BACK}-year-earlier figure ({e}); left out")
+            skipped[r["ticker"]] = f"{r['name']}: no usable figure from {YEARS_BACK} years earlier in its filings."
+            continue
+        if abs((d(res["end"]) - target).days) > 45:
+            log(f"{r['ticker']}: nearest window ends {res['end']}, too far from {target}; left out")
+            continue
+        days_ = (d(res["end"]) - d(res["start"])).days + 1
+        ps = res["value"] / (days_ * 86400)
+        log(f"{r['ticker']}: {res['method']}")
+        for f in res["inputs"]:
+            log(f"    {f['start']}..{f['end']} {f['val']:>18,} USD  {f['form']} filed {f['filed']} accn {f['accn']}")
+        chk = four_quarters(sub, res["end"])
+        log(f"    TTM {res['start']}..{res['end']} ({days_} days) = {res['value']:,} USD"
+            + (f"; four-quarter sum {chk:,}" if chk is not None else "; four discrete quarters not available"))
+        if chk is not None and abs(chk - res["value"]) > max(2e6, abs(res["value"]) * 0.005):
+            log(f"    disagrees with the four-quarter sum by {chk - res['value']:,}: ambiguous, left out")
+            skipped[r["ticker"]] = (f"{r['name']}: the filings from then don't add up. Its twelve months to "
+                                    f"{res['end']} come to ${res['value'] / 1e9:.2f} billion from the year totals but "
+                                    f"${chk / 1e9:.2f} billion from the four quarters, so it is left out.")
+            continue
+        log(f"    = {ps:,.2f} USD per second" + (f"; $1M every {1e6 / ps:,.1f} s" if ps > 0 else "; loss"))
+        out.append(dict(ticker=r["ticker"], name=r["name"], period_start=res["start"], period_end=res["end"],
+                        days=days_, net_income=res["value"], per_second=round(ps, 4),
+                        seconds_per_million=round(1e6 / ps, 3) if ps > 0 else "",
+                        sources=" ".join(sorted({f["accn"] for f in res["inputs"]})), cik=r["cik"]))
+    with open(f"{OUT}/decade.csv", "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(out[0]))
+        w.writeheader()
+        w.writerows(out)
+    return skipped
+
+
+def last_close(ticker):
+    url = f"https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=1mo&interval=1d"
+    j = json.loads(fetch(url, ua=UA_PLAIN))["chart"]["result"][0]
+    best = None
+    for ts, c in zip(j["timestamp"], j["indicators"]["quote"][0]["close"]):
+        day = dt.datetime.fromtimestamp(ts + j["meta"]["gmtoffset"], dt.timezone.utc).date().isoformat()
+        if c is not None and day <= AS_OF:
+            best = (day, round(c, 2))
+    log(f"{ticker}: last close on or before {AS_OF}: {best[1]} on {best[0]} ({url})")
+    return best
+
+
+def pair(rows, kept):
+    log("\n--- pair: similar profit, different market value ---")
+    out = []
+    for tk in PAIR:
+        k = kept[tk]
+        r = next(x for x in rows if x["ticker"] == tk)
+        sh = k["cf"]["facts"]["dei"]["EntityCommonStockSharesOutstanding"]["units"]["shares"]
+        sh = [f for f in sh if f["filed"] <= AS_OF]
+        last = max(f["end"] for f in sh)
+        cur = [f for f in sh if f["end"] == last]
+        latest_filed = max(f["filed"] for f in cur)
+        cur = [f for f in cur if f["filed"] == latest_filed]
+        if len(cur) != 1:
+            sys.exit(f"{tk}: expected one share class on the cover, found {len(cur)}")
+        f = cur[0]
+        day, close = last_close(tk)
+        mv = f["val"] * close
+        log(f"{tk}: {f['val']:,} shares as of {f['end']} ({f['form']} filed {f['filed']}, accn {f['accn']})"
+            f" x {close} = {mv:,.0f} USD")
+        out.append(dict(ticker=tk, name=r["name"], net_income=r["net_income"], per_second=r["per_second"],
+                        period_end=r["period_end"], shares=f["val"], shares_as_of=f["end"], shares_accn=f["accn"],
+                        shares_form=f["form"], close=close, close_date=day, market_value=round(mv), cik=r["cik"]))
+    a, b = out
+    gap = abs(a["net_income"] / b["net_income"] - 1)
+    ratio = max(a["market_value"], b["market_value"]) / min(a["market_value"], b["market_value"])
+    log(f"profit gap {gap:.1%}, market value ratio {ratio:.1f}x")
+    if gap > 0.1:
+        sys.exit("pair: profits are not within 10% of each other; pick another pair")
+    json.dump(dict(companies=out, profit_gap=round(gap, 4), value_ratio=round(ratio, 2),
+                   price_source="Yahoo Finance chart API, daily close"), open(f"{OUT}/pair.json", "w"), indent=1)
 
 
 if __name__ == "__main__":
