@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where your $20 goes at Uber</title>
+  <meta name="description" content="What people spend through Uber, what Uber keeps, and how rides made room for food, from Uber's own quarterly reports.">
+  <link rel="icon" href="../../assets/img/logo.svg" type="image/svg+xml">
+  <link rel="icon" href="../../assets/img/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="../../assets/css/site.css">
+  <style>
+    :root { --mobility: var(--brand); --delivery: #e8590c; --other: #a39a8a; }
+    .key { display: inline-block; width: 0.8em; height: 0.8em; margin-right: 0.15em; vertical-align: -0.05em; }
+    .key.m { background: var(--mobility); } .key.d { background: var(--delivery); } .key.o { background: var(--other); }
+    .chart .bill-edge { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+    .chart .bill-label { fill: var(--ink); font-size: 14px; }
+    .chart .bill-big { fill: var(--ink); font-family: var(--serif); font-size: 22px; font-weight: 600; }
+    .chart .series-label { font-weight: 600; font-size: 14px; }
+    .chart .zero { stroke: var(--ink); stroke-width: 1; }
+    .chart .hover-line { stroke: var(--ink); stroke-width: 1; stroke-dasharray: 2 3; }
+    .chart .title { fill: var(--ink); font-family: var(--serif); font-size: 17px; }
+    .step b.m { color: var(--mobility); } .step b.d { color: #b8430a; }
+  </style>
+</head>
+<body>
+  <nav class="masthead"><a href="../../index.html"><span>Finance <i>in</i> Pictures</span></a></nav>
+
+  <header class="lede">
+    <h1>Where your $20 goes at Uber</h1>
+    <p>Uber started as a way to hail a car. Today almost half of what people spend through it is food, groceries and parcels. Scroll to watch the mix change, then follow a $20 ride and a $20 order to see how much of each Uber keeps.</p>
+    <p class="byline">From Uber's own quarterly reports, <span data-fill="first-label">…</span> to <span data-fill="last-label">…</span>. Sources and checks are listed at the end.</p>
+  </header>
+
+  <section class="scrolly">
+    <figure class="graphic"><svg class="chart" id="chart" role="img" aria-label="Uber gross bookings, revenue and profit by business line"></svg></figure>
+    <div class="steps">
+      <div class="step"><p>In the first three months of 2018, people spent <b data-fill="q0-total">…</b> through Uber. Uber calls this gross bookings: the full price of every ride and order, including the driver's share, taxes and tolls.</p>
+        <p><b class="m" data-fill="q0-m">…</b> of it was <span class="key m"></span>rides. <span class="key d"></span>Uber Eats was <b class="d" data-fill="q0-d">…</b>.</p></div>
+      <div class="step"><p>Then came the pandemic. From April to June 2020, rides fell to <b class="m" data-fill="cv-m">…</b>, down <span data-fill="cv-m-drop">…</span> from a year earlier.</p>
+        <p>Deliveries went the other way, to <b class="d" data-fill="cv-d">…</b>. For the first time, more money went through Uber on deliveries than on rides.</p></div>
+      <div class="step"><p>Here's each quarter as a share of the total. Delivery stayed ahead of rides for <span data-fill="d-ahead">…</span> quarters in a row.</p>
+        <p data-fill="tie-sentence">…</p></div>
+      <div class="step"><p>Rides came back and took the lead again. In <span data-fill="last-label">…</span>, people spent <b data-fill="last-total">…</b> through Uber: <b class="m" data-fill="last-m-share">…</b> on <span class="key m"></span>rides, <b class="d" data-fill="last-d-share">…</b> on <span class="key d"></span>delivery and the rest on <span class="key o"></span>freight.</p>
+        <p>That's <span data-fill="last-trips">…</span> trips in three months.</p></div>
+      <div class="step"><p>So what does Uber keep? Take a $20 ride, priced at Uber's average for <span data-fill="last-label">…</span>.</p>
+        <p>About <b data-fill="ride-rev">…</b> of it is Uber's revenue. The rest goes to the driver, and to taxes, tolls and fees. Out of its share, Uber has <b data-fill="ride-profit">…</b> left once it has paid what it costs to run the rides business.</p></div>
+      <div class="step"><p>Now a $20 food or grocery order. Uber's cut is smaller, <b data-fill="order-rev">…</b>, because the restaurant or shop takes most of the bill and the courier takes much of the rest.</p>
+        <p>What's left as profit is <b data-fill="order-profit">…</b>, less than half of what a ride earns.</p></div>
+      <div class="step"><p>Uber's cut wasn't always this size. Here's its revenue from every $20 spent, quarter by quarter.</p>
+        <p data-fill="keep-sentence">…</p>
+        <p>Some of the jumps are accounting. In 2022 Uber changed how it runs rides in Britain, and began counting the whole fare there as revenue, with drivers' pay as a cost. From 2023, in some countries, it began counting some marketing costs as a cut to revenue. The drop in 2026 is more of the same: Uber says such “business model changes” knocked 8 to 9 points off its revenue growth this year.</p></div>
+      <div class="step"><p>The bigger change is in profit. For every $20 order, Uber Eats lost <b class="d" data-fill="eats-worst">…</b> in <span data-fill="eats-worst-q">…</span>.</p>
+        <p data-fill="eats-turn">…</p>
+        <p>Rides went from <b class="m" data-fill="ride-first">…</b> per $20 in <span data-fill="ride-first-q">…</span> to <b class="m" data-fill="ride-last">…</b>.</p></div>
+      <div class="step"><p>What about reach? Uber's prospectus put its rides in <b data-fill="countries-first">…</b> countries at the end of 2018. Its latest annual report says its apps are in <b data-fill="countries-last">…</b> countries. The map barely moved. The growth came from more trips in the same places.</p>
+        <p>The one regional breakdown Uber published, revenue by region, shows <span class="key m"></span>the US and Canada bringing in <b data-fill="geo-us-first">…</b> of revenue in <span data-fill="geo-first-q">…</span> and <b data-fill="geo-us-last">…</b> in <span data-fill="geo-last-q">…</span>, the last quarter I found split out. Most of the wiggles are British accounting again: a charge for drivers' claims in early 2021 and the 2022 change.</p></div>
+    </div>
+  </section>
+
+  <section class="method" id="method">
+    <h2>How this was made</h2>
+    <p>Every number comes from Uber's quarterly earnings releases, which it files with the SEC as Exhibit 99.1 to a Form 8-K, plus its April 2019 IPO prospectus for the first half of 2018. I read each release and copied its tables line by line into <code>data/raw/</code>, naming the release each line came from. <code>pipeline/build_uber.py</code> then checks them and writes <code>data/quarters.csv</code>, which is the only file this page reads.</p>
+    <p>The checks: within each table the business lines add up to the printed total; most quarters appear in two releases (their own and the next year's), and the two copies must match; and each quarter's total revenue must match the figure in Uber's machine-readable SEC filings. <span data-fill="check-summary">…</span> The full log is in <code>data/build_log.txt</code>.</p>
+    <p>“Rides” is Uber's Mobility segment and “delivery” its Delivery segment; Uber renamed them from Rides and Eats in 2020. The grey band is everything else: Freight, plus small businesses Uber later sold or closed. Before 2020 the releases do not split Freight out, so the grey band then is the total minus rides and delivery.</p>
+    <p>The $20 ride and order scale Uber's own totals for <span data-fill="last-label">…</span>: revenue ÷ gross bookings, and segment profit ÷ gross bookings, for each business line, times $20. They are averages over every trip in the quarter, not a receipt for any one trip. Segment profit is Uber's “segment operating income”, which leaves out head-office costs and shared technology spending (<span data-fill="corp-cost">…</span> that quarter), so Uber as a whole keeps less than the two figures suggest. Uber switched profit measures in late 2025. The profit chart uses its older measure, segment adjusted EBITDA, until <span data-fill="ebitda-last">…</span>, and the newer one, dotted, after that. The newer measure runs lower, as the overlap in the chart shows.</p>
+    <p>Revenue before the fourth quarter of 2019 is left out of the revenue chart. Uber changed how it presents some payments to drivers in late 2020 and restated 2019 and 2020, but the releases only restate back to the fourth quarter of 2019. Gross bookings were not affected.</p>
+
+    <h2>Sources</h2>
+    <ol id="sources"></ol>
+
+    <h2>What is left out</h2>
+    <ul>
+      <li>Gross bookings by region. Uber's releases give only revenue by region, and only through mid-2023. Revenue by region is distorted by the 2022 British change, which moved about $1 billion a quarter into Europe's revenue.</li>
+      <li>City counts. Uber's prospectus counts “over 700 cities” in 2018 and its 2019 annual report counts about 10,000, which are clearly different definitions, so the two aren't compared here.</li>
+      <li>How the driver's share splits from taxes, tolls and fees. Uber doesn't break that out each quarter.</li>
+      <li>Figures for 2014 to 2017, which Uber has published only as yearly totals.</li>
+    </ul>
+
+    <h2>The data</h2>
+    <p>Every quarter used on this page, in millions of dollars, with the release it came from.</p>
+    <div id="table" class="wide-table"></div>
+  </section>
+
+  <div class="tooltip" id="tooltip"></div>
+  <script src="../../assets/js/d3.min.js"></script>
+  <script type="module" src="story.js"></script>
+</body>
+</html>

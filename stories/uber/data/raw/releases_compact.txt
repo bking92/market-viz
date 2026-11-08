@@ -1,0 +1,287 @@
+# Transcribed from Uber earnings releases (SEC EX-99.1). One line per table per quarter column.
+# file period table values...   gb/rev: Mobility Delivery Freight Total | seg_ebitda/seg_oi: Mobility Delivery Freight Corporate Total | geo_rev: US&CAN LatAm EMEA APAC Total
+uberq423earningspressrelea.htm 2022Q4 gb 14894 14315 1540 30749
+uberq423earningspressrelea.htm 2023Q4 gb 19285 17011 1279 37575
+uberq423earningspressrelea.htm 2022Q4 rev 4136 2931 1540 8607
+uberq423earningspressrelea.htm 2023Q4 rev 5537 3119 1280 9936
+uberq423earningspressrelea.htm 2022Q4 seg_ebitda 1012 241 -8 -580 665
+uberq423earningspressrelea.htm 2023Q4 seg_ebitda 1446 476 -14 -625 1283
+uberq423earningspressrelea.htm 2022Q4 trips 2104
+uberq423earningspressrelea.htm 2023Q4 trips 2601
+uberq423earningspressrelea.htm 2022Q4 mapcs 131
+uberq423earningspressrelea.htm 2023Q4 mapcs 150
+uberq124earningspressrelea.htm 2023Q1 gb 14981 15026 1401 31408
+uberq124earningspressrelea.htm 2024Q1 gb 18670 17699 1282 37651
+uberq124earningspressrelea.htm 2023Q1 rev 4330 3093 1400 8823
+uberq124earningspressrelea.htm 2024Q1 rev 5633 3214 1284 10131
+uberq124earningspressrelea.htm 2023Q1 seg_ebitda 1060 288 -23 -564 761
+uberq124earningspressrelea.htm 2024Q1 seg_ebitda 1479 528 -21 -604 1382
+uberq124earningspressrelea.htm 2023Q1 trips 2124
+uberq124earningspressrelea.htm 2024Q1 trips 2572
+uberq124earningspressrelea.htm 2023Q1 mapcs 130
+uberq124earningspressrelea.htm 2024Q1 mapcs 149
+uberq224earningspressrelea.htm 2023Q2 gb 16728 15595 1278 33601
+uberq224earningspressrelea.htm 2024Q2 gb 20554 18126 1272 39952
+uberq224earningspressrelea.htm 2023Q2 rev 4894 3057 1279 9230
+uberq224earningspressrelea.htm 2024Q2 rev 6134 3293 1273 10700
+uberq224earningspressrelea.htm 2023Q2 seg_ebitda 1170 329 -14 -569 916
+uberq224earningspressrelea.htm 2024Q2 seg_ebitda 1567 588 -12 -573 1570
+uberq224earningspressrelea.htm 2023Q2 trips 2282
+uberq224earningspressrelea.htm 2024Q2 trips 2765
+uberq224earningspressrelea.htm 2023Q2 mapcs 137
+uberq224earningspressrelea.htm 2024Q2 mapcs 156
+uberq225earningspressrelea.htm 2024Q2 gb 20554 18126 1272 39952
+uberq225earningspressrelea.htm 2025Q2 gb 23762 21734 1260 46756
+uberq225earningspressrelea.htm 2024Q2 rev 6134 3293 1273 10700
+uberq225earningspressrelea.htm 2025Q2 rev 7288 4102 1261 12651
+uberq225earningspressrelea.htm 2024Q2 seg_ebitda 1567 588 -12 -573 1570
+uberq225earningspressrelea.htm 2025Q2 seg_ebitda 1905 873 -6 -653 2119
+uberq225earningspressrelea.htm 2024Q2 trips 2765
+uberq225earningspressrelea.htm 2025Q2 trips 3268
+uberq225earningspressrelea.htm 2024Q2 mapcs 156
+uberq225earningspressrelea.htm 2025Q2 mapcs 180
+uberq325earningspressrelea.htm 2024Q3 gb 21002 18663 1308 40973
+uberq325earningspressrelea.htm 2025Q3 gb 25111 23322 1307 49740
+uberq325earningspressrelea.htm 2024Q3 rev 6409 3470 1309 11188
+uberq325earningspressrelea.htm 2025Q3 rev 7682 4477 1308 13467
+uberq325earningspressrelea.htm 2024Q3 seg_ebitda 1682 628 -19 -601 1690
+uberq325earningspressrelea.htm 2025Q3 seg_ebitda 2038 921 -20 -683 2256
+uberq325earningspressrelea.htm 2024Q3 trips 2868
+uberq325earningspressrelea.htm 2025Q3 trips 3512
+uberq325earningspressrelea.htm 2024Q3 mapcs 161
+uberq325earningspressrelea.htm 2025Q3 mapcs 189
+uberq425earningspressrelea.htm 2024Q4 gb 22798 20126 1273 44197
+uberq425earningspressrelea.htm 2025Q4 gb 27442 25431 1267 54140
+uberq425earningspressrelea.htm 2024Q4 rev 6911 3773 1275 11959
+uberq425earningspressrelea.htm 2025Q4 rev 8204 4892 1270 14366
+uberq425earningspressrelea.htm 2024Q4 seg_ebitda 1769 727 -22 -632 1842
+uberq425earningspressrelea.htm 2025Q4 seg_ebitda 2203 1015 0 -731 2487
+uberq425earningspressrelea.htm 2024Q4 seg_oi 1608 639 -41 -888 1318
+uberq425earningspressrelea.htm 2025Q4 seg_oi 2027 905 -18 -996 1918
+uberq425earningspressrelea.htm 2024Q4 trips 3068
+uberq425earningspressrelea.htm 2025Q4 trips 3751
+uberq425earningspressrelea.htm 2024Q4 mapcs 171
+uberq425earningspressrelea.htm 2025Q4 mapcs 202
+uberq324earningspressrelea.htm 2023Q3 gb 17903 16094 1284 35281
+uberq324earningspressrelea.htm 2024Q3 gb 21002 18663 1308 40973
+uberq324earningspressrelea.htm 2023Q3 rev 5071 2935 1286 9292
+uberq324earningspressrelea.htm 2024Q3 rev 6409 3470 1309 11188
+uberq324earningspressrelea.htm 2023Q3 seg_ebitda 1287 413 -13 -595 1092
+uberq324earningspressrelea.htm 2024Q3 seg_ebitda 1682 628 -19 -601 1690
+uberq324earningspressrelea.htm 2023Q3 trips 2441
+uberq324earningspressrelea.htm 2024Q3 trips 2868
+uberq324earningspressrelea.htm 2023Q3 mapcs 142
+uberq324earningspressrelea.htm 2024Q3 mapcs 161
+uberq424earningspressrelea.htm 2023Q4 gb 19285 17011 1279 37575
+uberq424earningspressrelea.htm 2024Q4 gb 22798 20126 1273 44197
+uberq424earningspressrelea.htm 2023Q4 rev 5537 3119 1280 9936
+uberq424earningspressrelea.htm 2024Q4 rev 6911 3773 1275 11959
+uberq424earningspressrelea.htm 2023Q4 seg_ebitda 1446 476 -14 -625 1283
+uberq424earningspressrelea.htm 2024Q4 seg_ebitda 1769 727 -22 -632 1842
+uberq424earningspressrelea.htm 2023Q4 trips 2601
+uberq424earningspressrelea.htm 2024Q4 trips 3068
+uberq424earningspressrelea.htm 2023Q4 mapcs 150
+uberq424earningspressrelea.htm 2024Q4 mapcs 171
+uberq125earningspressrelea.htm 2024Q1 gb 18670 17699 1282 37651
+uberq125earningspressrelea.htm 2025Q1 gb 21182 20377 1259 42818
+uberq125earningspressrelea.htm 2024Q1 rev 5633 3214 1284 10131
+uberq125earningspressrelea.htm 2025Q1 rev 6496 3777 1260 11533
+uberq125earningspressrelea.htm 2024Q1 seg_ebitda 1479 528 -21 -604 1382
+uberq125earningspressrelea.htm 2025Q1 seg_ebitda 1753 763 -7 -641 1868
+uberq125earningspressrelea.htm 2024Q1 trips 2572
+uberq125earningspressrelea.htm 2025Q1 trips 3036
+uberq125earningspressrelea.htm 2024Q1 mapcs 149
+uberq125earningspressrelea.htm 2025Q1 mapcs 170
+uberq222earningspressrelea.htm 2021Q2 gb 8640 12912 348 21900
+uberq222earningspressrelea.htm 2022Q2 gb 13364 13876 1838 29078
+uberq222earningspressrelea.htm 2021Q2 rev 1618 1963 348 3929
+uberq222earningspressrelea.htm 2022Q2 rev 3553 2688 1832 8073
+uberq222earningspressrelea.htm 2021Q2 seg_ebitda 179 -161 -41 -486 -509
+uberq222earningspressrelea.htm 2022Q2 seg_ebitda 771 99 5 -511 364
+uberq222earningspressrelea.htm 2021Q2 trips 1511
+uberq222earningspressrelea.htm 2022Q2 trips 1872
+uberq222earningspressrelea.htm 2021Q2 mapcs 101
+uberq222earningspressrelea.htm 2022Q2 mapcs 122
+uberq222earningspressrelea.htm 2021Q2 geo_rev 1984 307 929 709 3929
+uberq222earningspressrelea.htm 2022Q2 geo_rev 4936 481 1846 810 8073
+uberq322earningspressrelea.htm 2021Q3 gb 9883 12828 402 23113
+uberq322earningspressrelea.htm 2022Q3 gb 13684 13684 1751 29119
+uberq322earningspressrelea.htm 2021Q3 rev 2205 2238 402 4845
+uberq322earningspressrelea.htm 2022Q3 rev 3822 2770 1751 8343
+uberq322earningspressrelea.htm 2021Q3 seg_ebitda 544 -12 -35 -489 8
+uberq322earningspressrelea.htm 2022Q3 seg_ebitda 898 181 1 -564 516
+uberq322earningspressrelea.htm 2021Q3 trips 1641
+uberq322earningspressrelea.htm 2022Q3 trips 1953
+uberq322earningspressrelea.htm 2021Q3 mapcs 109
+uberq322earningspressrelea.htm 2022Q3 mapcs 124
+uberq322earningspressrelea.htm 2021Q3 geo_rev 2648 390 1064 743 4845
+uberq322earningspressrelea.htm 2022Q3 geo_rev 5000 518 1878 947 8343
+uberq422earningspressrelea.htm 2021Q4 gb 11340 13444 1082 25866
+uberq422earningspressrelea.htm 2022Q4 gb 14894 14315 1540 30749
+uberq422earningspressrelea.htm 2021Q4 rev 2278 2420 1080 5778
+uberq422earningspressrelea.htm 2022Q4 rev 4136 2931 1540 8607
+uberq422earningspressrelea.htm 2021Q4 seg_ebitda 575 25 -25 -489 86
+uberq422earningspressrelea.htm 2022Q4 seg_ebitda 1012 241 -8 -580 665
+uberq422earningspressrelea.htm 2021Q4 trips 1769
+uberq422earningspressrelea.htm 2022Q4 trips 2104
+uberq422earningspressrelea.htm 2021Q4 mapcs 118
+uberq422earningspressrelea.htm 2022Q4 mapcs 131
+uberq422earningspressrelea.htm 2021Q4 geo_rev 3613 419 995 751 5778
+uberq422earningspressrelea.htm 2022Q4 geo_rev 4976 547 2092 992 8607
+uberq123earningspressrelea.htm 2022Q1 gb 10723 13903 1823 26449
+uberq123earningspressrelea.htm 2023Q1 gb 14981 15026 1401 31408
+uberq123earningspressrelea.htm 2022Q1 rev 2518 2512 1824 6854
+uberq123earningspressrelea.htm 2023Q1 rev 4330 3093 1400 8823
+uberq123earningspressrelea.htm 2022Q1 seg_ebitda 618 30 2 -482 168
+uberq123earningspressrelea.htm 2023Q1 seg_ebitda 1060 288 -23 -564 761
+uberq123earningspressrelea.htm 2022Q1 trips 1713
+uberq123earningspressrelea.htm 2023Q1 trips 2124
+uberq123earningspressrelea.htm 2022Q1 mapcs 115
+uberq123earningspressrelea.htm 2023Q1 mapcs 130
+uberq123earningspressrelea.htm 2022Q1 geo_rev 4562 432 1127 733 6854
+uberq123earningspressrelea.htm 2023Q1 geo_rev 5132 565 2094 1032 8823
+uberq223earningspressrelea.htm 2022Q2 gb 13364 13876 1838 29078
+uberq223earningspressrelea.htm 2023Q2 gb 16728 15595 1278 33601
+uberq223earningspressrelea.htm 2022Q2 rev 3553 2688 1832 8073
+uberq223earningspressrelea.htm 2023Q2 rev 4894 3057 1279 9230
+uberq223earningspressrelea.htm 2022Q2 seg_ebitda 771 99 5 -511 364
+uberq223earningspressrelea.htm 2023Q2 seg_ebitda 1170 329 -14 -569 916
+uberq223earningspressrelea.htm 2022Q2 trips 1872
+uberq223earningspressrelea.htm 2023Q2 trips 2282
+uberq223earningspressrelea.htm 2022Q2 mapcs 122
+uberq223earningspressrelea.htm 2023Q2 mapcs 137
+uberq223earningspressrelea.htm 2022Q2 geo_rev 4936 481 1846 810 8073
+uberq223earningspressrelea.htm 2023Q2 geo_rev 5129 627 2412 1062 9230
+uberq323earningspressrelea.htm 2022Q3 gb 13684 13684 1751 29119
+uberq323earningspressrelea.htm 2023Q3 gb 17903 16094 1284 35281
+uberq323earningspressrelea.htm 2022Q3 rev 3822 2770 1751 8343
+uberq323earningspressrelea.htm 2023Q3 rev 5071 2935 1286 9292
+uberq323earningspressrelea.htm 2022Q3 seg_ebitda 898 181 1 -564 516
+uberq323earningspressrelea.htm 2023Q3 seg_ebitda 1287 413 -13 -595 1092
+uberq323earningspressrelea.htm 2022Q3 trips 1953
+uberq323earningspressrelea.htm 2023Q3 trips 2441
+uberq323earningspressrelea.htm 2022Q3 mapcs 124
+uberq323earningspressrelea.htm 2023Q3 mapcs 142
+uberq420earningspressrelea.htm 2019Q4 gb 13512 4374 219 18131
+uberq420earningspressrelea.htm 2020Q4 gb 6789 10050 313 17152
+uberq420earningspressrelea.htm 2019Q4 rev 3050 418 219 3747
+uberq420earningspressrelea.htm 2020Q4 rev 1471 1356 313 3165
+uberq420earningspressrelea.htm 2019Q4 seg_ebitda 742 -461 -55 -644 -615
+uberq420earningspressrelea.htm 2020Q4 seg_ebitda 293 -145 -41 -489 -454
+uberq420earningspressrelea.htm 2019Q4 trips 1907
+uberq420earningspressrelea.htm 2020Q4 trips 1443
+uberq420earningspressrelea.htm 2019Q4 mapcs 111
+uberq420earningspressrelea.htm 2020Q4 mapcs 93
+uberq420earningspressrelea.htm 2019Q4 geo_rev 2458 531 531 227 3747
+uberq420earningspressrelea.htm 2020Q4 geo_rev 1814 302 664 385 3165
+uberq121earningspressrelea.htm 2020Q1 gb 10874 4683 198 15776
+uberq121earningspressrelea.htm 2021Q1 gb 6773 12461 302 19536
+uberq121earningspressrelea.htm 2020Q1 rev 2467 527 199 3248
+uberq121earningspressrelea.htm 2021Q1 rev 853 1741 301 2903
+uberq121earningspressrelea.htm 2020Q1 seg_ebitda 581 -313 -64 -645 -612
+uberq121earningspressrelea.htm 2021Q1 seg_ebitda 298 -200 -29 -417 -359
+uberq121earningspressrelea.htm 2020Q1 trips 1661
+uberq121earningspressrelea.htm 2021Q1 trips 1447
+uberq121earningspressrelea.htm 2020Q1 mapcs 103
+uberq121earningspressrelea.htm 2021Q1 mapcs 98
+uberq121earningspressrelea.htm 2020Q1 geo_rev 2075 478 473 222 3248
+uberq121earningspressrelea.htm 2021Q1 geo_rev 1849 302 225 527 2903
+uberq221earningspressrelea.htm 2020Q2 gb 3046 6961 212 10224
+uberq221earningspressrelea.htm 2021Q2 gb 8640 12912 348 21900
+uberq221earningspressrelea.htm 2020Q2 rev 787 886 211 1913
+uberq221earningspressrelea.htm 2021Q2 rev 1618 1963 348 3929
+uberq221earningspressrelea.htm 2020Q2 seg_ebitda 50 -232 -49 -492 -837
+uberq221earningspressrelea.htm 2021Q2 seg_ebitda 179 -161 -41 -486 -509
+uberq221earningspressrelea.htm 2020Q2 trips 737
+uberq221earningspressrelea.htm 2021Q2 trips 1511
+uberq221earningspressrelea.htm 2020Q2 mapcs 55
+uberq221earningspressrelea.htm 2021Q2 mapcs 101
+uberq221earningspressrelea.htm 2020Q2 geo_rev 1125 213 358 217 1913
+uberq221earningspressrelea.htm 2021Q2 geo_rev 1984 307 929 709 3929
+uberq321earningspressrelea.htm 2020Q3 gb 5905 8550 290 14745
+uberq321earningspressrelea.htm 2021Q3 gb 9883 12828 402 23113
+uberq321earningspressrelea.htm 2020Q3 rev 1364 1136 288 2813
+uberq321earningspressrelea.htm 2021Q3 rev 2205 2238 402 4845
+uberq321earningspressrelea.htm 2020Q3 seg_ebitda 245 -183 -73 -510 -625
+uberq321earningspressrelea.htm 2021Q3 seg_ebitda 544 -12 -35 -489 8
+uberq321earningspressrelea.htm 2020Q3 trips 1184
+uberq321earningspressrelea.htm 2021Q3 trips 1641
+uberq321earningspressrelea.htm 2020Q3 mapcs 78
+uberq321earningspressrelea.htm 2021Q3 mapcs 109
+uberq321earningspressrelea.htm 2020Q3 geo_rev 1598 302 590 323 2813
+uberq321earningspressrelea.htm 2021Q3 geo_rev 2648 390 1064 743 4845
+uberq421earningspressrelea.htm 2020Q4 gb 6789 10050 313 17152
+uberq421earningspressrelea.htm 2021Q4 gb 11340 13444 1082 25866
+uberq421earningspressrelea.htm 2020Q4 rev 1471 1356 313 3165
+uberq421earningspressrelea.htm 2021Q4 rev 2278 2420 1080 5778
+uberq421earningspressrelea.htm 2020Q4 seg_ebitda 293 -145 -41 -489 -454
+uberq421earningspressrelea.htm 2021Q4 seg_ebitda 575 25 -25 -489 86
+uberq421earningspressrelea.htm 2020Q4 trips 1443
+uberq421earningspressrelea.htm 2021Q4 trips 1769
+uberq421earningspressrelea.htm 2020Q4 mapcs 93
+uberq421earningspressrelea.htm 2021Q4 mapcs 118
+uberq421earningspressrelea.htm 2020Q4 geo_rev 1814 302 664 385 3165
+uberq421earningspressrelea.htm 2021Q4 geo_rev 3613 419 995 751 5778
+uberq122earningspressrelea.htm 2021Q1 gb 6773 12461 302 19536
+uberq122earningspressrelea.htm 2022Q1 gb 10723 13903 1823 26449
+uberq122earningspressrelea.htm 2021Q1 rev 853 1741 301 2903
+uberq122earningspressrelea.htm 2022Q1 rev 2518 2512 1824 6854
+uberq122earningspressrelea.htm 2021Q1 seg_ebitda 298 -200 -29 -417 -359
+uberq122earningspressrelea.htm 2022Q1 seg_ebitda 618 30 2 -482 168
+uberq122earningspressrelea.htm 2021Q1 trips 1447
+uberq122earningspressrelea.htm 2022Q1 trips 1713
+uberq122earningspressrelea.htm 2021Q1 mapcs 98
+uberq122earningspressrelea.htm 2022Q1 mapcs 115
+uberq122earningspressrelea.htm 2021Q1 geo_rev 1849 302 225 527 2903
+uberq122earningspressrelea.htm 2022Q1 geo_rev 4562 432 1127 733 6854
+# --- pre-restatement releases (2019 revenue later recast; see notes). Rides=Mobility, Eats=Delivery.
+uberq120earningspressr.htm 2019Q1 gb 11446 3071 128 14649
+uberq120earningspressr.htm 2020Q1 gb 10874 4683 198 15776
+uberq120earningspressr.htm 2019Q1 rev_orig 2418 536 127 3099
+uberq120earningspressr.htm 2020Q1 rev_orig 2470 819 199 3543
+uberq120earningspressr.htm 2019Q1 seg_ebitda 192 -309 -29 -568 -869
+uberq120earningspressr.htm 2020Q1 seg_ebitda 581 -313 -64 -645 -612
+uberq120earningspressr.htm 2019Q1 trips 1550
+uberq120earningspressr.htm 2020Q1 trips 1658
+uberq220earningspressr.htm 2019Q2 gb 12188 3386 167 15756
+uberq220earningspressr.htm 2020Q2 gb 3046 6961 212 10224
+uberq220earningspressr.htm 2019Q2 rev_orig 2376 595 167 3166
+uberq220earningspressr.htm 2020Q2 rev_orig 790 1211 211 2241
+uberq220earningspressr.htm 2019Q2 seg_ebitda 506 -286 -52 -622 -656
+uberq220earningspressr.htm 2020Q2 seg_ebitda 50 -232 -49 -492 -837
+uberq220earningspressr.htm 2019Q2 trips 1677
+uberq220earningspressr.htm 2020Q2 trips 737
+uberq220earningspressr.htm 2019Q2 mapcs 99
+uberq220earningspressr.htm 2020Q2 mapcs 55
+uberq320earningspressr.htm 2019Q3 gb 12554 3658 223 16465
+uberq320earningspressr.htm 2020Q3 gb 5905 8550 290 14745
+uberq320earningspressr.htm 2019Q3 rev_orig 2895 645 218 3813
+uberq320earningspressr.htm 2020Q3 rev_orig 1365 1451 288 3129
+uberq320earningspressr.htm 2019Q3 trips 1770
+uberq320earningspressr.htm 2020Q3 trips 1150
+uberq320earningspressr.htm 2019Q3 mapcs 103
+uberq320earningspressr.htm 2020Q3 mapcs 78
+uberq319earningspressr.htm 2018Q3 gb 10488 2111 123 12725
+uberq319earningspressr.htm 2019Q3 gb 12554 3658 223 16465
+uberq319earningspressr.htm 2018Q3 rev_orig 2425 394 122 2944
+uberq319earningspressr.htm 2019Q3 rev_orig 2895 645 218 3813
+uberq319earningspressr.htm 2018Q3 trips 1348
+uberq319earningspressr.htm 2019Q3 trips 1770
+uberq319earningspressr.htm 2018Q3 mapcs 82
+uberq319earningspressr.htm 2019Q3 mapcs 103
+uberq419earningspressrelea.htm 2018Q4 gb 11479 2561 126 14169
+uberq419earningspressrelea.htm 2019Q4 gb 13512 4374 219 18131
+uberq419earningspressrelea.htm 2018Q4 rev_orig 2400 437 125 2974
+uberq419earningspressrelea.htm 2019Q4 rev_orig 3056 734 219 4069
+uberq419earningspressrelea.htm 2018Q4 trips 1493
+uberq419earningspressrelea.htm 2019Q4 trips 1907
+uberq219earningspressrelea.htm 2018Q2 gb_total 12012
+uberq219earningspressrelea.htm 2019Q2 gb_total 15756
+uberq219earningspressrelea.htm 2018Q2 trips 1242
+uberq219earningspressrelea.htm 2019Q2 trips 1677
+uberq219earningspressrelea.htm 2018Q2 mapcs 76
+uberq219earningspressrelea.htm 2019Q2 mapcs 99
+d647752ds1a.htm 2018Q1 gb_rides_eats 9380 1473
+d647752ds1a.htm 2018Q1 gb_total 10893
+uberq219earningspressrelea.htm 2018Q2 gb_rides_eats 10166 1774
+uberq219earningspressrelea.htm 2019Q2 gb_rides_eats 12188 3386

@@ -1,0 +1,58 @@
+Built 2026-11-08 20:23 UTC from 314 transcribed table-columns in 31 documents
+  note uberq420earningspressrelea.htm 2019Q4 gb: segments shown sum to 18105, total 18131; gap 26 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq420earningspressrelea.htm 2019Q4 rev: segments shown sum to 3687, total 3747; gap 60 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq420earningspressrelea.htm 2020Q4 rev: segments shown sum to 3140, total 3165; gap 25 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq420earningspressrelea.htm 2019Q4 seg_ebitda: segments shown sum to -418, total -615; gap -197 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq420earningspressrelea.htm 2020Q4 seg_ebitda: segments shown sum to -382, total -454; gap -72 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq121earningspressrelea.htm 2020Q1 gb: segments shown sum to 15755, total 15776; gap 21 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq121earningspressrelea.htm 2020Q1 rev: segments shown sum to 3193, total 3248; gap 55 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq121earningspressrelea.htm 2021Q1 rev: segments shown sum to 2895, total 2903; gap 8 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq121earningspressrelea.htm 2020Q1 seg_ebitda: segments shown sum to -441, total -612; gap -171 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq121earningspressrelea.htm 2021Q1 seg_ebitda: segments shown sum to -348, total -359; gap -11 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq221earningspressrelea.htm 2020Q2 gb: segments shown sum to 10219, total 10224; gap 5 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq221earningspressrelea.htm 2020Q2 rev: segments shown sum to 1884, total 1913; gap 29 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq221earningspressrelea.htm 2020Q2 seg_ebitda: segments shown sum to -723, total -837; gap -114 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq321earningspressrelea.htm 2020Q3 rev: segments shown sum to 2788, total 2813; gap 25 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq321earningspressrelea.htm 2020Q3 seg_ebitda: segments shown sum to -521, total -625; gap -104 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq421earningspressrelea.htm 2020Q4 rev: segments shown sum to 3140, total 3165; gap 25 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq421earningspressrelea.htm 2020Q4 seg_ebitda: segments shown sum to -382, total -454; gap -72 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq122earningspressrelea.htm 2021Q1 rev: segments shown sum to 2895, total 2903; gap 8 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq122earningspressrelea.htm 2021Q1 seg_ebitda: segments shown sum to -348, total -359; gap -11 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2019Q1 gb: segments shown sum to 14645, total 14649; gap 4 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2020Q1 gb: segments shown sum to 15755, total 15776; gap 21 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2019Q1 rev_orig: segments shown sum to 3081, total 3099; gap 18 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2020Q1 rev_orig: segments shown sum to 3488, total 3543; gap 55 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2019Q1 seg_ebitda: segments shown sum to -714, total -869; gap -155 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq120earningspressr.htm 2020Q1 seg_ebitda: segments shown sum to -441, total -612; gap -171 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2019Q2 gb: segments shown sum to 15741, total 15756; gap 15 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2020Q2 gb: segments shown sum to 10219, total 10224; gap 5 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2019Q2 rev_orig: segments shown sum to 3138, total 3166; gap 28 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2020Q2 rev_orig: segments shown sum to 2212, total 2241; gap 29 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2019Q2 seg_ebitda: segments shown sum to -454, total -656; gap -202 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq220earningspressr.htm 2020Q2 seg_ebitda: segments shown sum to -723, total -837; gap -114 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq320earningspressr.htm 2019Q3 gb: segments shown sum to 16435, total 16465; gap 30 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq320earningspressr.htm 2019Q3 rev_orig: segments shown sum to 3758, total 3813; gap 55 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq320earningspressr.htm 2020Q3 rev_orig: segments shown sum to 3104, total 3129; gap 25 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq319earningspressr.htm 2018Q3 gb: segments shown sum to 12722, total 12725; gap 3 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq319earningspressr.htm 2019Q3 gb: segments shown sum to 16435, total 16465; gap 30 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq319earningspressr.htm 2018Q3 rev_orig: segments shown sum to 2941, total 2944; gap 3 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq319earningspressr.htm 2019Q3 rev_orig: segments shown sum to 3758, total 3813; gap 55 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq419earningspressrelea.htm 2018Q4 gb: segments shown sum to 14166, total 14169; gap 3 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq419earningspressrelea.htm 2019Q4 gb: segments shown sum to 18105, total 18131; gap 26 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq419earningspressrelea.htm 2018Q4 rev_orig: segments shown sum to 2962, total 2974; gap 12 is the small 'Other Bets'/'ATG'/'All Other' rows
+  note uberq419earningspressrelea.htm 2019Q4 rev_orig: segments shown sum to 4009, total 4069; gap 60 is the small 'Other Bets'/'ATG'/'All Other' rows
+check 1 (segments add to totals): ok
+  ('2019Q4', 'rev'): uberq419earningspressrelea.htm has first-reported revenue [3056, 734, 219, 4069]; later restated to [3050, 418, 219, 3747] by uberq420earningspressrelea.htm
+  ('2020Q1', 'rev'): uberq120earningspressr.htm has first-reported revenue [2470, 819, 199, 3543]; later restated to [2467, 527, 199, 3248] by uberq121earningspressrelea.htm
+  restated ('2020Q1', 'trips'): uberq120earningspressr.htm [1658] -> uberq121earningspressrelea.htm [1661] (Releases differ: Q1 2021 prints 1,661 million trips for Q1 2020, Q1 2020 printed 1,658. Later used.)
+  ('2020Q2', 'rev'): uberq220earningspressr.htm has first-reported revenue [790, 1211, 211, 2241]; later restated to [787, 886, 211, 1913] by uberq221earningspressrelea.htm
+  ('2020Q3', 'rev'): uberq320earningspressr.htm has first-reported revenue [1365, 1451, 288, 3129]; later restated to [1364, 1136, 288, 2813] by uberq321earningspressrelea.htm
+  restated ('2020Q3', 'trips'): uberq320earningspressr.htm [1150] -> uberq321earningspressrelea.htm [1184] (Releases differ: Q3 2021 prints 1,184 million trips for Q3 2020, Q3 2020 printed 1,150. Later used.)
+check 2 (overlapping releases agree): ok
+check 3 (revenue vs SEC XBRL, 26 quarters with discrete XBRL values): ok
+  2020: four quarters sum to 11139, 10-K says 11139 ok
+  2021: four quarters sum to 17455, 10-K says 17455 ok
+  2022: four quarters sum to 31877, 10-K says 31877 ok
+  2023: four quarters sum to 37281, 10-K says 37281 ok
+  2024: four quarters sum to 43978, 10-K says 43978 ok
+  2025: four quarters sum to 52017, 10-K says 52017 ok
