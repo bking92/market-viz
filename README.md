@@ -41,3 +41,10 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 - Profit = us-gaap `NetIncomeLoss` over the latest twelve reported months (FY + YTD − prior YTD) from SEC company facts, checked against four discrete quarters. Seconds per $1M uses the window's real length.
 - Rebuild: `SEC_USER_AGENT="your name you@example.com" AS_OF=YYYY-MM-DD python3 pipeline/build_cradles.py`. Company list and groups are at the top of the script; loss-makers are decided by the data, not the list.
 - Excluded: Beyond Meat (TTM and four-quarter sum disagree by $10.8M). Berkshire's net income includes unrealized investment gains; flagged on the page.
+
+## Where your $20 goes at Uber: status (Nov 8, 2026)
+
+- Page: `stories/uber/index.html`. Data: `stories/uber/data/quarters.csv`, `meta.json`, `build_log.txt`.
+- Source tables: Uber's 30 quarterly earnings releases (8-K Exhibit 99.1, Q2 2019 to Q3 2026) and the April 2019 S-1/A. www.sec.gov refuses scripted downloads from the cloud environment, so the tables were read page by page and copied into `data/raw/releases_compact.txt` and `data/raw/releases_transcribed.csv`, one line per table per quarter, each naming its source file. Brian chose this route on Nov 8, 2026.
+- Rebuild: `SEC_USER_AGENT="name email" python3 pipeline/build_uber.py`. It checks segment sums, overlapping releases and SEC XBRL revenue, and stops on any failure. To add a quarter, copy the new release's tables into `releases_compact.txt` in the same format.
+- Known gaps: no regional gross bookings; regional revenue only to Q2 2023; revenue before Q4 2019 only as first reported (not used for take rates).

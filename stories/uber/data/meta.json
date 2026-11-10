@@ -1,0 +1,89 @@
+{
+ "built": "2026-11-08 20:23 UTC",
+ "first": "2018Q1",
+ "last": "2026Q3",
+ "documents": {
+  "uberq219earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315119000006/uberq219earningspressrelea.htm",
+  "uberq319earningspressr.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315119000014/uberq319earningspressr.htm",
+  "uberq419earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315120000005/uberq419earningspressrelea.htm",
+  "uberq120earningspressr.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315120000020/uberq120earningspressr.htm",
+  "uberq220earningspressr.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315120000027/uberq220earningspressr.htm",
+  "uberq320earningspressr.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000162828020015770/uberq320earningspressr.htm",
+  "uberq420earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315121000008/uberq420earningspressrelea.htm",
+  "uberq121earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315121000024/uberq121earningspressrelea.htm",
+  "uberq221earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315121000035/uberq221earningspressrelea.htm",
+  "uberq321earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315121000043/uberq321earningspressrelea.htm",
+  "uberq421earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315122000004/uberq421earningspressrelea.htm",
+  "uberq122earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315122000012/uberq122earningspressrelea.htm",
+  "uberq222earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315122000021/uberq222earningspressrelea.htm",
+  "uberq322earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315122000029/uberq322earningspressrelea.htm",
+  "uberq422earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315123000004/uberq422earningspressrelea.htm",
+  "uberq123earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315123000013/uberq123earningspressrelea.htm",
+  "uberq223earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315123000021/uberq223earningspressrelea.htm",
+  "uberq323earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315123000036/uberq323earningspressrelea.htm",
+  "uberq423earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315124000008/uberq423earningspressrelea.htm",
+  "uberq124earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315124000017/uberq124earningspressrelea.htm",
+  "uberq224earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315124000024/uberq224earningspressrelea.htm",
+  "uberq324earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315124000033/uberq324earningspressrelea.htm",
+  "uberq424earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315125000004/uberq424earningspressrelea.htm",
+  "uberq125earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315125000012/uberq125earningspressrelea.htm",
+  "uberq225earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315125000020/uberq225earningspressrelea.htm",
+  "uberq325earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315125000030/uberq325earningspressrelea.htm",
+  "uberq425earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315126000011/uberq425earningspressrelea.htm",
+  "uberq126earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315126000019/uberq126earningspressrelea.htm",
+  "uberq226earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315126000027/uberq226earningspressrelea.htm",
+  "uberq326earningspressrelea.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315126000039/uberq326earningspressrelea.htm",
+  "d647752ds1a.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000119312519120759/d647752ds1a.htm",
+  "fy2019q410kfinancialst.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315120000010/fy2019q410kfinancialst.htm",
+  "uber-20211231.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315122000008/uber-20211231.htm",
+  "uber-20231231.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315124000012/uber-20231231.htm",
+  "uber-20251231.htm": "https://www.sec.gov/Archives/edgar/data/1543151/000154315126000015/uber-20251231.htm"
+ },
+ "xbrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001543151.json",
+ "restated": {
+  "2019Q4 rev": "Q4 2020 release recast 2019 revenue (change in presenting cumulative payments to drivers).",
+  "2020Q1 rev": "Q1 2021 release recast 2020 revenue for the same policy change.",
+  "2020Q2 rev": "Q2 2021 release recast 2020 revenue for the same policy change.",
+  "2020Q3 rev": "Q3 2021 release recast 2020 revenue for the same policy change.",
+  "2020Q1 trips": "Releases differ: Q1 2021 prints 1,661 million trips for Q1 2020, Q1 2020 printed 1,658. Later used.",
+  "2020Q3 trips": "Releases differ: Q3 2021 prints 1,184 million trips for Q3 2020, Q3 2020 printed 1,150. Later used.",
+  "2019Q4 geo_rev": "Regional revenue recast with total revenue."
+ },
+ "geo_quotes": [
+  {
+   "filing": "S-1/A April 2019 (d647752ds1a.htm)",
+   "as_of": "2018-12-31",
+   "countries": "63",
+   "countries_text": "Personal Mobility in 63 countries (Prospectus Summary, Overview)",
+   "cities_text": "over 700 cities"
+  },
+  {
+   "filing": "10-K FY2019 (fy2019q410kfinancialst.htm)",
+   "as_of": "2020-01-01",
+   "countries": "69",
+   "countries_text": "Our technology is available in 69 countries around the world",
+   "cities_text": "In approximately 10,000 cities around the world (as of January 1, 2020)"
+  },
+  {
+   "filing": "10-K FY2021 (uber-20211231.htm)",
+   "as_of": "2022-01-01",
+   "countries": "approximately 72",
+   "countries_text": "Our technology is available in approximately 72 countries around the world",
+   "cities_text": "In approximately 10,500 cities around the world (as of January 1, 2022)"
+  },
+  {
+   "filing": "10-K FY2023 (uber-20231231.htm)",
+   "as_of": "2023-12-31",
+   "countries": "approximately 70",
+   "countries_text": "Our technology is available in approximately 70 countries around the world",
+   "cities_text": "In more than 10,000 cities around the world (as of December 31, 2023)"
+  },
+  {
+   "filing": "10-K FY2025 (uber-20251231.htm)",
+   "as_of": "2025-12-31",
+   "countries": "over 70",
+   "countries_text": "Our technology is available in over 70 countries around the world",
+   "cities_text": "In more than 15,000 cities around the world (as of December 31, 2025)"
+  }
+ ]
+}
