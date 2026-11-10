@@ -1,0 +1,95 @@
+cached https://data.sec.gov/submissions/CIK0001832466.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000119312521163658/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000119312521163658/d12103dex991.htm
+2021Q1 filed 2021-05-17: members 83,100, revenue $267.1M, MBR 91.5%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184321005701/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184321005701/exh_991.htm
+2021Q2 filed 2021-08-09: members 84,700, revenue $309.0M, MBR 88%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184321007564/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184321007564/exh_991.htm
+2021Q3 filed 2021-11-04: members 86,000, revenue $293.5M, MBR 85.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322001620/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322001620/exh_991.htm
+2021Q4 filed 2022-03-03: members 86,100, revenue $298.3M, MBR 85.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322003329/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322003329/exh_991.htm
+2022Q1 filed 2022-05-05: members 94,200, revenue $345.5M, MBR 87.0%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322005356/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322005356/exh_991.htm
+2022Q2 filed 2022-08-04: members 95,900, revenue $366.5M, MBR 83.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322007073/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184322007073/exh_991.htm
+2022Q3 filed 2022-11-03: members 98,000, revenue $360.3M, MBR 86.3%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323001253/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323001253/exh_991.htm
+2022Q4 filed 2023-02-28: members 98,400, revenue $361.8M, MBR 89.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323002888/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323002888/exh_991.htm
+2023Q1 filed 2023-05-04: members 109,700, revenue $439.2M, MBR 89.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323004974/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323004974/exh_991.htm
+2023Q2 filed 2023-08-03: members 112,200, revenue $462.4M, MBR 88.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323006669/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184323006669/exh_991.htm
+2023Q3 filed 2023-11-02: members 115,600, revenue $456.7M, MBR 86.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324001014/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324001014/exh_991.htm
+2023Q4 filed 2024-02-27: members 119,200, revenue $465.4M, MBR 89.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324002487/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324002487/exh_991.htm
+2024Q1 filed 2024-05-02: members 165,100, revenue $628.6M, MBR 90.9%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324004355/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324004355/exh_991.htm
+2024Q2 filed 2024-08-01: members 175,100, revenue $681.3M, MBR 88.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324005854/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184324005854/exh_991.htm
+2024Q3 filed 2024-10-29: members 182,300, revenue $692.4M, MBR 88.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325001127/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325001127/exh_991.htm
+2024Q4 filed 2025-02-27: members 189,100, revenue $701.2M, MBR 87.5%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325002689/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325002689/exh_991.htm
+2025Q1 filed 2025-05-01: members 217,500, revenue $926.9M, MBR 88.4%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325004825/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325004825/exh_991.htm
+2025Q2 filed 2025-07-30: members 223,700, revenue $1,015.3M, MBR 86.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325006831/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184325006831/exh_991.htm
+2025Q3 filed 2025-10-30: members 229,600, revenue $993.7M, MBR 87.2%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326001139/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326001139/exh_991.htm
+2025Q4 filed 2026-02-26: members 236,300, revenue $1,012.8M, MBR 87.7%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326002895/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326002895/exh_991.htm
+2026Q1 filed 2026-04-30: members 284,800, revenue $1,235.2M, MBR 88.2%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326005078/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326005078/exh_991.htm
+2026Q2 filed 2026-07-30: members 294,100, revenue $1,335.6M, MBR 86.3%
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/exh_991.htm
+2026Q3 filed 2026-10-29: members 301,200, revenue $1,358.3M, MBR 89.5%
+check 1 ok: 23 quarters, 2021Q1 to 2026Q3
+cached https://data.sec.gov/api/xbrl/companyfacts/CIK0001832466.json
+check 2 ok: release revenue matches XBRL in 23 quarters
+check 3 ok: nine months 2026, revenue $3929.1M; per $100: {'care': 88.14, 'running': 9.89, 'equipment': 0.61, 'operating_profit': 1.37, 'net_profit': 1.02, 'premiums': 99.3}
+shares outstanding on recent covers: [('2026-04-27', 206733823, '0001628280-26-028901'), ('2026-07-27', 207435149, '0001628280-26-051060'), ('2026-10-26', 209268394, '0001628280-26-068247')]
+cached https://query1.finance.yahoo.com/v8/finance/chart/ALHC?period1=1616716800&period2=1794276725&interval=1d&events=split
+check 4 ok: 1412 closes 2021-03-26 to 2026-11-06; press spot checks match
+cached https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/index.json
+cached https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm
+cached https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/jpm2026deckvf.htm
+cached https://www.cms.gov/files/document/fact-sheet-2027-ma-part-d-star-ratings-october-8-2026.pdf
+cached https://www.kff.org/medicare/medicare-advantage-glossary/
+cached https://www.medpac.gov/wp-content/uploads/import_data/scrape_files/docs/default-source/reports/jun19_ch8_medpac_reporttocongress_sec.pdf
+cached https://www.sec.gov/Archives/edgar/data/1832466/000162828026068247/alhc-20260930.htm
+cached https://www.sec.gov/Archives/edgar/data/1832466/000119312521100476/d292883dex991.htm
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326005078/exh_991.htm
+cached https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/exh_991.htm
+check 5 ok: 22 quoted passages found in their sources
+event 2026-07-08 (1 day): 24.05 -> 20.03 (-16.7%) Whistleblower lawsuit
+event 2026-07-31 (1 day): 18.61 -> 14.85 (-20.2%) After second-quarter results
+event 2026-09-15 (2 day): 12.94 -> 8.71 (-32.7%) Rising costs
+event 2026-10-09 (1 day): 8.71 -> 7.55 (-13.3%) Half a star
+event 2026-10-30 (1 day): 8.06 -> 7.27 (-9.8%) Lower forecast
+2026 peak (datetime.date(2026, 7, 6), 24.56), value $5.08B on 206,733,823 shares (cover 2026-04-27); last (datetime.date(2026, 11, 6), 7.34), $1.54B on 209,268,394 (cover 2026-10-26)
+wrote meta.json, quarters.csv, prices.csv

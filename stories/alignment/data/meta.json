@@ -1,0 +1,232 @@
+{
+ "built": "2026-11-10 02:12 UTC",
+ "ipo_price": 18.0,
+ "first_close": {
+  "date": "2021-03-26",
+  "close": 17.31
+ },
+ "low": {
+  "date": "2024-04-03",
+  "close": 4.47
+ },
+ "peak_2026": {
+  "date": "2026-07-06",
+  "close": 24.56,
+  "shares": 206733823,
+  "shares_as_of": "2026-04-27",
+  "value_bn": 5.077
+ },
+ "last": {
+  "date": "2026-11-06",
+  "close": 7.34,
+  "shares": 209268394,
+  "shares_as_of": "2026-10-26",
+  "value_bn": 1.536
+ },
+ "nine_months_2026": {
+  "Revenues": 3929.1,
+  "OperatingExpenses": 3875.3,
+  "SellingGeneralAndAdministrativeExpense": 388.5,
+  "DepreciationDepletionAndAmortization": 23.8,
+  "OperatingIncomeLoss": 53.8,
+  "NetIncomeLoss": 39.9,
+  "PremiumsEarnedNet": 3901.4,
+  "medical": 3463.0
+ },
+ "per100": {
+  "care": 88.137,
+  "running": 9.888,
+  "equipment": 0.606,
+  "operating_profit": 1.369,
+  "net_profit": 1.016,
+  "premiums": 99.296
+ },
+ "stars": {
+  "h3815_years_4plus": 9,
+  "h3815_years": [
+   2018,
+   2026
+  ],
+  "h3815_2027": 3.5,
+  "h3815_share_of_members": 0.75,
+  "share_4plus": {
+   "alignment": {
+    "2023": 94,
+    "2024": 92,
+    "2025": 100,
+    "2026": 100
+   },
+   "industry": {
+    "2023": 74,
+    "2024": 79,
+    "2025": 66,
+    "2026": 65,
+    "2027": 71
+   }
+  },
+  "alignment_2027_max": 25,
+  "bonus_points": 5,
+  "bonus_points_double": 10
+ },
+ "events": [
+  {
+   "date": "2026-07-08",
+   "label": "Whistleblower lawsuit",
+   "src": "lawsuit",
+   "note": "A former executive sued on July 7, alleging retaliation after he reported concerns about the accounting. Alignment says the claims are without merit.",
+   "before": 24.05,
+   "after": 20.03,
+   "end": "2026-07-08",
+   "change": -0.1672,
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026068247/alhc-20260930.htm"
+  },
+  {
+   "date": "2026-07-31",
+   "label": "After second-quarter results",
+   "src": "q2_beat",
+   "note": "Results beat forecasts, but on the call managers said they would reinvest some of the gains, according to StockStory.",
+   "press": "https://markets.financialcontent.com/stocks/article/stockstory-2026-7-31-alignment-healthcare-alhc-stock-trades-down-here-is-why",
+   "before": 18.61,
+   "after": 14.85,
+   "end": "2026-07-31",
+   "change": -0.202,
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1832466/000117184326005078/exh_991.htm"
+  },
+  {
+   "date": "2026-09-15",
+   "label": "Rising costs",
+   "src": null,
+   "days": 2,
+   "note": "At an investor conference on Sept. 15, executives talked about higher hospital and nursing-home costs, the Orange County Business Journal reported.",
+   "press": "https://www.ocbj.com/oc-homepage/alignment-shares-tumble-on-rising-medical-costs/",
+   "before": 12.94,
+   "after": 8.71,
+   "end": "2026-09-16",
+   "change": -0.3269,
+   "source_url": null
+  },
+  {
+   "date": "2026-10-09",
+   "label": "Half a star",
+   "src": "h3815_cut",
+   "note": "Medicare's 2027 ratings, released Oct. 8 after the close, cut the main California plan to 3.5 stars.",
+   "before": 8.71,
+   "after": 7.55,
+   "end": "2026-10-09",
+   "change": -0.1332,
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm"
+  },
+  {
+   "date": "2026-10-30",
+   "label": "Lower forecast",
+   "src": "q3_lower",
+   "note": "Third-quarter results on Oct. 29, after the close: medical costs ran higher than expected and profit guidance came down.",
+   "before": 8.06,
+   "after": 7.27,
+   "end": "2026-10-30",
+   "change": -0.098,
+   "source_url": "https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/exh_991.htm"
+  }
+ ],
+ "quotes": {
+  "h3815_cut": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "expects that its California HMO health plan contract (H3815) will have a 3.5-Star Rating for rating year 2027"
+  },
+  "h3815_share": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "H3815, which had a 4.0-Star Rating for rating year 2026, serves approximately 75% of the Company's health plan membership"
+  },
+  "others_4": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "Alignment expects to retain a 4.0-Star or higher rating in each of its six other eligible plans"
+  },
+  "no_rev_2627": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "The rating year 2027 Stars results are not expected to impact the Company's revenue for fiscal years 2026 or 2027"
+  },
+  "hits_2028": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "The change in Star Ratings performance for rating year 2027 will impact the Company's quality bonus payments for fiscal year 2028"
+  },
+  "appeal": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "expects to commence litigation challenging certain Star Ratings measures and methodologies"
+  },
+  "cutpoints": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "the decline in Stars performance was driven primarily by higher industry cut points"
+  },
+  "new_members": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+   "text": "with approximately 50% of Alignment's membership having joined the Company within the last two years"
+  },
+  "ninth_year": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/jpm2026deckvf.htm",
+   "text": "CA HMO: 4 star-rated plan and nineth consecutive year rated 4 stars or greater"
+  },
+  "all_100": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/jpm2026deckvf.htm",
+   "text": "100% of Alignment's members are in plans rated 4 stars or above, versus 65% for the industry"
+  },
+  "share_series": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/jpm2026deckvf.htm",
+   "text": "94% 92% 100% 100% 74% 79% 66% 65% 2023 2024 2025 2026"
+  },
+  "cms_71": {
+   "url": "https://www.cms.gov/files/document/fact-sheet-2027-ma-part-d-star-ratings-october-8-2026.pdf",
+   "text": "approximately 71% of MA-PD enrollees are currently in contracts that will have four or more stars in 2027"
+  },
+  "cms_my": {
+   "url": "https://www.cms.gov/files/document/fact-sheet-2027-ma-part-d-star-ratings-october-8-2026.pdf",
+   "text": "beginning with the 2029 Star Ratings (measurement year 2027)"
+  },
+  "kff_qbp": {
+   "url": "https://www.kff.org/medicare/medicare-advantage-glossary/",
+   "text": "The Affordable Care Act requires CMS to increase the benchmark for plans that are part of contracts that have at least a 4-star rating, on a 5-star scale. The increase in the benchmark is 5 percentage points in most counties and 10 percentage points in double bonus counties."
+  },
+  "medpac_rebate": {
+   "url": "https://www.medpac.gov/wp-content/uploads/import_data/scrape_files/docs/default-source/reports/jun19_ch8_medpac_reporttocongress_sec.pdf",
+   "text": "The rebate amount for plans at 4.5 and 5 stars is 70 percent of the bid\u2013benchmark difference; at 3.5 and 4"
+  },
+  "medpac_rebate2": {
+   "url": "https://www.medpac.gov/wp-content/uploads/import_data/scrape_files/docs/default-source/reports/jun19_ch8_medpac_reporttocongress_sec.pdf",
+   "text": "65 percent of the difference; and below 3.5 stars, 50 percent of the difference"
+  },
+  "lawsuit": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026068247/alhc-20260930.htm",
+   "text": "On July 7, 2026, a former executive officer filed a lawsuit against the Company and certain officers in the U.S. District Court for the Central District of California alleging whistleblower retaliation"
+  },
+  "lawsuit_merit": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026068247/alhc-20260930.htm",
+   "text": "The Company believes the claims are without merit and intends to defend the matter vigorously"
+  },
+  "ipo": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000119312521100476/d292883dex991.htm",
+   "text": "closing of its initial public offering of 27,200,000 shares of its common stock at $18.00 per share"
+  },
+  "q2_beat": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000117184326005078/exh_991.htm",
+   "text": "Raises the midpoint of all full-year guidance metrics"
+  },
+  "q3_lower": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/exh_991.htm",
+   "text": "lowers full-year 2026 adjusted gross profit and adjusted EBITDA guidance"
+  },
+  "q3_trend": {
+   "url": "https://www.sec.gov/Archives/edgar/data/1832466/000117184326006971/exh_991.htm",
+   "text": "while medical trends ran higher than expected"
+  }
+ },
+ "sources": {
+  "xbrl": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001832466.json",
+  "prices": "https://query1.finance.yahoo.com/v8/finance/chart/ALHC",
+  "jpm2026": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026001783/jpm2026deckvf.htm",
+  "stars_8k": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026065470/alhc-20261008.htm",
+  "q3_10q": "https://www.sec.gov/Archives/edgar/data/1832466/000162828026068247/alhc-20260930.htm",
+  "cms": "https://www.cms.gov/files/document/fact-sheet-2027-ma-part-d-star-ratings-october-8-2026.pdf",
+  "kff": "https://www.kff.org/medicare/medicare-advantage-glossary/",
+  "medpac": "https://www.medpac.gov/wp-content/uploads/import_data/scrape_files/docs/default-source/reports/jun19_ch8_medpac_reporttocongress_sec.pdf",
+  "ipo": "https://www.sec.gov/Archives/edgar/data/1832466/000119312521100476/d292883dex991.htm"
+ }
+}

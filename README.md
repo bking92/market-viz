@@ -48,3 +48,10 @@ Served by GitHub Pages from the `main` branch root at https://bking92.github.io/
 - Source tables: Uber's 30 quarterly earnings releases (8-K Exhibit 99.1, Q2 2019 to Q3 2026) and the April 2019 S-1/A. www.sec.gov refuses scripted downloads from the cloud environment, so the tables were read page by page and copied into `data/raw/releases_compact.txt` and `data/raw/releases_transcribed.csv`, one line per table per quarter, each naming its source file. Brian chose this route on Nov 8, 2026.
 - Rebuild: `SEC_USER_AGENT="name email" python3 pipeline/build_uber.py`. It checks segment sums, overlapping releases and SEC XBRL revenue, and stops on any failure. To add a quarter, copy the new release's tables into `releases_compact.txt` in the same format.
 - Known gaps: no regional gross bookings; regional revenue only to Q2 2023; revenue before Q4 2019 only as first reported (not used for take rates).
+
+## Half a star (Alignment Healthcare): status (Nov 10, 2026)
+
+- Page: `stories/alignment/index.html`. Data: `stories/alignment/data/` (quarters.csv, prices.csv, meta.json, build_log.txt).
+- Rebuild: `SEC_USER_AGENT="name email" python3 pipeline/build_alignment.py`. Downloads Alignment's 23 earnings releases, XBRL facts, the Oct 8, 2026 stars 8-K, the Jan 2026 J.P. Morgan deck, the Q3 2026 10-Q, CMS's 2027 Star Ratings fact sheet, KFF and MedPAC pages, and Yahoo daily closes. Every quoted passage on the page is checked word for word against its downloaded source; the build stops on any failed check.
+- Two drop explanations come only from the press (StockStory on the Q2 call, Orange County Business Journal on the Sept 15 conference); they're labelled as such on the page.
+- Not shown: a dollar value for the lost quality bonus (Alignment hasn't given one), and the exact star grade of the California HMO before 2025.
